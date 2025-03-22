@@ -139,7 +139,7 @@
     const llista = document.getElementById('llista-temes');
     temes.forEach(num => {
       const li = document.createElement('li');
-      li.textContent = nomsTemes[num] || `Tema ${num}`;
+      li.textContent = `Tema ${num}: ${nomsTemes[num] || "Sense nom"}`;
       llista.appendChild(li);
     });
 

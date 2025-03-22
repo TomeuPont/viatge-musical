@@ -25,6 +25,7 @@
       background-color: rgba(255,255,255,0.1);
       padding: 1rem 2rem;
       border-radius: 10px;
+      text-align: center;
     }
 
     .modalitats {
@@ -85,21 +86,30 @@
   </div>
 
   <div class="buttons">
-    <button onclick="tornarEnrere()">Tornar</button>
+    <a href="temes.html"><button>Tornar</button></a>
     <button onclick="continuar()">Continuar</button>
   </div>
 
   <script>
-    // Recuperem els temes seleccionats de la URL (simulació)
+    // Recuperem els temes seleccionats de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const temes = urlParams.get('temes')?.split(',') || [];
 
     const container = document.getElementById('temes');
     container.innerHTML = "<strong>Temes seleccionats:</strong><br>" + temes.map(t => `Tema ${t}`).join(', ');
 
-    function tornarEnrere() {
-      window.location.href = 'temes.html';
-
-    }
-
     function continuar() {
+      const checks = document.querySelectorAll('input[type="checkbox"]:checked');
+      const modalitats = Array.from(checks).map(cb => cb.value);
+
+      if (modalitats.length === 0) {
+        alert("Si us plau, selecciona almenys una modalitat.");
+        return;
+      }
+
+      // Aquí podríem passar temes i modalitats a la següent pàgina
+      alert("Modalitats seleccionades: " + modalitats.join(', '));
+    }
+  </script>
+</body>
+</html>

@@ -89,12 +89,10 @@
     return;
   }
 
-  // De moment només mostrem per consola
-  console.log("Temes seleccionats:", temesSeleccionats);
-
-  // Aquí pots redirigir a la següent fase
-  alert("Temes seleccionats: " + temesSeleccionats.join(", "));
+  // Redirigim a la pantalla de modalitats, passant els temes per paràmetre d'URL
+  window.location.href = 'modalitats.html?temes=' + temesSeleccionats.join(',');
 }
+
 
   </script>
 </body>

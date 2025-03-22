@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selecció de temes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #2e003e, #4b0082);
+      color: white;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .temes-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .tema {
+      background-color: #3a1c71;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .tema input[type="checkbox"] {
+      transform: scale(1.5);
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff79a7;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selecciona els temes que vols jugar</h1>
+  <div class="temes-container">
+    <label class="tema"><input type="checkbox" value="1"> Tema 1: Instruments</label>
+    <label class="tema"><input type="checkbox" value="2"> Tema 2: Estils musicals</label>
+    <label class="tema"><input type="checkbox" value="3"> Tema 3: Danses tradicionals</label>
+    <label class="tema"><input type="checkbox" value="4"> Tema 4: Compositors famosos</label>
+    <label class="tema"><input type="checkbox" value="5"> Tema 5: Cançons populars</label>
+    <label class="tema"><input type="checkbox" value="6"> Tema 6: Ritmes i compassos</label>
+    <label class="tema"><input type="checkbox" value="7"> Tema 7: Instruments del món</label>
+    <label class="tema"><input type="checkbox" value="8"> Tema 8: Història de la música</label>
+    <label class="tema"><input type="checkbox" value="9"> Tema 9: Òpera i musicals</label>
+    <label class="tema"><input type="checkbox" value="10"> Tema 10: Música electrònica</label>
+    <label class="tema"><input type="checkbox" value="11"> Tema 11: Jazz i blues</label>
+    <label class="tema"><input type="checkbox" value="12"> Tema 12: Música i emocions</label>
+  </div>
+
+  <button onclick="comencarAmbTemes()">Començar amb els temes seleccionats</button>
+
+  <script>
+    function comencarAmbTemes() {
+      const checks = document.querySelectorAll('input[type="checkbox"]:checked');
+      const temesSeleccionats = Array.from(checks).map(cb => cb.value);
+      
+      if (temesSeleccionats.length === 0) {
+        alert("Si us plau, selecciona almenys un tema.");
+        return;
+      }
+
+      // De moment només mostrem per consola
+      console.log("Temes seleccionats:", temesSeleccionats);
+
+      // Aquí pots redirigir a la següent fase amb els temes seleccionats
+      alert("Temes seleccionats: " + temesSeleccionats.join(", "));
+    }
+  </script>
+</body>
+</html>

@@ -81,20 +81,21 @@
 
   <script>
     function comencarAmbTemes() {
-      const checks = document.querySelectorAll('input[type="checkbox"]:checked');
-      const temesSeleccionats = Array.from(checks).map(cb => cb.value);
-      
-      if (temesSeleccionats.length === 0) {
-        alert("Si us plau, selecciona almenys un tema.");
-        return;
-      }
+  const checks = document.querySelectorAll('input[type="checkbox"]:checked');
+  const temesSeleccionats = Array.from(checks).map(cb => cb.value);
+  
+  if (temesSeleccionats.length === 0) {
+    alert("Si us plau, selecciona almenys un tema.");
+    return;
+  }
 
-      // De moment només mostrem per consola
-      console.log("Temes seleccionats:", temesSeleccionats);
+  // De moment només mostrem per consola
+  console.log("Temes seleccionats:", temesSeleccionats);
 
-      // Aquí pots redirigir a la següent fase amb els temes seleccionats
-      alert("Temes seleccionats: " + temesSeleccionats.join(", "));
-    }
+  // Aquí pots redirigir a la següent fase
+  alert("Temes seleccionats: " + temesSeleccionats.join(", "));
+}
+
   </script>
 </body>
 </html>

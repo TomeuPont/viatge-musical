@@ -98,7 +98,8 @@
     container.innerHTML = "<strong>Temes seleccionats:</strong><br>" + temes.map(t => `Tema ${t}`).join(', ');
 
     function tornarEnrere() {
-      window.history.back(); // O window.location.href = 'temes.html';
+      window.location.href = 'temes.html';
+
     }
 
     function continuar() {

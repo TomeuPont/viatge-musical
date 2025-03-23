@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -152,8 +153,11 @@
         return;
       }
 
-      // Fase següent: aquí pots redirigir amb temes i modalitats
-      alert("Modalitats seleccionades: " + modalitats.join(', '));
+      if (modalitats.includes('terminologia')) {
+        window.location.href = `joc.html?temes=${temes.join(',')}&modalitat=terminologia`;
+      } else {
+        alert("Només està implementada la modalitat 'terminologia' per ara.");
+      }
     }
   </script>
 </body>

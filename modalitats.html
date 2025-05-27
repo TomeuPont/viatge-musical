@@ -144,21 +144,26 @@
       llista.appendChild(li);
     });
 
-    function continuar() {
-      const checks = document.querySelectorAll('input[type="checkbox"]:checked');
-      const modalitats = Array.from(checks).map(cb => cb.value);
+function continuar() {
+  const checks = document.querySelectorAll('input[type="checkbox"]:checked');
+  const modalitats = Array.from(checks).map(cb => cb.value);
 
-      if (modalitats.length === 0) {
-        alert("Si us plau, selecciona almenys una modalitat.");
-        return;
-      }
+  if (modalitats.length === 0) {
+    alert("Si us plau, selecciona almenys una modalitat.");
+    return;
+  }
 
-      if (modalitats.includes('terminologia')) {
-        window.location.href = `joc.html?temes=${temes.join(',')}&modalitat=terminologia`;
-      } else {
-        alert("Només està implementada la modalitat 'terminologia' per ara.");
-      }
-    }
+  if (modalitats.includes('terminologia')) {
+    window.location.href = `joc.html?temes=${temes.join(',')}&modalitat=terminologia`;
+  } else if (modalitats.includes('audicions')) {
+    window.location.href = `audicions.html?temes=${temes.join(',')}&modalitat=audicions`;
+  } else {
+    alert("Només està implementada la modalitat 'terminologia' i 'audicions' per ara.");
+  }
+}
+
+
+    
   </script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+[
+  {
+    "tema": 1,
+    "titol": "Música de l’antiguitat",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Neuma'?",
+        "opcions": [
+          "Forma musical del Barroc",
+          "Primer sistema de notació musical amb signes sobre el text",
+          "Tipus de dansa medieval",
+          "Instrument de vent fet de canya"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "A quin terme correspon la següent definició? 'Oracions i cants litúrgics quotidians propis del cristianisme medieval.'",
+        "opcions": [
+          "Motet",
+          "Cant gregorià",
+          "Ofici diví",
+          "Missa"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 2,
+    "titol": "Música Medieval",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Trobador'?",
+        "opcions": [
+          "Monjo que escrivia cants litúrgics",
+          "Músic i poeta de la noblesa medieval",
+          "Tipus d'instrument de percussió",
+          "Dansa cortesana del Renaixement"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Composició musical basada en el ritual de l'eucaristia cristiana.'",
+        "opcions": [
+          "Cant gregorià",
+          "Motet",
+          "Missa",
+          "Coral"
+        ],
+        "correcta": 2
+      }
+    ]
+  }
+]

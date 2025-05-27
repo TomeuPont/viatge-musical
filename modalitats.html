@@ -144,7 +144,9 @@
       llista.appendChild(li);
     });
 
-function continuar() {
+
+
+    function continuar() {
   const checks = document.querySelectorAll('input[type="checkbox"]:checked');
   const modalitats = Array.from(checks).map(cb => cb.value);
 
@@ -154,13 +156,14 @@ function continuar() {
   }
 
   if (modalitats.includes('terminologia')) {
-    window.location.href = `joc.html?temes=${temes.join(',')}&modalitat=terminologia`;
+    window.location.href = `joc_dinamic.html?temes=${temes.join(',')}&modalitat=terminologia`;
   } else if (modalitats.includes('audicions')) {
     window.location.href = `audicions.html?temes=${temes.join(',')}&modalitat=audicions`;
   } else {
     alert("Només està implementada la modalitat 'terminologia' i 'audicions' per ara.");
   }
 }
+    
 
 
     

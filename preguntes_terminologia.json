@@ -50,5 +50,265 @@
         "correcta": 2
       }
     ]
+  },
+  {
+    "tema": 3,
+    "titol": "Música del Renaixement",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Mecenes'?",
+        "opcions": [
+          "Persona que finança artistes i projectes culturals",
+          "Instrument musical antic de corda",
+          "Forma musical polifònica sacra",
+          "Tipus de dansa cortesana"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Composició vocal polifònica de caràcter religiós, sovint en llatí.'",
+        "opcions": [
+          "Madrigal",
+          "Missa",
+          "Motet",
+          "Lied"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 4,
+    "titol": "Música del Barroc",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Baix continu'?",
+        "opcions": [
+          "Forma musical del Classicisme basada en variacions",
+          "Acompanyament musical format per un baix i un instrument d'harmonia",
+          "Tipus de dansa barroca",
+          "Gènere vocal de l'època medieval"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Forma musical barroca basada en el contrast entre un petit grup de solistes i l'orquestra.'",
+        "opcions": [
+          "Sonata",
+          "Concerto grosso",
+          "Fuga",
+          "Suite"
+        ],
+        "correcta": 1
+      }
+    ]
+  },
+  {
+    "tema": 5,
+    "titol": "Música del Classicisme",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Rondó'?",
+        "opcions": [
+          "Forma musical basada en la repetició d'un tema principal alternat amb episodis nous",
+          "Dansa barroca a ritme ternari",
+          "Tipus de simfonia",
+          "Forma coral de l'època medieval"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Composicions musicals destinades a petits grups d'instruments.'",
+        "opcions": [
+          "Música simfònica",
+          "Música profana",
+          "Música de cambra",
+          "Música religiosa"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 6,
+    "titol": "Música del Romanticisme",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Lied'?",
+        "opcions": [
+          "Cançó per a veu i piano pròpia del Romanticisme",
+          "Composició per a orquestra",
+          "Dansa alemanya del Barroc",
+          "Forma musical del Classicisme"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Composició orquestral d’un sol moviment amb un programa narratiu.'",
+        "opcions": [
+          "Sonata",
+          "Poema simfònic",
+          "Òpera",
+          "Minuet"
+        ],
+        "correcta": 1
+      }
+    ]
+  },
+  {
+    "tema": 7,
+    "titol": "Música del segle XX i últimes tendències",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Dodecafonisme'?",
+        "opcions": [
+          "Sistema de composició basat en la utilització de les dotze notes de l’escala cromàtica sense jerarquies",
+          "Música basada en la improvisació i el swing",
+          "Estil musical inspirat en la música folklòrica",
+          "Forma musical que combina instruments acústics i electrònics"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Estil de música experimental basada en enregistraments de sons naturals i processats electrònicament.'",
+        "opcions": [
+          "Música electrònica",
+          "Música concreta",
+          "Dodecafonisme",
+          "Minimalisme"
+        ],
+        "correcta": 1
+      }
+    ]
+  },
+  {
+    "tema": 8,
+    "titol": "Músiques urbanes",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Blues'?",
+        "opcions": [
+          "Gènere musical d'origen africà que combina improvisació i swing",
+          "Estil musical de ritme sincopat amb influència africana",
+          "Gènere musical d’origen afroamericà amb estructura harmònica de 12 compassos",
+          "Música electrònica basada en loops i sintetitzadors"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Instrument que genera so mitjançant circuits electrònics.'",
+        "opcions": [
+          "Clavecí",
+          "Gramòfon",
+          "Electròfon",
+          "Orgue"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 9,
+    "titol": "Música de pel·lícules i musicals",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Banda sonora original'?",
+        "opcions": [
+          "Música utilitzada en un musical de Broadway",
+          "Composició que acompanya una pel·lícula, pot incloure diàlegs i efectes de so",
+          "Recull de cançons comercials per a una pel·lícula",
+          "Efectes sonors gravats per a una obra audiovisual"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Espectacle teatral que combina música, dansa i interpretació.'",
+        "opcions": [
+          "Òpera",
+          "Zarzuela",
+          "Musical",
+          "Oratori"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 10,
+    "titol": "Músiques i danses tradicionals del món",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Polonesa'?",
+        "opcions": [
+          "Dansa tradicional d'origen polonès a ritme ternari",
+          "Peça vocal profana amb acompanyament instrumental",
+          "Cançó popular de caràcter improvisat",
+          "Dansa cortesana del Renaixement"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Música no vinculada a cap context religiós.'",
+        "opcions": [
+          "Cant gregorià",
+          "Motet",
+          "Música profana",
+          "Música litúrgica"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 11,
+    "titol": "Músiques i danses tradicionals de les Illes Balears",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Ball tradicional de les Illes Balears'?",
+        "opcions": [
+          "Danses populars pròpies de la cultura balear com la jota i el bolero",
+          "Música medieval composta per a la cort reial",
+          "Forma de cant religiós amb arrels gregorianes",
+          "Composició coral pròpia del segle XIX"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Grup de músics que toquen xeremies, flabiol i tamborí en celebracions populars.'",
+        "opcions": [
+          "Ministrils",
+          "Glosadors",
+          "Colla de xeremiers",
+          "Orquestra de cambra"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 12,
+    "titol": "Història de la dansa",
+    "preguntes": [
+      {
+        "enunciat": "Quina és la definició correcta de 'Ballet de cort'?",
+        "opcions": [
+          "Forma de dansa desenvolupada a les corts europees del Renaixement i Barroc",
+          "Espectacle musical amb cantants, actors i ballarins",
+          "Dansa popular tradicional de l’edat mitjana",
+          "Estil de dansa contemporània desenvolupat al segle XX"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "A quin terme correspon la definició? 'Dansa de parella a ritme ternari, d’origen austríac.'",
+        "opcions": [
+          "Minuet",
+          "Vals",
+          "Tarantel·la",
+          "Gavota"
+        ],
+        "correcta": 1
+      }
+    ]
   }
 ]

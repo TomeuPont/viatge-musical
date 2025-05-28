@@ -1,0 +1,47 @@
+[
+  {
+    "tema": 1,
+    "titol": "Música de l’edat mitjana",
+    "audicions": [
+      {
+        "audio": "audio/dies_irae.mp3",
+        "pregunta": "A quin període pertany aquest fragment?",
+        "opcions": [
+          "Renaixement",
+          "Barroc",
+          "Edat Mitjana",
+          "Classicisme"
+        ],
+        "correcta": 2
+      },
+      {
+        "audio": "audio/cantiga100.mp3",
+        "pregunta": "Quina obra escoltes?",
+        "opcions": [
+          "Santa Maria, strela do dia",
+          "Dies irae",
+          "Viderunt omnes",
+          "Orfeo"
+        ],
+        "correcta": 0
+      }
+    ]
+  },
+  {
+    "tema": 3,
+    "titol": "Música del Renaixement",
+    "audicions": [
+      {
+        "audio": "audio/ave_maria_victoria.mp3",
+        "pregunta": "Qui és el compositor d’aquesta obra?",
+        "opcions": [
+          "Tomás Luis de Victoria",
+          "Monteverdi",
+          "Bach",
+          "Mozart"
+        ],
+        "correcta": 0
+      }
+    ]
+  }
+]

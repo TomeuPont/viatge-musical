@@ -86,6 +86,11 @@
 
 
     const modalitat = urlParams.get("modalitat");
+    if (modalitat === "terminologia") {
+      document.title = "Joc – Terminologia";
+    } else if (modalitat === "teoria") {
+    document.title = "Joc – Contingut teòric";
+    }
 
 let arxiuJSON = "";
 if (modalitat === "terminologia") {

@@ -146,7 +146,7 @@
 
 
 
-    function continuar() {
+   function continuar() {
   const checks = document.querySelectorAll('input[type="checkbox"]:checked');
   const modalitats = Array.from(checks).map(cb => cb.value);
 
@@ -155,15 +155,15 @@
     return;
   }
 
-  if (modalitat === 'terminologia' || modalitat === 'teoria') {
-    window.location.href = `joc_dinamic.html?temes=${temesSeleccionats}&modalitat=${modalitat}`;
-  } else if (modalitat === 'audicions') {
+  const temesSeleccionats = new URLSearchParams(window.location.search).get("temes");
+
+  if (modalitats.includes('audicions')) {
+    // Si audicions està seleccionada, la separem perquè té la seva pròpia pàgina
     window.location.href = `joc_audicions.html?temes=${temesSeleccionats}`;
   } else {
-    alert("Modalitat no reconeguda.");
+    // Per terminologia i/o teoria, passem totes les modalitats
+    window.location.href = `joc_dinamic.html?temes=${temesSeleccionats}&modalitats=${modalitats.join(',')}`;
   }
-      
-      
 }
     
 

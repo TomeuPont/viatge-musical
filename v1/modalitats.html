@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -143,18 +144,30 @@
       llista.appendChild(li);
     });
 
-    function continuar() {
-      const checks = document.querySelectorAll('input[type="checkbox"]:checked');
-      const modalitats = Array.from(checks).map(cb => cb.value);
 
-      if (modalitats.length === 0) {
-        alert("Si us plau, selecciona almenys una modalitat.");
-        return;
-      }
 
-      // Fase següent: aquí pots redirigir amb temes i modalitats
-      alert("Modalitats seleccionades: " + modalitats.join(', '));
-    }
+   function continuar() {
+  const checks = document.querySelectorAll('input[type="checkbox"]:checked');
+  const modalitats = Array.from(checks).map(cb => cb.value);
+
+  if (modalitats.length === 0) {
+    alert("Si us plau, selecciona almenys una modalitat.");
+    return;
+  }
+
+  const temesSeleccionats = new URLSearchParams(window.location.search).get("temes");
+
+  if (modalitats.includes('audicions')) {
+    // Si audicions està seleccionada, la separem perquè té la seva pròpia pàgina
+    window.location.href = `joc_audicions.html?temes=${temesSeleccionats}`;
+  } else {
+    // Per terminologia i/o teoria, passem totes les modalitats
+    window.location.href = `joc_dinamic.html?temes=${temesSeleccionats}&modalitats=${modalitats.join(',')}`;
+  }
+}
+    
+
+    
   </script>
 </body>
 </html>

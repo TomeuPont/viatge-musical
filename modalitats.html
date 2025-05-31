@@ -155,16 +155,17 @@
     return;
   }
 
-  if (modalitats.includes('terminologia')) {
-    window.location.href = `joc_dinamic.html?temes=${temes.join(',')}&modalitat=terminologia`;
-  } else if (modalitats.includes('audicions')) {
-    window.location.href = `audicions.html?temes=${temes.join(',')}&modalitat=audicions`;
+  if (modalitat === 'terminologia' || modalitat === 'teoria') {
+    window.location.href = `joc_dinamic.html?temes=${temesSeleccionats}&modalitat=${modalitat}`;
+  } else if (modalitat === 'audicions') {
+    window.location.href = `joc_audicions.html?temes=${temesSeleccionats}`;
   } else {
-    alert("Només està implementada la modalitat 'terminologia' i 'audicions' per ara.");
+    alert("Modalitat no reconeguda.");
   }
+      
+      
 }
     
-
 
     
   </script>

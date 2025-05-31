@@ -100,13 +100,19 @@ fetch(arxiuJSON)
     const filtrades = data
       .filter(t => temesSeleccionats.includes(t.tema))
       .flatMap(t =>
-        t.preguntes.map(p => ({
-          tema: t.titol,
-          enunciat: p.enunciat,
-          opcions: barrejarArray([...p.opcions]),
-          correcta: p.opcions[p.correcta]
-        }))
-      );
+     t.preguntes.map(p => {
+    const opcionsBarrejades = barrejarArray([...p.opcions]);
+    const indexCorrecte = opcionsBarrejades.findIndex(o => o === p.opcions[p.correcta]);
+    return {
+      tema: t.titol,
+      enunciat: p.enunciat,
+      opcions: opcionsBarrejades,
+      correcta: indexCorrecte
+    };
+  })
+);
+
+    
     barrejarArray(filtrades);
     preguntes = filtrades;
     carregarPregunta();

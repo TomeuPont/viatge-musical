@@ -1,25 +1,25 @@
 [
   {
     "tema": 1,
-    "titol": "Música de l’antiguitat",
+    "titol": "Música de l'Antiguitat",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Neuma'?",
+        "enunciat": "Neuma",
         "opcions": [
-          "Forma musical del Barroc",
-          "Primer sistema de notació musical amb signes sobre el text",
           "Tipus de dansa medieval",
-          "Instrument de vent fet de canya"
+          "Primer sistema de notació musical amb signes sobre el text",
+          "Instrument de vent fet de canya",
+          "Forma musical del Barroc"
         ],
         "correcta": 1
       },
       {
-        "enunciat": "A quin terme correspon la següent definició? 'Oracions i cants litúrgics quotidians propis del cristianisme medieval.'",
+        "enunciat": "Ofici diví",
         "opcions": [
-          "Motet",
-          "Cant gregorià",
-          "Ofici diví",
-          "Missa"
+          "Ritme ternari característic del Renaixement",
+          "Escriptura musical anterior al tetragrama",
+          "Celebració de la pregària cristiana, establerta per a diferents moments de la jornada",
+          "Dansa ritual de l’antiga Grècia"
         ],
         "correcta": 2
       }
@@ -30,22 +30,22 @@
     "titol": "Música Medieval",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Trobador'?",
+        "enunciat": "Trobador",
         "opcions": [
-          "Monjo que escrivia cants litúrgics",
+          "Dansa cortesana del Renaixement",
           "Músic i poeta de la noblesa medieval",
           "Tipus d'instrument de percussió",
-          "Dansa cortesana del Renaixement"
+          "Monjo que escrivia cants litúrgics"
         ],
         "correcta": 1
       },
       {
-        "enunciat": "A quin terme correspon la definició? 'Composició musical basada en el ritual de l'eucaristia cristiana.'",
+        "enunciat": "Cant melismàtic",
         "opcions": [
-          "Cant gregorià",
-          "Motet",
-          "Missa",
-          "Coral"
+          "Cant gregorià sense acompanyament instrumental",
+          "Text sacre cantat en llatí",
+          "Cant amb moltes notes sobre una sola síl·laba",
+          "Dansa medieval lenta"
         ],
         "correcta": 2
       }
@@ -56,24 +56,34 @@
     "titol": "Música del Renaixement",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Mecenes'?",
+        "enunciat": "Mecenes",
         "opcions": [
-          "Persona que finança artistes i projectes culturals",
+          "Tipus de dansa cortesana",
           "Instrument musical antic de corda",
-          "Forma musical polifònica sacra",
-          "Tipus de dansa cortesana"
-        ],
-        "correcta": 0
-      },
-      {
-        "enunciat": "A quin terme correspon la definició? 'Composició vocal polifònica de caràcter religiós, sovint en llatí.'",
-        "opcions": [
-          "Madrigal",
-          "Missa",
-          "Motet",
-          "Lied"
+          "Persona que finança artistes i projectes culturals",
+          "Forma musical polifònica sacra"
         ],
         "correcta": 2
+      },
+      {
+        "enunciat": "Contrapunt",
+        "opcions": [
+          "Tipus d'instrument de corda pinçada",
+          "Tècnica compositiva basada en la superposició de línies melòdiques independents",
+          "Ritme ternari de dansa cortesana",
+          "Harmonia de tres sons simultanis"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Música ficta",
+        "opcions": [
+          "Composicions inventades per juglars",
+          "Música improvisada sense notació",
+          "Obres amb temàtica mitològica",
+          "Notes accidentals afegides pel músic en la interpretació del Renaixement"
+        ],
+        "correcta": 3
       }
     ]
   },
@@ -82,24 +92,34 @@
     "titol": "Música del Barroc",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Baix continu'?",
+        "enunciat": "Baix continu",
         "opcions": [
+          "Gènere vocal de l'època medieval",
           "Forma musical del Classicisme basada en variacions",
           "Acompanyament musical format per un baix i un instrument d'harmonia",
-          "Tipus de dansa barroca",
-          "Gènere vocal de l'època medieval"
+          "Tipus de dansa barroca"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Aria da capo",
+        "opcions": [
+          "Tema amb variacions simfòniques",
+          "Ària tripartida que repeteix la primera secció al final",
+          "Cançó profana del Romanticisme",
+          "Peça vocal medieval de forma lliure"
         ],
         "correcta": 1
       },
       {
-        "enunciat": "A quin terme correspon la definició? 'Forma musical barroca basada en el contrast entre un petit grup de solistes i l'orquestra.'",
+        "enunciat": "Suite",
         "opcions": [
-          "Sonata",
-          "Concerto grosso",
-          "Fuga",
-          "Suite"
+          "Forma de teatre musical satíric",
+          "Obra vocal religiosa amb cor",
+          "Conjunt de peces instrumentals de dansa del Barroc",
+          "Forma instrumental pròpia del Classicisme"
         ],
-        "correcta": 1
+        "correcta": 2
       }
     ]
   },
@@ -108,24 +128,24 @@
     "titol": "Música del Classicisme",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Rondó'?",
+        "enunciat": "Rondó",
         "opcions": [
-          "Forma musical basada en la repetició d'un tema principal alternat amb episodis nous",
           "Dansa barroca a ritme ternari",
+          "Forma musical basada en la repetició d'un tema principal alternat amb episodis nous",
           "Tipus de simfonia",
           "Forma coral de l'època medieval"
         ],
-        "correcta": 0
+        "correcta": 1
       },
       {
-        "enunciat": "A quin terme correspon la definició? 'Composicions musicals destinades a petits grups d'instruments.'",
+        "enunciat": "Quartet",
         "opcions": [
-          "Música simfònica",
-          "Música profana",
-          "Música de cambra",
-          "Música religiosa"
+          "Dansa cortesana del Barroc",
+          "Composició escrita per a quatre instruments o veus",
+          "Peça simfònica per a gran orquestra",
+          "Grup coral religiós"
         ],
-        "correcta": 2
+        "correcta": 1
       }
     ]
   },
@@ -134,24 +154,34 @@
     "titol": "Música del Romanticisme",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Lied'?",
+        "enunciat": "Lied",
         "opcions": [
+          "Forma musical del Classicisme",
           "Cançó per a veu i piano pròpia del Romanticisme",
           "Composició per a orquestra",
-          "Dansa alemanya del Barroc",
-          "Forma musical del Classicisme"
-        ],
-        "correcta": 0
-      },
-      {
-        "enunciat": "A quin terme correspon la definició? 'Composició orquestral d’un sol moviment amb un programa narratiu.'",
-        "opcions": [
-          "Sonata",
-          "Poema simfònic",
-          "Òpera",
-          "Minuet"
+          "Dansa alemanya del Barroc"
         ],
         "correcta": 1
+      },
+      {
+        "enunciat": "Música programàtica",
+        "opcions": [
+          "Suite instrumental de dansa",
+          "Música que segueix una narrativa o programa extramusical",
+          "Música coral religiosa",
+          "Composició basada exclusivament en estructures abstractes"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Orquestra filharmònica",
+        "opcions": [
+          "Gran conjunt de músics que interpreten obres de música clàssica.",
+          "Banda de vent per a cerimònies",
+          "Conjunt de músics dedicats al jazz",
+          "Orquestra reduïda per a cambra"
+        ],
+        "correcta": 0
       }
     ]
   },
@@ -160,48 +190,42 @@
     "titol": "Música del segle XX i últimes tendències",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Dodecafonisme'?",
+        "enunciat": "Dodecafonisme",
         "opcions": [
-          "Sistema de composició basat en la utilització de les dotze notes de l’escala cromàtica sense jerarquies",
           "Música basada en la improvisació i el swing",
           "Estil musical inspirat en la música folklòrica",
-          "Forma musical que combina instruments acústics i electrònics"
+          "Forma musical que combina instruments acústics i electrònics",
+          "Sistema de composició basat en la utilització de les dotze notes de l’escala cromàtica sense jerarquies"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Atonalitat",
+        "opcions": [
+          "Tècnica exclusiva per a percussió",
+          "Música basada en escales pentatòniques",
+          "Estil de composició exclusivament modal",
+          "Música amb absència de tonalitat central o jerarquia harmònica"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Clúster",
+        "opcions": [
+          "Grup de notes adjacents tocades simultàniament",
+          "Trama rítmica d’una fuga",
+          "Tècnica d’improvisació de jazz",
+          "Seqüència de sons repetitius"
         ],
         "correcta": 0
       },
       {
-        "enunciat": "A quin terme correspon la definició? 'Estil de música experimental basada en enregistraments de sons naturals i processats electrònicament.'",
+        "enunciat": "Ones Martenot",
         "opcions": [
-          "Música electrònica",
-          "Música concreta",
-          "Dodecafonisme",
-          "Minimalisme"
-        ],
-        "correcta": 1
-      }
-    ]
-  },
-  {
-    "tema": 8,
-    "titol": "Músiques urbanes",
-    "preguntes": [
-      {
-        "enunciat": "Quina és la definició correcta de 'Blues'?",
-        "opcions": [
-          "Gènere musical d'origen africà que combina improvisació i swing",
-          "Estil musical de ritme sincopat amb influència africana",
-          "Gènere musical d’origen afroamericà amb estructura harmònica de 12 compassos",
-          "Música electrònica basada en loops i sintetitzadors"
-        ],
-        "correcta": 2
-      },
-      {
-        "enunciat": "A quin terme correspon la definició? 'Instrument que genera so mitjançant circuits electrònics.'",
-        "opcions": [
-          "Clavecí",
-          "Gramòfon",
-          "Electròfon",
-          "Orgue"
+          "Efecte sonor de reverberació",
+          "Sinestèsia visual-auditiva",
+          "Primer instrument electrònic amb control expressiu desenvolupat al segle XX",
+          "Sistema de transmissió per ràdio"
         ],
         "correcta": 2
       }
@@ -212,24 +236,24 @@
     "titol": "Música de pel·lícules i musicals",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Banda sonora original'?",
+        "enunciat": "Banda sonora original",
         "opcions": [
-          "Música utilitzada en un musical de Broadway",
           "Composició que acompanya una pel·lícula, pot incloure diàlegs i efectes de so",
-          "Recull de cançons comercials per a una pel·lícula",
-          "Efectes sonors gravats per a una obra audiovisual"
+          "Efectes sonors gravats per a una obra audiovisual",
+          "Música utilitzada en un musical de Broadway",
+          "Recull de cançons comercials per a una pel·lícula"
         ],
-        "correcta": 1
+        "correcta": 0
       },
       {
-        "enunciat": "A quin terme correspon la definició? 'Espectacle teatral que combina música, dansa i interpretació.'",
+        "enunciat": "Leitmotiv",
         "opcions": [
-          "Òpera",
-          "Zarzuela",
-          "Musical",
-          "Oratori"
+          "Tema musical associat a un personatge, lloc o idea en una obra audiovisual",
+          "Melodia aleatòria dins d’un film",
+          "Narració parlada sobre música",
+          "Cançó principal d’un musical"
         ],
-        "correcta": 2
+        "correcta": 0
       }
     ]
   },
@@ -238,22 +262,12 @@
     "titol": "Músiques i danses tradicionals del món",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Polonesa'?",
+        "enunciat": "Polonesa",
         "opcions": [
-          "Dansa tradicional d'origen polonès a ritme ternari",
-          "Peça vocal profana amb acompanyament instrumental",
           "Cançó popular de caràcter improvisat",
-          "Dansa cortesana del Renaixement"
-        ],
-        "correcta": 0
-      },
-      {
-        "enunciat": "A quin terme correspon la definició? 'Música no vinculada a cap context religiós.'",
-        "opcions": [
-          "Cant gregorià",
-          "Motet",
-          "Música profana",
-          "Música litúrgica"
+          "Dansa cortesana del Renaixement",
+          "Dansa tradicional d'origen polonès a ritme ternari",
+          "Peça vocal profana amb acompanyament instrumental"
         ],
         "correcta": 2
       }
@@ -264,22 +278,12 @@
     "titol": "Músiques i danses tradicionals de les Illes Balears",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Ball tradicional de les Illes Balears'?",
+        "enunciat": "Ball tradicional de les Illes Balears",
         "opcions": [
-          "Danses populars pròpies de la cultura balear com la jota i el bolero",
-          "Música medieval composta per a la cort reial",
+          "Composició coral pròpia del segle XIX",
           "Forma de cant religiós amb arrels gregorianes",
-          "Composició coral pròpia del segle XIX"
-        ],
-        "correcta": 0
-      },
-      {
-        "enunciat": "A quin terme correspon la definició? 'Grup de músics que toquen xeremies, flabiol i tamborí en celebracions populars.'",
-        "opcions": [
-          "Ministrils",
-          "Glosadors",
-          "Colla de xeremiers",
-          "Orquestra de cambra"
+          "Danses populars pròpies de la cultura balear com la jota i el bolero",
+          "Música medieval composta per a la cort reial"
         ],
         "correcta": 2
       }
@@ -290,24 +294,980 @@
     "titol": "Història de la dansa",
     "preguntes": [
       {
-        "enunciat": "Quina és la definició correcta de 'Ballet de cort'?",
+        "enunciat": "Ballet de cort",
         "opcions": [
-          "Forma de dansa desenvolupada a les corts europees del Renaixement i Barroc",
+          "Estil de dansa contemporània desenvolupat al segle XX",
           "Espectacle musical amb cantants, actors i ballarins",
           "Dansa popular tradicional de l’edat mitjana",
-          "Estil de dansa contemporània desenvolupat al segle XX"
+          "Forma de dansa desenvolupada a les corts europees del Renaixement i Barroc"
+        ],
+        "correcta": 3
+      }
+    ]
+  },
+  {
+    "tema": 14,
+    "titol": "Música Medieval",
+    "preguntes": [
+      {
+        "enunciat": "«Himne a Sant Joan»",
+        "opcions": [
+          "«Himne a Sant Joan», anònim, Medieval, veu.",
+          "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+          "«Flos Florum», Dufay, Renaixement, orgue.",
+          "«Rehab», Amy Winehouse, segle XXI, veu i electrònica."
         ],
         "correcta": 0
       },
       {
-        "enunciat": "A quin terme correspon la definició? 'Dansa de parella a ritme ternari, d’origen austríac.'",
+        "enunciat": "«Cántiga de Santa Maria. Strela do Dia»",
         "opcions": [
-          "Minuet",
-          "Vals",
-          "Tarantel·la",
-          "Gavota"
+          "«La cavalcada de les valquíries», Wagner, Romanticisme, orquestra.",
+          "«Preludi a la sesta del faune», Debussy, segle XX, piano.",
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Cántiga de Santa Maria. Strela do Dia», Alfons X El Savi, Medieval, veu i instruments antics."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Viderunt Omnes»",
+        "opcions": [
+          "«Strange Fruit», Billie Holiday, segle XXI, jazz band.",
+          "«La Primavera», Vivaldi, Barroc, orquestra.",
+          "«Viderunt Omnes», Leonin, Medieval, veus.",
+          "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, piano."
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 15,
+    "titol": "Música del Renaixement",
+    "preguntes": [
+      {
+        "enunciat": "«Flos Florum»",
+        "opcions": [
+          "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
+          "«Flos Florum», Dufay, Renaixement, cor a capella.",
+          "«Bourrée pour les Basques», Lully, Barroc, dansa i violí.",
+          "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna."
         ],
         "correcta": 1
+      },
+      {
+        "enunciat": "«Morir non può il mio cuore»",
+        "opcions": [
+          "«Preludi a la sesta del faune», Debussy, segle XX, piano.",
+          "«Morir non può il mio cuore», Maddalena Casulana, Renaixement, veu i llaüt.",
+          "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, cor i orquestra.",
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«Hoy comamos y bebamos»",
+        "opcions": [
+          "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+          "«Another Day of Sun», Justin Hurwitz, segle XXI, orquestra i veu.",
+          "«Hoy comamos y bebamos», Juan del Encina, Renaixement, veu i instruments antics.",
+          "«Rehab», Amy Winehouse, segle XXI, veu i electrònica."
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 16,
+    "titol": "Música del Barroc",
+    "preguntes": [
+      {
+        "enunciat": "«Magnum Mysterium»",
+        "opcions": [
+          "«Enyorança», Matilde Escalas, segle XX, veu i piano.",
+          "«Pulcinella», Stravinsky, segle XX, orquestra moderna.",
+          "«Viderunt Omnes», Leonin, Medieval, veus i orgue.",
+          "«Magnum Mysterium», Victoria, Barroc, cor a capella."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Orfeo. Vi ricorda, o boschi ombrosi»",
+        "opcions": [
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Orfeo. Vi ricorda, o boschi ombrosi», Monteverdi, Barroc, veu i orquestra.",
+          "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, piano.",
+          "«Jota de morir», Marala, segle XXI, veu i electrònica."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«La Primavera», primer moviment",
+        "opcions": [
+          "«Strange Fruit», Billie Holiday, segle XXI, veu i electrònica.",
+          "«La Primavera», Vivaldi, Barroc, orquestra.",
+          "«Quadres d’una exposició», Mussorgsky, Romanticisme, piano.",
+          "«Simfonia núm. 94», Haydn, Classicisme, quartet de corda."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«Coral de la Passió segons Sant Mateu. Wenn ich einmal soll scheiden»",
+        "opcions": [
+          "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
+          "«Penny Lane», The Beatles, segle XX, banda pop.",
+          "«Coral de la Passió segons Sant Mateu. Wenn ich einmal soll scheiden», J. S. Bach, Barroc, cor i orquestra.",
+          "«Pierrot Lunaire», Schoenberg, segle XX, veu i piano."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Bourrée pour les Basques»",
+        "opcions": [
+          "«Strange Fruit», Billie Holiday, segle XX, veu i guitarra.",
+          "«Pulcinella», Stravinsky, segle XX, orquestra moderna.",
+          "«Bourrée pour les Basques», Lully, Barroc, orquestra de dansa.",
+          "«Another Day of Sun», Hurwitz, segle XXI, cor i electrònica."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Cantata al Santísimo “Ya por el Horizonte. Suene la alboreada”» (ària)",
+        "opcions": [
+          "«La cavalcada de les valquíries», Wagner, Romanticisme, orquestra.",
+          "«Cantata al Santísimo “Ya por el Horizonte. Suene la alboreada” (ària)», Lliteres, Barroc, veu i orquestra.",
+          "«Enyorança», Matilde Escalas, segle XX, veu i piano.",
+          "«Operation Pull Toy», Newman, segle XXI, orquestra i electrònica."
+        ],
+        "correcta": 1
+      }
+    ]
+  },
+  {
+    "tema": 17,
+    "titol": "Música del Classicisme",
+    "preguntes": [
+      {
+        "enunciat": "«Quartet Op. 76 núm. 4», quart moviment",
+        "opcions": [
+          "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, orquestra.",
+          "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna.",
+          "«Quartet Op. 76 núm. 4», Haydn, Classicisme, quartet de corda.",
+          "«Viderunt Omnes», Leonin, Medieval, veus."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Simfonia núm. 94», segon moviment",
+        "opcions": [
+          "«Flos Florum», Dufay, Renaixement, veu i llaüt.",
+          "«Operation Pull Toy», Newman, segle XXI, orquestra i electrònica.",
+          "«Simfonia núm. 6 Pastoral», Schubert, Romanticisme, cor.",
+          "«Simfonia núm. 94», Haydn, Classicisme, orquestra."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Petita serenata nocturna», primer moviment",
+        "opcions": [
+          "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
+          "«Pulcinella», Stravinsky, segle XX, orquestra moderna.",
+          "«Petita serenata nocturna», Mozart, Classicisme, orquestra de corda.",
+          "«Jota de morir», Marala, segle XXI, veu i electrònica."
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 18,
+    "titol": "Música del Romanticisme",
+    "preguntes": [
+      {
+        "enunciat": "«Simfonia núm. 6. Pastoral», primer moviment",
+        "opcions": [
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Pierrot Lunaire», Schoenberg, segle XX, veu i piano.",
+          "«Simfonia núm. 6. Pastoral», Beethoven, Romanticisme, orquestra.",
+          "«Cantata al Santísimo», Lliteres, Barroc, veu i orquestra."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Quintet La Truita», primer moviment",
+        "opcions": [
+          "«La Primavera», Vivaldi, Barroc, orquestra.",
+          "«Quintet La Truita», Schubert, Romanticisme, quintet de corda i piano.",
+          "«Flos Florum», Dufay, Renaixement, cor a capella.",
+          "«Another Day of Sun», Hurwitz, segle XXI, cor i electrònica."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«Preludi de la gota d’aigua»",
+        "opcions": [
+          "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna.",
+          "«Preludi de la gota d’aigua», Chopin, Romanticisme, piano solista.",
+          "«Strange Fruit», Billie Holiday, segle XX, veu i electrònica.",
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«Quadres d’una exposició»",
+        "opcions": [
+          "«Jota de morir», Marala, segle XXI, veu i electrònica.",
+          "«Simfonia núm. 94», Haydn, Classicisme, quartet de corda.",
+          "«Quadres d’una exposició», Mussorgsky (orq. Ravel), Romanticisme, orquestra.",
+          "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, cor."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Lied. Das Veilchen»",
+        "opcions": [
+          "«Flos Florum», Dufay, Renaixement, cor a capella.",
+          "«Lied. Das Veilchen», Clara Wieck Schumann, Romanticisme, veu i piano.",
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Strange Fruit», Billie Holiday, segle XXI, jazz band."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«La cavalcada de les valquíries. La Valquíria»",
+        "opcions": [
+          "«Viderunt Omnes», Leonin, Medieval, veus.",
+          "«La cavalcada de les valquíries. La Valquíria», Wagner, Romanticisme, orquestra.",
+          "«Another Day of Sun», Hurwitz, segle XXI, orquestra moderna.",
+          "«Cantata al Santísimo», Lliteres, Barroc, cor i orquestra."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«Gloria all'Egitto, ad Iside. Aida»",
+        "opcions": [
+          "«Operation Pull Toy», Newman, segle XXI, orquestra moderna.",
+          "«Flos Florum», Dufay, Renaixement, cor a capella.",
+          "«Gloria all'Egitto, ad Iside. Aida», Verdi, Romanticisme, cor i orquestra.",
+          "«Strange Fruit», Billie Holiday, segle XXI, veu i jazz band."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Simfonia Fantàstica», 5è moviment",
+        "opcions": [
+          "«Preludi a la sesta del faune», Debussy, segle XX, piano.",
+          "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna.",
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra."
+        ],
+        "correcta": 3
+      }
+    ]
+  },
+  {
+    "tema": 19,
+    "titol": "Música del segle XX i últimes tendències",
+    "preguntes": [
+      {
+        "enunciat": "«Preludi a la sesta del faune»",
+        "opcions": [
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Preludi a la sesta del faune», Debussy, segle XX, orquestra.",
+          "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, piano.",
+          "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, orquestra."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«Gymnopédie núm. 1»",
+        "opcions": [
+          "«Jota de morir», Marala, segle XXI, veu i electrònica.",
+          "«Pulcinella», Stravinsky, segle XXI, electrònica.",
+          "«Pierrot Lunaire», Schoenberg, segle XX, veu i ensemble.",
+          "«Gymnopédie núm. 1», Satie, segle XX, piano solista."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Simfonia clàssica», primer moviment",
+        "opcions": [
+          "«Operation Pull Toy», Newman, segle XXI, electrònica.",
+          "«Himne a Sant Joan», anònim, Medieval, veu.",
+          "«Simfonia clàssica», Prokofiev, segle XX, orquestra.",
+          "«Another Day of Sun», Hurwitz, segle XXI, veu i orquestra moderna."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Enyorança»",
+        "opcions": [
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, orquestra.",
+          "«Pierrot Lunaire», Schoenberg, segle XX, veu i ensemble.",
+          "«Enyorança», Matilde Escalas, segle XX, veu i piano."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Pierrot Lunaire. Part 1. Mondestrunken»",
+        "opcions": [
+          "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
+          "«Jota de morir», Marala, segle XXI, veu i electrònica.",
+          "«Flos Florum», Dufay, Renaixement, cor a capella.",
+          "«Pierrot Lunaire. Part 1. Mondestrunken», Schoenberg, segle XX, veu i ensemble."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Pulcinella» (obertura)",
+        "opcions": [
+          "«Preludi de la gota d’aigua», Chopin, Romanticisme, piano solista.",
+          "«Pulcinella» (obertura), Stravinsky, segle XX, orquestra.",
+          "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+          "«Cant de la Sibil·la», tradicional mallorquina, Medieval, veu."
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "«Strange Fruit»",
+        "opcions": [
+          "«Operation Pull Toy», Newman, segle XXI, orquestra moderna.",
+          "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Strange Fruit», Billie Holiday, segle XX, veu i jazz band."
+        ],
+        "correcta": 3
+      }
+    ]
+  },
+  {
+    "tema": 20,
+    "titol": "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
+    "preguntes": [
+      {
+        "enunciat": "«Rehab»",
+        "opcions": [
+          "«Simfonia Fantàstica», Berlioz, Romanticisme, cor i orquestra.",
+          "«Viderunt Omnes», Leonin, Medieval, veus.",
+          "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, orquestra.",
+          "«Rehab», Amy Winehouse, segle XXI, veu i banda de soul."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Penny Lane»",
+        "opcions": [
+          "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, cor i orquestra.",
+          "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+          "«Penny Lane», The Beatles, segle XX, banda pop.",
+          "«Another Day of Sun», Hurwitz, segle XXI, veu i orquestra moderna."
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "«Jota de morir»",
+        "opcions": [
+          "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna.",
+          "«Jota de morir», Marala, segle XXI, veu i electrònica.",
+          "«Preludi de la gota d’aigua», Chopin, Romanticisme, piano solista.",
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda."
+        ],
+        "correcta": 1
+      }
+    ]
+  },
+  {
+    "tema": 21,
+    "titol": "Música de pel·lícules i musicals",
+    "preguntes": [
+      {
+        "enunciat": "«Another Day of Sun»",
+        "opcions": [
+          "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+          "«Preludi a la sesta del faune», Debussy, segle XX, piano solista.",
+          "«Strange Fruit», Billie Holiday, segle XXI, jazz band.",
+          "«Another Day of Sun», Justin Hurwitz, segle XXI, veu i orquestra moderna."
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "«Operation Pull Toy», Toy Story",
+        "opcions": [
+          "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, cor i orquestra.",
+          "«Jota de morir», Marala, segle XXI, veu i electrònica.",
+          "«Himne a Sant Joan», anònim, Medieval, veu.",
+          "«Operation Pull Toy», Randy Newman, segle XXI, orquestra i electrònica."
+        ],
+        "correcta": 3
+      }
+    ]
+  },
+  {
+    "tema": 23,
+    "titol": "Música i danses tradicionals de les Illes Balears",
+    "preguntes": [
+      {
+        "enunciat": "«Cant de la Sibil·la»",
+        "opcions": [
+          "«Cant de la Sibil·la», tradicional mallorquina, Medieval, veu i orgue.",
+          "«Operation Pull Toy», Newman, segle XXI, orquestra i cor.",
+          "«Jota de morir», Marala, segle XXI, electrònica.",
+          "«Preludi de la gota d’aigua», Chopin, Romanticisme, orquestra."
+        ],
+        "correcta": 0
+      }
+    ]
+  },
+  {
+    "tema": 25,
+    "titol": "Música de l’antiguitat",
+    "preguntes": [
+      {
+        "enunciat": "Cultures musicals antigues",
+        "opcions": [
+          "Persa, xinesa, maia i inca",
+          "Eslava, índia, bizantina i japonesa",
+          "Celta, germànica, escandinava i visigòtica",
+          "Egípcia, Mesopotàmica, Grega i Romana"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Instruments antics",
+        "opcions": [
+          "Violí",
+          "Saxòfon",
+          "Lira",
+          "Clavecí"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Funcions de la música antiga",
+        "opcions": [
+          "Només per a educació de l’aristocràcia",
+          "Només per narrar històries",
+          "Per rituals, funcions religioses i entreteniment",
+          "Exclusivament per ballar"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Pensament musical grec",
+        "opcions": [
+          "Sòcrates",
+          "Aristòtil",
+          "Plató",
+          "Pitàgores"
+        ],
+        "correcta": 3
+      }
+    ]
+  },
+  {
+    "tema": 26,
+    "titol": "Música Medieval",
+    "preguntes": [
+      {
+        "enunciat": "Característiques del cant gregorià",
+        "opcions": [
+          "Monòdic, en llatí, sense acompanyament",
+          "Coral, amb veus mixtes i instruments",
+          "Polifònic, amb acompanyament d’arpa",
+          "Popular, rítmic, cantat en llengua vernacla"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "La polifonia primitiva",
+        "opcions": [
+          "Canterbury",
+          "Roma",
+          "Santiago de Compostel·la",
+          "Notre-Dame de París"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Música profana",
+        "opcions": [
+          "Trobadors i trobairitz",
+          "Càtars",
+          "Monjos gregorians",
+          "Jutglars"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "Dansa medieval",
+        "opcions": [
+          "Estampida",
+          "Vals",
+          "Pavana",
+          "Sarabanda"
+        ],
+        "correcta": 0
+      }
+    ]
+  },
+  {
+    "tema": 27,
+    "titol": "Música del Renaixement",
+    "preguntes": [
+      {
+        "enunciat": "Estil musical del Renaixement",
+        "opcions": [
+          "Rebuig de la simetria i ús de dissonàncies",
+          "Predomini del contrapunt i l’equilibri formal",
+          "Inspiració en l’espiritualitat oriental",
+          "Exclusiva improvisació instrumental"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Formes vocals del Renaixement",
+        "opcions": [
+          "Villancet",
+          "Madrigal",
+          "Motet",
+          "Lied"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Instruments renaixentistes",
+        "opcions": [
+          "Violí elèctric",
+          "Llaüt",
+          "Acordió",
+          "Saxòfon"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Danses del Renaixement",
+        "opcions": [
+          "Branle",
+          "Tango",
+          "Tarantel·la",
+          "Jota"
+        ],
+        "correcta": 0
+      }
+    ]
+  },
+  {
+    "tema": 28,
+    "titol": "Música del Barroc",
+    "preguntes": [
+      {
+        "enunciat": "Característiques de l’estil barroc",
+        "opcions": [
+          "Predomini de la percussió",
+          "Sobrietat i línies pures",
+          "Contrast, afectes i expressivitat",
+          "Simetria i contenció emocional"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Gènere vocal destacat",
+        "opcions": [
+          "Lied",
+          "Blues",
+          "Òpera",
+          "Chanson"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Música instrumental barroca",
+        "opcions": [
+          "Simfonia",
+          "Concert grosso",
+          "Òpera-rock",
+          "Quartet de corda"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Danses barroques",
+        "opcions": [
+          "Mazurca",
+          "Sardana",
+          "Giga",
+          "Cueca"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 29,
+    "titol": "Música del Classicisme",
+    "preguntes": [
+      {
+        "enunciat": "Estètica clàssica",
+        "opcions": [
+          "Aleatorietat",
+          "Asimetria",
+          "Exaltació individual",
+          "Equilibri i claredat formal"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Formes instrumentals del Classicisme",
+        "opcions": [
+          "Sonata",
+          "Lied",
+          "Motet",
+          "Toccata"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "Òpera clàssica",
+        "opcions": [
+          "Verdi",
+          "Mozart",
+          "Wagner",
+          "Monteverdi"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Ballet clàssic",
+        "opcions": [
+          "Codificació de passos i tècnica formal amb narrativa",
+          "Dansa amb veu parlada sobre música electrònica",
+          "Dansa folklòrica amb improvisació rítmica",
+          "Dansa religiosa amb orígens grecs"
+        ],
+        "correcta": 0
+      }
+    ]
+  },
+  {
+    "tema": 30,
+    "titol": "Música del Romanticisme",
+    "preguntes": [
+      {
+        "enunciat": "Estil romàntic",
+        "opcions": [
+          "Contrapunt imitatiu estrictament tècnic",
+          "Claredat formal i simetria",
+          "Expressió individual i emoció",
+          "Ús de la música electrònica"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Lied romàntic",
+        "opcions": [
+          "Bach",
+          "Debussy",
+          "Schubert",
+          "Händel"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Instrument protagonista",
+        "opcions": [
+          "Saxòfon",
+          "Flauta",
+          "Arpa",
+          "Piano"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Moviment cultural destacat",
+        "opcions": [
+          "Nacionalisme",
+          "Minimalisme",
+          "Impressionisme",
+          "Dodecafonisme"
+        ],
+        "correcta": 0
+      }
+    ]
+  },
+  {
+    "tema": 31,
+    "titol": "Música del segle XX i últimes tendències",
+    "preguntes": [
+      {
+        "enunciat": "Tendència estètica del segle XX",
+        "opcions": [
+          "Retorn a formes barroques estrictes",
+          "Ús exclusiu de la tonalitat clàssica",
+          "Experimentació i ús del soroll",
+          "Exclusivitat de la veu humana"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Estils musicals",
+        "opcions": [
+          "Expressionisme",
+          "Impressionisme",
+          "Aleatorietat",
+          "Neoclassicisme"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Tècnica innovadora",
+        "opcions": [
+          "Tipus de coral a dotze veus",
+          "Composició basada en dotze sons iguals sense jerarquia tonal",
+          "Cançó amb dotze compassos de blues",
+          "Efecte electrònic sobre sons naturals"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Música concreta",
+        "opcions": [
+          "Música religiosa del Barroc",
+          "Composició només per a piano",
+          "Composició a partir d’enregistraments manipulats",
+          "Cançons folklòriques a capella"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 32,
+    "titol": "Músiques urbanes",
+    "preguntes": [
+      {
+        "enunciat": "Característiques del jazz",
+        "opcions": [
+          "Improvisació i arrels afroamericanes",
+          "Ús exclusiu de guitarra elèctrica",
+          "Veu parlada i base electrònica constant",
+          "Composició totalment escrita i rígida"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "Origen del blues",
+        "opcions": [
+          "Òpera italiana",
+          "Comunitats afroamericanes",
+          "Música japonesa tradicional",
+          "Europa barroca"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Elements del rock",
+        "opcions": [
+          "Cants gregorians en llatí",
+          "Instruments de vent fusta",
+          "Guitarra elèctrica i ritme marcat",
+          "Polifonia imitativa estricta"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Rap i cultura associada",
+        "opcions": [
+          "Hip-hop",
+          "Gòtic",
+          "Classicisme",
+          "Surrealisme"
+        ],
+        "correcta": 0
+      }
+    ]
+  },
+  {
+    "tema": 33,
+    "titol": "Música de pel·lícules i musicals",
+    "preguntes": [
+      {
+        "enunciat": "Funcions de la música al cinema",
+        "opcions": [
+          "Crear ambient, emoció i reforçar l’acció",
+          "Substituir els efectes visuals",
+          "Reduir la durada de les escenes",
+          "Ometre diàlegs i silenciar escenes"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "Compositors destacats de bandes sonores",
+        "opcions": [
+          "John Dowland",
+          "Hans Zimmer",
+          "Verdi",
+          "Clara Schumann"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Característiques del musical",
+        "opcions": [
+          "Un tipus de poema cantat amb flauta",
+          "Una òpera religiosa del Renaixement",
+          "Un espectacle amb música, dansa i teatre",
+          "Una cançó simfònica de curta durada"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Origen dels musicals moderns",
+        "opcions": [
+          "Berlín",
+          "Broadway",
+          "Nàpols",
+          "Viena"
+        ],
+        "correcta": 1
+      }
+    ]
+  },
+  {
+    "tema": 34,
+    "titol": "Músiques i danses tradicionals del món",
+    "preguntes": [
+      {
+        "enunciat": "Dansa europea tradicional",
+        "opcions": [
+          "Gagaku",
+          "Raga",
+          "Fado",
+          "Samba"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Característica de la música africana",
+        "opcions": [
+          "Polifonia clàssica",
+          "Percussió i danses rituals",
+          "Instruments electrònics",
+          "Notació gràfica estricta"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Música asiàtica tradicional",
+        "opcions": [
+          "Ritme tribal africà",
+          "Música tradicional de la cort japonesa",
+          "Cant improvisat persa",
+          "Dansa contemporània coreana"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Danses americanes",
+        "opcions": [
+          "Branle",
+          "Tango",
+          "Pavana",
+          "Tarantel·la"
+        ],
+        "correcta": 1
+      }
+    ]
+  },
+  {
+    "tema": 35,
+    "titol": "Músiques i danses tradicionals de les Illes Balears",
+    "preguntes": [
+      {
+        "enunciat": "Ball de bot",
+        "opcions": [
+          "Cueca",
+          "Bourrée",
+          "Fandango",
+          "Tarantel·la"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Instruments tradicionals balears",
+        "opcions": [
+          "Violí i piano",
+          "Acordió i guitarra elèctrica",
+          "Tambor i pandereta",
+          "Flabiol i tamborí amb xeremies"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Contextos d’interpretació",
+        "opcions": [
+          "Òperes a teatres",
+          "Festes patronals i revetlles",
+          "Cerimònies religioses formals",
+          "Concerts simfònics"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Transmissió cultural",
+        "opcions": [
+          "Via enregistraments moderns",
+          "Exclusivament a través de llibres antics",
+          "Per transmissió oral",
+          "Mitjançant partitures barroques"
+        ],
+        "correcta": 2
+      }
+    ]
+  },
+  {
+    "tema": 36,
+    "titol": "Història de la dansa",
+    "preguntes": [
+      {
+        "enunciat": "Funcions de la dansa a l’antiguitat",
+        "opcions": [
+          "Tenia funcions rituals, socials i religioses",
+          "Només la practicaven els guerrers",
+          "Servia per competir entre pobles",
+          "Era només una forma de càstig corporal"
+        ],
+        "correcta": 0
+      },
+      {
+        "enunciat": "Dansa al Renaixement",
+        "opcions": [
+          "Va suprimir tota dansa cortesana",
+          "Va fusionar dansa i òpera",
+          "Va eliminar la codificació de moviments",
+          "Va codificar passos i va crear danses de saló"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Segle XIX i dansa",
+        "opcions": [
+          "Improvisació lliure i espontània",
+          "Ús de sintetitzadors i veu electrònica",
+          "Narrativa simbòlica i atmosfera etèria",
+          "Danses de parella amb percussió africana"
+        ],
+        "correcta": 2
+      },
+      {
+        "enunciat": "Segle XX i la dansa moderna",
+        "opcions": [
+          "Isadora Duncan",
+          "Johann Strauss",
+          "Marius Petipa",
+          "Anna Pavlova"
+        ],
+        "correcta": 0
       }
     ]
   }

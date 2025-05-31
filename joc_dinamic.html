@@ -84,21 +84,35 @@
     let errors = 0;
     let respostaMostrada = false;
 
-    fetch("preguntes_terminologia.json")
-      .then(response => response.json())
-      .then(data => {
-        const filtrades = data
-          .filter(t => temesSeleccionats.includes(t.tema))
-          .flatMap(t => t.preguntes.map(p => ({
-            tema: t.titol,
-            enunciat: p.enunciat,
-            opcions: p.opcions,
-            correcta: p.correcta
-          })));
-        barrejarArray(filtrades);
-        preguntes = filtrades;
-        carregarPregunta();
-      });
+
+    const modalitat = urlParams.get("modalitat");
+
+let arxiuJSON = "";
+if (modalitat === "terminologia") {
+  arxiuJSON = "preguntes_terminologia.json";
+} else if (modalitat === "teoria") {
+  arxiuJSON = "preguntes_teoria_complet.json";
+}
+
+fetch(arxiuJSON)
+  .then(response => response.json())
+  .then(data => {
+    const filtrades = data
+      .filter(t => temesSeleccionats.includes(t.tema))
+      .flatMap(t =>
+        t.preguntes.map(p => ({
+          tema: t.titol,
+          enunciat: p.enunciat,
+          opcions: barrejarArray([...p.opcions]),
+          correcta: p.opcions[p.correcta]
+        }))
+      );
+    barrejarArray(filtrades);
+    preguntes = filtrades;
+    carregarPregunta();
+  });
+
+    
 
     function barrejarArray(array) {
       for (let i = array.length - 1; i > 0; i--) {

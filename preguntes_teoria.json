@@ -1,0 +1,48 @@
+[
+  {
+    "tema": 1,
+    "titol": "Música de l’antiguitat",
+    "preguntes": [
+      {
+        "enunciat": "Quina d’aquestes cultures forma part del desenvolupament musical de l’antiguitat?",
+        "opcions": [
+          "Eslava, índia, bizantina i japonesa",
+          "Egípcia, Mesopotàmica, Grega i Romana",
+          "Persa, xinesa, maia i inca",
+          "Celta, germànica, escandinava i visigòtica"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Quin d’aquests instruments era utilitzat en l’antiguitat clàssica?",
+        "opcions": [
+          "Saxòfon",
+          "Violí",
+          "Clavecí",
+          "Lira"
+        ],
+        "correcta": 3
+      },
+      {
+        "enunciat": "Per a què s’utilitzava principalment la música a l’antiguitat?",
+        "opcions": [
+          "Només per a educació de l’aristocràcia",
+          "Per rituals, funcions religioses i entreteniment",
+          "Només per narrar històries",
+          "Exclusivament per ballar"
+        ],
+        "correcta": 1
+      },
+      {
+        "enunciat": "Quin filòsof grec relacionà la música amb les proporcions numèriques?",
+        "opcions": [
+          "Pitàgores",
+          "Aristòtil",
+          "Sòcrates",
+          "Plató"
+        ],
+        "correcta": 0
+      }
+    ]
+  }
+]

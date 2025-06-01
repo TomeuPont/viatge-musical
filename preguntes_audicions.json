@@ -12,7 +12,7 @@
       "tema": "Música Medieval",
       "preguntes": [
         {
-          "titol": "Himne a Sant Joan",
+          "titol": "",
           "audio": "audio/himne_a_sant_joan.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
@@ -24,7 +24,7 @@
           "resposta_correcta": "a"
         },
         {
-          "titol": "Cántiga de Santa Maria. Strela do Dia",
+          "titol": "",
           "audio": "audio/cantiga_strela_do_dia.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [

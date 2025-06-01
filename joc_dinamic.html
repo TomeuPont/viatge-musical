@@ -1,50 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Joc – Terminologia (dinàmic)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joc Dinàmic</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #283048, #859398);
+      background: linear-gradient(to bottom right, #1a1a40, #4b0082);
       color: white;
-      padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
     .question-container {
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.5);
       padding: 2rem;
-      border-radius: 10px;
-      max-width: 700px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      max-width: 600px;
       width: 100%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-    h2 {
-      margin-top: 0;
+      text-align: center;
     }
     .options {
-      margin-top: 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      margin: 1rem 0;
     }
     .option-button {
       padding: 1rem;
       border: none;
-      border-radius: 8px;
-      background-color: #ffffff22;
+      border-radius: 10px;
+      background-color: #4b0082;
       color: white;
-      cursor: pointer;
       font-size: 1rem;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
     .option-button:hover {
-      background-color: #ffffff44;
+      background-color: #ff4081;
     }
     .feedback {
       margin-top: 1rem;
@@ -77,7 +75,6 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const temesSeleccionats = urlParams.get("temes")?.split(",").map(Number) || [];
-
     let preguntes = [];
     let index = 0;
     let encerts = 0;
@@ -85,97 +82,98 @@
     let respostaMostrada = false;
 
     const modalitats = urlParams.get("modalitats")?.split(",") || [];
-    if (modalitats === "terminologia") {
+    if (modalitats.includes("terminologia")) {
       document.title = "Joc – Terminologia";
-    } else if (modalitats === "teoria") {
-    document.title = "Joc – Contingut teòric";
+    } else if (modalitats.includes("teoria")) {
+      document.title = "Joc – Contingut teòric";
     }
 
     let arxiusJSON = [];
-
-if (modalitats.includes("terminologia")) {
-  arxiusJSON.push("preguntes_terminologia.json");
-}
-if (modalitats.includes("teoria")) {
-  arxiusJSON.push("preguntes_teoria.json");
-}
-
-Promise.all(arxiusJSON.map(arxiu => fetch(arxiu).then(res => res.json())))
-  .then(llistes => {
-    const combinades = llistes.flat();
-    const filtrades = combinades
-      .filter(t => temesSeleccionats.includes(t.tema))
-      .flatMap(t =>
-        t.preguntes.map(p => ({
-          tema: t.tema,
-          enunciat: p.pregunta,
-          opcions: barrejarArray([...p.opcions]),
-          correcta: p.opcions.findIndex(o => o.startsWith(p.resposta_correcta + ")"))
-        }))
-      );
-    barrejarArray(filtrades);
-    preguntes = filtrades;
-    carregarPregunta();
-  })
-  .catch(error => {
-    console.error("Error carregant les preguntes:", error);
-  });
-
-    
-
-    function barrejarArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-    
-
-    function carregarPregunta() {
-      const actual = preguntes[index];
-      document.getElementById("tema").textContent = actual.tema;
-      document.getElementById("pregunta").textContent = "Pregunta: " + actual.enunciat;
-      document.getElementById("opcions").innerHTML = "";
-      document.getElementById("feedback").textContent = "";
-      respostaMostrada = false;
-
-      actual.opcions.forEach((opcio, i) => {
-        const boto = document.createElement("button");
-        boto.className = "option-button";
-        boto.textContent = opcio;
-        boto.onclick = () => comprovarResposta(i);
-        document.getElementById("opcions").appendChild(boto);
-      });
+    if (modalitats.includes("terminologia")) {
+      arxiusJSON.push("preguntes_terminologia.json");
+    }
+    if (modalitats.includes("teoria")) {
+      arxiusJSON.push("preguntes_teoria.json");
     }
 
-    function comprovarResposta(seleccio) {
+    Promise.all(arxiusJSON.map(arxiu => fetch(arxiu).then(res => res.json())))
+      .then(llistes => {
+        // Llistes és un array d'objectes json
+        // Si el fitxer és de teoria, accedim a json.preguntes
+        const combinades = llistes.flatMap(json => Array.isArray(json.preguntes) ? json.preguntes : []);
+        // FILTRAT PER id numèric!
+        const filtrades = combinades
+          .filter(t => temesSeleccionats.includes(t.id))
+          .flatMap(t =>
+            t.preguntes.map(p => ({
+              tema: t.tema,
+              enunciat: p.pregunta,
+              opcions: barrejarArray([...p.opcions]),
+              correcta: p.opcions.findIndex(o => o.startsWith(p.resposta_correcta + ")")),
+              titol: p.titol || ""
+            }))
+          );
+        barrejarArray(filtrades);
+        preguntes = filtrades;
+        carregarPregunta();
+      })
+      .catch(error => {
+        console.error("Error carregant les preguntes:", error);
+        document.getElementById("contenidor").innerHTML = "<p style='color:red;'>Error carregant les preguntes. Comprova que els arxius JSON i els temes seleccionats són correctes.</p>";
+      });
+
+    function barrejarArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function carregarPregunta() {
+      if (index >= preguntes.length) {
+        document.getElementById("contenidor").innerHTML =
+          `<h2>Joc completat!</h2>
+          <p>Encerts: ${encerts}</p>
+          <p>Errors: ${errors}</p>
+          <button onclick="window.location.href='index.html'">Tornar a l'inici</button>`;
+        return;
+      }
+      respostaMostrada = false;
+      const actual = preguntes[index];
+      document.getElementById("tema").textContent = actual.titol ? actual.tema + " – " + actual.titol : actual.tema;
+      document.getElementById("pregunta").textContent = "Pregunta: " + actual.enunciat;
+
+      const opcionsDiv = document.getElementById("opcions");
+      opcionsDiv.innerHTML = "";
+      actual.opcions.forEach((opcio, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = opcio;
+        btn.className = "option-button";
+        btn.onclick = () => comprovarResposta(i, actual.correcta);
+        opcionsDiv.appendChild(btn);
+      });
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function comprovarResposta(indexResposta, indexCorrecta) {
       if (respostaMostrada) return;
       respostaMostrada = true;
-      const correcta = preguntes[index].correcta;
       const feedback = document.getElementById("feedback");
-      if (seleccio === correcta) {
+      if (indexResposta === indexCorrecta) {
         feedback.textContent = "✅ Correcte!";
         feedback.style.color = "#00ff88";
         encerts++;
       } else {
-        feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntes[index].opcions[correcta];
+        feedback.textContent = "❌ Incorrecte.";
         feedback.style.color = "#ff8888";
         errors++;
       }
     }
 
     function seguentPregunta() {
-      if (index < preguntes.length - 1) {
-        index++;
-        carregarPregunta();
-      } else {
-        document.getElementById("contenidor").innerHTML = `
-          <h2>Has completat totes les preguntes! 🎉</h2>
-          <p>✅ Correctes: ${encerts}</p>
-          <p>❌ Incorrectes: ${errors}</p>`;
-      }
+      index++;
+      carregarPregunta();
     }
   </script>
 </body>

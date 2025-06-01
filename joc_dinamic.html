@@ -66,12 +66,17 @@
     .next-button:hover:enabled {
       background-color: #ff79a7;
     }
+    .audio-player {
+      margin-bottom: 1.5rem;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
   <div class="question-container" id="contenidor">
     <h2 id="tema"></h2>
     <p id="pregunta"></p>
+    <div id="audioDiv"></div>
     <div class="options" id="opcions"></div>
     <div id="feedback" class="feedback"></div>
     <button class="next-button" id="nextBtn" onclick="seguentPregunta()" disabled>Següent pregunta</button>
@@ -90,23 +95,25 @@
     let respostaMostrada = false;
 
     const modalitats = urlParams.get("modalitats")?.split(",") || [];
-    if (modalitats.includes("terminologia")) {
+    if (modalitats.includes("audicions")) {
+      document.title = "Joc – Audicions";
+    } else if (modalitats.includes("terminologia")) {
       document.title = "Joc – Terminologia";
     } else if (modalitats.includes("teoria")) {
       document.title = "Joc – Contingut teòric";
     }
 
     let arxiusJSON = [];
+    if (modalitats.includes("audicions")) {
+      arxiusJSON.push("preguntes_audicions.json");
+    }
     if (modalitats.includes("terminologia")) {
       arxiusJSON.push("preguntes_terminologia.json");
     }
     if (modalitats.includes("teoria")) {
       arxiusJSON.push("preguntes_teoria.json");
     }
-    if (modalitats.includes("audicions")) {
-  arxiusJSON.push("preguntes_audicions.json");
-    }
-    
+
     Promise.all(arxiusJSON.map(arxiu => fetch(arxiu).then(res => res.json())))
       .then(llistes => {
         // Obtenim la llista de temes (array de temes)
@@ -130,7 +137,8 @@
                 enunciat: p.pregunta,
                 opcions: opcionsBarrejades,
                 correcta: indexCorrecteBarrejat,
-                titol: p.titol || ""
+                titol: p.titol || "",
+                audio: p.audio || null
               };
             })
           );
@@ -165,6 +173,17 @@
       const actual = preguntes[index];
       document.getElementById("tema").textContent = actual.titol ? actual.tema + " – " + actual.titol : actual.tema;
       document.getElementById("pregunta").textContent = "Pregunta: " + actual.enunciat;
+
+      // Mostra l'audio si existeix
+      const audioDiv = document.getElementById("audioDiv");
+      audioDiv.innerHTML = "";
+      if (actual.audio) {
+        const audio = document.createElement("audio");
+        audio.className = "audio-player";
+        audio.setAttribute("controls", "");
+        audio.src = actual.audio;
+        audioDiv.appendChild(audio);
+      }
 
       const opcionsDiv = document.getElementById("opcions");
       opcionsDiv.innerHTML = "";

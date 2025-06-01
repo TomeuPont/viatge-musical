@@ -2,68 +2,92 @@
 <html lang="ca">
 <head>
   <meta charset="UTF-8" />
-  <title>Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Un viatge musical i dansat</title>
   <style>
     body {
-      background:
-        linear-gradient(to bottom right, rgba(26,26,64,0.75), rgba(75,0,130,0.75)),
-        url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=1400&q=80') center center / cover no-repeat fixed;
-      min-height: 100vh;
       margin: 0;
-      color: white;
       font-family: 'Segoe UI', sans-serif;
+      color: white;
+      min-height: 100vh;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background-image:
+        linear-gradient(to bottom right, rgba(26,26,64,0.75), rgba(75,0,130,0.75)),
+        url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-shadow: 1px 1px 3px #000;
+    }
+    .center-box {
+      background: rgba(30,18,60,0.72);
+      border-radius: 22px;
+      padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+      box-shadow: 0 2px 32px 0 rgba(0,0,0,0.32);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      min-width: 320px;
+      max-width: 90vw;
     }
-    .main-container {
-      background: #272149cc;
-      padding: 2.5rem 2rem;
-      border-radius: 18px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.4);
-      max-width: 450px;
-      width: 100%;
+    .center-box h1 {
+      font-size: 3rem;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-top: 70px;
-    }
-    .main-container h1 {
-      margin-bottom: 1.3rem;
+      margin-bottom: 2rem;
       margin-top: 0;
-      font-size: 2.1rem;
+      letter-spacing: 1px;
+      line-height: 1.15;
       background: linear-gradient(90deg, #ff4081 20%, #e0aaff 80%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 1px 1px 4px #0009;
+      text-shadow: 2px 2px 6px #0009;
     }
-    .main-container button {
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      border: none;
-      background: #ff4081;
-      color: white;
+    .center-box p {
+      font-size: 1.25rem;
+      margin: 0 0 2rem 0;
+      text-align: center;
+      color: #f0eaff;
+      text-shadow: 1px 1px 3px #000;
+    }
+    button {
+      padding: 1rem 2.5rem;
       font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ff4081;
+      color: white;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 1.2rem;
-      transition: background 0.3s;
+      transition: background 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 18px 0 #0005;
+      margin-top: 1rem;
+      letter-spacing: 0.5px;
     }
-    .main-container button:hover {
-      background: #ff79a7;
+    button:hover {
+      background-color: #ff79a7;
+      transform: scale(1.06);
     }
-    .main-container p {
-      margin: 0.5em 0 0 0;
-      font-size: 1.1rem;
-      color: #e0e0e0;
+    @media (max-width: 600px) {
+      .center-box {
+        padding: 1.2rem 0.5rem;
+      }
+      .center-box h1 {
+        font-size: 2.1rem;
+      }
+      .center-box p {
+        font-size: 1.06rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="main-container">
+  <div class="center-box">
     <h1>Un viatge musical i dansat</h1>
     <p>Benvingut/da! Prepara't per començar el teu viatge musical.</p>
     <button onclick="window.location.href='login.html'">Començar</button>

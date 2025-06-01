@@ -84,18 +84,17 @@
     let errors = 0;
     let respostaMostrada = false;
 
-
-    const modalitat = urlParams.get("modalitat");
-    if (modalitat === "terminologia") {
+    const modalitats = urlParams.get("modalitats")?.split(",") || [];
+    if (modalitats === "terminologia") {
       document.title = "Joc – Terminologia";
-    } else if (modalitat === "teoria") {
+    } else if (modalitats === "teoria") {
     document.title = "Joc – Contingut teòric";
     }
 
 let arxiuJSON = "";
-if (modalitat === "terminologia") {
+if (modalitats === "terminologia") {
   arxiuJSON = "preguntes_terminologia.json";
-} else if (modalitat === "teoria") {
+} else if (modalitats === "teoria") {
   arxiuJSON = "preguntes_teoria.json";
 }
 

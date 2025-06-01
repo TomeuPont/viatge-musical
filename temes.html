@@ -2,62 +2,121 @@
 <html lang="ca">
 <head>
   <meta charset="UTF-8" />
+  <title>Selecció de Temes - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Un viatge musical i dansat</title>
+  <!-- Firebase App (core) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <!-- Firebase Authentication -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom right, #1a1a40, #4b0082);
+      min-height: 100vh;
+      margin: 0;
       color: white;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=1400&q=80');
-      background-size: cover;
-      background-position: center;
-      text-shadow: 1px 1px 3px #000;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .temes-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      max-width: 800px;
-      width: 100%;
-    }
-    .tema {
-      background-color: #3a1c71;
-      padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    #jugadorInfo {
+      position: fixed;
+      top: 18px;
+      right: 30px;
+      z-index: 1000;
+      font-weight: 600;
+      font-size: 1.1rem;
+      background: #3a1c71aa;
+      padding: 0.7em 1.2em;
+      border-radius: 20px;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2em;
     }
-    .tema input[type="checkbox"] {
-      transform: scale(1.5);
-    }
-    button {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
+    #logoutBtn {
+      padding: 0.5em 1em;
+      background: #563889;
+      color: #fff;
+      font-size: 1em;
       border: none;
-      border-radius: 10px;
-      background-color: #ff4081;
-      color: white;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      margin-left: 0.7em;
+      transition: background 0.3s;
     }
-    button:hover {
-      background-color: #ff79a7;
+    #logoutBtn:hover {
+      background: #8e5ce6;
     }
-    .missatge-error {
+    .container {
+      background: #272149cc;
+      padding: 2.5rem 2rem;
+      border-radius: 18px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.4);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 90px;
+    }
+    h2 {
+      margin-bottom: 1.3rem;
+      margin-top: 0;
+      font-size: 1.7rem;
+      background: linear-gradient(90deg, #ff4081 20%, #e0aaff 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 1px 1px 4px #0009;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.1em;
+      margin-top: 1.2em;
+    }
+    .tema-option {
+      background: #3a1c71;
+      padding: 0.9em 1.2em;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 1.1em;
+      margin-bottom: 0.2em;
+      font-size: 1.08em;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .tema-option input[type="checkbox"] {
+      transform: scale(1.3);
+    }
+    .tema-option:hover {
+      background: #ff4081aa;
+    }
+    .actions {
+      margin-top: 1.8em;
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      width: 100%;
+    }
+    .actions button {
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      border: none;
+      background: #ff4081;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .actions button:hover {
+      background: #ff79a7;
+    }
+    .error {
       margin-top: 1.2rem;
       color: #fff2a0;
       background: #a14e4e;
@@ -67,42 +126,95 @@
       text-align: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
       display: none;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin-top: 110px;
+        padding: 1.5rem 0.5rem;
+      }
+      #jugadorInfo {
+        top: 8px;
+        right: 5px;
+        font-size: 0.98rem;
+        padding: 0.5em 0.7em;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Selecciona el/s tema/es que vols</h1>
-  <div class="temes-container">
-    <label class="tema" for="tema1"><input id="tema1" name="tema" type="checkbox" value="1"> Tema 1: Música de l’antiguitat</label>
-    <label class="tema" for="tema2"><input id="tema2" name="tema" type="checkbox" value="2"> Tema 2: Música Medieval</label>
-    <label class="tema" for="tema3"><input id="tema3" name="tema" type="checkbox" value="3"> Tema 3: Música del Renaixement</label>
-    <label class="tema" for="tema4"><input id="tema4" name="tema" type="checkbox" value="4"> Tema 4: Música del Barroc</label>
-    <label class="tema" for="tema5"><input id="tema5" name="tema" type="checkbox" value="5"> Tema 5: Música del Classicisme</label>
-    <label class="tema" for="tema6"><input id="tema6" name="tema" type="checkbox" value="6"> Tema 6: Música del Romanticisme</label>
-    <label class="tema" for="tema7"><input id="tema7" name="tema" type="checkbox" value="7"> Tema 7: Música del segle XX i últimes tendències</label>
-    <label class="tema" for="tema8"><input id="tema8" name="tema" type="checkbox" value="8"> Tema 8: Músiques urbanes (jazz, rock, blues, rap, electrònica)</label>
-    <label class="tema" for="tema9"><input id="tema9" name="tema" type="checkbox" value="9"> Tema 9: Música de pel·lícules i musicals</label>
-    <label class="tema" for="tema10"><input id="tema10" name="tema" type="checkbox" value="10"> Tema 10: Músiques i danses tradicionals del món</label>
-    <label class="tema" for="tema11"><input id="tema11" name="tema" type="checkbox" value="11"> Tema 11: Músiques i danses tradicionals de les Illes Balears</label>
-    <label class="tema" for="tema12"><input id="tema12" name="tema" type="checkbox" value="12"> Tema 12: Història de la dansa</label>
+  <div id="jugadorInfo" style="display:none;">
+    <!-- Nom del jugador i sortir -->
   </div>
-
-  <button onclick="comencarAmbTemes()">Començar a jugar amb els temes seleccionats</button>
-  <div id="missatgeError" class="missatge-error"></div>
-
+  <div class="container">
+    <h2>Selecciona els temes</h2>
+    <form id="temesForm">
+      <label class="tema-option"><input type="checkbox" value="1"> Música de l’antiguitat</label>
+      <label class="tema-option"><input type="checkbox" value="2"> Música Medieval</label>
+      <label class="tema-option"><input type="checkbox" value="3"> Música del Renaixement</label>
+      <label class="tema-option"><input type="checkbox" value="4"> Música del Barroc</label>
+      <label class="tema-option"><input type="checkbox" value="5"> Música del Classicisme</label>
+      <label class="tema-option"><input type="checkbox" value="6"> Música del Romanticisme</label>
+      <label class="tema-option"><input type="checkbox" value="7"> Música del segle XX i últimes tendències</label>
+      <label class="tema-option"><input type="checkbox" value="8"> Músiques urbanes (jazz, rock, blues, rap, electrònica)</label>
+      <label class="tema-option"><input type="checkbox" value="9"> Música de pel·lícules i musicals</label>
+      <label class="tema-option"><input type="checkbox" value="10"> Músiques i danses tradicionals del món</label>
+      <label class="tema-option"><input type="checkbox" value="11"> Músiques i danses tradicionals de les Illes Balears</label>
+      <label class="tema-option"><input type="checkbox" value="12"> Història de la dansa</label>
+      <div class="actions">
+        <button type="button" onclick="continuar()">Continuar</button>
+        <button type="button" onclick="logout()" style="background:#563889;">Sortir</button>
+      </div>
+    </form>
+    <div id="error" class="error"></div>
+  </div>
   <script>
-    function comencarAmbTemes() {
-      const checks = document.querySelectorAll('.temes-container input[type="checkbox"]:checked');
-      const missatgeDiv = document.getElementById('missatgeError');
-      if (checks.length === 0) {
-        missatgeDiv.textContent = 'Per favor, selecciona almenys un tema per poder continuar amb el joc.';
-        missatgeDiv.style.display = 'block';
+    // -- Configuración de tu Firebase --
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+    // -- Mostrar nombre del jugador y proteger acceso --
+    firebase.auth().onAuthStateChanged(function(user) {
+      const jugadorInfo = document.getElementById('jugadorInfo');
+      if (user) {
+        jugadorInfo.style.display = 'flex';
+        let nomJugador = user.displayName ? user.displayName : user.email;
+        jugadorInfo.innerHTML = `👤 ${nomJugador}
+          <button id="logoutBtn" onclick="logout()">Sortir</button>`;
+        localStorage.setItem('jugador', nomJugador);
+      } else {
+        jugadorInfo.style.display = 'none';
+        localStorage.removeItem('jugador');
+        window.location.href = "login.html";
+      }
+    });
+
+    // -- Logout Function --
+    function logout() {
+      firebase.auth().signOut().then(function() {
+        localStorage.removeItem('jugador');
+        window.location.href = "login.html";
+      });
+    }
+
+    // -- Continuar Function --
+    function continuar() {
+      const checkboxes = document.querySelectorAll('#temesForm input[type="checkbox"]:checked');
+      const errorDiv = document.getElementById('error');
+      if (checkboxes.length === 0) {
+        errorDiv.textContent = 'Per favor, selecciona almenys un tema per continuar.';
+        errorDiv.style.display = 'block';
         return;
       }
-      missatgeDiv.style.display = 'none';
-      const temes = Array.from(checks).map(cb => cb.value).join(',');
-      window.location.href = `modalitats.html?temes=${temes}`;
+      errorDiv.style.display = 'none';
+      const temesSeleccionats = Array.from(checkboxes).map(cb => cb.value).join(',');
+      window.location.href = `modalitats.html?temes=${temesSeleccionats}`;
     }
   </script>
 </body>

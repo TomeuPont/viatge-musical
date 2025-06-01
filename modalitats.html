@@ -16,10 +16,7 @@
       justify-content: center;
       min-height: 100vh;
       text-shadow: 1px 1px 3px #000;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
+      margin-left: 260px; /* Deja espacio para la sidebar */
     }
     .modalitats-container {
       display: flex;
@@ -28,6 +25,7 @@
       max-width: 400px;
       width: 100%;
       margin-bottom: 2rem;
+      margin-top: 2rem;
     }
     .modalitats-container label {
       background-color: #3a1c71;
@@ -68,19 +66,103 @@
       max-width: 400px;
       display: none;
     }
+    .sidebar-temes {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 260px;
+      background: #2d1a48;
+      color: white;
+      padding: 2rem 1rem 1rem 1rem;
+      box-shadow: 2px 0 16px rgba(0,0,0,0.2);
+      overflow-y: auto;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .sidebar-temes h3 {
+      margin-top: 0;
+      font-size: 1.18rem;
+      text-align: left;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+    .sidebar-temes ul {
+      list-style: disc inside;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-temes li {
+      margin-bottom: 0.7em;
+      font-size: 1rem;
+      word-break: break-word;
+    }
+    @media (max-width: 900px) {
+      .sidebar-temes {
+        position: static;
+        width: 100%;
+        max-height: 200px;
+        height: auto;
+        box-shadow: none;
+        border-bottom: 1px solid #563889;
+      }
+      body {
+        margin-left: 0;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="sidebar-temes" id="sidebarTemes">
+    <h3>Temes seleccionats</h3>
+    <ul id="llistaTemes"></ul>
+  </div>
+
   <h1>Selecciona la modalitat de joc</h1>
   <div class="modalitats-container">
     <label for="modalitat1"><input id="modalitat1" name="modalitat" type="checkbox" value="teoria"> Treballar contingut teòric</label>
     <label for="modalitat2"><input id="modalitat2" name="modalitat" type="checkbox" value="terminologia"> Treballar terminologia</label>
-    <label for="modalitat4"><input id="modalitat4" name="modalitat" type="checkbox" value="audicions"> Treballar audicions</label>
     <label for="modalitat3"><input id="modalitat3" name="modalitat" type="checkbox" value="totes"> Totes les modalitats</label>
+    <label for="modalitat4"><input id="modalitat4" name="modalitat" type="checkbox" value="audicions"> Treballar audicions</label>
   </div>
   <button onclick="comencarAmbModalitat()">Continuar</button>
   <div id="missatgeError" class="missatge-error"></div>
   <script>
+    // Lista de nombres de temas (ajusta si cambian)
+    const TEMES = [
+      "Música de l’antiguitat",
+      "Música Medieval",
+      "Música del Renaixement",
+      "Música del Barroc",
+      "Música del Classicisme",
+      "Música del Romanticisme",
+      "Música del segle XX i últimes tendències",
+      "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
+      "Música de pel·lícules i musicals",
+      "Músiques i danses tradicionals del món",
+      "Músiques i danses tradicionals de les Illes Balears",
+      "Història de la dansa"
+    ];
+
+    function mostrarLlistaTemes() {
+      const params = new URLSearchParams(window.location.search);
+      const temes = (params.get("temes") || "")
+        .split(',')
+        .map(x => parseInt(x.trim(), 10))
+        .filter(x => !isNaN(x) && x >= 1 && x <= TEMES.length);
+
+      const ul = document.getElementById('llistaTemes');
+      ul.innerHTML = "";
+      temes.forEach(idx => {
+        const li = document.createElement('li');
+        li.textContent = TEMES[idx - 1];
+        ul.appendChild(li);
+      });
+    }
+    mostrarLlistaTemes();
+
     // Recupera los temas seleccionados de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const temes = urlParams.get("temes") || "";

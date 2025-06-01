@@ -99,7 +99,7 @@ if (modalitat === "terminologia") {
   arxiuJSON = "preguntes_teoria.json";
 }
 
-
+    console.log("Carregant fitxer:", arxiuJSON);
     fetch(arxiuJSON)
   .then(response => {
     if (!response.ok) {

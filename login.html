@@ -54,10 +54,9 @@
   <script>
     // Tu config Firebase aquí:
     const firebaseConfig = {
-      apiKey: "AIzaSyBIgrJxLanB-UM7-mPm-2deAny60yf1Rtk",
-      authDomain: "viatge-musical.firebaseapp.com",
-      projectId: "viatge-musical,
-      // ...otros datos si hace falta
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID"
     };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
@@ -76,9 +75,8 @@
       const password = document.getElementById('password').value;
       auth.signInWithEmailAndPassword(email, password)
         .then(userCredential => {
-          // Guarda el nombre (email) en localStorage y redirige
           localStorage.setItem('jugador', userCredential.user.email);
-          window.location.href = "index.html";
+          window.location.href = "temes.html";
         })
         .catch(error => mostrarError(error.message));
     }
@@ -89,15 +87,14 @@
       auth.createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
           localStorage.setItem('jugador', userCredential.user.email);
-          window.location.href = "index.html";
+          window.location.href = "temes.html";
         })
         .catch(error => mostrarError(error.message));
     }
-    // Si ya está logueado, ir a home
     auth.onAuthStateChanged(user => {
       if (user) {
         localStorage.setItem('jugador', user.email);
-        window.location.href = "index.html";
+        window.location.href = "temes.html";
       }
     });
   </script>

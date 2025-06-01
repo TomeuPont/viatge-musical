@@ -2,103 +2,23 @@
 <html lang="ca">
 <head>
   <meta charset="UTF-8" />
-  <title>Login Jugador</title>
+  <title>Inicia sessió - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <style>
-    body {
-      background: linear-gradient(to bottom right, #1a1a40, #4b0082);
-      display: flex; align-items: center; justify-content: center; min-height: 100vh; color: white;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .login-box {
-      background: #272149;
-      padding: 2.5rem 2rem;
-      border-radius: 18px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.4);
-      max-width: 350px;
-      width: 100%;
-      display: flex; flex-direction: column; gap: 1.2rem;
-    }
-    .login-box input {
-      padding: 0.8rem;
-      border-radius: 8px;
-      border: none;
-      font-size: 1.1rem;
-      margin-bottom: 0.7rem;
-    }
-    .login-box button {
-      padding: 0.9rem;
-      border-radius: 8px;
-      border: none;
-      background: #ff4081;
-      color: white;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-    .login-box button:hover { background: #ff79a7; }
-    .error { color: #ffe0e0; background: #a14e4e; padding: 0.7rem; border-radius: 8px; }
-  </style>
+  <link rel="stylesheet" href="estils.css">
 </head>
 <body>
-  <div class="login-box">
-    <h2>Inici de sessió</h2>
-    <form autocomplete="off">
-      <input type="email" id="email" placeholder="Correu electrònic" autocomplete="off"/>
-      <input type="password" id="password" placeholder="Contrasenya" autocomplete="off"/>
-      <button type="button" onclick="login()">Entrar</button>
-      <button type="button" onclick="register()">Registrar-se</button>
+  <div class="container center">
+    <h2>Inicia sessió</h2>
+    <form id="loginForm" autocomplete="off">
+      <input type="email" id="email" placeholder="Correu electrònic" autocomplete="off" required/>
+      <input type="password" id="password" placeholder="Contrasenya" autocomplete="off" required/>
+      <div class="btn-row">
+        <button type="button" onclick="login()">Entrar</button>
+        <button type="button" onclick="register()">Registrar-se</button>
+      </div>
       <div id="error" class="error" style="display:none;"></div>
-    </form>    
+    </form>
   </div>
-  <script>
-    // Configuración de Firebase:
-    const firebaseConfig = {
-      apiKey: "AIzaSyBIgrJxLanB-UM7-mPm-2deAny60yf1Rtk",
-      authDomain: "viatge-musical.firebaseapp.com",
-      projectId: "viatge-musical"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    function mostrarError(missatge) {
-      const e = document.getElementById('error');
-      e.textContent = missatge;
-      e.style.display = 'block';
-    }
-    function ocultarError() {
-      document.getElementById('error').style.display = 'none';
-    }
-    function login() {
-      ocultarError();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      auth.signInWithEmailAndPassword(email, password)
-        .then(userCredential => {
-          localStorage.setItem('jugador', userCredential.user.email);
-          window.location.href = "temes.html";
-        })
-        .catch(error => mostrarError(error.message));
-    }
-    function register() {
-      ocultarError();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      auth.createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
-          localStorage.setItem('jugador', userCredential.user.email);
-          window.location.href = "temes.html";
-        })
-        .catch(error => mostrarError(error.message));
-    }
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        localStorage.setItem('jugador', user.email);
-        window.location.href = "temes.html";
-      }
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>

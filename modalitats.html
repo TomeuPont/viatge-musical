@@ -1,87 +1,53 @@
-
 <!DOCTYPE html>
 <html lang="ca">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Selecció de modalitats</title>
+  <title>Un viatge musical i dansat - Modalitat</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #3f0d12, #a71d31);
+      background: linear-gradient(to bottom right, #1a1a40, #4b0082);
       color: white;
-      padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      text-shadow: 1px 1px 3px #000;
     }
-
     h1 {
+      text-align: center;
       margin-bottom: 2rem;
     }
-
-    .main-layout {
-      display: flex;
-      gap: 2rem;
-      width: 100%;
-      max-width: 1000px;
-    }
-
-    .temes-seleccionats {
-      flex: 1;
-      background-color: rgba(255,255,255,0.1);
-      padding: 1rem;
-      border-radius: 10px;
-    }
-
-    .temes-seleccionats ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .temes-seleccionats li {
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      background-color: rgba(255,255,255,0.1);
-      border-radius: 6px;
-    }
-
     .modalitats-container {
-      flex: 2;
       display: flex;
       flex-direction: column;
-    }
-
-    .modalitats {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      gap: 1.5rem;
+      max-width: 400px;
+      width: 100%;
       margin-bottom: 2rem;
     }
-
-    .modalitat {
-      background-color: #880e4f;
+    .modalitats-container label {
+      background-color: #3a1c71;
       padding: 1rem;
-      border-radius: 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
       display: flex;
       align-items: center;
       gap: 1rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
     }
-
-    input[type="checkbox"] {
+    .modalitats-container input[type="radio"] {
       transform: scale(1.5);
     }
-
-    .buttons {
-      display: flex;
-      gap: 1rem;
-    }
-
     button {
+      margin-top: 1rem;
       padding: 1rem 2rem;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       border: none;
       border-radius: 10px;
       background-color: #ff4081;
@@ -89,7 +55,6 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-
     button:hover {
       background-color: #ff79a7;
     }
@@ -97,77 +62,34 @@
 </head>
 <body>
   <h1>Selecciona la modalitat de joc</h1>
-
-  <div class="main-layout">
-    <div class="temes-seleccionats">
-      <strong>Temes seleccionats:</strong>
-      <ul id="llista-temes"></ul>
-    </div>
-
-    <div class="modalitats-container">
-      <div class="modalitats">
-        <label class="modalitat"><input type="checkbox" value="teoria"> Treballar contingut teòric</label>
-        <label class="modalitat"><input type="checkbox" value="terminologia"> Treballar terminologia</label>
-        <label class="modalitat"><input type="checkbox" value="audicions"> Treballar audicions</label>
-      </div>
-
-      <div class="buttons">
-        <a href="temes.html"><button>Tornar</button></a>
-        <button onclick="continuar()">Continuar</button>
-      </div>
-    </div>
+  <div class="modalitats-container">
+    <label for="modalitat1"><input id="modalitat1" name="modalitat" type="radio" value="teoria"> Treballar contingut teòric</label>
+    <label for="modalitat2"><input id="modalitat2" name="modalitat" type="radio" value="terminologia"> Treballar terminologia</label>
+    <label for="modalitat3"><input id="modalitat3" name="modalitat" type="radio" value="totes"> Totes les modalitats</label>
   </div>
+  <button onclick="comencarAmbModalitat()">Continuar</button>
 
   <script>
-    const nomsTemes = {
-      1: "Música de l’antiguitat",
-      2: "Música Medieval",
-      3: "Música del Renaixement",
-      4: "Música del Barroc",
-      5: "Música del Classicisme",
-      6: "Música del Romanticisme",
-      7: "Música del segle XX i últimes tendències",
-      8: "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
-      9: "Música de pel·lícules i musicals",
-      10: "Músiques i danses tradicionals del món",
-      11: "Músiques i danses tradicionals de les Illes Balears",
-      12: "Història de la dansa"
-    };
-
+    // Recupera los temas seleccionados de la URL
     const urlParams = new URLSearchParams(window.location.search);
-    const temes = urlParams.get('temes')?.split(',') || [];
+    const temes = urlParams.get("temes") || "";
 
-    const llista = document.getElementById('llista-temes');
-    temes.forEach(num => {
-      const li = document.createElement('li');
-      li.textContent = `Tema ${num}: ${nomsTemes[num] || "Sense nom"}`;
-      llista.appendChild(li);
-    });
-
-
-
-   function continuar() {
-  const checks = document.querySelectorAll('input[type="checkbox"]:checked');
-  const modalitats = Array.from(checks).map(cb => cb.value);
-
-  if (modalitats.length === 0) {
-    alert("Si us plau, selecciona almenys una modalitat.");
-    return;
-  }
-
-  const temesSeleccionats = new URLSearchParams(window.location.search).get("temes");
-
-  if (modalitats.includes('audicions')) {
-    // Si audicions està seleccionada, la separem perquè té la seva pròpia pàgina
-    window.location.href = `joc_audicions.html?temes=${temesSeleccionats}`;
-  } else {
-    // Per terminologia i/o teoria, passem totes les modalitats
-    window.location.href = `joc_dinamic.html?temes=${temesSeleccionats}&modalitats=${modalitats.join(',')}`;
-  }
-}
-    
-
-    
+    function comencarAmbModalitat() {
+      const check = document.querySelector('.modalitats-container input[type="radio"]:checked');
+      if (!check) {
+        alert('Selecciona una modalitat per continuar.');
+        return;
+      }
+      const modalitat = check.value;
+      // Redirige según la modalidad seleccionada
+      let url = "";
+      if (modalitat === "teoria" || modalitat === "terminologia") {
+        url = `joc_dinamic.html?temes=${temes}&modalitats=${modalitat}`;
+      } else {
+        url = `joc.html?temes=${temes}&modalitats=${modalitat}`;
+      }
+      window.location.href = url;
+    }
   </script>
 </body>
 </html>

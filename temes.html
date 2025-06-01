@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Selecció de temes</title>
+  <title>Un viatge musical i dansat</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #2e003e, #4b0082);
+      background: linear-gradient(to bottom right, #1a1a40, #4b0082);
       color: white;
-      padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      text-shadow: 1px 1px 3px #000;
     }
 
     h1 {
@@ -63,37 +68,34 @@
 <body>
   <h1>Selecciona el/s tema/es que vols</h1>
   <div class="temes-container">
-    <label class="tema"><input type="checkbox" value="1"> Tema 1: Música de l’antiguitat</label>
-    <label class="tema"><input type="checkbox" value="2"> Tema 2: Música Medieval</label>
-    <label class="tema"><input type="checkbox" value="3"> Tema 3: Música del Renaixement</label>
-    <label class="tema"><input type="checkbox" value="4"> Tema 4: Música del Barroc</label>
-    <label class="tema"><input type="checkbox" value="5"> Tema 5: Música del Classicisme</label>
-    <label class="tema"><input type="checkbox" value="6"> Tema 6: Música del Romanticisme</label>
-    <label class="tema"><input type="checkbox" value="7"> Tema 7: Música del segle XX i últimes tendències</label>
-    <label class="tema"><input type="checkbox" value="8"> Tema 8: Músiques urbanes (jazz, rock, blues, rap, electrònica)</label>
-    <label class="tema"><input type="checkbox" value="9"> Tema 9: Música de pel·lícules i musicals</label>
-    <label class="tema"><input type="checkbox" value="10"> Tema 10: Músiques i danses tradicionals del món</label>
-    <label class="tema"><input type="checkbox" value="11"> Tema 11: Músiques i danses tradicionals de les Illes Balears</label>
-    <label class="tema"><input type="checkbox" value="12"> Tema 12: Història de la dansa</label>
+    <label class="tema" for="tema1"><input id="tema1" name="tema" type="checkbox" value="1"> Tema 1: Música de l’antiguitat</label>
+    <label class="tema" for="tema2"><input id="tema2" name="tema" type="checkbox" value="2"> Tema 2: Música Medieval</label>
+    <label class="tema" for="tema3"><input id="tema3" name="tema" type="checkbox" value="3"> Tema 3: Música del Renaixement</label>
+    <label class="tema" for="tema4"><input id="tema4" name="tema" type="checkbox" value="4"> Tema 4: Música del Barroc</label>
+    <label class="tema" for="tema5"><input id="tema5" name="tema" type="checkbox" value="5"> Tema 5: Música del Classicisme</label>
+    <label class="tema" for="tema6"><input id="tema6" name="tema" type="checkbox" value="6"> Tema 6: Música del Romanticisme</label>
+    <label class="tema" for="tema7"><input id="tema7" name="tema" type="checkbox" value="7"> Tema 7: Música del segle XX i últimes tendències</label>
+    <label class="tema" for="tema8"><input id="tema8" name="tema" type="checkbox" value="8"> Tema 8: Músiques urbanes (jazz, rock, blues, rap, electrònica)</label>
+    <label class="tema" for="tema9"><input id="tema9" name="tema" type="checkbox" value="9"> Tema 9: Música de pel·lícules i musicals</label>
+    <label class="tema" for="tema10"><input id="tema10" name="tema" type="checkbox" value="10"> Tema 10: Músiques i danses tradicionals del món</label>
+    <label class="tema" for="tema11"><input id="tema11" name="tema" type="checkbox" value="11"> Tema 11: Músiques i danses tradicionals de les Illes Balears</label>
+    <label class="tema" for="tema12"><input id="tema12" name="tema" type="checkbox" value="12"> Tema 12: Història de la dansa</label>
   </div>
 
   <button onclick="comencarAmbTemes()">Començar a jugar amb els temes seleccionats</button>
 
   <script>
     function comencarAmbTemes() {
-  const checks = document.querySelectorAll('input[type="checkbox"]:checked');
-  const temesSeleccionats = Array.from(checks).map(cb => cb.value);
-  
-  if (temesSeleccionats.length === 0) {
-    alert("Si us plau, selecciona almenys un tema.");
-    return;
-  }
-
-  // Redirigim a la pantalla de modalitats, passant els temes per paràmetre d'URL
-  window.location.href = 'modalitats.html?temes=' + temesSeleccionats.join(',');
-}
-
-
+      // Recoger todos los checkboxes de temas seleccionados
+      const checks = document.querySelectorAll('.temes-container input[type="checkbox"]:checked');
+      if (checks.length === 0) {
+        alert('Selecciona almenys un tema per continuar.');
+        return;
+      }
+      const temes = Array.from(checks).map(cb => cb.value).join(',');
+      // Redirigir a la pantalla de modalitats pasando los temas por la URL
+      window.location.href = `modalitats.html?temes=${temes}`;
+    }
   </script>
 </body>
 </html>

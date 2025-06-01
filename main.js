@@ -1,8 +1,8 @@
 // --- Configuración global de Firebase ---
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID"
+  apiKey: "AIzaSyBIgrJxLanB-UM7-mPm-2deAny60yf1Rtk",
+  authDomain: "viatge-musical.firebaseapp.com",
+  projectId: "viatge-musical"
 };
 if (!firebase.apps?.length) firebase.initializeApp(firebaseConfig);
 

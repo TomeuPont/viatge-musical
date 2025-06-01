@@ -45,11 +45,13 @@
 <body>
   <div class="login-box">
     <h2>Inici de sessió</h2>
-    <input type="email" id="email" placeholder="Correu electrònic" autocomplete="username"/>
-    <input type="password" id="password" placeholder="Contrasenya" autocomplete="current-password"/>
-    <button onclick="login()">Entrar</button>
-    <button onclick="register()">Registrar-se</button>
-    <div id="error" class="error" style="display:none;"></div>
+    <form autocomplete="off">
+      <input type="email" id="email" placeholder="Correu electrònic" autocomplete="off"/>
+      <input type="password" id="password" placeholder="Contrasenya" autocomplete="off"/>
+      <button type="button" onclick="login()">Entrar</button>
+      <button type="button" onclick="register()">Registrar-se</button>
+      <div id="error" class="error" style="display:none;"></div>
+    </form>    
   </div>
   <script>
     // Configuración de Firebase:

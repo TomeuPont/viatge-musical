@@ -73,6 +73,9 @@
   </div>
 
   <script>
+    // Lletres per a les opcions
+    const lletres = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
     const urlParams = new URLSearchParams(window.location.search);
     const temesSeleccionats = urlParams.get("temes")?.split(",").map(Number) || [];
     let preguntes = [];
@@ -98,22 +101,32 @@
 
     Promise.all(arxiusJSON.map(arxiu => fetch(arxiu).then(res => res.json())))
       .then(llistes => {
-        // Llistes és un array d'objectes json
-        // Si el fitxer és de teoria, accedim a json.preguntes
+        // Obtenim la llista de temes (array de temes)
         const combinades = llistes.flatMap(json => Array.isArray(json.preguntes) ? json.preguntes : []);
-        // FILTRAT PER id numèric!
+        // Filtra només els temes seleccionats per id
         const filtrades = combinades
           .filter(t => temesSeleccionats.includes(t.id))
           .flatMap(t =>
-            t.preguntes.map(p => ({
-              tema: t.tema,
-              enunciat: p.pregunta,
-              opcions: barrejarArray([...p.opcions]),
-              correcta: p.opcions.findIndex(o => o.startsWith(p.resposta_correcta + ")")),
-              titol: p.titol || ""
-            }))
+            t.preguntes.map(p => {
+              // Crea una còpia de les opcions i les barreja
+              const opcionsBarrejades = barrejarArray([...p.opcions]);
+              // Troba la posició de la resposta correcta dins les opcions originals (no barrejades)
+              const indexCorrecteOriginal = lletres.indexOf(p.resposta_correcta);
+              // Troba el text de la resposta correcta segons el JSON original
+              const textCorrecte = p.opcions[indexCorrecteOriginal];
+              // Busca l'índex d'aquest text dins l'array barrejada
+              const indexCorrecteBarrejat = opcionsBarrejades.indexOf(textCorrecte);
+
+              return {
+                tema: t.tema,
+                enunciat: p.pregunta,
+                opcions: opcionsBarrejades,
+                correcta: indexCorrecteBarrejat,
+                titol: p.titol || ""
+              };
+            })
           );
-        barrejarArray(filtrades);
+        barrejarArray(filtrades); // barreja l'ordre de les preguntes
         preguntes = filtrades;
         carregarPregunta();
       })
@@ -122,6 +135,7 @@
         document.getElementById("contenidor").innerHTML = "<p style='color:red;'>Error carregant les preguntes. Comprova que els arxius JSON i els temes seleccionats són correctes.</p>";
       });
 
+    // Funció per barrejar un array (Fisher-Yates)
     function barrejarArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -148,7 +162,7 @@
       opcionsDiv.innerHTML = "";
       actual.opcions.forEach((opcio, i) => {
         const btn = document.createElement("button");
-        btn.textContent = opcio;
+        btn.textContent = `${lletres[i]}) ${opcio}`;
         btn.className = "option-button";
         btn.onclick = () => comprovarResposta(i, actual.correcta);
         opcionsDiv.appendChild(btn);

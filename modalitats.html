@@ -40,8 +40,14 @@
     .modalitats-container input[type="checkbox"] {
       transform: scale(1.5);
     }
-    button {
+    .button-row {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: center;
       margin-top: 1rem;
+    }
+    button {
       padding: 1rem 2rem;
       font-size: 1.2rem;
       border: none;
@@ -126,7 +132,10 @@
     <label for="modalitat2"><input id="modalitat2" name="modalitat" type="checkbox" value="terminologia"> Treballar terminologia</label>
     <label for="modalitat4"><input id="modalitat4" name="modalitat" type="checkbox" value="audicions"> Treballar audicions</label>
   </div>
-  <button onclick="comencarAmbModalitat()">Continuar</button>
+  <div class="button-row">
+    <button onclick="comencarAmbModalitat()">Continuar</button>
+    <button type="button" onclick="tornarTemes()" style="background-color:#563889;">Tornar als temes</button>
+  </div>
   <div id="missatgeError" class="missatge-error"></div>
   <script>
     // Lista de nombres de temas (ajusta si cambian)
@@ -177,6 +186,10 @@
       missatgeDiv.style.display = 'none';
       const modalitats = Array.from(checks).map(cb => cb.value).join(',');
       window.location.href = `joc_dinamic.html?temes=${temes}&modalitats=${modalitats}`;
+    }
+
+    function tornarTemes() {
+      window.location.href = "index.html";
     }
   </script>
 </body>

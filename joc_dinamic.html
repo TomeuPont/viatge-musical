@@ -91,44 +91,34 @@
     document.title = "Joc – Contingut teòric";
     }
 
-let arxiuJSON = "";
-if (modalitats === "terminologia") {
-  arxiuJSON = "preguntes_terminologia.json";
-} else if (modalitats === "teoria") {
-  arxiuJSON = "preguntes_teoria.json";
+    let arxiusJSON = [];
+
+if (modalitats.includes("terminologia")) {
+  arxiusJSON.push("preguntes_terminologia.json");
+}
+if (modalitats.includes("teoria")) {
+  arxiusJSON.push("preguntes_teoria.json");
 }
 
-    console.log("Carregant fitxer:", arxiuJSON);
-    fetch(arxiuJSON)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("No s'ha pogut carregar el fitxer JSON: " + arxiuJSON);
-    }
-    return response.json();
-  })
-  .then(data => {
-    const filtrades = data
+Promise.all(arxiusJSON.map(arxiu => fetch(arxiu).then(res => res.json())))
+  .then(llistes => {
+    const combinades = llistes.flat();
+    const filtrades = combinades
       .filter(t => temesSeleccionats.includes(t.tema))
-      .flatMap(t => {
-        const opcionsBarrejades = barrejarArray([...t.preguntes[0].opcions]);
-        return t.preguntes.map(p => {
-          const opcionsBarrejades = barrejarArray([...p.opcions]);
-          const indexCorrecte = opcionsBarrejades.findIndex(o => o === p.opcions[p.correcta]);
-          return {
-            tema: t.titol,
-            enunciat: p.enunciat,
-            opcions: opcionsBarrejades,
-            correcta: indexCorrecte
-          };
-        });
-      });
+      .flatMap(t =>
+        t.preguntes.map(p => ({
+          tema: t.tema,
+          enunciat: p.pregunta,
+          opcions: barrejarArray([...p.opcions]),
+          correcta: p.opcions.findIndex(o => o.startsWith(p.resposta_correcta + ")"))
+        }))
+      );
     barrejarArray(filtrades);
     preguntes = filtrades;
     carregarPregunta();
   })
   .catch(error => {
-    console.error("Error carregant preguntes:", error);
-    document.getElementById("contenidor").innerHTML = `<p style="color: red;">Error carregant les preguntes: ${error.message}</p>`;
+    console.error("Error carregant les preguntes:", error);
   });
 
     

@@ -103,7 +103,10 @@
     if (modalitats.includes("teoria")) {
       arxiusJSON.push("preguntes_teoria.json");
     }
-
+    if (modalitats.includes("audicions")) {
+  arxiusJSON.push("preguntes_audicions.json");
+    }
+    
     Promise.all(arxiusJSON.map(arxiu => fetch(arxiu).then(res => res.json())))
       .then(llistes => {
         // Obtenim la llista de temes (array de temes)

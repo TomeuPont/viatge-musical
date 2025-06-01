@@ -57,8 +57,13 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
-    .next-button:hover {
+    .next-button:disabled {
+      background-color: #a97ab7;
+      cursor: not-allowed;
+    }
+    .next-button:hover:enabled {
       background-color: #ff79a7;
     }
   </style>
@@ -69,7 +74,7 @@
     <p id="pregunta"></p>
     <div class="options" id="opcions"></div>
     <div id="feedback" class="feedback"></div>
-    <button class="next-button" onclick="seguentPregunta()">Següent pregunta</button>
+    <button class="next-button" id="nextBtn" onclick="seguentPregunta()" disabled>Següent pregunta</button>
   </div>
 
   <script>
@@ -168,6 +173,8 @@
         opcionsDiv.appendChild(btn);
       });
       document.getElementById("feedback").textContent = "";
+      // Desactivem el botó de següent
+      document.getElementById("nextBtn").disabled = true;
     }
 
     function comprovarResposta(indexResposta, indexCorrecta) {
@@ -183,6 +190,8 @@
         feedback.style.color = "#ff8888";
         errors++;
       }
+      // Activem el botó de següent quan ja s'ha respost
+      document.getElementById("nextBtn").disabled = false;
     }
 
     function seguentPregunta() {

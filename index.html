@@ -9,34 +9,22 @@
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      min-height: 100vh;
       height: 100vh;
       width: 100vw;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      background-image:
-        linear-gradient(to bottom right, rgba(26,26,64,0.75), rgba(75,0,130,0.75)),
-        url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=1400&q=80');
+      background: linear-gradient(to bottom right, #1a1a40, #4b0082);
+      background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=1400&q=80');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       text-shadow: 1px 1px 3px #000;
-    }
-    .center-box {
-      background: rgba(30,18,60,0.72);
-      border-radius: 22px;
-      padding: 2.5rem 2.5rem 2.5rem 2.5rem;
-      box-shadow: 0 2px 32px 0 rgba(0,0,0,0.32);
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 320px;
-      max-width: 90vw;
+      justify-content: center;
+      overflow: hidden;
     }
-    .center-box h1 {
+
+    h1 {
       font-size: 3rem;
       text-align: center;
       margin-bottom: 2rem;
@@ -48,13 +36,16 @@
       -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 6px #0009;
     }
-    .center-box p {
+
+    .subtitle {
       font-size: 1.25rem;
-      margin: 0 0 2rem 0;
+      margin-bottom: 2.5rem;
       text-align: center;
       color: #f0eaff;
       text-shadow: 1px 1px 3px #000;
+      font-weight: 400;
     }
+
     button {
       padding: 1rem 2.5rem;
       font-size: 1.2rem;
@@ -66,31 +57,31 @@
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s;
       box-shadow: 0 4px 18px 0 #0005;
-      margin-top: 1rem;
       letter-spacing: 0.5px;
     }
+
     button:hover {
       background-color: #ff79a7;
       transform: scale(1.06);
     }
+
     @media (max-width: 600px) {
-      .center-box {
-        padding: 1.2rem 0.5rem;
-      }
-      .center-box h1 {
+      h1 {
         font-size: 2.1rem;
       }
-      .center-box p {
-        font-size: 1.06rem;
+      .subtitle {
+        font-size: 1.07rem;
+      }
+      button {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="center-box">
-    <h1>Un viatge musical i dansat</h1>
-    <p>Benvingut/da! Prepara't per començar el teu viatge musical.</p>
-    <button onclick="window.location.href='login.html'">Començar</button>
-  </div>
+  <h1>Un viatge musical i dansat</h1>
+  <div class="subtitle">Benvingut/da! Prepara't per començar el teu viatge musical.</div>
+  <button onclick="window.location.href='login.html'">Començar</button>
 </body>
 </html>

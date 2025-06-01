@@ -15,8 +15,6 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background-size: cover;
-      background-position: center;
       text-shadow: 1px 1px 3px #000;
     }
     h1 {
@@ -41,7 +39,7 @@
       gap: 1rem;
       cursor: pointer;
     }
-    .modalitats-container input[type="radio"] {
+    .modalitats-container input[type="checkbox"] {
       transform: scale(1.5);
     }
     button {
@@ -58,37 +56,45 @@
     button:hover {
       background-color: #ff79a7;
     }
+    .missatge-error {
+      margin-top: 1.2rem;
+      color: #fff2a0;
+      background: #a14e4e;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      max-width: 400px;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <h1>Selecciona la modalitat de joc</h1>
   <div class="modalitats-container">
-    <label for="modalitat1"><input id="modalitat1" name="modalitat" type="radio" value="teoria"> Treballar contingut teòric</label>
-    <label for="modalitat2"><input id="modalitat2" name="modalitat" type="radio" value="terminologia"> Treballar terminologia</label>
-    <label for="modalitat3"><input id="modalitat3" name="modalitat" type="radio" value="totes"> Totes les modalitats</label>
+    <label for="modalitat1"><input id="modalitat1" name="modalitat" type="checkbox" value="teoria"> Treballar contingut teòric</label>
+    <label for="modalitat2"><input id="modalitat2" name="modalitat" type="checkbox" value="terminologia"> Treballar terminologia</label>
+    <label for="modalitat3"><input id="modalitat3" name="modalitat" type="checkbox" value="totes"> Totes les modalitats</label>
   </div>
   <button onclick="comencarAmbModalitat()">Continuar</button>
-
+  <div id="missatgeError" class="missatge-error"></div>
   <script>
     // Recupera los temas seleccionados de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const temes = urlParams.get("temes") || "";
 
     function comencarAmbModalitat() {
-      const check = document.querySelector('.modalitats-container input[type="radio"]:checked');
-      if (!check) {
-        alert('Selecciona una modalitat per continuar.');
+      const checks = document.querySelectorAll('.modalitats-container input[type="checkbox"]:checked');
+      const missatgeDiv = document.getElementById('missatgeError');
+      if (!checks.length) {
+        missatgeDiv.textContent = 'Per favor, selecciona almenys una modalitat per continuar.';
+        missatgeDiv.style.display = 'block';
         return;
       }
-      const modalitat = check.value;
-      // Redirige según la modalidad seleccionada
-      let url = "";
-      if (modalitat === "teoria" || modalitat === "terminologia") {
-        url = `joc_dinamic.html?temes=${temes}&modalitats=${modalitat}`;
-      } else {
-        url = `joc.html?temes=${temes}&modalitats=${modalitat}`;
-      }
-      window.location.href = url;
+      missatgeDiv.style.display = 'none';
+      const modalitats = Array.from(checks).map(cb => cb.value).join(',');
+      window.location.href = `joc_dinamic.html?temes=${temes}&modalitats=${modalitats}`;
     }
   </script>
 </body>

@@ -52,7 +52,7 @@
       padding: 2.5rem 2rem;
       border-radius: 18px;
       box-shadow: 0 2px 14px rgba(0,0,0,0.4);
-      max-width: 500px;
+      max-width: 700px;
       width: 100%;
       text-align: center;
       display: flex;
@@ -72,25 +72,32 @@
     form {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 1.1em;
+      align-items: center;
       margin-top: 1.2em;
+      width: 100%;
+    }
+    .temes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.7em 1.2em;
+      width: 100%;
+      margin-bottom: 1.2em;
     }
     .tema-option {
       background: #3a1c71;
-      padding: 0.9em 1.2em;
+      padding: 0.7em 0.7em 0.7em 1em;
       border-radius: 10px;
       display: flex;
       align-items: center;
       gap: 1.1em;
-      margin-bottom: 0.2em;
-      font-size: 1.08em;
-      width: 100%;
+      font-size: 1.03em;
       cursor: pointer;
       transition: background 0.3s;
+      width: 100%;
     }
     .tema-option input[type="checkbox"] {
-      transform: scale(1.3);
+      transform: scale(1.2);
+      margin-right: 0.7em;
     }
     .tema-option:hover {
       background: #ff4081aa;
@@ -130,6 +137,14 @@
       margin-right: auto;
       display: none;
     }
+    @media (max-width: 900px) {
+      .container {
+        max-width: 98vw;
+      }
+      .temes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
     @media (max-width: 600px) {
       .container {
         margin-top: 110px;
@@ -141,6 +156,9 @@
         font-size: 0.98rem;
         padding: 0.5em 0.7em;
       }
+      .temes-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -151,18 +169,20 @@
   <div class="container">
     <h2>Selecciona els temes</h2>
     <form id="temesForm">
-      <label class="tema-option"><input type="checkbox" value="1"> Música de l’antiguitat</label>
-      <label class="tema-option"><input type="checkbox" value="2"> Música Medieval</label>
-      <label class="tema-option"><input type="checkbox" value="3"> Música del Renaixement</label>
-      <label class="tema-option"><input type="checkbox" value="4"> Música del Barroc</label>
-      <label class="tema-option"><input type="checkbox" value="5"> Música del Classicisme</label>
-      <label class="tema-option"><input type="checkbox" value="6"> Música del Romanticisme</label>
-      <label class="tema-option"><input type="checkbox" value="7"> Música del segle XX i últimes tendències</label>
-      <label class="tema-option"><input type="checkbox" value="8"> Músiques urbanes (jazz, rock, blues, rap, electrònica)</label>
-      <label class="tema-option"><input type="checkbox" value="9"> Música de pel·lícules i musicals</label>
-      <label class="tema-option"><input type="checkbox" value="10"> Músiques i danses tradicionals del món</label>
-      <label class="tema-option"><input type="checkbox" value="11"> Músiques i danses tradicionals de les Illes Balears</label>
-      <label class="tema-option"><input type="checkbox" value="12"> Història de la dansa</label>
+      <div class="temes-grid">
+        <label class="tema-option"><input type="checkbox" value="1"> Música de l’antiguitat</label>
+        <label class="tema-option"><input type="checkbox" value="2"> Música Medieval</label>
+        <label class="tema-option"><input type="checkbox" value="3"> Música del Renaixement</label>
+        <label class="tema-option"><input type="checkbox" value="4"> Música del Barroc</label>
+        <label class="tema-option"><input type="checkbox" value="5"> Música del Classicisme</label>
+        <label class="tema-option"><input type="checkbox" value="6"> Música del Romanticisme</label>
+        <label class="tema-option"><input type="checkbox" value="7"> Música del segle XX i últimes tendències</label>
+        <label class="tema-option"><input type="checkbox" value="8"> Músiques urbanes (jazz, rock, blues, rap, electrònica)</label>
+        <label class="tema-option"><input type="checkbox" value="9"> Música de pel·lícules i musicals</label>
+        <label class="tema-option"><input type="checkbox" value="10"> Músiques i danses tradicionals del món</label>
+        <label class="tema-option"><input type="checkbox" value="11"> Músiques i danses tradicionals de les Illes Balears</label>
+        <label class="tema-option"><input type="checkbox" value="12"> Història de la dansa</label>
+      </div>
       <div class="actions">
         <button type="button" onclick="continuar()">Continuar</button>
         <button type="button" onclick="logout()" style="background:#563889;">Sortir</button>
@@ -175,7 +195,7 @@
     const firebaseConfig = {
       apiKey: "AIzaSyBIgrJxLanB-UM7-mPm-2deAny60yf1Rtk",
       authDomain: "viatge-musical.firebaseapp.com",
-      projectId: "viatge-musical"
+      projectId: "viatge-musical"      
     };
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 

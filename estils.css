@@ -5,27 +5,138 @@ body {
   color: white;
   font-family: 'Segoe UI', sans-serif;
 }
+
+.container {
+  max-width: 420px;
+  margin: 4em auto 0 auto;
+  background: rgba(34,34,68,0.80);
+  border-radius: 16px;
+  box-shadow: 0 6px 32px #00000033;
+  padding: 2.5em 2em;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 h1, h2 {
   font-family: inherit;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.2em;
 }
-/* Estilo de estrellas de logros */
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.85em;
+  margin-bottom: 0.4em;
+  border: none;
+  border-radius: 8px;
+  background: #2c2c5e;
+  color: #fff;
+  font-size: 1em;
+  outline: none;
+  box-sizing: border-box;
+}
+input[type="email"]:focus,
+input[type="password"]:focus {
+  background: #39396b;
+}
+.btn-row {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+button, .main-btn {
+  background: #ffd600;
+  color: #2c2c5e;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75em 1.6em;
+  font-size: 1.08em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0;
+}
+button:hover, .main-btn:hover {
+  background: #ffe066;
+}
+
+.error {
+  color: #ff5a5a;
+  background: #fff3f3;
+  padding: 0.7em 1em;
+  border-radius: 7px;
+  margin-top: 1em;
+  text-align: center;
+  font-size: 1em;
+  display: block;
+}
+
+.temes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9em;
+  margin-bottom: 2em;
+}
+.tema-option {
+  display: flex;
+  align-items: center;
+  background: #282853;
+  padding: 0.7em 1em;
+  border-radius: 8px;
+  transition: background 0.18s;
+  cursor: pointer;
+  font-size: 1.03em;
+  gap: 0.7em;
+}
+.tema-option:hover {
+  background: #39396b;
+}
+.tema-option input[type="checkbox"] {
+  margin-right: 0.6em;
+  accent-color: #ffd600;
+  transform: scale(1.18);
+}
 .logros {
   margin-left: auto;
   display: flex;
-  gap: 0.2em;
+  gap: 0.12em;
 }
 .estrella {
   display: inline-block;
-  width: 1.25em;
-  height: 1.25em;
+  width: 1.2em;
+  height: 1.2em;
   background-size: contain;
   background-repeat: no-repeat;
   vertical-align: middle;
   color: #888;
-  /* SVG star as background-image, color controlled by filter or color property */
   background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12.59,7.36 19.51,7.64 14,12.13 15.82,18.99 10,15.27 4.18,18.99 6,12.13 0.49,7.64 7.41,7.36"/></svg>');
 }
 .estrella.gris      { color: #888; }
 .estrella.amarillo  { color: #ffd600; }
 .estrella.verde     { color: #2ecc40; }
-.estrella.teoria, .estrella.terminologia, .estrella.audicions {}
+
+.actions {
+  display: flex;
+  gap: 1.2em;
+  justify-content: center;
+  margin: 1.6em 0 0 0;
+}
+@media (max-width: 600px) {
+  .container { max-width: 97vw; padding: 1.2em 0.6em; }
+  .tema-option { font-size: 0.98em; padding: 0.6em 0.4em; }
+}

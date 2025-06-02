@@ -8,20 +8,30 @@ function getTemaFromURL() {
 }
 
 // Opcional: nombres de los temas para mostrar
-const nomsTemes = {
-  1: "Música de l’antiguitat",
-  2: "Música Medieval",
-  3: "Música del Renaixement",
-  4: "Música del Barroc",
-  5: "Música del Classicisme",
-  6: "Música del Romanticisme",
-  7: "Música del segle XX i últimes tendències",
-  8: "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
-  9: "Música de pel·lícules i musicals",
-  10: "Músiques i danses tradicionals del món",
-  11: "Músiques i danses tradicionals de les Illes Balears",
-  12: "Història de la dansa"
-};
+const nomsTemes = [
+  "Música de l’antiguitat",
+  "Música Medieval",
+  "Música del Renaixement",
+  "Música del Barroc",
+  "Música del Classicisme",
+  "Música del Romanticisme",
+  "Música del segle XX i últimes tendències",
+  "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
+  "Música de pel·lícules i musicals",
+  "Músiques i danses tradicionals del món",
+  "Músiques i danses tradicionals de les Illes Balears",
+  "Història de la dansa"
+];
+
+function mostrarTemesSeleccionats() {
+  let temes = [];
+  try {
+    temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
+  } catch(e) {}
+  const ul = document.getElementById("temesSeleccionats");
+  ul.innerHTML = temes.map(idx => `<li>${nomsTemes[parseInt(idx,10)-1]}</li>`).join('');
+}
+window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
 
 let currentTema = getTemaFromURL();
 if (currentTema && nomsTemes[currentTema]) {

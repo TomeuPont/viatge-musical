@@ -87,11 +87,12 @@ button:hover, .main-btn:hover {
 }
 
 .temes-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1em;
   margin-bottom: 2em;
 }
+
 .tema-option {
   display: flex;
   align-items: center;
@@ -103,6 +104,22 @@ button:hover, .main-btn:hover {
   font-size: 1.03em;
   gap: 0.7em;
 }
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 900px) {
+  .temes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .temes-grid {
+    grid-template-columns: 1fr;
+  }
+  .tema-option {
+    font-size: 0.98em;
+    padding: 0.6em 0.4em;
+  }
+}
+
 .tema-option:hover {
   background: #39396b;
 }

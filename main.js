@@ -76,12 +76,13 @@ async function setLogros(uid, tema, logrosTema) {
 // ==================== UTILIDADES DE INTERFAZ ====================
 
 // Muestra datos del usuario logueado (ejemplo para encabezado)
+
 function mostrarInfoUsuario() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
-      const info = document.getElementById('jugadorInfo');
+      const info = document.getElementById('userEmail');
       if (info) {
-        info.innerHTML = `Usuari: <strong>${user.email}</strong>`;
+        info.innerHTML = `<span>${user.email}</span> <button onclick="logout()" style="margin-left:12px;background:#563889;color:#fff;border:none;padding:0.3em 1em;border-radius:1em;cursor:pointer;">Sortir</button>`;
         info.style.display = '';
       }
     }

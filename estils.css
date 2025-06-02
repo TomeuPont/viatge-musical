@@ -195,3 +195,59 @@ button:hover, .main-btn:hover {
     top: 0.35em;
   }
 }
+
+body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.side-panel {
+  width: 240px;
+  min-height: 100vh;
+  background: rgba(34,34,68,0.90);
+  color: #ffd600;
+  padding: 2em 1em 2em 1.5em;
+  box-sizing: border-box;
+  border-top-right-radius: 1.4em;
+  border-bottom-right-radius: 1.4em;
+  position: sticky;
+  top: 0;
+}
+.side-panel h3 {
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 1.18em;
+  letter-spacing: 0.01em;
+}
+
+.side-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-panel li {
+  padding: 0.5em 0;
+  border-bottom: 1px solid #ffd60033;
+  font-size: 1em;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2.5em 1.5em;
+}
+@media (max-width: 800px) {
+  body {
+    flex-direction: column;
+  }
+  .side-panel {
+    width: 100%;
+    border-radius: 0;
+    min-height: auto;
+    position: static;
+    padding: 1em 0.6em;
+  }
+  .main-content {
+    padding: 1em 0.5em;
+  }
+}

@@ -1,6 +1,5 @@
 // main.js
 
-// ⚠️ PON AQUÍ TU CONFIGURACIÓN DE FIREBASE (sustituye los valores por los de tu proyecto)
 const firebaseConfig = {
   apiKey: "AIzaSyBIgrJxLanB-UM7-mPm-2deAny60yf1Rtk",
   authDomain: "viatge-musical.firebaseapp.com",

@@ -7,37 +7,64 @@
   <link rel="stylesheet" href="estils.css">
 </head>
 <body>
-  <div id="jugadorInfo" style="display:none;"></div>
-  <div class="container">
-    <h2>Selecciona la modalitat</h2>
-    <div id="temaNom" style="margin-bottom:1.5em; font-size:1.2em; font-weight:600;"></div>
-    <div class="modalitats-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2em;">
-      <div class="modalitat-card" data-modalitat="teoria">
-        <div class="modalitat-nom">Teoria</div>
-        <div class="estrella gris" id="estrella-teoria" title="Logro Teoria"></div>
-        <button class="jugar-btn" onclick="jugarModalitat('teoria')">Jugar</button>
-      </div>
-      <div class="modalitat-card" data-modalitat="terminologia">
-        <div class="modalitat-nom">Terminologia</div>
-        <div class="estrella gris" id="estrella-terminologia" title="Logro Terminologia"></div>
-        <button class="jugar-btn" onclick="jugarModalitat('terminologia')">Jugar</button>
-      </div>
-      <div class="modalitat-card" data-modalitat="audicions">
-        <div class="modalitat-nom">Audicions</div>
-        <div class="estrella gris" id="estrella-audicions" title="Logro Audicions"></div>
-        <button class="jugar-btn" onclick="jugarModalitat('audicions')">Jugar</button>
-      </div>
-    </div>
-    <div style="margin-top:2em;">
-      <button onclick="window.location.href='temes.html'" style="background:#563889;">Tornar enrere</button>
-    </div>
-    <div id="error" class="error"></div>
+  <!-- Panel lateral para mostrar temas seleccionados -->
+  <div class="side-panel">
+    <h3>Temes seleccionats</h3>
+    <ul id="temesSeleccionats"></ul>
   </div>
-  <!-- Firebase scripts, JS global y específico -->
+  <div class="main-content">
+    <div id="userEmail" class="user-email"></div>
+    <div class="container center">
+      <h2>Modalitats</h2>
+      <!-- Aquí va tu contenido principal de selección de modalidad, por ejemplo: -->
+      <form id="modalitatsForm">
+        <div class="modalitats-options">
+          <label><input type="radio" name="modalitat" value="teoria" required> Teoria</label>
+          <label><input type="radio" name="modalitat" value="terminologia"> Terminologia</label>
+          <label><input type="radio" name="modalitat" value="audicions"> Audicions</label>
+        </div>
+        <div class="actions">
+          <button type="submit">Començar</button>
+        </div>
+        <div id="error" class="error" style="display:none;"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Scripts Firebase y tus JS -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="main.js"></script>
-  <script src="modalitats.js"></script>
+  <script>
+    // Nombres de los temas (el mismo orden que en temes.html)
+    const nomsTemes = [
+      "Música de l’antiguitat",
+      "Música Medieval",
+      "Música del Renaixement",
+      "Música del Barroc",
+      "Música del Classicisme",
+      "Música del Romanticisme",
+      "Música del segle XX i últimes tendències",
+      "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
+      "Música de pel·lícules i musicals",
+      "Músiques i danses tradicionals del món",
+      "Músiques i danses tradicionals de les Illes Balears",
+      "Història de la dansa"
+    ];
+
+    function mostrarTemesSeleccionats() {
+      let temes = [];
+      try {
+        temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
+      } catch(e) {}
+      const ul = document.getElementById("temesSeleccionats");
+      ul.innerHTML = temes.map(idx => `<li>${nomsTemes[parseInt(idx,10)-1]}</li>`).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      mostrarTemesSeleccionats();
+      if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
+    });
+  </script>
 </body>
 </html>

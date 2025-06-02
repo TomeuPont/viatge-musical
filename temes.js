@@ -46,6 +46,8 @@ function continuar() {
     return;
   }
   errorDiv.style.display = 'none';
-  const temesSeleccionats = Array.from(checkboxes).map(cb => cb.value).join(',');
-  window.location.href = `modalitats.html?temes=${temesSeleccionats}`;
+  // Guarda los temas seleccionados (como array de valores) en localStorage
+  const temesSeleccionats = Array.from(checkboxes).map(cb => cb.value);
+  localStorage.setItem('temesSeleccionats', JSON.stringify(temesSeleccionats));
+  window.location.href = 'modalitats.html';
 }

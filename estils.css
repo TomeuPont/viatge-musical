@@ -249,13 +249,20 @@ body {
 
 .modalitats-options {
   display: flex;
-  flex-direction: column;
-  gap: 1.1em;
+  flex-direction: row;
+  gap: 1.2em;
   margin-bottom: 2em;
   margin-top: 2em;
-  align-items: flex-start;
+  align-items: stretch;
+  justify-content: center;
 }
 
+@media (max-width: 700px) {
+  .modalitats-options {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 .modalitat-checkbox {
   display: flex;
   align-items: center;

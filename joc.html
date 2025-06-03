@@ -91,16 +91,14 @@
     <div id="feedback" class="feedback"></div>
     <button class="next-button" id="nextBtn" onclick="seguentPregunta()">Següent pregunta</button>
   </div>
-
   <script>
-    // --- Configuración de rutas de los JSON por modalidad ---
     const MODALITAT_ARXIU = {
       "teoria": "preguntes_teoria.json",
       "terminologia": "preguntes_terminologia.json",
       "audicions": "preguntes_audicions.json"
     };
 
-    // --- Recupera la selección del usuario ---
+    // Lee temas y modalidades seleccionadas
     let temesSeleccionats = [];
     let modalitatsSeleccionades = [];
     try {
@@ -110,6 +108,8 @@
       temesSeleccionats = [];
       modalitatsSeleccionades = [];
     }
+    // Convierte todos los ids de tema seleccionados a string para comparación robusta
+    temesSeleccionats = temesSeleccionats.map(x => String(x));
 
     if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
       document.getElementById("qcontainer").innerHTML = `
@@ -119,7 +119,6 @@
         </div>
       `;
     } else {
-      // Prepara los fetch de cada modalidad seleccionada
       Promise.all(
         modalitatsSeleccionades
           .map(m => ({modalitat: m, path: MODALITAT_ARXIU[m]}))
@@ -134,14 +133,11 @@
       )
       .then(results => {
         let preguntesPlanas = [];
-
-        // Por cada archivo cargado
         results.forEach(({modalitat, data}) => {
           if (!data.preguntes) return;
-
-          // Para cada tema seleccionado, busca el bloque de ese tema por id
+          // Filtra temas por id (como string)
           data.preguntes
-            .filter(temaObj => temesSeleccionats.includes(temaObj.id))
+            .filter(temaObj => temesSeleccionats.includes(String(temaObj.id)))
             .forEach(temaObj => {
               if (Array.isArray(temaObj.preguntes)) {
                 temaObj.preguntes.forEach(p => {
@@ -162,34 +158,29 @@
         if (!preguntesPlanas.length) {
           document.getElementById("qcontainer").innerHTML = `
             <div class="no-questions">
-              <p>❗ No hi ha preguntes per aquesta selecció de temes i modalitats.</p>
+              <p>❗ No hi ha pregunte per aquesta selecció de temes i modalitats.</p>
               <p>Si us plau, torna enrere i selecciona altres opcions.</p>
             </div>
           `;
           return;
         }
 
-        // Baraja preguntas y baraja opciones de cada pregunta
         shuffleArray(preguntesPlanas);
         preguntesPlanas = preguntesPlanas.map(p => {
           const opcions = [...p.opcions];
-          // Detecta la respuesta correcta (puede ser índice o letra)
           let idxCorrecta = -1;
           if (typeof p.resposta_correcta === "number") {
             idxCorrecta = p.resposta_correcta;
           } else if (typeof p.resposta_correcta === "string") {
-            // Si es letra: a, b, c, d...
             const lletra = p.resposta_correcta.trim().toLowerCase();
             const codis = { a: 0, b: 1, c: 2, d: 3 };
             idxCorrecta = codis[lletra];
           }
-          // Si es string tipo "2", conviértelo a índice
           if (idxCorrecta === undefined && !isNaN(p.resposta_correcta)) {
             idxCorrecta = parseInt(p.resposta_correcta, 10);
           }
-          // Trata caso inválido
           if (typeof idxCorrecta !== "number" || idxCorrecta < 0 || idxCorrecta >= opcions.length) {
-            idxCorrecta = 0; // Por defecto
+            idxCorrecta = 0;
           }
           const respostaCorrecta = opcions[idxCorrecta];
           shuffleArray(opcions);
@@ -204,7 +195,6 @@
           };
         });
 
-        // --- Variables de estado del juego ---
         let index = 0;
         let encerts = 0;
         let errors = 0;

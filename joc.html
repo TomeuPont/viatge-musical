@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Joc – Terminologia</title>
+  <title>Joc – Viatge Musical</title>
   <style>
     body {
       margin: 0;
@@ -14,6 +14,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
     }
     .question-container {
       background-color: rgba(0, 0, 0, 0.3);
@@ -22,6 +23,7 @@
       max-width: 700px;
       width: 100%;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      margin: auto;
     }
     h2 {
       margin-top: 0;
@@ -62,133 +64,187 @@
     .next-button:hover {
       background-color: #ff79a7;
     }
+    .no-questions {
+      text-align: center;
+      padding: 2em 0;
+      color: #ffeea8;
+      font-size: 1.2em;
+    }
+    .badge {
+      display: inline-block;
+      background: #ffe082;
+      color: #222;
+      border-radius: 1em;
+      padding: 0.2em 0.8em;
+      margin-bottom: 0.5em;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <div class="question-container">
+  <div class="question-container" id="qcontainer">
+    <div id="modalitat-badge"></div>
     <h2 id="tema"></h2>
     <p id="pregunta"></p>
     <div class="options" id="opcions"></div>
     <div id="feedback" class="feedback"></div>
-    <button class="next-button" onclick="seguentPregunta()">Següent pregunta</button>
+    <button class="next-button" id="nextBtn" onclick="seguentPregunta()">Següent pregunta</button>
   </div>
 
   <script>
-    const preguntesOriginals = [
-      {
-        temaId: 1,
-        tema: "Tema 1: Música de l’antiguitat",
-        pregunta: "Quina és la definició correcta de 'Neuma'?",
-        opcions: ["Forma musical del Barroc","Primer sistema de notació musical amb signes sobre el text","Tipus de dansa medieval","Instrument de vent fet de canya"],
-        correcta: 1
-      },
-      {
-        temaId: 1,
-        tema: "Tema 1: Música de l’antiguitat",
-        pregunta: "A quin terme correspon la definició: 'Oracions i cants litúrgics quotidians propis del cristianisme medieval'?",
-        opcions: ["Motet","Cant gregorià","Ofici diví","Missa"],
-        correcta: 2
-      },
-      {
-        temaId: 2,
-        tema: "Tema 2: Música Medieval",
-        pregunta: "Quina és la definició correcta de 'Trobador'?",
-        opcions: ["Monjo que escrivia cants litúrgics","Músic i poeta de la noblesa medieval","Tipus d'instrument de percussió","Dansa cortesana del Renaixement"],
-        correcta: 1
-      },
-      {
-        temaId: 2,
-        tema: "Tema 2: Música Medieval",
-        pregunta: "A quin terme correspon la definició: 'Composició musical basada en el ritual de l'eucaristia cristiana'?",
-        opcions: ["Cant gregorià","Motet","Missa","Coral"],
-        correcta: 2
-      },
-      {
-        temaId: 3,
-        tema: "Tema 3: Música del Renaixement",
-        pregunta: "Quina és la definició correcta de 'Mecenes'?",
-        opcions: ["Persona que finança artistes i projectes culturals","Instrument musical antic de corda","Forma musical polifònica sacra","Tipus de dansa cortesana"],
-        correcta: 0
-      }
-    ];
+    // -------------- CONFIGURACIÓ MODALITATS/JSONS --------------
+    const MODALITAT_ARXIU = {
+      "teoria": "preguntes_teoria.json",
+      "terminologia": "preguntes_terminologia.json",
+      "audicions": "preguntes_audicions.json"
+    };
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const temesSeleccionats = urlParams.get("temes")?.split(",").map(Number) || [];
-    const modalitat = urlParams.get("modalitat");
+    // -------------- RECUPERA SELECCIÓ DE L'USUARI --------------
+    const temesSeleccionats = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
+    const modalitatsSeleccionades = JSON.parse(localStorage.getItem('modalitatsSeleccionades') || "[]");
 
-    const preguntesFiltrades = preguntesOriginals.filter(p => temesSeleccionats.includes(p.temaId));
-    function barrejarArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    }
+    // Si no hi ha selecció, mostra error i atura
+    if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
+      document.getElementById("qcontainer").innerHTML = `
+        <div class="no-questions">
+          <p>❗ No s'han seleccionat temes o modalitats.</p>
+          <p>Si us plau, torna a la pàgina anterior i fes la selecció.</p>
+        </div>
+      `;
+    } else {
+      // Carrega totes les preguntes de cada modalitat seleccionada
+      Promise.all(
+        modalitatsSeleccionades
+          .map(m => MODALITAT_ARXIU[m])
+          .filter(Boolean)
+          .map(path => fetch(path).then(r => {
+            if (!r.ok) throw new Error(`Error carregant ${path}`);
+            return r.json();
+          }))
+      )
+      .then(modalitatPreguntesArrays => {
+        // Aplana totes les preguntes de totes les modalitats
+        let preguntes = modalitatPreguntesArrays.flat();
+        // Filtra pels temes seleccionats
+        preguntes = preguntes.filter(p => temesSeleccionats.includes(p.temaId));
+        if (!preguntes.length) {
+          document.getElementById("qcontainer").innerHTML = `
+            <div class="no-questions">
+              <p>❗ No hi ha preguntes per aquesta selecció de temes i modalitats.</p>
+              <p>Si us plau, torna enrere i selecciona altres opcions.</p>
+            </div>
+          `;
+          return;
+        }
 
-    // Barregem preguntes i opcions
-    const preguntes = preguntesFiltrades.map(p => {
-      const opcions = [...p.opcions];
-      const respostaCorrecta = opcions[p.correcta];
-      barrejarArray(opcions);
-      return {
-        tema: p.tema,
-        pregunta: p.pregunta,
-        opcions: opcions,
-        correcta: opcions.indexOf(respostaCorrecta)
-      };
-    });
-    barrejarArray(preguntes);
+        // Barreja preguntes i opcions
+        barrejarArray(preguntes);
+        preguntes = preguntes.map(p => {
+          const opcions = [...p.opcions];
+          const respostaCorrecta = opcions[p.correcta];
+          barrejarArray(opcions);
+          return {
+            tema: p.tema,
+            modalitat: p.modalitat || getModalitatDePregunta(p),
+            pregunta: p.pregunta,
+            opcions: opcions,
+            correcta: opcions.indexOf(respostaCorrecta)
+          };
+        });
 
-    let index = 0;
-    let encerts = 0;
-    let errors = 0;
-    let respostaMostrada = false;
+        function getModalitatDePregunta(pregunta) {
+          // Intenta deduir modalitat a partir de la font (només si als JSON no està inclosa la modalitat)
+          // Si vols que surti el nom bonic, pots millorar aquest mètode
+          if (pregunta && pregunta.arxiuFont) return pregunta.arxiuFont.replace('preguntes_','').replace('.json','');
+          return '';
+        }
 
-    function carregarPregunta() {
-      const actual = preguntes[index];
-      document.getElementById("tema").textContent = actual.tema;
-      document.getElementById("pregunta").textContent = "Pregunta: " + actual.pregunta;
-      document.getElementById("opcions").innerHTML = "";
-      document.getElementById("feedback").textContent = "";
-      respostaMostrada = false;
+        let index = 0;
+        let encerts = 0;
+        let errors = 0;
+        let respostaMostrada = false;
 
-      actual.opcions.forEach((opcio, i) => {
-        const boto = document.createElement("button");
-        boto.className = "option-button";
-        boto.textContent = opcio;
-        boto.onclick = () => comprovarResposta(i);
-        document.getElementById("opcions").appendChild(boto);
+        function barrejarArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+        }
+
+        function carregarPregunta() {
+          if (!preguntes[index]) {
+            document.getElementById("qcontainer").innerHTML = `
+              <div class="no-questions">
+                <p>❗ No hi ha més preguntes.</p>
+              </div>
+            `;
+            return;
+          }
+          const actual = preguntes[index];
+          // Mostra la modalitat de la pregunta (si vols, pots afegir més info)
+          document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
+          document.getElementById("tema").textContent = actual.tema || '';
+          document.getElementById("pregunta").textContent = "Pregunta: " + (actual.pregunta || '');
+          document.getElementById("opcions").innerHTML = "";
+          document.getElementById("feedback").textContent = "";
+          respostaMostrada = false;
+
+          actual.opcions.forEach((opcio, i) => {
+            const boto = document.createElement("button");
+            boto.className = "option-button";
+            boto.textContent = opcio;
+            boto.onclick = () => comprovarResposta(i);
+            document.getElementById("opcions").appendChild(boto);
+          });
+
+          document.getElementById("nextBtn").style.display = "block";
+        }
+
+        function capitalitza(text) {
+          return text.charAt(0).toUpperCase() + text.slice(1);
+        }
+
+        function comprovarResposta(seleccio) {
+          if (respostaMostrada) return;
+          respostaMostrada = true;
+          const correcta = preguntes[index].correcta;
+          const feedback = document.getElementById("feedback");
+          if (seleccio === correcta) {
+            feedback.textContent = "✅ Correcte!";
+            feedback.style.color = "#00ff88";
+            encerts++;
+          } else {
+            feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntes[index].opcions[correcta];
+            feedback.style.color = "#ff8888";
+            errors++;
+          }
+        }
+
+        window.seguentPregunta = function() {
+          if (index < preguntes.length - 1) {
+            index++;
+            carregarPregunta();
+          } else {
+            document.getElementById("qcontainer").innerHTML = `
+              <h2>Has completat totes les preguntes! 🎉</h2>
+              <p>✅ Correctes: ${encerts}</p>
+              <p>❌ Incorrectes: ${errors}</p>
+              <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
+            `;
+          }
+        };
+
+        carregarPregunta();
+      })
+      .catch(err => {
+        document.getElementById("qcontainer").innerHTML = `
+          <div class="no-questions">
+            <p>❗ Error carregant preguntes: ${err.message}</p>
+          </div>
+        `;
       });
     }
-
-    function comprovarResposta(seleccio) {
-      if (respostaMostrada) return;
-      respostaMostrada = true;
-      const correcta = preguntes[index].correcta;
-      const feedback = document.getElementById("feedback");
-      if (seleccio === correcta) {
-        feedback.textContent = "✅ Correcte!";
-        feedback.style.color = "#00ff88";
-        encerts++;
-      } else {
-        feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntes[index].opcions[correcta];
-        feedback.style.color = "#ff8888";
-        errors++;
-      }
-    }
-
-    function seguentPregunta() {
-      if (index < preguntes.length - 1) {
-        index++;
-        carregarPregunta();
-      } else {
-        document.querySelector(".question-container").innerHTML = `
-          <h2>Has completat totes les preguntes! 🎉</h2>
-          <p>✅ Correctes: ` + encerts + `</p>
-          <p>❌ Incorrectes: ` + errors + `</p>`;
-      }
-    }
-
-    carregarPregunta();
   </script>
 </body>
 </html>

@@ -113,166 +113,145 @@
         </div>
       `;
     } else {
-      // Carrega totes les preguntes de cada modalitat seleccionada
-      Promise.all(
-        modalitatsSeleccionades
-          .map(m => MODALITAT_ARXIU[m])
-          .filter(Boolean)
-          .map(path => fetch(path).then(r => {
-            if (!r.ok) throw new Error(`Error carregant ${path}`);
-            return r.json().then(data => ({modalitat: m, data}));
-          }))
-      )
-      .then(results => {
-        // Aplana totes les preguntes de totes les modalitats i temes
-        let preguntes = [];
-        results.forEach(({modalitat, data}) => {
-          if (!data.preguntes) return;
-          // Per cada tema seleccionat
-          data.preguntes
-            .filter(temaObj => temesSeleccionats.includes(temaObj.id))
-            .forEach(temaObj => {
-              if (Array.isArray(temaObj.preguntes)) {
-                temaObj.preguntes.forEach(p => {
-                  preguntes.push({
-                    tema: temaObj.tema,
-                    modalitat: data.modalitat || modalitat,
-                    titol: p.titol,
-                    pregunta: p.pregunta,
-                    opcions: p.opcions,
-                    resposta_correcta: p.resposta_correcta,
-                    audio: p.audio || null    // Per si és una pregunta d'audició
-                  });
-                });
-              }
-            });
-        });
-
-        if (!preguntes.length) {
-          document.getElementById("qcontainer").innerHTML = `
-            <div class="no-questions">
-              <p>❗ No hi ha preguntes per aquesta selecció de temes i modalitats.</p>
-              <p>Si us plau, torna enrere i selecciona altres opcions.</p>
-            </div>
-          `;
-          return;
-        }
-
-        // Barreja preguntes i opcions
-        barrejarArray(preguntes);
-        preguntes = preguntes.map(p => {
-          const opcions = [...p.opcions];
-          // Determina la resposta correcta (pot ser índex o lletra)
-          let idxCorrecta = -1;
-          if (typeof p.resposta_correcta === "number") {
-            idxCorrecta = p.resposta_correcta;
-          } else if (typeof p.resposta_correcta === "string") {
-            // Si la resposta correcta és una lletra: a, b, c, d...
-            const lletra = p.resposta_correcta.trim().toLowerCase();
-            const codis = { a: 0, b: 1, c: 2, d: 3 };
-            idxCorrecta = codis[lletra];
-          }
-          const respostaCorrecta = opcions[idxCorrecta];
-          barrejarArray(opcions);
-          return {
-            tema: p.tema,
-            modalitat: p.modalitat,
-            titol: p.titol,
-            pregunta: p.pregunta,
-            opcions: opcions,
-            correcta: opcions.indexOf(respostaCorrecta),
-            audio: p.audio || null
-          };
-        });
-
-        let index = 0;
-        let encerts = 0;
-        let errors = 0;
-        let respostaMostrada = false;
-
-        function barrejarArray(array) {
-          for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-          }
-        }
-
-        function carregarPregunta() {
-          if (!preguntes[index]) {
+      // Filtra només les modalitats vàlides (que existeixen a MODALITAT_ARXIU)
+      const modalitatsValidades = modalitatsSeleccionades.filter(m => MODALITAT_ARXIU[m]);
+      if (!modalitatsValidades.length) {
+        document.getElementById("qcontainer").innerHTML = `
+          <div class="no-questions">
+            <p>❗ Cap modalitat seleccionada no és vàlida.</p>
+            <p>Si us plau, torna a la pàgina anterior i fes una selecció correcta.</p>
+          </div>
+        `;
+      } else {
+        // Carrega totes les preguntes de cada modalitat seleccionada vàlida
+        Promise.all(
+          modalitatsValidades
+            .map(m => MODALITAT_ARXIU[m])
+            .map(path => fetch(path).then(r => {
+              if (!r.ok) throw new Error(`Error carregant ${path}`);
+              return r.json();
+            }))
+        )
+        .then(modalitatPreguntesArrays => {
+          // Aplana totes les preguntes de totes les modalitats
+          let preguntes = modalitatPreguntesArrays.flat();
+          // Filtra pels temes seleccionats
+          preguntes = preguntes.filter(p => temesSeleccionats.includes(p.temaId));
+          if (!preguntes.length) {
             document.getElementById("qcontainer").innerHTML = `
               <div class="no-questions">
-                <p>❗ No hi ha més preguntes.</p>
+                <p>❗ No hi ha preguntes per aquesta selecció de temes i modalitats.</p>
+                <p>Si us plau, torna enrere i selecciona altres opcions.</p>
               </div>
             `;
             return;
           }
-          const actual = preguntes[index];
-          // Mostra la modalitat de la pregunta
-          document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
-          document.getElementById("tema").textContent = actual.tema || '';
-          document.getElementById("pregunta").textContent = "Pregunta: " + (actual.pregunta || '');
-          // Si hay audio, mostrar reproductor
-          if (actual.audio) {
-            document.getElementById("pregunta").innerHTML += `<br/><audio controls src="${actual.audio}" style="margin-top:1em"></audio>`;
-          }
-          document.getElementById("opcions").innerHTML = "";
-          document.getElementById("feedback").textContent = "";
-          respostaMostrada = false;
 
-          actual.opcions.forEach((opcio, i) => {
-            const boto = document.createElement("button");
-            boto.className = "option-button";
-            boto.textContent = opcio;
-            boto.onclick = () => comprovarResposta(i);
-            document.getElementById("opcions").appendChild(boto);
+          // Barreja preguntes i opcions
+          barrejarArray(preguntes);
+          preguntes = preguntes.map(p => {
+            const opcions = [...p.opcions];
+            const respostaCorrecta = opcions[p.correcta];
+            barrejarArray(opcions);
+            return {
+              tema: p.tema,
+              modalitat: p.modalitat || getModalitatDePregunta(p),
+              pregunta: p.pregunta,
+              opcions: opcions,
+              correcta: opcions.indexOf(respostaCorrecta)
+            };
           });
 
-          document.getElementById("nextBtn").style.display = "block";
-        }
-
-        function capitalitza(text) {
-          return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
-        }
-
-        function comprovarResposta(seleccio) {
-          if (respostaMostrada) return;
-          respostaMostrada = true;
-          const correcta = preguntes[index].correcta;
-          const feedback = document.getElementById("feedback");
-          if (seleccio === correcta) {
-            feedback.textContent = "✅ Correcte!";
-            feedback.style.color = "#00ff88";
-            encerts++;
-          } else {
-            feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntes[index].opcions[correcta];
-            feedback.style.color = "#ff8888";
-            errors++;
+          function getModalitatDePregunta(pregunta) {
+            // Intenta deduir modalitat a partir de la font (si vols)
+            if (pregunta && pregunta.arxiuFont) return pregunta.arxiuFont.replace('preguntes_','').replace('.json','');
+            return '';
           }
-        }
 
-        window.seguentPregunta = function() {
-          if (index < preguntes.length - 1) {
-            index++;
-            carregarPregunta();
-          } else {
-            document.getElementById("qcontainer").innerHTML = `
-              <h2>Has completat totes les preguntes! 🎉</h2>
-              <p>✅ Correctes: ${encerts}</p>
-              <p>❌ Incorrectes: ${errors}</p>
-              <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
-            `;
+          let index = 0;
+          let encerts = 0;
+          let errors = 0;
+          let respostaMostrada = false;
+
+          function barrejarArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]];
+            }
           }
-        };
 
-        carregarPregunta();
-      })
-      .catch(err => {
-        document.getElementById("qcontainer").innerHTML = `
-          <div class="no-questions">
-            <p>❗ Error carregant preguntes: ${err.message}</p>
-          </div>
-        `;
-      });
+          function carregarPregunta() {
+            if (!preguntes[index]) {
+              document.getElementById("qcontainer").innerHTML = `
+                <div class="no-questions">
+                  <p>❗ No hi ha més preguntes.</p>
+                </div>
+              `;
+              return;
+            }
+            const actual = preguntes[index];
+            document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
+            document.getElementById("tema").textContent = actual.tema || '';
+            document.getElementById("pregunta").textContent = "Pregunta: " + (actual.pregunta || '');
+            document.getElementById("opcions").innerHTML = "";
+            document.getElementById("feedback").textContent = "";
+            respostaMostrada = false;
+
+            actual.opcions.forEach((opcio, i) => {
+              const boto = document.createElement("button");
+              boto.className = "option-button";
+              boto.textContent = opcio;
+              boto.onclick = () => comprovarResposta(i);
+              document.getElementById("opcions").appendChild(boto);
+            });
+
+            document.getElementById("nextBtn").style.display = "block";
+          }
+
+          function capitalitza(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+          }
+
+          function comprovarResposta(seleccio) {
+            if (respostaMostrada) return;
+            respostaMostrada = true;
+            const correcta = preguntes[index].correcta;
+            const feedback = document.getElementById("feedback");
+            if (seleccio === correcta) {
+              feedback.textContent = "✅ Correcte!";
+              feedback.style.color = "#00ff88";
+              encerts++;
+            } else {
+              feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntes[index].opcions[correcta];
+              feedback.style.color = "#ff8888";
+              errors++;
+            }
+          }
+
+          window.seguentPregunta = function() {
+            if (index < preguntes.length - 1) {
+              index++;
+              carregarPregunta();
+            } else {
+              document.getElementById("qcontainer").innerHTML = `
+                <h2>Has completat totes les preguntes! 🎉</h2>
+                <p>✅ Correctes: ${encerts}</p>
+                <p>❌ Incorrectes: ${errors}</p>
+                <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
+              `;
+            }
+          };
+
+          carregarPregunta();
+        })
+        .catch(err => {
+          document.getElementById("qcontainer").innerHTML = `
+            <div class="no-questions">
+              <p>❗ Error carregant preguntes: ${err.message}</p>
+            </div>
+          `;
+        });
+      }
     }
   </script>
 </body>

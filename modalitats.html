@@ -5,9 +5,77 @@
   <title>Modalitats - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
+  <style>
+    .stars {
+      display: flex;
+      gap: 0.1em;
+      font-size: 1.2em;
+      margin-top: 2px;
+    }
+    .star { color: #888; }
+    .star.yellow { color: #ffd600; }
+    .star.green { color: #38c172; }
+    /* Mejoras visuales para las opciones de modalidad */
+    .modalitats-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1em;
+      margin-bottom: 2em;
+      margin-top: 2em;
+      align-items: flex-start;
+    }
+    .modalitat-checkbox {
+      display: flex;
+      align-items: center;
+      padding: 0.7em 1.3em;
+      background: #222244;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.1em;
+      min-width: 220px;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.16s;
+      border: 2px solid transparent;
+      gap: 0.8em;
+    }
+    .modalitat-checkbox:hover,
+    .modalitat-checkbox:focus-within {
+      background: #2a2a5a;
+      border-color: #ffd600;
+    }
+    .modalitat-checkbox input[type="checkbox"] {
+      appearance: none;
+      width: 1.3em;
+      height: 1.3em;
+      border: 2px solid #ffd600;
+      border-radius: 5px;
+      background: #fff;
+      margin-right: 1em;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .modalitat-checkbox input[type="checkbox"]:checked {
+      background: #ffd600;
+      border-color: #ffd600;
+    }
+    .modalitat-checkbox input[type="checkbox"]:checked:after {
+      content: '';
+      position: absolute;
+      left: 0.36em;
+      top: 0.15em;
+      width: 0.4em;
+      height: 0.8em;
+      border-right: 2.5px solid #222244;
+      border-bottom: 2.5px solid #222244;
+      transform: rotate(45deg);
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <!-- Panel lateral para mostrar temas seleccionados -->
+  <!-- Panel lateral para mostrar temas seleccionados y estrellas -->
   <div class="side-panel">
     <h3>Temes seleccionats</h3>
     <ul id="temesSeleccionats"></ul>
@@ -18,9 +86,15 @@
       <h2>Modalitats</h2>
       <form id="modalitatsForm">
         <div class="modalitats-options">
-          <label><input type="checkbox" name="modalitat" value="teoria"> Teoria</label>
-          <label><input type="checkbox" name="modalitat" value="terminologia"> Terminologia</label>
-          <label><input type="checkbox" name="modalitat" value="audicions"> Audicions</label>
+          <label class="modalitat-checkbox">
+            <input type="checkbox" name="modalitat" value="teoria"> Teoria
+          </label>
+          <label class="modalitat-checkbox">
+            <input type="checkbox" name="modalitat" value="terminologia"> Terminologia
+          </label>
+          <label class="modalitat-checkbox">
+            <input type="checkbox" name="modalitat" value="audicions"> Audicions
+          </label>
         </div>
         <div class="actions">
           <button type="submit">Començar</button>
@@ -51,13 +125,49 @@
       "Història de la dansa"
     ];
 
+    // Devuelve la clase de la estrella según el estado
+    function estrellaClase(estado) {
+      if (estado === "perfecta") return "star green";
+      if (estado === "fallos") return "star yellow";
+      return "star";
+    }
+
+    // Devuelve el HTML SVG de la estrella
+    function estrellaSVG(clase) {
+      return `<span class="${clase}">
+        <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-0.15em">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+      </span>`;
+    }
+
+    // Genera las 3 estrellas para cada tema
+    function pintarEstrellasModalidades(estados) {
+      const arr = [
+        estados.teoria ?? null,
+        estados.terminologia ?? null,
+        estados.audicions ?? null
+      ];
+      return `<span class="stars">` +
+        arr.map(estado => estrellaSVG(estrellaClase(estado))).join('') +
+        `</span>`;
+    }
+
     function mostrarTemesSeleccionats() {
       let temes = [];
       try {
         temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
       } catch(e) {}
+      const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
       const ul = document.getElementById("temesSeleccionats");
-      ul.innerHTML = temes.map(idx => `<li>${nomsTemes[parseInt(idx,10)-1]}</li>`).join('');
+      ul.innerHTML = temes.map(idx => {
+        const temaNom = nomsTemes[parseInt(idx,10)-1];
+        const estados = estrelles[idx] || {};
+        return `<li>
+          <strong>${temaNom}</strong>
+          ${pintarEstrellasModalidades(estados)}
+        </li>`;
+      }).join('');
     }
 
     window.addEventListener('DOMContentLoaded', function() {

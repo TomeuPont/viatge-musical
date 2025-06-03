@@ -120,14 +120,34 @@
           .filter(Boolean)
           .map(path => fetch(path).then(r => {
             if (!r.ok) throw new Error(`Error carregant ${path}`);
-            return r.json();
+            return r.json().then(data => ({modalitat: m, data}));
           }))
       )
-      .then(modalitatPreguntesArrays => {
-        // Aplana totes les preguntes de totes les modalitats
-        let preguntes = modalitatPreguntesArrays.flat();
-        // Filtra pels temes seleccionats
-        preguntes = preguntes.filter(p => temesSeleccionats.includes(p.temaId));
+      .then(results => {
+        // Aplana totes les preguntes de totes les modalitats i temes
+        let preguntes = [];
+        results.forEach(({modalitat, data}) => {
+          if (!data.preguntes) return;
+          // Per cada tema seleccionat
+          data.preguntes
+            .filter(temaObj => temesSeleccionats.includes(temaObj.id))
+            .forEach(temaObj => {
+              if (Array.isArray(temaObj.preguntes)) {
+                temaObj.preguntes.forEach(p => {
+                  preguntes.push({
+                    tema: temaObj.tema,
+                    modalitat: data.modalitat || modalitat,
+                    titol: p.titol,
+                    pregunta: p.pregunta,
+                    opcions: p.opcions,
+                    resposta_correcta: p.resposta_correcta,
+                    audio: p.audio || null    // Per si és una pregunta d'audició
+                  });
+                });
+              }
+            });
+        });
+
         if (!preguntes.length) {
           document.getElementById("qcontainer").innerHTML = `
             <div class="no-questions">
@@ -142,23 +162,28 @@
         barrejarArray(preguntes);
         preguntes = preguntes.map(p => {
           const opcions = [...p.opcions];
-          const respostaCorrecta = opcions[p.correcta];
+          // Determina la resposta correcta (pot ser índex o lletra)
+          let idxCorrecta = -1;
+          if (typeof p.resposta_correcta === "number") {
+            idxCorrecta = p.resposta_correcta;
+          } else if (typeof p.resposta_correcta === "string") {
+            // Si la resposta correcta és una lletra: a, b, c, d...
+            const lletra = p.resposta_correcta.trim().toLowerCase();
+            const codis = { a: 0, b: 1, c: 2, d: 3 };
+            idxCorrecta = codis[lletra];
+          }
+          const respostaCorrecta = opcions[idxCorrecta];
           barrejarArray(opcions);
           return {
             tema: p.tema,
-            modalitat: p.modalitat || getModalitatDePregunta(p),
+            modalitat: p.modalitat,
+            titol: p.titol,
             pregunta: p.pregunta,
             opcions: opcions,
-            correcta: opcions.indexOf(respostaCorrecta)
+            correcta: opcions.indexOf(respostaCorrecta),
+            audio: p.audio || null
           };
         });
-
-        function getModalitatDePregunta(pregunta) {
-          // Intenta deduir modalitat a partir de la font (només si als JSON no està inclosa la modalitat)
-          // Si vols que surti el nom bonic, pots millorar aquest mètode
-          if (pregunta && pregunta.arxiuFont) return pregunta.arxiuFont.replace('preguntes_','').replace('.json','');
-          return '';
-        }
 
         let index = 0;
         let encerts = 0;
@@ -182,10 +207,14 @@
             return;
           }
           const actual = preguntes[index];
-          // Mostra la modalitat de la pregunta (si vols, pots afegir més info)
+          // Mostra la modalitat de la pregunta
           document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
           document.getElementById("tema").textContent = actual.tema || '';
           document.getElementById("pregunta").textContent = "Pregunta: " + (actual.pregunta || '');
+          // Si hay audio, mostrar reproductor
+          if (actual.audio) {
+            document.getElementById("pregunta").innerHTML += `<br/><audio controls src="${actual.audio}" style="margin-top:1em"></audio>`;
+          }
           document.getElementById("opcions").innerHTML = "";
           document.getElementById("feedback").textContent = "";
           respostaMostrada = false;
@@ -202,7 +231,7 @@
         }
 
         function capitalitza(text) {
-          return text.charAt(0).toUpperCase() + text.slice(1);
+          return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
         }
 
         function comprovarResposta(seleccio) {

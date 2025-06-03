@@ -15,14 +15,17 @@
     .star { color: #888; }
     .star.yellow { color: #ffd600; }
     .star.green { color: #38c172; }
-    /* Mejoras visuales para las opciones de modalidad */
+
+    /* MODALITATS OPCIONS HORIZONTAL */
     .modalitats-options {
       display: flex;
-      flex-direction: column;
-      gap: 1.1em;
+      flex-direction: row; /* <-- HORIZONTAL */
+      gap: 2em;
       margin-bottom: 2em;
       margin-top: 2em;
       align-items: flex-start;
+      justify-content: center;
+      width: 100%;
     }
     .modalitat-checkbox {
       display: flex;
@@ -32,7 +35,7 @@
       border-radius: 10px;
       cursor: pointer;
       font-size: 1.1em;
-      min-width: 220px;
+      min-width: 160px;
       box-shadow: 0 2px 8px #0002;
       transition: background 0.16s;
       border: 2px solid transparent;
@@ -71,6 +74,17 @@
       border-bottom: 2.5px solid #222244;
       transform: rotate(45deg);
       display: block;
+    }
+    /* Responsive: Columna en mòbil */
+    @media (max-width: 600px) {
+      .modalitats-options {
+        flex-direction: column;
+        gap: 1.1em;
+        align-items: stretch;
+      }
+      .modalitat-checkbox {
+        min-width: 220px;
+      }
     }
   </style>
 </head>

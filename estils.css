@@ -347,14 +347,19 @@ body {
   padding: 0.5em 0 0.3em 0;
   min-width: 0;
 }
+
 .tema-nom {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Quitamos: */
+  /* white-space: nowrap; */
+  /* text-overflow: ellipsis; */
+  overflow: unset;
   flex: 1 1 auto;
   font-weight: 500;
   min-width: 0;
+  /* Permitimos salto de línea */
+  word-break: break-word;
 }
+
 .stars {
   flex-shrink: 0;
 }

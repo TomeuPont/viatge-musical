@@ -4,7 +4,7 @@
   "preguntes": [
     {
       "id": 1,
-      "tema": "Música de l'Antiguitat",
+      "tema": "Música de l'antiguitat",
       "preguntes": [
         {
           "titol": "Neuma",
@@ -54,7 +54,7 @@
     },
     {
       "id": 2,
-      "tema": "Música Medieval",
+      "tema": "Música medieval",
       "preguntes": [
         {
           "titol": "Trobador",
@@ -237,7 +237,7 @@
     },
     {
       "id": 5,
-      "tema": "Música del Classicisme",
+      "tema": "Música del classicisme",
       "preguntes": [
         {
           "titol": "Rondó",

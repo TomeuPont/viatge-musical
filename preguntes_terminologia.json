@@ -8,7 +8,7 @@
       "preguntes": [
         {
           "titol": "Neuma",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Neuma"?",
           "opcions": [
             "Forma musical del Barroc",
             "Primer sistema de notació musical amb signes sobre el text",
@@ -19,7 +19,7 @@
         },
         {
           "titol": "Ofici diví",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta d'"Ofici diví"?",
           "opcions": [
             "Dansa ritual de l’antiga Grècia",
             "Escriptura musical anterior al tetragrama",
@@ -58,7 +58,7 @@
       "preguntes": [
         {
           "titol": "Trobador",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Trobador"?",
           "opcions": [
             "Monjo que escrivia cants litúrgics",
             "Músic i poeta de la noblesa medieval",
@@ -80,7 +80,7 @@
         },
         {
           "titol": "Cant melismàtic",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Cant melismàtic"?",
           "opcions": [
             "Cant amb moltes notes sobre una sola síl·laba",
             "Cant gregorià sense acompanyament instrumental",
@@ -108,7 +108,7 @@
       "preguntes": [
         {
           "titol": "Mecenes",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Mecenes"?",
           "opcions": [
             "Persona que finança artistes i projectes culturals",
             "Instrument musical antic de corda",
@@ -130,7 +130,7 @@
         },
         {
           "titol": "Contrapunt",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Contrapunt"?",
           "opcions": [
             "Tècnica compositiva basada en la superposició de línies melòdiques independents",
             "Ritme ternari de dansa cortesana",
@@ -141,7 +141,7 @@
         },
         {
           "titol": "Música ficta",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Música ficta"?",
           "opcions": [
             "Notes accidentals afegides pel músic en la interpretació del Renaixement",
             "Composicions inventades per juglars",
@@ -158,7 +158,7 @@
       "preguntes": [
         {
           "titol": "Baix continu",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Baix continu"?",
           "opcions": [
             "Forma musical del Classicisme basada en variacions",
             "Acompanyament musical format per un baix i un instrument d'harmonia",
@@ -180,9 +180,9 @@
         },
         {
           "titol": "Aria da capo",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta d'"Aria da capo"?",
           "opcions": [
-            "Ària tripartida que repeteix la primera secció al final",
+            "Aria tripartida que repeteix la primera secció al final",
             "Peça vocal medieval de forma lliure",
             "Cançó profana del Romanticisme",
             "Tema amb variacions simfòniques"
@@ -216,15 +216,15 @@
           "pregunta": "A quin terme correspon la següent definició?\n\"Text o guió d’una òpera o obra musical escènica.\"",
           "opcions": [
             "Sonata",
-            "Ària",
-            "Libreto",
+            "Aria",
+            "Libretto",
             "Obertura"
           ],
           "resposta_correcta": "c"
         },
         {
           "titol": "Suite",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Suite"?",
           "opcions": [
             "Conjunt de peces instrumentals de dansa del Barroc",
             "Obra vocal religiosa amb cor",
@@ -241,7 +241,7 @@
       "preguntes": [
         {
           "titol": "Rondó",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Rondó"?",
           "opcions": [
             "Forma musical basada en la repetició d'un tema principal alternat amb episodis nous",
             "Dansa barroca a ritme ternari",
@@ -274,7 +274,7 @@
         },
         {
           "titol": "Quartet",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Quartet"?",
           "opcions": [
             "Composició escrita per a quatre instruments o veus",
             "Grup coral religiós",
@@ -302,7 +302,7 @@
       "preguntes": [
         {
           "titol": "Lied",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Lied"?",
           "opcions": [
             "Cançó per a veu i piano pròpia del Romanticisme",
             "Composició per a orquestra",
@@ -324,7 +324,7 @@
         },
         {
           "titol": "Música programàtica",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Música programàtica"?",
           "opcions": [
             "Música que segueix una narrativa o programa extramusical",
             "Composició basada exclusivament en estructures abstractes",
@@ -335,7 +335,7 @@
         },
         {
           "titol": "Orquestra filharmònica",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta d'"Orquestra filharmònica"?",
           "opcions": [
             "Orquestra reduïda per a cambra",
             "Conjunt de músics dedicats al jazz",
@@ -374,7 +374,7 @@
       "preguntes": [
         {
           "titol": "Dodecafonisme",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Dodecafonisme"?",
           "opcions": [
             "Sistema de composició basat en la utilització de les dotze notes de l’escala cromàtica sense jerarquies",
             "Música basada en la improvisació i el swing",
@@ -396,7 +396,7 @@
         },
         {
           "titol": "Atonalitat",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta d'"Atonalitat"?",
           "opcions": [
             "Música amb absència de tonalitat central o jerarquia harmònica",
             "Estil de composició exclusivament modal",
@@ -407,7 +407,7 @@
         },
         {
           "titol": "Clúster",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Clúster"?",
           "opcions": [
             "Grup de notes adjacents tocades simultàniament",
             "Tècnica d’improvisació de jazz",
@@ -429,7 +429,7 @@
         },
         {
           "titol": "Ones Martenot",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta d'"Ones Martenot"?",
           "opcions": [
             "Primer instrument electrònic amb control expressiu desenvolupat al segle XX",
             "Sistema de transmissió per ràdio",
@@ -463,7 +463,7 @@
       "preguntes": [
         {
           "titol": "Banda sonora original",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Banda sonora original"?",
           "opcions": [
             "Música utilitzada en un musical de Broadway",
             "Composició que acompanya una pel·lícula, pot incloure diàlegs i efectes de so",
@@ -485,7 +485,7 @@
         },
         {
           "titol": "Leitmotiv",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Leitmotiv"?",
           "opcions": [
             "Tema musical associat a un personatge, lloc o idea en una obra audiovisual",
             "Melodia aleatòria dins d’un film",
@@ -513,7 +513,7 @@
       "preguntes": [
         {
           "titol": "Polonesa",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Polonesa"?",
           "opcions": [
             "Dansa tradicional d'origen polonès a ritme ternari",
             "Peça vocal profana amb acompanyament instrumental",
@@ -552,7 +552,7 @@
       "preguntes": [
         {
           "titol": "Ball tradicional de les Illes Balears",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Ball tradicional de les Illes Balears"?",
           "opcions": [
             "Danses populars pròpies de la cultura balear com la jota i el bolero",
             "Música medieval composta per a la cort reial",
@@ -602,7 +602,7 @@
       "preguntes": [
         {
           "titol": "Ballet de cort",
-          "pregunta": "Quina és la definició correcta?",
+          "pregunta": "Quina és la definició correcta de "Ballet de cort"?",
           "opcions": [
             "Forma de dansa desenvolupada a les corts europees del Renaixement i Barroc",
             "Espectacle musical amb cantants, actors i ballarins",

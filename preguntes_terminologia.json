@@ -179,7 +179,7 @@
           "resposta_correcta": "b"
         },
         {
-          "titol": "Aria da capo",
+          "titol": "Ària da capo",
           "pregunta": "Quina és la definició correcta d'&quot;Aria da capo&quot;?",
           "opcions": [
             "Aria tripartida que repeteix la primera secció al final",
@@ -216,7 +216,7 @@
           "pregunta": "A quin terme correspon la següent definició?\n\"Text o guió d’una òpera o obra musical escènica.\"",
           "opcions": [
             "Sonata",
-            "Aria",
+            "Ària",
             "Libretto",
             "Obertura"
           ],

@@ -124,7 +124,7 @@
           "audio": "audio/la_primavera.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«La Primavera», Vivaldi, Barroc, orquestra.",
+            "«La Primavera», 1r moviment, Vivaldi, Barroc, orquestra.",
             "«Quadres d’una exposició», Mussorgsky, Romanticisme, piano.",
             "«Strange Fruit», Billie Holiday, segle XXI, veu i electrònica.",
             "«Simfonia núm. 94», Haydn, Classicisme, quartet de corda."
@@ -178,7 +178,7 @@
           "audio": "audio/quartet_op76_4_iv.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Quartet Op. 76 núm. 4», Haydn, Classicisme, quartet de corda.",
+            "«Quartet Op. 76 núm. 4», 4t moviment, Haydn, Classicisme, quartet de corda.",
             "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, orquestra.",
             "«Viderunt Omnes», Leonin, Medieval, veus.",
             "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna."
@@ -190,7 +190,7 @@
           "audio": "audio/simfonia_94_ii.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+            "«Simfonia núm. 94», 2n moviment, Haydn, Classicisme, orquestra.",
             "«Simfonia núm. 6 Pastoral», Schubert, Romanticisme, cor.",
             "«Operation Pull Toy», Newman, segle XXI, orquestra i electrònica.",
             "«Flos Florum», Dufay, Renaixement, veu i llaüt."
@@ -202,7 +202,7 @@
           "audio": "audio/petita_serenata_nocturna.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Petita serenata nocturna», Mozart, Classicisme, orquestra de corda.",
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, orquestra de corda.",
             "«Jota de morir», Marala, segle XXI, veu i electrònica.",
             "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
             "«Pulcinella», Stravinsky, segle XX, orquestra moderna."
@@ -220,9 +220,9 @@
           "audio": "audio/simfonia_6_pastoral.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Simfonia núm. 6. Pastoral», Beethoven, Romanticisme, orquestra.",
+            "«Simfonia núm. 6. Pastoral», 1r moviment, Beethoven, Romanticisme, orquestra.",
             "«Cantata al Santísimo», Lliteres, Barroc, veu i orquestra.",
-            "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, quartet de corda.",
             "«Pierrot Lunaire», Schoenberg, segle XX, veu i piano."
           ],
           "resposta_correcta": "a"
@@ -232,9 +232,9 @@
           "audio": "audio/quintet_la_truita.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Quintet La Truita», Schubert, Romanticisme, quintet de corda i piano.",
+            "«Quintet La Truita», Schubert, 1r moviment, Romanticisme, quintet de corda i piano.",
             "«Flos Florum», Dufay, Renaixement, cor a capella.",
-            "«La Primavera», Vivaldi, Barroc, orquestra.",
+            "«La Primavera», 1r moviment, Vivaldi, Barroc, orquestra.",
             "«Another Day of Sun», Hurwitz, segle XXI, cor i electrònica."
           ],
           "resposta_correcta": "a"
@@ -304,9 +304,9 @@
           "audio": "audio/simfonia_fantastica.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
-            "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
-            "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna.",
+            "«Simfonia Fantàstica», 5è moviment, Berlioz, Romanticisme, orquestra.",
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, quartet de corda.",
+            "«Simfonia clàssica», 1r moviment, Prokofiev, segle XX, orquestra moderna.",
             "«Preludi a la sesta del faune», Debussy, segle XX, piano."
           ],
           "resposta_correcta": "a"
@@ -325,7 +325,7 @@
             "«Preludi a la sesta del faune», Debussy, segle XX, orquestra.",
             "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, piano.",
             "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, orquestra.",
-            "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda."
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, quartet de corda."
           ],
           "resposta_correcta": "a"
         },
@@ -346,7 +346,7 @@
           "audio": "audio/simfonia_classica.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Simfonia clàssica», Prokofiev, segle XX, orquestra.",
+            "«Simfonia clàssica», 1r moviment, Prokofiev, segle XX, orquestra.",
             "«Himne a Sant Joan», anònim, Medieval, veu.",
             "«Another Day of Sun», Hurwitz, segle XXI, veu i orquestra moderna.",
             "«Operation Pull Toy», Newman, segle XXI, electrònica."
@@ -361,7 +361,7 @@
             "«Enyorança», Matilde Escalas, segle XX, veu i piano.",
             "«Pierrot Lunaire», Schoenberg, segle XX, veu i ensemble.",
             "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, orquestra.",
-            "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda."
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, quartet de corda."
           ],
           "resposta_correcta": "a"
         },
@@ -372,7 +372,7 @@
           "opcions": [
             "«Pierrot Lunaire. Part 1. Mondestrunken», Schoenberg, segle XX, veu i ensemble.",
             "«Jota de morir», Marala, segle XXI, veu i electrònica.",
-            "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
+            "«Simfonia Fantàstica», 5è moviment, Berlioz, Romanticisme, orquestra.",
             "«Flos Florum», Dufay, Renaixement, cor a cappella."
           ],
           "resposta_correcta": "a"
@@ -383,7 +383,7 @@
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
             "«Pulcinella» (obertura), Stravinsky, segle XX, orquestra.",
-            "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+            "«Simfonia núm. 94», 2n moviment, Haydn, Classicisme, orquestra.",
             "«Cant de la Sibil·la», tradicional mallorquina, Medieval, veu.",
             "«Preludi de la gota d’aigua», Chopin, Romanticisme, piano solista."
           ],
@@ -395,9 +395,9 @@
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
             "«Strange Fruit», Billie Holiday, segle XX, veu i jazz band.",
-            "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, quartet de corda.",
             "«Operation Pull Toy», Newman, segle XXI, orquestra moderna.",
-            "«Simfonia núm. 94», Haydn, Classicisme, orquestra."
+            "«Simfonia núm. 94», 2n moviment, Haydn, Classicisme, orquestra."
           ],
           "resposta_correcta": "a"
         }
@@ -415,7 +415,7 @@
             "«Rehab», Amy Winehouse, segle XXI, veu i banda de soul.",
             "«Viderunt Omnes», Leonin, Medieval, veus.",
             "«Simfonia núm. 6 Pastoral», Beethoven, Romanticisme, orquestra.",
-            "«Simfonia Fantàstica», Berlioz, Romanticisme, cor i orquestra."
+            "«Simfonia Fantàstica», 5è moviment, Berlioz, Romanticisme, cor i orquestra."
           ],
           "resposta_correcta": "a"
         },
@@ -425,7 +425,7 @@
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
             "«Penny Lane», The Beatles, segle XX, banda pop.",
-            "«Simfonia núm. 94», Haydn, Classicisme, orquestra.",
+            "«Simfonia núm. 94», 2n moviment, Haydn, Classicisme, orquestra.",
             "«Gloria all'Egitto, ad Iside», Verdi, Romanticisme, cor i orquestra.",
             "«Another Day of Sun», Hurwitz, segle XXI, veu i orquestra moderna."
           ],
@@ -437,9 +437,9 @@
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
             "«Jota de morir», Marala, segle XXI, veu i electrònica.",
-            "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, quartet de corda.",
             "«Preludi de la gota d’aigua», Chopin, Romanticisme, piano solista.",
-            "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna."
+            "«Simfonia clàssica», 1r moviment, Prokofiev, segle XX, orquestra moderna."
           ],
           "resposta_correcta": "a"
         }
@@ -456,7 +456,7 @@
           "opcions": [
             "«Another Day of Sun», Justin Hurwitz, segle XXI, veu i orquestra moderna.",
             "«Preludi a la sesta del faune», Debussy, segle XX, piano solista.",
-            "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
+            "«Petita serenata nocturna», 1r moviment, Mozart, Classicisme, quartet de corda.",
             "«Strange Fruit», Billie Holiday, segle XXI, jazz band."
           ],
           "resposta_correcta": "a"

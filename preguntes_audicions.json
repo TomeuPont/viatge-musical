@@ -58,7 +58,7 @@
           "audio": "audio/flos_florum.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Flos Florum», Dufay, Renaixement, cor a capella.",
+            "«Flos Florum», Dufay, Renaixement, cor a cappella.",
             "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
             "«Bourrée pour les Basques», Lully, Barroc, dansa i violí.",
             "«Simfonia clàssica», Prokofiev, segle XX, orquestra moderna."
@@ -100,7 +100,7 @@
           "audio": "audio/magnum_mysterium.mp3",
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
-            "«Magnum Mysterium», Victoria, Barroc, cor a capella.",
+            "«Magnum Mysterium», Victoria, Barroc, cor a cappella.",
             "«Viderunt Omnes», Leonin, Medieval, veus i orgue.",
             "«Pulcinella», Stravinsky, segle XX, orquestra moderna.",
             "«Enyorança», Matilde Escalas, segle XX, veu i piano."
@@ -269,7 +269,7 @@
           "pregunta": "Quina de les següents afirmacions és correcta sobre aquesta audició?",
           "opcions": [
             "«Lied. Das Veilchen», Clara Wieck Schumann, Romanticisme, veu i piano.",
-            "«Flos Florum», Dufay, Renaixement, cor a capella.",
+            "«Flos Florum», Dufay, Renaixement, cor a cappella.",
             "«Petita serenata nocturna», Mozart, Classicisme, quartet de corda.",
             "«Strange Fruit», Billie Holiday, segle XXI, jazz band."
           ],
@@ -295,7 +295,7 @@
             "«Gloria all'Egitto, ad Iside. Aida», Verdi, Romanticisme, cor i orquestra.",
             "«Operation Pull Toy», Newman, segle XXI, orquestra moderna.",
             "«Strange Fruit», Billie Holiday, segle XXI, veu i jazz band.",
-            "«Flos Florum», Dufay, Renaixement, cor a capella."
+            "«Flos Florum», Dufay, Renaixement, cor a cappella."
           ],
           "resposta_correcta": "a"
         },
@@ -373,7 +373,7 @@
             "«Pierrot Lunaire. Part 1. Mondestrunken», Schoenberg, segle XX, veu i ensemble.",
             "«Jota de morir», Marala, segle XXI, veu i electrònica.",
             "«Simfonia Fantàstica», Berlioz, Romanticisme, orquestra.",
-            "«Flos Florum», Dufay, Renaixement, cor a capella."
+            "«Flos Florum», Dufay, Renaixement, cor a cappella."
           ],
           "resposta_correcta": "a"
         },

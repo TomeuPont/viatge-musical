@@ -10,10 +10,10 @@
           "titol": "Neuma",
           "pregunta": "Quina és la definició correcta de &quot;Neuma&quot;?",
           "opcions": [
-            "Forma musical del Barroc",
-            "Primer sistema de notació musical amb signes sobre el text",
-            "Tipus de dansa medieval",
-            "Instrument de vent fet de canya"
+            "Forma musical pròpia del Barroc, basada en contrastos entre moviments",
+            "Sistema primitiu de notació musical utilitzat a l’edat mitjana, amb signes col·locats sobre el text per indicar l’entonació i el moviment melòdic",
+            "Dansa medieval de caràcter cerimonial, sovint interpretada en contextos cortesans o religiosos",
+            "Instrument de vent fet de canya utilitzat a l'antiguitat, amb un so agut i funcional en la música popular"
           ],
           "resposta_correcta": "b"
         },
@@ -132,10 +132,10 @@
           "titol": "Contrapunt",
           "pregunta": "Quina és la definició correcta de &quot;Contrapunt&quot;?",
           "opcions": [
-            "Tècnica compositiva basada en la superposició de línies melòdiques independents",
-            "Ritme ternari de dansa cortesana",
-            "Harmonia de tres sons simultanis",
-            "Tipus d'instrument de corda pinçada"
+            "Tècnica compositiva basada en la superposició de dues o més línies melòdiques independents, que juntes formen una estructura harmònica",
+            "Patró rítmic ternari sovint associat a danses cortesanes del Renaixement o Barroc, com el minuet o la sarabanda",
+            "Construcció harmònica bàsica formada per la superposició de tres sons diferents que constitueixen un acord triada",
+            "Instrument musical de corda pinçada, com el llaüt o la tiorba, habitual en la música antiga"
           ],
           "resposta_correcta": "a"
         },

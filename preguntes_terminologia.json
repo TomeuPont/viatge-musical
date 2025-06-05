@@ -119,7 +119,7 @@
         },
         {
           "titol": "Motet",
-          "pregunta": "A quin terme correspon la següent definició?\n\"Composició vocal polifònica de caràcter religiós, sovint en llatí.\"",
+          "pregunta": "A quin terme correspon la següent definició?\n\"Composició vocal polifònica, sovint a cappella, de caràcter religiós i tradicionalment amb text en llatí.\"",
           "opcions": [
             "Madrigal",
             "Missa",
@@ -143,10 +143,10 @@
           "titol": "Música ficta",
           "pregunta": "Quina és la definició correcta de &quot;Música ficta&quot;?",
           "opcions": [
-            "Notes accidentals afegides pel músic en la interpretació del Renaixement",
-            "Composicions inventades per joglars",
-            "Música improvisada sense notació",
-            "Obres amb temàtica mitològica"
+            "Alteracions accidentals no escrites que els intèrprets afegien segons el context durant l’edat mitjana i el Renaixement",
+            "Composicions de caràcter narratiu creades pels joglars medievals, sovint transmeses oralment i amb continguts satírics",
+            "Música improvisada sense cap suport escrit, habitual en tradicions orals de diverses cultures",
+            "Peces vocals o instrumentals inspirades en mites clàssics, sovint utilitzades en òperes o cantates"
           ],
           "resposta_correcta": "a"
         }
@@ -385,7 +385,7 @@
         },
         {
           "titol": "Música concreta",
-          "pregunta": "A quin terme correspon la següent definició?\n\"Estil de música experimental basada en enregistraments de sons naturals i processats electrònicament.\"",
+          "pregunta": "A quin terme correspon la següent definició?\n\"Estil de música experimental basada en l'enregistrament, manipulació i combinació de sons reals (naturals, industrials, vocals, etc.), sovint processats electrònicament.\"",
           "opcions": [
             "Música electrònica",
             "Música concreta",
@@ -535,7 +535,7 @@
         },
         {
           "titol": "Bolero",
-          "pregunta": "A quin terme correspon la següent definició?\n\"Dansa tradicional d’origen espanyol amb ritme ternari i caràcter romàntic.\"",
+          "pregunta": "A quin terme correspon la següent definició?\n\"Dansa tradicional d’origen espanyol amb ritme ternari i generalment de temps moderat.\"",
           "opcions": [
             "Polonesa",
             "Fandango",

@@ -1,0 +1,364 @@
+{
+  "modalitat": "Treballar contingut teòric",
+  "joc": "Un viatge musical i dansat",
+  "preguntes": [
+    {
+      "id": 1,
+      "tema": "Música de l’antiguitat",
+      "preguntes": [
+        {
+          "titol": "Cultures musicals antigues",
+          "pregunta": "Quina d’aquestes cultures forma part del desenvolupament musical de l’antiguitat?",
+          "opcions": [
+            "Celta, germànica, escandinava i visigòtica",
+            "Egípcia, Mesopotàmica, Grega i Romana",
+            "Eslava, índia, bizantina i japonesa",
+            "Persa, xinesa, maia i inca"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Instruments antics",
+          "pregunta": "Quin d’aquests instruments era utilitzat en l’antiguitat clàssica?",
+          "opcions": [
+            "Violí",
+            "Lira",
+            "Saxòfon",
+            "Clavecí"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Funcions de la música antiga",
+          "pregunta": "Per a què s’utilitzava principalment la música a l’antiguitat?",
+          "opcions": [
+            "Exclusivament per ballar",
+            "Només per narrar històries",
+            "Per rituals, funcions religioses i entreteniment",
+            "Només per a educació de l’aristocràcia"
+          ],
+          "resposta_correcta": "c"
+        },
+        {
+          "titol": "Pensament musical grec",
+          "pregunta": "Quin filòsof grec relacionà la música amb les proporcions numèriques?",
+          "opcions": [
+            "Sòcrates",
+            "Aristòtil",
+            "Plató",
+            "Pitàgores"
+          ],
+          "resposta_correcta": "d"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "tema": "Música medieval",
+      "preguntes": [
+        {
+          "titol": "Característiques del cant gregorià",
+          "pregunta": "Com és el cant gregorià?",
+          "opcions": [
+            "Polifònic, amb acompanyament d’arpa",
+            "Monòdic, en llatí, sense acompanyament",
+            "Popular, rítmic, cantat en llengua vernacla",
+            "Coral, amb veus mixtes i instruments"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "La polifonia primitiva",
+          "pregunta": "On es desenvolupà l’organum, forma primitiva de polifonia?",
+          "opcions": [
+            "Roma",
+            "Notre-Dame de París",
+            "Santiago de Compostel·la",
+            "Canterbury"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "tema": "Música del Renaixement",
+      "preguntes": [
+        {
+          "titol": "Compositors renaixentistes",
+          "pregunta": "Quin d’aquests fou un compositor destacat del Renaixement?",
+          "opcions": [
+            "Johann Sebastian Bach",
+            "Josquin des Prez",
+            "Wolfgang Amadeus Mozart",
+            "Ludwig van Beethoven"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Característiques musicals",
+          "pregunta": "Quina característica defineix la música del Renaixement?",
+          "opcions": [
+            "Predomini de la monodia",
+            "Ús de la polifonia imitativa",
+            "Ús d’instruments elèctrics",
+            "Improvisació jazzística"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "tema": "Música del Barroc",
+      "preguntes": [
+        {
+          "titol": "Instruments barrocs",
+          "pregunta": "Quin instrument fou típic del Barroc?",
+          "opcions": [
+            "Syntetitzador",
+            "Clavecí",
+            "Saxòfon",
+            "Guitarra elèctrica"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Formes musicals",
+          "pregunta": "Quina d’aquestes formes musicals sorgeix al Barroc?",
+          "opcions": [
+            "Simfonia",
+            "Sonata",
+            "Òpera",
+            "Suite"
+          ],
+          "resposta_correcta": "c"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "tema": "Música del classicisme",
+      "preguntes": [
+        {
+          "titol": "Compositors clàssics",
+          "pregunta": "Quin d’aquests és considerat un compositor del Classicisme?",
+          "opcions": [
+            "Johann Sebastian Bach",
+            "Wolfgang Amadeus Mozart",
+            "Richard Wagner",
+            "Claude Debussy"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Característiques musicals",
+          "pregunta": "Quina característica defineix la música clàssica?",
+          "opcions": [
+            "Improvisació lliure",
+            "Equilibri formal i claredat melòdica",
+            "Ús d’instruments electrònics",
+            "Ritmes sincopats de jazz"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "tema": "Música del Romanticisme",
+      "preguntes": [
+        {
+          "titol": "Compositors romàntics",
+          "pregunta": "Quin d’aquests fou un compositor romàntic destacat?",
+          "opcions": [
+            "Antonio Vivaldi",
+            "Ludwig van Beethoven",
+            "Guillaume de Machaut",
+            "John Williams"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Expressions musicals",
+          "pregunta": "Quina característica defineix la música romàntica?",
+          "opcions": [
+            "Sobrietat i equilibri",
+            "Expressivitat i llibertat formal",
+            "Ús predominant de la polifonia imitativa",
+            "Exclusió de l’orquestra"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "tema": "Música del segle XX i últimes tendències",
+      "preguntes": [
+        {
+          "titol": "Estil musicals",
+          "pregunta": "Quin estil musical aparegué al segle XX?",
+          "opcions": [
+            "Cant gregorià",
+            "Jazz",
+            "Barroc",
+            "Renaixement"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Compositors del segle XX",
+          "pregunta": "Quin d’aquests és un compositor del segle XX?",
+          "opcions": [
+            "Ludwig van Beethoven",
+            "Igor Stravinsky",
+            "Franz Schubert",
+            "Josquin des Prez"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "tema": "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
+      "preguntes": [
+        {
+          "titol": "Orígens del jazz",
+          "pregunta": "On va sorgir el jazz?",
+          "opcions": [
+            "Nova York",
+            "Nova Orleans",
+            "París",
+            "Viena"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Característiques del rock",
+          "pregunta": "Quina característica defineix la música rock?",
+          "opcions": [
+            "Ús prominent del clavecí",
+            "Ús de la guitarra elèctrica",
+            "Polifonia vocal a cappella",
+            "Melodies gregorianes"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "tema": "Música de pel·lícules i musicals",
+      "preguntes": [
+        {
+          "titol": "Compositors de cinema",
+          "pregunta": "Quin d’aquests és un compositor de música de cinema?",
+          "opcions": [
+            "John Williams",
+            "Johann Strauss",
+            "Claudio Monteverdi",
+            "Franz Liszt"
+          ],
+          "resposta_correcta": "a"
+        },
+        {
+          "titol": "Funció de la música al cinema",
+          "pregunta": "Quina funció pot tenir la música en una pel·lícula?",
+          "opcions": [
+            "Crear ambient",
+            "Explicar emocions",
+            "Ressaltar accions",
+            "Totes les anteriors"
+          ],
+          "resposta_correcta": "d"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "tema": "Músiques i danses tradicionals del món",
+      "preguntes": [
+        {
+          "titol": "Danses tradicionals",
+          "pregunta": "Quina dansa és originària d’Irlanda?",
+          "opcions": [
+            "Fandango",
+            "Sardana",
+            "Riverdance",
+            "Habanera"
+          ],
+          "resposta_correcta": "c"
+        },
+        {
+          "titol": "Instruments del món",
+          "pregunta": "Quin d’aquests instruments és típic de l’Àfrica Occidental?",
+          "opcions": [
+            "Sitar",
+            "Djembe",
+            "Didgeridoo",
+            "Balalaika"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "tema": "Músiques i danses tradicionals de les Illes Balears",
+      "preguntes": [
+        {
+          "titol": "Ball de bot",
+          "pregunta": "Quin és el ball tradicional més conegut de les Illes Balears?",
+          "opcions": [
+            "Ball de bot",
+            "Sardana",
+            "Sevillanes",
+            "Jota aragonesa"
+          ],
+          "resposta_correcta": "a"
+        },
+        {
+          "titol": "Instruments balears",
+          "pregunta": "Quin instrument és tradicional de Mallorca?",
+          "opcions": [
+            "Xeremies",
+            "Castanyoles",
+            "Gaita gallega",
+            "Tamborí andalús"
+          ],
+          "resposta_correcta": "a"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "tema": "Història de la dansa",
+      "preguntes": [
+        {
+          "titol": "Danses antigues",
+          "pregunta": "Quina dansa era popular a la cort del Renaixement?",
+          "opcions": [
+            "Hip-hop",
+            "Pavana",
+            "Rock",
+            "Tango"
+          ],
+          "resposta_correcta": "b"
+        },
+        {
+          "titol": "Danses modernes",
+          "pregunta": "Quin estil de dansa va néixer als Estats Units al segle XX?",
+          "opcions": [
+            "Ballet clàssic",
+            "Jazz dance",
+            "Sardana",
+            "Fandango"
+          ],
+          "resposta_correcta": "b"
+        }
+      ]
+    }
+  ]
+}

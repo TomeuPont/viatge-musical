@@ -108,12 +108,28 @@
       transform: scale(1.06);
       color: #fff;
     }
-    /* Ajuste para el botón volver */
-    .back-btn {
-      margin-bottom: 1.5em;
-      margin-top: 0.5em;
+    .actions-duo {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      margin-bottom: 1em;
+      margin-top: 1.5em;
+      flex-wrap: wrap;
+    }
+    .actions-duo .boto-rosa {
       min-width: 180px;
       text-align: center;
+      margin: 0;
+    }
+    @media (max-width: 600px) {
+      .actions-duo {
+        flex-direction: column;
+        gap: 0.7em;
+      }
+      .actions-duo .boto-rosa {
+        width: 100%;
+        min-width: 0;
+      }
     }
   </style>
 </head>
@@ -125,10 +141,6 @@
   </div>
   <div class="main-content">
     <div id="userEmail" class="user-email"></div>
-
-    <!-- Botón para volver a la pantalla de temas -->
-    <a href="temes.html" class="back-btn boto-rosa">← Tornar als temes</a>
-
     <div class="container center">
       <h2>Modalitats</h2>
       <form id="modalitatsForm">
@@ -145,7 +157,8 @@
           </label>
         </div>
         
-        <div class="actions">
+        <div class="actions actions-duo">
+          <a href="temes.html" class="boto-rosa back-btn">← Tornar als temes</a>
           <button type="submit" class="boto-rosa">Començar</button>
         </div>
         <div id="error" class="error" style="display:none;"></div>

@@ -5,6 +5,50 @@
   <title>Inicia sessió - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
+  <style>
+    .btn-row {
+      display: flex;
+      gap: 1.2em;
+      justify-content: center;
+      margin-top: 1.5em;
+      margin-bottom: 1em;
+      flex-wrap: wrap;
+    }
+    .boto-rosa, button {
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ff4081;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 18px 0 #0005;
+      letter-spacing: 0.5px;
+      outline: none;
+      margin: 0.5em 0;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .boto-rosa:hover, button:hover {
+      background-color: #ff79a7;
+      transform: scale(1.06);
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      .btn-row {
+        flex-direction: column;
+        gap: 0.7em;
+      }
+      .boto-rosa, button {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+        min-width: 0;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container center">
@@ -13,12 +57,26 @@
       <input type="email" id="email" placeholder="Correu electrònic" autocomplete="off" required/>
       <input type="password" id="password" placeholder="Contrasenya" autocomplete="off" required/>
       <div class="btn-row">
-        <button type="button" onclick="login()">Entrar</button>
-        <button type="button" onclick="register()">Registrar-se</button>
+        <button type="button" class="boto-rosa" onclick="login()">Entrar</button>
+        <button type="button" class="boto-rosa" onclick="register()">Registrar-se</button>
       </div>
       <div id="error" class="error" style="display:none;"></div>
     </form>
   </div>
+  <!-- Música de fondo (heredada de index.html si estaba activada) -->
+  <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+  <script>
+    // Reproduce la música sólo si se activó en la pantalla de inicio
+    window.addEventListener("DOMContentLoaded", () => {
+      const musica = document.getElementById('musicaFondo');
+      if (localStorage.getItem('musicaFondoON') === 'si') {
+        musica.volume = 0.4;
+        musica.play().catch(()=>{});
+      } else {
+        musica.pause();
+      }
+    });
+  </script>
   <!-- Scripts DEBEN ir en este orden -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

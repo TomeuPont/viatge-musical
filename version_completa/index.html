@@ -104,7 +104,20 @@
 <body>
   <h1>Un viatge musical i dansat</h1>
   <div class="subtitle">Benvingut/da! Prepara't per començar el teu viatge musical.</div>
-  <button onclick="window.location.href='login.html'">Començar</button>
-  <div class="autora">Candelaria Pont Miró</div>
-</body>
+  <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+<button id="comencarBtn" type="button">Començar</button>
+<script>
+document.getElementById('comencarBtn').addEventListener('click', 
+  function() {
+  const musica = document.getElementById('musicaFondo');
+  musica.volume = 0.4;
+  musica.play().then(() => {
+    localStorage.setItem('musicaFondoON', 'si');
+    window.location.href = 'login.html';
+  }).catch(() => {
+    localStorage.setItem('musicaFondoON', 'si');
+    window.location.href = 'login.html';
+  });
+});
+</script></body>
 </html>

@@ -16,10 +16,9 @@
     .star.yellow { color: #ffd600; }
     .star.green { color: #38c172; }
 
-    /* MODALITATS OPCIONS HORIZONTAL */
     .modalitats-options {
       display: flex;
-      flex-direction: row; /* <-- HORIZONTAL */
+      flex-direction: row;
       gap: 2em;
       margin-bottom: 2em;
       margin-top: 2em;
@@ -86,6 +85,36 @@
         min-width: 220px;
       }
     }
+    /* Botón rosa estilo global */
+    .boto-rosa, button, .actions button, .back-btn {
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ff4081;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 18px 0 #0005;
+      letter-spacing: 0.5px;
+      outline: none;
+      margin: 0.5em 0;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .boto-rosa:hover, button:hover, .actions button:hover, .back-btn:hover {
+      background-color: #ff79a7;
+      transform: scale(1.06);
+      color: #fff;
+    }
+    /* Ajuste para el botón volver */
+    .back-btn {
+      margin-bottom: 1.5em;
+      margin-top: 0.5em;
+      min-width: 180px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -96,6 +125,10 @@
   </div>
   <div class="main-content">
     <div id="userEmail" class="user-email"></div>
+
+    <!-- Botón para volver a la pantalla de temas -->
+    <a href="temes.html" class="back-btn boto-rosa">← Tornar als temes</a>
+
     <div class="container center">
       <h2>Modalitats</h2>
       <form id="modalitatsForm">
@@ -113,7 +146,7 @@
         </div>
         
         <div class="actions">
-          <button type="submit">Començar</button>
+          <button type="submit" class="boto-rosa">Començar</button>
         </div>
         <div id="error" class="error" style="display:none;"></div>
       </form>

@@ -22,7 +22,6 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      position: relative;
     }
 
     h1 {
@@ -32,10 +31,9 @@
       margin-top: 0;
       letter-spacing: 1px;
       line-height: 1.15;
-      color: #fff; /* BLANCO PURO */
-      background: none;
-      -webkit-background-clip: initial;
-      -webkit-text-fill-color: initial;
+      background: linear-gradient(90deg, #ff4081 20%, #e0aaff 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 6px #0009;
     }
 
@@ -104,20 +102,21 @@
 <body>
   <h1>Un viatge musical i dansat</h1>
   <div class="subtitle">Benvingut/da! Prepara't per començar el teu viatge musical.</div>
+  <button id="comencarBtn" type="button">Començar</button>
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
-<button id="comencarBtn" type="button">Començar</button>
-<script>
-document.getElementById('comencarBtn').addEventListener('click', 
-  function() {
-  const musica = document.getElementById('musicaFondo');
-  musica.volume = 0.4;
-  musica.play().then(() => {
-    localStorage.setItem('musicaFondoON', 'si');
-    window.location.href = 'login.html';
-  }).catch(() => {
-    localStorage.setItem('musicaFondoON', 'si');
-    window.location.href = 'login.html';
-  });
-});
-</script></body>
+  <div class="autora">Candelaria Pont Miró</div>
+  <script>
+    document.getElementById('comencarBtn').addEventListener('click', function() {
+      const musica = document.getElementById('musicaFondo');
+      musica.volume = 0.4;
+      musica.play().then(() => {
+        localStorage.setItem('musicaFondoON', 'si');
+        window.location.href = 'login.html';
+      }).catch(() => {
+        localStorage.setItem('musicaFondoON', 'si');
+        window.location.href = 'login.html';
+      });
+    });
+  </script>
+</body>
 </html>

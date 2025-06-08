@@ -77,3 +77,18 @@ function jugarModalitat(modalitat) {
   // Ejemplo:
   window.location.href = `joc.html?tema=${currentTema}&modalitat=${modalitat}`;
 }
+
+// Música de fondo: recuperar posición y play/pause según ON/OFF
+window.addEventListener("DOMContentLoaded", () => {
+  const musica = document.getElementById('musicaFondo');
+  const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
+  if (!isNaN(tiempo)) {
+    musica.currentTime = tiempo;
+  }
+  if (localStorage.getItem('musicaFondoON') === 'si') {
+    musica.volume = 0.4;
+    musica.play().catch(()=>{});
+  } else {
+    musica.pause();
+  }
+});

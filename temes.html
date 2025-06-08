@@ -5,8 +5,125 @@
   <title>Selecció de Temes - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
+  <link rel="stylesheet" href="temes.css">
+  <style>
+    #jugadorInfo {
+      position: fixed;
+      top: 1.2em;
+      right: 2em;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      z-index: 150;
+    }
+    #jugadorInfo button {
+      padding: 0.4em 1.1em;
+      font-size: 1.01em;
+      background: #ff4081;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      margin-left: 0.2em;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.2s, transform 0.18s;
+    }
+    #jugadorInfo button:hover {
+      background: #ff79a7;
+      transform: scale(1.07);
+    }
+    @media (max-width: 600px) {
+      #jugadorInfo {
+        font-size: 0.93em;
+        top: 0.9em;
+        right: 1em;
+      }
+      #jugadorInfo button {
+        font-size: 0.98em;
+        padding: 0.33em 1em;
+      }
+    }
+    .temes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.1em;
+      margin: 2.2em 0;
+    }
+    .tema-option {
+      background: #222244;
+      border-radius: 13px;
+      padding: 1.3em 1.5em 1.1em 1.6em;
+      box-shadow: 0 2px 8px #0002;
+      font-size: 1.13em;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.17s, transform 0.13s;
+      border: 2px solid transparent;
+      font-weight: 500;
+      min-height: 70px;
+    }
+    .tema-option:hover,
+    .tema-option:focus-within {
+      background: #2a2a5a;
+      border-color: #ffd600;
+      transform: scale(1.03);
+    }
+    .tema-option input[type="checkbox"] {
+      position: absolute;
+      left: 1.1em;
+      top: 1.1em;
+      accent-color: #ffd600;
+      width: 1.2em;
+      height: 1.2em;
+      margin-right: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .logros {
+      display: flex;
+      gap: 0.4em;
+      margin-top: 0.7em;
+      margin-left: 0.1em;
+    }
+    .estrella {
+      width: 1.32em;
+      height: 1.32em;
+      border-radius: 50%;
+      display: inline-block;
+      background: #ccc;
+      position: relative;
+      transition: background 0.18s;
+    }
+    .estrella.gris { background: #ccc; }
+    .estrella.amarillo { background: #ffd600; }
+    .estrella.verde { background: #38c172; }
+    .estrella::after {
+      content: '';
+      display: block;
+      width: 0.4em;
+      height: 0.4em;
+      left: 0.43em;
+      top: 0.43em;
+      border-radius: 50%;
+      position: absolute;
+      background: transparent;
+    }
+    .estrella.amarillo::after { background: #ffd600; }
+    .estrella.verde::after { background: #38c172; }
+    .estrella.gris::after { background: #ccc; }
+    @media (max-width: 700px) {
+      .temes-grid {
+        grid-template-columns: 1fr;
+      }
+      .tema-option {
+        font-size: 1.03em;
+      }
+    }
+  </style>
+</head>
 <body>
-  <div id="userEmail" class="user-email"></div>
   <div id="jugadorInfo" style="display:none;"></div>
   <div class="container center">
     <h2>Selecciona els temes</h2>
@@ -122,23 +239,16 @@
         </label>
       </div>
       <div class="actions">
-        <button type="button" onclick="continuar()">Continuar</button>
-        <button type="button" onclick="logout()" style="background:#563889;">Sortir</button>
+        <button type="button" class="boto-rosa" onclick="continuar()">Continuar</button>
       </div>
     </form>
     <div id="error" class="error" style="display:none;"></div>
   </div>
-  <!-- Firebase scripts y JS global -->
+  <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="main.js"></script>
   <script src="temes.js"></script>
-
-  <script>
-  // Mostrar el email del usuario logueado en la esquina superior derecha
-  if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
-  </script>  
-
 </body>
 </html>

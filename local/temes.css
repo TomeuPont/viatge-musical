@@ -1,98 +1,102 @@
 .actions {
-    display: flex;
-    justify-content: center;
-    gap: 1.5em;
-    margin-top: 2em;
-    margin-bottom: 1em;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+}
+.boto-rosa {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #ff4081;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 18px 0 #0005;
+  letter-spacing: 0.5px;
+  outline: none;
+  margin: 0.5em 0;
+  text-decoration: none;
+  display: inline-block;
+}
+.boto-rosa:hover {
+  background-color: #ff79a7;
+  transform: scale(1.06);
+  color: #fff;
+}
+button {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #ff4081;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 18px 0 #0005;
+  letter-spacing: 0.5px;
+  outline: none;
+  margin: 0.5em 0;
+  text-decoration: none;
+  display: inline-block;
+}
+button:hover {
+  background-color: #ff79a7;
+  transform: scale(1.06);
+  color: #fff;
+}
+/* Bloque usuario arriba derecha (solo uno es suficiente) */
+#jugadorInfo {
+  position: fixed;
+  top: 1.2em;
+  right: 2em;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  z-index: 150;
+}
+#jugadorInfo button {
+  padding: 0.4em 1.1em;
+  font-size: 1.01em;
+  background: #ff4081;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  margin-left: 0.2em;
+  box-shadow: 0 2px 8px #0002;
+  transition: background 0.2s, transform 0.18s;
+}
+#jugadorInfo button:hover {
+  background: #ff79a7;
+  transform: scale(1.07);
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column;
+    gap: 0.7em;
   }
   .boto-rosa, button {
-    padding: 1rem 2.5rem;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 12px;
-    background-color: #ff4081;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s;
-    box-shadow: 0 4px 18px 0 #0005;
-    letter-spacing: 0.5px;
-    outline: none;
-    margin: 0.5em 0;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .boto-rosa:hover, button:hover {
-    background-color: #ff79a7;
-    transform: scale(1.06);
-    color: #fff;
-  }
-  .user-email {
-    position: fixed;
-    top: 1.2em;
-    right: 2em;
-    color: #fff;
-    font-size: 1.06em;
-    opacity: 0.9;
-    background: rgba(34, 34, 68, 0.92);
-    padding: 0.5em 1em;
-    border-radius: 11px;
-    z-index: 100;
-    box-shadow: 0 2px 9px #0004;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    user-select: text;
-    max-width: 88vw;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    width: 100%;
+    min-width: 0;
   }
   #jugadorInfo {
-    position: fixed;
-    top: 1.2em;
-    right: 2em;
-    display: flex;
-    align-items: center;
-    gap: 0.7em;
-    z-index: 150;
+    font-size: 0.99em;
+    top: 0.9em;
+    right: 1em;
+    padding: 0.4em 0.8em;
+    max-width: 96vw;
   }
   #jugadorInfo button {
-    padding: 0.4em 1.1em;
-    font-size: 1.01em;
-    background: #ff4081;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: 600;
-    border: none;
-    margin-left: 0.2em;
-    box-shadow: 0 2px 8px #0002;
-    transition: background 0.2s, transform 0.18s;
+    font-size: 0.98em;
+    padding: 0.33em 1em;
   }
-  #jugadorInfo button:hover {
-    background: #ff79a7;
-    transform: scale(1.07);
-  }
-  @media (max-width: 600px) {
-    .actions {
-      flex-direction: column;
-      gap: 0.7em;
-    }
-    .boto-rosa, button {
-      padding: 0.8rem 1.2rem;
-      font-size: 1rem;
-      width: 100%;
-      min-width: 0;
-    }
-    .user-email, #jugadorInfo {
-      font-size: 0.99em;
-      top: 0.9em;
-      right: 1em;
-      padding: 0.4em 0.8em;
-      max-width: 96vw;
-    }
-    #jugadorInfo button {
-      font-size: 0.98em;
-      padding: 0.33em 1em;
-    }
-  }
+}

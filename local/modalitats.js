@@ -1,3 +1,7 @@
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof initUserInfo === "function") initUserInfo();
+});
+
 // Extrae el tema de la URL (aunque aquí no se usa, se mantiene por estructura)
 function getTemaFromURL() {
   const params = new URLSearchParams(window.location.search);

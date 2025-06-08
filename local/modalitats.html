@@ -141,6 +141,7 @@
   </div>
   <div class="main-content">
     <div id="userEmail" class="user-email"></div>
+    <div id="jugadorInfo" style="display:none;"></div>
     <div class="container center">
       <h2>Modalitats</h2>
       <form id="modalitatsForm">
@@ -165,98 +166,12 @@
       </form>
     </div>
   </div>
-  <!-- Scripts Firebase y tus JS -->
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
-  <script src="modalitats.js"></script>  
+  <!-- Scripts Firebase y tus JS -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="main.js"></script>
-  
-  <script>
-    // Nombres de los temas (el mismo orden que en temes.html)
-    const nomsTemes = [
-      "Música de l’antiguitat",
-      "Música Medieval",
-      "Música del Renaixement",
-      "Música del Barroc",
-      "Música del Classicisme",
-      "Música del Romanticisme",
-      "Música del segle XX i últimes tendències",
-      "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
-      "Música de pel·lícules i musicals",
-      "Músiques i danses tradicionals del món",
-      "Músiques i danses tradicionals de les Illes Balears",
-      "Història de la dansa"
-    ];
-
-    // Devuelve la clase de la estrella según el estado
-    function estrellaClase(estado) {
-      if (estado === "perfecta") return "star green";
-      if (estado === "fallos") return "star yellow";
-      return "star";
-    }
-
-    // Devuelve el HTML SVG de la estrella
-    function estrellaSVG(clase) {
-      return `<span class="${clase}">
-        <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-0.15em">
-          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-        </svg>
-      </span>`;
-    }
-
-    // Genera las 3 estrellas para cada tema
-    function pintarEstrellasModalidades(estados) {
-      const arr = [
-        estados.teoria ?? null,
-        estados.terminologia ?? null,
-        estados.audicions ?? null
-      ];
-      return `<span class="stars">` +
-        arr.map(estado => estrellaSVG(estrellaClase(estado))).join('') +
-        `</span>`;
-    }
-
-    function mostrarTemesSeleccionats() {
-      let temes = [];
-      try {
-        temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
-      } catch(e) {}
-      const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
-      const ul = document.getElementById("temesSeleccionats");
-     ul.innerHTML = temes.map(idx => {
-        const temaNom = nomsTemes[parseInt(idx,10)-1];
-        const estados = estrelles[idx] || {};
-        return `<li class="tema-row">
-          <span class="tema-nom">${temaNom}</span>
-          ${pintarEstrellasModalidades(estados)}
-      </li>`;
-    }).join('');
-    }
-
-    window.addEventListener('DOMContentLoaded', function() {
-      mostrarTemesSeleccionats();
-      if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
-
-      // Manejar el envío del formulario para varias modalidades
-      document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
-        const errorDiv = document.getElementById('error');
-        if (checkboxes.length === 0) {
-          errorDiv.textContent = 'Per favor, selecciona almenys una modalitat per continuar.';
-          errorDiv.style.display = 'block';
-          return;
-        }
-        errorDiv.style.display = 'none';
-        const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
-        // Guarda las modalidades seleccionadas en localStorage
-        localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
-        // Redirige a la siguiente página o acción
-        window.location.href = 'joc.html';
-      });
-    });
-  </script>
+  <script src="modalitats.js"></script>
 </body>
 </html>

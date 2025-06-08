@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Joc – Viatge Musical</title>
+  <link rel="stylesheet" href="estils.css">
   <style>
     body {
       margin: 0;
@@ -80,225 +81,59 @@
       font-size: 0.9em;
       font-weight: bold;
     }
+    #jugadorInfo {
+      position: fixed;
+      top: 1.2em;
+      right: 2em;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      z-index: 150;
+    }
+    #jugadorInfo button {
+      padding: 0.4em 1.1em;
+      font-size: 1.01em;
+      background: #ff4081;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      margin-left: 0.2em;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.2s, transform 0.18s;
+    }
+    #jugadorInfo button:hover {
+      background: #ff79a7;
+      transform: scale(1.07);
+    }
+    @media (max-width: 600px) {
+      #jugadorInfo {
+        font-size: 0.93em;
+        top: 0.9em;
+        right: 1em;
+      }
+      #jugadorInfo button {
+        font-size: 0.98em;
+        padding: 0.33em 1em;
+      }
+    }
   </style>
 </head>
 <body>
+  <div id="jugadorInfo" style="display:none;"></div>
   <div class="question-container" id="qcontainer">
     <div id="modalitat-badge"></div>
     <h2 id="tema"></h2>
     <p id="pregunta"></p>
     <div class="options" id="opcions"></div>
     <div id="feedback" class="feedback"></div>
-    <button class="next-button" id="nextBtn" onclick="seguentPregunta()">Següent pregunta</button>
+    <button class="next-button" id="nextBtn">Següent pregunta</button>
   </div>
-  <script>
-    const MODALITAT_ARXIU = {
-      "teoria": "preguntes_teoria.json",
-      "terminologia": "preguntes_terminologia.json",
-      "audicions": "preguntes_audicions.json"
-    };
-
-    // Lee temas y modalidades seleccionadas
-    let temesSeleccionats = [];
-    let modalitatsSeleccionades = [];
-    try {
-      temesSeleccionats = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
-      modalitatsSeleccionades = JSON.parse(localStorage.getItem('modalitatsSeleccionades') || "[]");
-    } catch(e) {
-      temesSeleccionats = [];
-      modalitatsSeleccionades = [];
-    }
-    // Convierte todos los ids de tema seleccionados a string para comparación robusta
-    temesSeleccionats = temesSeleccionats.map(x => String(x));
-
-    if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
-      document.getElementById("qcontainer").innerHTML = `
-        <div class="no-questions">
-          <p>❗ No s'han seleccionat temes o modalitats.</p>
-          <p>Si us plau, torna a la pàgina anterior i fes la selecció.</p>
-        </div>
-      `;
-    } else {
-      Promise.all(
-        modalitatsSeleccionades
-          .map(m => ({modalitat: m, path: MODALITAT_ARXIU[m]}))
-          .filter(obj => !!obj.path)
-          .map(obj =>
-            fetch(obj.path)
-              .then(r => {
-                if (!r.ok) throw new Error(`Error carregant ${obj.path}`);
-                return r.json().then(data => ({modalitat: obj.modalitat, data}));
-              })
-          )
-      )
-      .then(results => {
-        let preguntesPlanas = [];
-        results.forEach(({modalitat, data}) => {
-          if (!data.preguntes) return;
-          // Filtra temas por id (como string)
-          data.preguntes
-            .filter(temaObj => temesSeleccionats.includes(String(temaObj.id)))
-            .forEach(temaObj => {
-              if (Array.isArray(temaObj.preguntes)) {
-                temaObj.preguntes.forEach(p => {
-                  preguntesPlanas.push({
-                    tema: temaObj.tema,
-                    modalitat: data.modalitat || modalitat,
-                    titol: p.titol,
-                    pregunta: p.pregunta,
-                    opcions: p.opcions,
-                    resposta_correcta: p.resposta_correcta,
-                    audio: p.audio || null
-                  });
-                });
-              }
-            });
-        });
-
-        if (!preguntesPlanas.length) {
-          document.getElementById("qcontainer").innerHTML = `
-            <div class="no-questions">
-              <p>❗ No hi ha pregunte per aquesta selecció de temes i modalitats.</p>
-              <p>Si us plau, torna enrere i selecciona altres opcions.</p>
-            </div>
-          `;
-          return;
-        }
-
-        shuffleArray(preguntesPlanas);
-        preguntesPlanas = preguntesPlanas.map(p => {
-          const opcions = [...p.opcions];
-          let idxCorrecta = -1;
-          if (typeof p.resposta_correcta === "number") {
-            idxCorrecta = p.resposta_correcta;
-          } else if (typeof p.resposta_correcta === "string") {
-            const lletra = p.resposta_correcta.trim().toLowerCase();
-            const codis = { a: 0, b: 1, c: 2, d: 3 };
-            idxCorrecta = codis[lletra];
-          }
-          if (idxCorrecta === undefined && !isNaN(p.resposta_correcta)) {
-            idxCorrecta = parseInt(p.resposta_correcta, 10);
-          }
-          if (typeof idxCorrecta !== "number" || idxCorrecta < 0 || idxCorrecta >= opcions.length) {
-            idxCorrecta = 0;
-          }
-          const respostaCorrecta = opcions[idxCorrecta];
-          shuffleArray(opcions);
-          return {
-            tema: p.tema,
-            modalitat: p.modalitat,
-            titol: p.titol,
-            pregunta: p.pregunta,
-            opcions: opcions,
-            correcta: opcions.indexOf(respostaCorrecta),
-            audio: p.audio || null
-          };
-        });
-
-        let index = 0;
-        let encerts = 0;
-        let errors = 0;
-        let respostaMostrada = false;
-
-        function shuffleArray(array) {
-          for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-          }
-        }
-
-        function carregarPregunta() {
-          if (!preguntesPlanas[index]) {
-            document.getElementById("qcontainer").innerHTML = `
-              <div class="no-questions">
-                <p>❗ No hi ha més preguntes.</p>
-              </div>
-            `;
-            return;
-          }
-          const actual = preguntesPlanas[index];
-          document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
-          document.getElementById("tema").textContent = actual.tema || '';
-          document.getElementById("pregunta").innerHTML = "Pregunta: " + (actual.pregunta || '');
-          if (actual.audio) {
-            document.getElementById("pregunta").innerHTML += `<br/><audio controls src="${actual.audio}" style="margin-top:1em"></audio>`;
-          }
-          document.getElementById("opcions").innerHTML = "";
-          document.getElementById("feedback").textContent = "";
-          respostaMostrada = false;
-
-          actual.opcions.forEach((opcio, i) => {
-            const boto = document.createElement("button");
-            boto.className = "option-button";
-            boto.textContent = opcio;
-            boto.onclick = () => comprovarResposta(i);
-            document.getElementById("opcions").appendChild(boto);
-          });
-
-          document.getElementById("nextBtn").style.display = "block";
-        }
-
-        function capitalitza(text) {
-          return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
-        }
-
-        function comprovarResposta(seleccio) {
-          if (respostaMostrada) return;
-          respostaMostrada = true;
-          const correcta = preguntesPlanas[index].correcta;
-          const feedback = document.getElementById("feedback");
-          if (seleccio === correcta) {
-            feedback.textContent = "✅ Correcte!";
-            feedback.style.color = "#00ff88";
-            encerts++;
-          } else {
-            feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntesPlanas[index].opcions[correcta];
-            feedback.style.color = "#ff8888";
-            errors++;
-          }
-        }
-
-        window.seguentPregunta = function() {
-          if (index < preguntesPlanas.length - 1) {
-            index++;
-            carregarPregunta();
-          } else {
-            document.getElementById("qcontainer").innerHTML = `
-              <h2>Has completat totes les preguntes! 🎉</h2>
-              <p>✅ Correctes: ${encerts}</p>
-              <p>❌ Incorrectes: ${errors}</p>
-              <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
-            `;
-          }
-        };
-
-        carregarPregunta();
-      })
-      .catch(err => {
-        document.getElementById("qcontainer").innerHTML = `
-          <div class="no-questions">
-            <p>❗ Error carregant preguntes: ${err.message}</p>
-          </div>
-        `;
-      });
-    }
-  </script>
-
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  const musica = document.getElementById('musicaFondo');
-  if (localStorage.getItem('musicaFondoON') === 'si') {
-    musica.volume = 0.4;
-    musica.play().catch(()=>{});
-  }
-});
-function pausarMusicaFondo() {
-  document.getElementById("musicaFondo").pause();
-}
-function reanudarMusicaFondo() {
-  document.getElementById("musicaFondo").play();
-}
-</script>  
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="main.js"></script>
+  <script src="joc.js"></script>
 </body>
 </html>

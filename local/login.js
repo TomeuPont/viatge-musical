@@ -1,49 +1,67 @@
-// Muestra usuario modular si está logueado (normalmente en login estará oculto)
+// Asegúrate de tener los scripts de Firebase en tu HTML antes de este archivo
+
+// Modular: Muestra usuario y botón Sortir si ya está logueado (con Google u otro método)
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
-// Login tradicional
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
+// Iniciar sesión
+function login() {
+  const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
-  const errorDiv = document.getElementById('loginError');
+  const errorDiv = document.getElementById('error');
   errorDiv.style.display = 'none';
-  try {
-    await firebase.auth().signInWithEmailAndPassword(email, password);
-    window.location.href = 'temes.html';
-  } catch (error) {
-    errorDiv.textContent = error.message;
-    errorDiv.style.display = 'block';
-  }
-});
 
-// Login con Google
-document.getElementById('googleLogin').addEventListener('click', async function() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  const errorDiv = document.getElementById('loginError');
+  if (!email || !password) {
+    errorDiv.textContent = "Introdueix el correu i la contrasenya.";
+    errorDiv.style.display = 'block';
+    return;
+  }
+
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+      window.location.href = "temes.html";
+    })
+    .catch(error => {
+      errorDiv.textContent = tradueixError(error);
+      errorDiv.style.display = 'block';
+    });
+}
+
+// Registrar nuevo usuario
+function register() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const errorDiv = document.getElementById('error');
   errorDiv.style.display = 'none';
-  try {
-    await firebase.auth().signInWithPopup(provider);
-    window.location.href = 'temes.html';
-  } catch (error) {
-    errorDiv.textContent = error.message;
-    errorDiv.style.display = 'block';
-  }
-});
 
-// Música de fondo
-window.addEventListener("DOMContentLoaded", () => {
-  const musica = document.getElementById('musicaFondo');
-  const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
-  if (!isNaN(tiempo)) {
-    musica.currentTime = tiempo;
+  if (!email || !password) {
+    errorDiv.textContent = "Introdueix el correu i la contrasenya.";
+    errorDiv.style.display = 'block';
+    return;
   }
-  if (localStorage.getItem('musicaFondoON') === 'si') {
-    musica.volume = 0.4;
-    musica.play().catch(()=>{});
-  } else {
-    musica.pause();
+  if (password.length < 6) {
+    errorDiv.textContent = "La contrasenya ha de tenir almenys 6 caràcters.";
+    errorDiv.style.display = 'block';
+    return;
   }
-});
+
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      window.location.href = "temes.html";
+    })
+    .catch(error => {
+      errorDiv.textContent = tradueixError(error);
+      errorDiv.style.display = 'block';
+    });
+}
+
+// Traduce errores comunes de Firebase a catalán/castellano
+function tradueixError(error) {
+  if (error.code === "auth/user-not-found") return "No existeix aquest usuari.";
+  if (error.code === "auth/wrong-password") return "Contrasenya incorrecta.";
+  if (error.code === "auth/email-already-in-use") return "Aquest correu ja està registrat.";
+  if (error.code === "auth/invalid-email") return "El correu electrònic no és vàlid.";
+  if (error.code === "auth/too-many-requests") return "Massa intents. Espera uns minuts i torna-ho a provar.";
+  return "Error: " + (error.message || error.code);
+}

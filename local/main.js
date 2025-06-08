@@ -6,7 +6,8 @@ const firebaseConfig = {
   projectId: "viatge-musical",
   storageBucket: "viatge-musical.firebasestorage.app",
   messagingSenderId: "275074430816",
-  appId: "1:275074430816:web:7a305c8c3ab5a423885005"};
+  appId: "1:275074430816:web:7a305c8c3ab5a423885005"
+};
 
 // Inicializa Firebase solo si no estaba inicializado
 if (!firebase.apps.length) {
@@ -18,7 +19,7 @@ const db = firebase.firestore();
 
 // ==================== AUTENTICACIÓN ====================
 
-// Comprueba si el usuario está autenticado, si no lo está redirige a login
+// Devuelve una promesa con el usuario autenticado, o null si no hay
 function isUserAuthenticated(redirect = true) {
   return new Promise(resolve => {
     firebase.auth().onAuthStateChanged(user => {
@@ -27,6 +28,25 @@ function isUserAuthenticated(redirect = true) {
       }
       resolve(user);
     });
+  });
+}
+
+// Muestra el correo y el botón sortir en el div #jugadorInfo (arriba derecha)
+function initUserInfo() {
+  const jugadorInfo = document.getElementById('jugadorInfo');
+  if (!jugadorInfo) return; // No hay div, no hacemos nada
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      jugadorInfo.style.display = 'flex';
+      let nomJugador = user.displayName ? user.displayName : user.email;
+      jugadorInfo.innerHTML = `👤 ${nomJugador}
+        <button id="logoutBtn" onclick="logout()">Sortir</button>`;
+      localStorage.setItem('jugador', nomJugador);
+    } else {
+      jugadorInfo.style.display = 'none';
+      localStorage.removeItem('jugador');
+      window.location.href = "login.html";
+    }
   });
 }
 
@@ -52,7 +72,6 @@ async function getLogros(uid) {
 
 // Guarda el estado de un logro individual (tema, modalidad: estado)
 async function setLogro(uid, tema, modalidad, estado) {
-  const field = `tema${tema}.${modalidad}`;
   try {
     await db.collection("logros").doc(uid).set({
       [`tema${tema}`]: { [modalidad]: estado }
@@ -75,8 +94,7 @@ async function setLogros(uid, tema, logrosTema) {
 
 // ==================== UTILIDADES DE INTERFAZ ====================
 
-// Muestra datos del usuario logueado (ejemplo para encabezado)
-
+// Muestra el email del usuario en el div #userEmail (solo si existe ese div)
 function mostrarInfoUsuario() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -92,5 +110,5 @@ function mostrarInfoUsuario() {
 // ==================== EXPORTA FUNCIONES SI HACE FALTA ====================
 /*
 // Si usas módulos:
-// export { isUserAuthenticated, logout, getLogros, setLogro, setLogros, mostrarInfoUsuario };
+// export { isUserAuthenticated, logout, getLogros, setLogro, setLogros, mostrarInfoUsuario, initUserInfo };
 */

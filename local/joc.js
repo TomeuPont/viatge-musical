@@ -1,4 +1,4 @@
-// === Música de fondo: guardar y restaurar tiempo ===
+// Música de fondo: guardar y restaurar tiempo
 window.addEventListener("DOMContentLoaded", () => {
   const musica = document.getElementById('musicaFondo');
   // Restaurar posición
@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// === Mostrar info usuario (correo/botón sortir) ===
+// Mostrar usuario y botón sortir
 isUserAuthenticated(async function(isAuth, user) {
   const jugadorInfo = document.getElementById('jugadorInfo');
   if (isAuth) {
@@ -36,7 +36,7 @@ isUserAuthenticated(async function(isAuth, user) {
   }
 });
 
-// === LÓGICA DEL JUEGO (idéntica a tu versión anterior, modularizada) ===
+// --- Lógica de preguntas ---
 const MODALITAT_ARXIU = {
   "teoria": "preguntes_teoria.json",
   "terminologia": "preguntes_terminologia.json",
@@ -65,16 +65,17 @@ function capitalitza(text) {
   return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
 }
 
-if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
     document.getElementById("qcontainer").innerHTML = `
       <div class="no-questions">
         <p>❗ No s'han seleccionat temes o modalitats.</p>
         <p>Si us plau, torna a la pàgina anterior i fes la selecció.</p>
       </div>
     `;
-  });
-} else {
+    return;
+  }
+
   Promise.all(
     modalitatsSeleccionades
       .map(m => ({modalitat: m, path: MODALITAT_ARXIU[m]}))
@@ -216,15 +217,9 @@ if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
       }
     }
 
-    // Vincula el botó de següent pregunta
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("nextBtn").onclick = seguentPregunta;
-    });
+    document.getElementById("nextBtn").onclick = seguentPregunta;
 
-    // Fes accessible la funció per si es crida des de HTML legacy
-    window.seguentPregunta = seguentPregunta;
-
-    document.addEventListener("DOMContentLoaded", carregarPregunta);
+    carregarPregunta();
   })
   .catch(err => {
     document.getElementById("qcontainer").innerHTML = `
@@ -233,4 +228,4 @@ if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
       </div>
     `;
   });
-}
+});

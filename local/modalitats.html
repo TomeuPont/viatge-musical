@@ -133,7 +133,6 @@
     }
   </style>
 </head>
-<audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>  
 <body>
   <!-- Panel lateral para mostrar temas seleccionados y estrellas -->
   <div class="side-panel">
@@ -167,10 +166,13 @@
     </div>
   </div>
   <!-- Scripts Firebase y tus JS -->
+  <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+  <script src="modalitats.js"></script>  
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="main.js"></script>
+  
   <script>
     // Nombres de los temas (el mismo orden que en temes.html)
     const nomsTemes = [

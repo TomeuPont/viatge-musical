@@ -1,24 +1,6 @@
+// Muestra el usuario y el botón "Sortir" arriba a la derecha de forma modular
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
-});
-
-// Mostrar nombre del jugador y proteger acceso (puedes mover esto a main.js si lo usas en más pantallas)
-isUserAuthenticated(async function(isAuth, user) {
-  const jugadorInfo = document.getElementById('jugadorInfo');
-  if (isAuth) {
-    jugadorInfo.style.display = 'flex';
-    let nomJugador = user.displayName ? user.displayName : user.email;
-    jugadorInfo.innerHTML = `👤 ${nomJugador}
-      <button id="logoutBtn" onclick="logout()">Sortir</button>`;
-    localStorage.setItem('jugador', nomJugador);
-
-    // Cargar logros y pintar estrellas
-    await mostrarLogros(user.uid);
-  } else {
-    jugadorInfo.style.display = 'none';
-    localStorage.removeItem('jugador');
-    window.location.href = "login.html";
-  }
 });
 
 // Mostrar estrellas de logros según Firestore
@@ -40,7 +22,7 @@ async function mostrarLogros(uid) {
   });
 }
 
-// Guardar el tiempo de la música antes de cambiar de página
+// Guardar el tiempo de la música antes de cambiar de página y continuar flujo
 function continuar() {
   const musica = document.getElementById('musicaFondo');
   if (musica && !musica.paused) {
@@ -74,16 +56,17 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     musica.pause();
   }
-  // Mostrar email usuario arriba a la derecha (con Firebase)
-  if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
-  else if (window.firebase && firebase.auth) {
-    firebase.auth().onAuthStateChanged(function(user) {
-      const div = document.getElementById('userEmail');
-      if (user && user.email) {
-        div.textContent = user.email;
-        div.style.display = 'block';
+});
+
+// Proteger acceso y cargar logros
+window.addEventListener("DOMContentLoaded", () => {
+  if (typeof isUserAuthenticated === "function") {
+    isUserAuthenticated().then(user => {
+      if (user) {
+        // Cargar logros y pintar estrellas
+        mostrarLogros(user.uid);
       } else {
-        div.style.display = 'none';
+        window.location.href = "login.html";
       }
     });
   }

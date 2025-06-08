@@ -131,9 +131,47 @@
         min-width: 0;
       }
     }
+    /* Estilos para jugadorInfo arriba a la derecha */
+    #jugadorInfo {
+      position: fixed;
+      top: 1.2em;
+      right: 2em;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      z-index: 150;
+    }
+    #jugadorInfo button {
+      padding: 0.4em 1.1em;
+      font-size: 1.01em;
+      background: #ff4081;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      margin-left: 0.2em;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.2s, transform 0.18s;
+    }
+    #jugadorInfo button:hover {
+      background: #ff79a7;
+      transform: scale(1.07);
+    }
+    @media (max-width: 600px) {
+      #jugadorInfo {
+        font-size: 0.93em;
+        top: 0.9em;
+        right: 1em;
+      }
+      #jugadorInfo button {
+        font-size: 0.98em;
+        padding: 0.33em 1em;
+      }
+    }
   </style>
 </head>
 <body>
+  <div id="jugadorInfo" style="display:none;"></div>
   <!-- Panel lateral para mostrar temas seleccionados y estrellas -->
   <div class="side-panel">
     <h3>Temes seleccionats</h3>
@@ -141,7 +179,6 @@
   </div>
   <div class="main-content">
     <div id="userEmail" class="user-email"></div>
-    <div id="jugadorInfo" style="display:none;"></div>
     <div class="container center">
       <h2>Modalitats</h2>
       <form id="modalitatsForm">

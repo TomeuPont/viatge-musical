@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inicia sessió - Un viatge musical i dansat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="estils.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div id="userEmail" class="user-email" style="display:none"></div>
+  <div id="jugadorInfo" style="display:none;"></div>
+  <div class="container center">
+    <h2>Inicia sessió</h2>
+    <form id="loginForm" autocomplete="off">
+      <input type="email" id="email" placeholder="Correu electrònic" autocomplete="off" required/>
+      <input type="password" id="password" placeholder="Contrasenya" autocomplete="off" required/>
+      <div class="btn-row">
+        <button type="button" class="boto-rosa" onclick="login()">Entrar</button>
+        <button type="button" class="boto-rosa" onclick="register()">Registrar-se</button>
+      </div>
+      <div id="error" class="error" style="display:none;"></div>
+    </form>
+  </div>
+  <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="main.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

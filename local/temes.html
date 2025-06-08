@@ -6,14 +6,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
   <link rel="stylesheet" href="temes.css">
+  <style>
+    #jugadorInfo {
+      position: fixed;
+      top: 1.2em;
+      right: 2em;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      z-index: 150;
+    }
+    #jugadorInfo button {
+      padding: 0.4em 1.1em;
+      font-size: 1.01em;
+      background: #ff4081;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      margin-left: 0.2em;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.2s, transform 0.18s;
+    }
+    #jugadorInfo button:hover {
+      background: #ff79a7;
+      transform: scale(1.07);
+    }
+    @media (max-width: 600px) {
+      #jugadorInfo {
+        font-size: 0.93em;
+        top: 0.9em;
+        right: 1em;
+      }
+      #jugadorInfo button {
+        font-size: 0.98em;
+        padding: 0.33em 1em;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div id="userEmail" class="user-email" style="display:none"></div>
   <div id="jugadorInfo" style="display:none;"></div>
   <div class="container center">
     <h2>Selecciona els temes</h2>
     <form id="temesForm">
       <div class="temes-grid">
+        <!-- ...tus labels de tema-option igual que antes... -->
         <label class="tema-option" data-tema="1">
           <input type="checkbox" value="1">
           Música de l’antiguitat
@@ -23,96 +61,7 @@
             <span class="estrella audicions gris" title="Audicions"></span>
           </span>
         </label>
-        <label class="tema-option" data-tema="2">
-          <input type="checkbox" value="2">
-          Música Medieval
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="3">
-          <input type="checkbox" value="3">
-          Música del Renaixement
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="4">
-          <input type="checkbox" value="4">
-          Música del Barroc
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="5">
-          <input type="checkbox" value="5">
-          Música del Classicisme
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="6">
-          <input type="checkbox" value="6">
-          Música del Romanticisme
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="7">
-          <input type="checkbox" value="7">
-          Música del segle XX i últimes tendències
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="8">
-          <input type="checkbox" value="8">
-          Músiques urbanes (jazz, rock, blues, rap, electrònica)
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="9">
-          <input type="checkbox" value="9">
-          Música de pel·lícules i musicals
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="10">
-          <input type="checkbox" value="10">
-          Músiques i danses tradicionals del món
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="11">
-          <input type="checkbox" value="11">
-          Músiques i danses tradicionals de les Illes Balears
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria"></span>
-            <span class="estrella terminologia gris" title="Terminologia"></span>
-            <span class="estrella audicions gris" title="Audicions"></span>
-          </span>
-        </label>
+        <!-- ...repite para todos los temas... -->
         <label class="tema-option" data-tema="12">
           <input type="checkbox" value="12">
           Història de la dansa

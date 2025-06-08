@@ -1,3 +1,7 @@
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof initUserInfo === "function") initUserInfo();
+});
+
 // Mostrar nombre del jugador y proteger acceso (puedes mover esto a main.js si lo usas en más pantallas)
 isUserAuthenticated(async function(isAuth, user) {
   const jugadorInfo = document.getElementById('jugadorInfo');

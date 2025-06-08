@@ -1,13 +1,12 @@
-// Extrae el tema de la URL
+// Extrae el tema de la URL (aunque aquí no se usa, se mantiene por estructura)
 function getTemaFromURL() {
   const params = new URLSearchParams(window.location.search);
-  // Puede haber más de un tema en el query, coger el primero
   const temes = params.get('temes');
   if (!temes) return null;
   return temes.split(',')[0];
 }
 
-// Opcional: nombres de los temas para mostrar
+// Nombres de los temas para mostrar
 const nomsTemes = [
   "Música de l’antiguitat",
   "Música Medieval",
@@ -23,23 +22,35 @@ const nomsTemes = [
   "Història de la dansa"
 ];
 
+// Muestra los temas seleccionados y las estrellas/logros si están guardados
 function mostrarTemesSeleccionats() {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
+  const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
-  ul.innerHTML = temes.map(idx => `<li>${nomsTemes[parseInt(idx,10)-1]}</li>`).join('');
+  ul.innerHTML = temes.map(idx => {
+    const temaNom = nomsTemes[parseInt(idx,10)-1];
+    const estados = estrelles[idx] || {};
+    return `<li class="tema-row">
+      <span class="tema-nom">${temaNom}</span>
+      <span class="stars">
+        <span class="star ${estados.teoria === 'perfecta' ? 'green' : estados.teoria === 'fallos' ? 'yellow' : ''}"></span>
+        <span class="star ${estados.terminologia === 'perfecta' ? 'green' : estados.terminologia === 'fallos' ? 'yellow' : ''}"></span>
+        <span class="star ${estados.audicions === 'perfecta' ? 'green' : estados.audicions === 'fallos' ? 'yellow' : ''}"></span>
+      </span>
+    </li>`;
+  }).join('');
 }
 window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
 
-let currentTema = getTemaFromURL();
-if (currentTema && nomsTemes[currentTema]) {
-  document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("temaNom").textContent = nomsTemes[currentTema];
-  });
-}
+// Muestra el email/usuario (si tienes función global, úsala)
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
+});
 
+// Autenticación y mostrar info de usuario/logros (igual que otras pantallas)
 isUserAuthenticated(async function(isAuth, user) {
   const jugadorInfo = document.getElementById('jugadorInfo');
   if (isAuth) {
@@ -48,9 +59,6 @@ isUserAuthenticated(async function(isAuth, user) {
     jugadorInfo.innerHTML = `👤 ${nomJugador}
       <button id="logoutBtn" onclick="logout()">Sortir</button>`;
     localStorage.setItem('jugador', nomJugador);
-
-    // Cargar y mostrar logros de este tema
-    await mostrarLogrosModalitats(user.uid, currentTema);
   } else {
     jugadorInfo.style.display = 'none';
     localStorage.removeItem('jugador');
@@ -58,25 +66,23 @@ isUserAuthenticated(async function(isAuth, user) {
   }
 });
 
-// Muestra las estrellas de logro para cada modalidad
-async function mostrarLogrosModalitats(uid, tema) {
-  const logros = await getLogros(uid);
-  const logrosTema = (logros && logros[tema]) ? logros[tema] : {};
-  ['teoria','terminologia','audicions'].forEach(modalitat => {
-    const estrella = document.getElementById(`estrella-${modalitat}`);
-    if (!estrella) return;
-    const estado = logrosTema[modalitat] || 'gris';
-    estrella.classList.remove('gris','amarillo','verde');
-    estrella.classList.add(estado);
+// Controla el envío del formulario de modalidades
+window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
+    const errorDiv = document.getElementById('error');
+    if (checkboxes.length === 0) {
+      errorDiv.textContent = 'Per favor, selecciona almenys una modalitat per continuar.';
+      errorDiv.style.display = 'block';
+      return;
+    }
+    errorDiv.style.display = 'none';
+    const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
+    localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
+    window.location.href = 'joc.html';
   });
-}
-
-// Cuando el usuario pulsa "Jugar" en una modalidad
-function jugarModalitat(modalitat) {
-  // Aquí normalmente iría la navegación a la pantalla de juego de esa modalidad y tema
-  // Ejemplo:
-  window.location.href = `joc.html?tema=${currentTema}&modalitat=${modalitat}`;
-}
+});
 
 // Música de fondo: recuperar posición y play/pause según ON/OFF
 window.addEventListener("DOMContentLoaded", () => {

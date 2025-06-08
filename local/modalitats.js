@@ -81,6 +81,7 @@ function jugarModalitat(modalitat) {
 // Música de fondo: recuperar posición y play/pause según ON/OFF
 window.addEventListener("DOMContentLoaded", () => {
   const musica = document.getElementById('musicaFondo');
+  if (!musica) return;
   const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
   if (!isNaN(tiempo)) {
     musica.currentTime = tiempo;

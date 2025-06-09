@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initUserInfo();
 });
 
-// Música de fondo: guardar y restaurar tiempo
+// --- Música de fondo: guardar y restaurar tiempo ---
 window.addEventListener("DOMContentLoaded", () => {
   const musica = document.getElementById('musicaFondo');
   // Restaurar posición
@@ -23,6 +23,18 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// --- Funciones para silenciar y restaurar la música de fondo según modalidad ---
+function silenciarMusicaFondo() {
+  const musica = document.getElementById('musicaFondo');
+  if (musica) musica.volume = 0;
+}
+function restaurarMusicaFondo() {
+  const musica = document.getElementById('musicaFondo');
+  if (musica && localStorage.getItem('musicaFondoON') === 'si') {
+    musica.volume = 0.4;
+  }
+}
 
 // Mostrar usuario y botón sortir
 isUserAuthenticated(async function(isAuth, user) {
@@ -180,6 +192,13 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("feedback").textContent = "";
       respostaMostrada = false;
 
+      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA ---
+      if (actual.modalitat === "audicions") {
+        silenciarMusicaFondo();
+      } else if (actual.modalitat === "teoria" || actual.modalitat === "terminologia") {
+        restaurarMusicaFondo();
+      }
+
       actual.opcions.forEach((opcio, i) => {
         const boto = document.createElement("button");
         boto.className = "option-button";
@@ -218,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>❌ Incorrectes: ${errors}</p>
           <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
         `;
+        restaurarMusicaFondo(); // Por si terminamos en teoria o terminologia
       }
     }
 

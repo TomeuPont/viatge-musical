@@ -21,6 +21,11 @@ function login() {
 
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
+      // Guarda la posición de la música antes de cambiar de pantalla
+      const musica = document.getElementById('musicaFondo');
+      if (musica && !musica.paused) {
+        localStorage.setItem('musicaFondoTime', musica.currentTime);
+      }
       window.location.href = "temes.html";
     })
     .catch(error => {
@@ -49,6 +54,11 @@ function register() {
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(() => {
+      // Guarda la posición de la música antes de cambiar de pantalla
+      const musica = document.getElementById('musicaFondo');
+      if (musica && !musica.paused) {
+        localStorage.setItem('musicaFondoTime', musica.currentTime);
+      }
       window.location.href = "temes.html";
     })
     .catch(error => {

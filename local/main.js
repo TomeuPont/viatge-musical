@@ -20,6 +20,7 @@ const db = firebase.firestore();
 // ==================== AUTENTICACIÓN ====================
 
 // Devuelve una promesa con el usuario autenticado, o null si no hay
+// Debes llamar a esta función SOLO en páginas protegidas (no en login.html)
 function isUserAuthenticated(redirect = true) {
   return new Promise(resolve => {
     firebase.auth().onAuthStateChanged(user => {
@@ -32,6 +33,7 @@ function isUserAuthenticated(redirect = true) {
 }
 
 // Muestra el correo y el botón sortir en el div #jugadorInfo (arriba derecha)
+// ¡ATENCIÓN! Ya NO redirige a login.html si no hay usuario, solo oculta el div.
 function initUserInfo() {
   const jugadorInfo = document.getElementById('jugadorInfo');
   if (!jugadorInfo) return; // No hay div, no hacemos nada
@@ -45,7 +47,7 @@ function initUserInfo() {
     } else {
       jugadorInfo.style.display = 'none';
       localStorage.removeItem('jugador');
-      window.location.href = "login.html";
+      // NO redirigir aquí, evita el bucle infinito en login.html
     }
   });
 }

@@ -172,6 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let errors = 0;
     let respostaMostrada = false;
 
+    // ... (resto del código igual)
+
     function carregarPregunta() {
       if (!preguntesPlanas[index]) {
         document.getElementById("qcontainer").innerHTML = `
@@ -193,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
       respostaMostrada = false;
 
       // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA (corregido con robustez) ---
-      // Normaliza la modalidad a minúsculas y acepta cualquier variante de "audicio"/"audició"/"audicions"
       const mod = (actual.modalitat || "").toLowerCase();
       if (mod.includes("audicio")) {
         silenciarMusicaFondo();
@@ -201,16 +202,56 @@ document.addEventListener("DOMContentLoaded", () => {
         restaurarMusicaFondo();
       }
 
+      // Deshabilitar el botón "Següent pregunta" hasta responder
+      const nextBtn = document.getElementById("nextBtn");
+      nextBtn.disabled = true;
+      nextBtn.classList.add("disabled");
+
+      // Mensaje de error si intenta avanzar sin contestar
+      const missatgeError = document.createElement("div");
+      missatgeError.id = "missatge-error";
+      missatgeError.style.display = "none";
+      missatgeError.style.color = "#ff4081";
+      missatgeError.style.marginTop = "1em";
+      document.getElementById("qcontainer").appendChild(missatgeError);
+
+      function mostrarMissatgeError(missatge) {
+        missatgeError.textContent = missatge;
+        missatgeError.style.display = "block";
+      }
+      function amagarMissatgeError() {
+        missatgeError.textContent = "";
+        missatgeError.style.display = "none";
+      }
+
+      // Opciones de respuesta
       actual.opcions.forEach((opcio, i) => {
         const boto = document.createElement("button");
         boto.className = "option-button";
         boto.textContent = opcio;
-        boto.onclick = () => comprovarResposta(i);
+        boto.onclick = () => {
+          amagarMissatgeError();
+          comprovarResposta(i);
+          // Habilita el botón "Següent pregunta" solo cuando se responde
+          nextBtn.disabled = false;
+          nextBtn.classList.remove("disabled");
+        };
         document.getElementById("opcions").appendChild(boto);
       });
 
-      document.getElementById("nextBtn").style.display = "block";
+      nextBtn.onclick = () => {
+        if (!respostaMostrada) {
+          mostrarMissatgeError("Has de seleccionar una opció abans de continuar.");
+          return;
+        }
+        seguentPregunta();
+        amagarMissatgeError();
+      };
+      nextBtn.style.display = "block";
     }
+
+// ... (resto del código igual)
+    
 
     function comprovarResposta(seleccio) {
       if (respostaMostrada) return;

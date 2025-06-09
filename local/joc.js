@@ -192,10 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("feedback").textContent = "";
       respostaMostrada = false;
 
-      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA ---
-      if (actual.modalitat === "audicions") {
+      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA (corregido con robustez) ---
+      // Normaliza la modalidad a minúsculas y acepta cualquier variante de "audicio"/"audició"/"audicions"
+      const mod = (actual.modalitat || "").toLowerCase();
+      if (mod.includes("audicio")) {
         silenciarMusicaFondo();
-      } else if (actual.modalitat === "teoria" || actual.modalitat === "terminologia") {
+      } else if (mod.includes("teoria") || mod.includes("terminologia")) {
         restaurarMusicaFondo();
       }
 

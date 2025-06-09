@@ -107,8 +107,14 @@ function mostrarInfoUsuario() {
   });
 }
 
-// ==================== EXPORTA FUNCIONES SI HACE FALTA ====================
-/*
-// Si usas módulos:
-// export { isUserAuthenticated, logout, getLogros, setLogro, setLogros, mostrarInfoUsuario, initUserInfo };
-*/
+function silenciarMusicaFondo() {
+  const musica = document.getElementById('musicaFondo');
+  if (musica) musica.volume = 0; // O musica.pause();
+}
+
+function restaurarMusicaFondo() {
+  const musica = document.getElementById('musicaFondo');
+  if (musica && localStorage.getItem('musicaFondoON') === 'si') {
+    musica.volume = 0.4;
+  }
+}

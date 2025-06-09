@@ -32,7 +32,7 @@ function continuar() {
   const checkboxes = document.querySelectorAll('#temesForm input[type="checkbox"]:checked');
   const errorDiv = document.getElementById('error');
   if (checkboxes.length === 0) {
-    errorDiv.textContent = 'Per favor, selecciona almenys un tema per continuar.';
+    errorDiv.textContent = 'Per favor, selecciona almenys un apartat per continuar.';
     errorDiv.style.display = 'block';
     return;
   }

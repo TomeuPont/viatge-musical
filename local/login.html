@@ -100,18 +100,23 @@
   </div>
   <!-- Música de fondo (heredada de index.html si estaba activada) -->
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+
   <script>
-    // Reproduce la música sólo si se activó en la pantalla de inicio
-    window.addEventListener("DOMContentLoaded", () => {
-      const musica = document.getElementById('musicaFondo');
-      if (localStorage.getItem('musicaFondoON') === 'si') {
-        musica.volume = 0.4;
-        musica.play().catch(()=>{});
-      } else {
-        musica.pause();
-      }
-    });
-  </script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const musica = document.getElementById('musicaFondo');
+    const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
+    if (!isNaN(tiempo) && tiempo > 0) {
+      musica.currentTime = tiempo;
+    }
+    if (localStorage.getItem('musicaFondoON') === 'si') {
+      musica.volume = 0.4;
+      musica.play().catch(()=>{});
+    } else {
+      musica.pause();
+    }
+  });
+</script>
+  
   <!-- Scripts DEBEN ir en este orden -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

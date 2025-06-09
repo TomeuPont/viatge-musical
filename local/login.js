@@ -1,11 +1,12 @@
-// Asegúrate de tener los scripts de Firebase en tu HTML antes de este archivo
+// Código para gestionar el login y registro, y mostrar usuario modular arriba
 
-// Modular: Muestra usuario y botón Sortir si ya está logueado (con Google u otro método)
+// Modular: muestra usuario/correo y botón Sortir si ya está logueado.
+// NO redirige nunca a login.html si no hay usuario (para evitar bucle infinito).
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
-// Iniciar sesión
+// Login tradicional
 function login() {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
@@ -65,3 +66,9 @@ function tradueixError(error) {
   if (error.code === "auth/too-many-requests") return "Massa intents. Espera uns minuts i torna-ho a provar.";
   return "Error: " + (error.message || error.code);
 }
+
+// Si tienes este código en login.js NO LO USES (elimina o comenta si existe):
+// isUserAuthenticated(function(isAuth, user) {
+//   if (!isAuth) window.location.href = "login.html";
+// });
+// O cualquier otro listener que redirija a login.html si no hay usuario.

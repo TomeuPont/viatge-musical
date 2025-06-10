@@ -13,10 +13,10 @@ function getTemaFromURL() {
 // Nombres de los temas para mostrar
 const nomsTemes = [
   "Música de l’antiguitat",
-  "Música Medieval",
+  "Música medieval",
   "Música del Renaixement",
   "Música del Barroc",
-  "Música del Classicisme",
+  "Música del classicisme",
   "Música del Romanticisme",
   "Música del segle XX i últimes tendències",
   "Músiques urbanes (jazz, rock, blues, rap, electrònica)",

@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!preguntesPlanas.length) {
       document.getElementById("qcontainer").innerHTML = `
         <div class="no-questions">
-          <p>❗ No hi ha preguntes per aquesta selecció de temes i modalitats.</p>
+          <p>❗ No hi ha preguntes per aquesta selecció d'apartats i modalitats.</p>
           <p>Si us plau, torna enrere i selecciona altres opcions.</p>
         </div>
       `;

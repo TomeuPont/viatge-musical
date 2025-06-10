@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
     document.getElementById("qcontainer").innerHTML = `
       <div class="no-questions">
-        <p>❗ No s'han seleccionat temes o modalitats.</p>
+        <p>❗ No s'han seleccionat apartats o modalitats.</p>
         <p>Si us plau, torna a la pàgina anterior i fes la selecció.</p>
       </div>
     `;
@@ -127,16 +127,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    if (!preguntesPlanas.length) {
-      document.getElementById("qcontainer").innerHTML = `
-        <div class="no-questions">
-          <p>❗ No hi ha preguntes per aquesta selecció d'apartats i modalitats.</p>
-          <p>Si us plau, torna enrere i selecciona altres opcions.</p>
-        </div>
-      `;
-      return;
-    }
 
+    if (!preguntesPlanas.length) {
+  document.getElementById("qcontainer").innerHTML = `
+    <div class="no-questions">
+      <p>❗ No hi ha preguntes per aquesta selecció d'apartats i modalitats.</p>
+      <button class="boto-rosa" onclick="window.location.href='modalitats.html'">Torna a les modalitats</button>
+    </div>
+  `;
+  return;
+}
+    
     shuffleArray(preguntesPlanas);
     preguntesPlanas = preguntesPlanas.map(p => {
       const opcions = [...p.opcions];

@@ -132,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("qcontainer").innerHTML = `
     <div class="no-questions">
       <p>❗ No hi ha preguntes per aquesta selecció d'apartats i modalitats.</p>
+      <p>Si us plau, torna enrere i selecciona altres opcions.</p>
       <button class="boto-rosa" onclick="window.location.href='modalitats.html'">Torna a les modalitats</button>
     </div>
   `;

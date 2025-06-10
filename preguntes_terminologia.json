@@ -217,7 +217,7 @@
           "opcions": [
             "Sonata",
             "Ària",
-            "<i>Libretto<i>",
+            "<em>Libretto</em>,
             "Obertura"
           ],
           "resposta_correcta": "c"

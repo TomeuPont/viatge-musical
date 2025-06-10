@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initUserInfo();
 });
 
-// --- Música de fondo: guardar y restaurar tiempo ---
+// - -- Música de fondo: guardar y restaurar tiempo ---
 window.addEventListener("DOMContentLoaded", () => {
   const musica = document.getElementById('musicaFondo');
   // Restaurar posición

@@ -2,14 +2,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
-// Extrae el tema de la URL (aunque aquí no se usa, se mantiene por estructura)
-function getTemaFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  const temes = params.get('temes');
-  if (!temes) return null;
-  return temes.split(',')[0];
-}
-
 // Nombres de los temas para mostrar
 const nomsTemes = [
   "Música de l’antiguitat",
@@ -26,30 +18,43 @@ const nomsTemes = [
   "Història de la dansa"
 ];
 
-// Muestra los temas seleccionados y las estrellas/logros si están guardados
-function mostrarTemesSeleccionats() {
+// Muestra los temas seleccionados y las estrellas de logros desde Firestore
+async function mostrarTemesSeleccionats() {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
-  const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
+  let user = null;
+  if (typeof isUserAuthenticated === "function") {
+    user = await isUserAuthenticated(false);
+  }
+  let logros = {};
+  if (user && typeof getLogros === "function") {
+    logros = await getLogros(user.uid);
+  }
   const ul = document.getElementById("temesSeleccionats");
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
-    const estados = estrelles[idx] || {};
+    const logrosTema = logros[`tema${idx}`] || {};
+    // Determina color estrella según estado: verde (perfecte), amarillo (completat), gris (otro)
+    function colorStar(mod) {
+      if (logrosTema[mod] === 'perfecte') return 'green';
+      if (logrosTema[mod] === 'completat') return 'yellow';
+      return '';
+    }
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
       <span class="stars">
-        <span class="star ${estados.teoria === 'perfecta' ? 'green' : estados.teoria === 'fallos' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.terminologia === 'perfecta' ? 'green' : estados.terminologia === 'fallos' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.audicions === 'perfecta' ? 'green' : estados.audicions === 'fallos' ? 'yellow' : ''}"></span>
+        <span class="star ${colorStar('teoria')}"></span>
+        <span class="star ${colorStar('terminologia')}"></span>
+        <span class="star ${colorStar('audicions')}"></span>
       </span>
     </li>`;
   }).join('');
 }
 window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
 
-// Muestra el email/usuario (si tienes función global, úsala)
+// Mostrar usuario y botón sortir (si tienes función global, úsala)
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
 });

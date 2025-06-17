@@ -127,18 +127,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-
     if (!preguntesPlanas.length) {
-  document.getElementById("qcontainer").innerHTML = `
-    <div class="no-questions">
-      <p>❗ No hi ha preguntes per aquesta selecció d'apartats i modalitats.</p>
-      <p>Si us plau, torna enrere i selecciona altres opcions.</p>
-      <button class="boto-rosa" onclick="window.location.href='modalitats.html'">Torna a les modalitats</button>
-    </div>
-  `;
-  return;
-}
-    
+      document.getElementById("qcontainer").innerHTML = `
+        <div class="no-questions">
+          <p>❗ No hi ha preguntes per aquesta selecció d'apartats i modalitats.</p>
+          <p>Si us plau, torna enrere i selecciona altres opcions.</p>
+          <button class="boto-rosa" onclick="window.location.href='modalitats.html'">Torna a les modalitats</button>
+        </div>
+      `;
+      return;
+    }
+
     shuffleArray(preguntesPlanas);
     preguntesPlanas = preguntesPlanas.map(p => {
       const opcions = [...p.opcions];
@@ -174,8 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let errors = 0;
     let respostaMostrada = false;
 
-    // ... (resto del código igual)
-
     function carregarPregunta() {
       if (!preguntesPlanas[index]) {
         document.getElementById("qcontainer").innerHTML = `
@@ -186,6 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       const actual = preguntesPlanas[index];
+      const totalPreguntes = preguntesPlanas.length;
+      // Mostrar el contador de pregunta actual / total
+      document.getElementById("question-counter").textContent = `Pregunta ${index + 1} / ${totalPreguntes}`;
       document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
       document.getElementById("tema").textContent = actual.tema || '';
       document.getElementById("pregunta").innerHTML = "Pregunta: " + (actual.pregunta || '');
@@ -251,9 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       nextBtn.style.display = "block";
     }
-
-// ... (resto del código igual)
-    
 
     function comprovarResposta(seleccio) {
       if (respostaMostrada) return;

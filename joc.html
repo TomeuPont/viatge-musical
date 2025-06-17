@@ -106,6 +106,14 @@
       background: #ff79a7;
       transform: scale(1.07);
     }
+    /* Estilo para el contador de preguntas */
+    #question-counter {
+      margin-bottom: 0.6em;
+      font-size: 1.1em;
+      color: #ffd600;
+      font-weight: bold;
+      text-align: right;
+    }
     @media (max-width: 600px) {
       #jugadorInfo {
         font-size: 0.93em;
@@ -116,6 +124,10 @@
         font-size: 0.98em;
         padding: 0.33em 1em;
       }
+      #question-counter {
+        font-size: 1em;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -123,6 +135,7 @@
   <div id="jugadorInfo" style="display:none;"></div>
   <div class="question-container" id="qcontainer">
     <div id="modalitat-badge"></div>
+    <div id="question-counter"></div>
     <h2 id="tema"></h2>
     <p id="pregunta"></p>
     <div class="options" id="opcions"></div>

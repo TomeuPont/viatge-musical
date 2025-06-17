@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
             temaObj.preguntes.forEach(p => {
               preguntesPlanas.push({
                 tema: temaObj.tema,
+                temaId: temaObj.id, // Importante para logros
                 modalitat: data.modalitat || modalitat,
                 titol: p.titol,
                 pregunta: p.pregunta,
@@ -159,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       shuffleArray(opcions);
       return {
         tema: p.tema,
+        temaId: p.temaId,
         modalitat: p.modalitat,
         titol: p.titol,
         pregunta: p.pregunta,
@@ -196,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("feedback").textContent = "";
       respostaMostrada = false;
 
-      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA (corregido con robustez) ---
+      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA ---
       const mod = (actual.modalitat || "").toLowerCase();
       if (mod.includes("audicio")) {
         silenciarMusicaFondo();
@@ -273,6 +275,27 @@ document.addEventListener("DOMContentLoaded", () => {
         index++;
         carregarPregunta();
       } else {
+        // --- GUARDAR LOGRO EN FIRESTORE ---
+        try {
+          // Modalitat actual: todas las preguntas de la ronda son de la misma modalidad
+          const modalitatActual = preguntesPlanas.length > 0 ? preguntesPlanas[0].modalitat : null;
+          // Temes en partida (pueden ser varios si el usuario seleccionó más de uno)
+          const temasEnPartida = Array.from(new Set(preguntesPlanas.map(p => ({ id: p.temaId, nom: p.tema }))));
+          // Estado del logro
+          let estat = "completat";
+          if (errors === 0) estat = "perfecte";
+          isUserAuthenticated().then(user => {
+            if (user && temasEnPartida.length && modalitatActual) {
+              temasEnPartida.forEach(temaObj => {
+                // Guardar bajo clave temaX (por id, para compatibilidad con otras vistas)
+                setLogro(user.uid, `tema${temaObj.id}`, modalitatActual, estat);
+              });
+            }
+          });
+        } catch (e) {
+          console.error("Error guardant logros:", e);
+        }
+        // Mostrar resumen final
         document.getElementById("qcontainer").innerHTML = `
           <h2>Has completat totes les preguntes! 🎉</h2>
           <p>✅ Correctes: ${encerts}</p>

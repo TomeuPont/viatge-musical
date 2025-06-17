@@ -24,6 +24,7 @@ async function mostrarTemesSeleccionats() {
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
+  // Espera a que el usuario esté autenticado
   let user = null;
   if (typeof isUserAuthenticated === "function") {
     user = await isUserAuthenticated(false);

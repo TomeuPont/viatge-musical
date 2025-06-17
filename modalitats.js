@@ -23,7 +23,11 @@ async function mostrarTemesSeleccionats() {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
-  } catch(e) {}
+    if (!Array.isArray(temes)) temes = [];
+  } catch(e) {
+    temes = [];
+  }
+
   // Espera a que el usuario esté autenticado
   let user = null;
   if (typeof isUserAuthenticated === "function") {
@@ -34,8 +38,10 @@ async function mostrarTemesSeleccionats() {
     logros = await getLogros(user.uid);
   }
   const ul = document.getElementById("temesSeleccionats");
+  if (!ul) return;
+
   ul.innerHTML = temes.map(idx => {
-    const temaNom = nomsTemes[parseInt(idx,10)-1];
+    const temaNom = nomsTemes[parseInt(idx,10)-1] || "(tema desconegut)";
     const logrosTema = logros[`tema${idx}`] || {};
     function colorStar(mod) {
       if (logrosTema[mod] === 'perfecte') return 'green';
@@ -77,7 +83,9 @@ isUserAuthenticated(async function(isAuth, user) {
 
 // Controla el envío del formulario de modalidades
 window.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
+  const form = document.getElementById('modalitatsForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
     const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
     const errorDiv = document.getElementById('error');

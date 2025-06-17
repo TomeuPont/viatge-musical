@@ -36,7 +36,6 @@ async function mostrarTemesSeleccionats() {
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
     const logrosTema = logros[`tema${idx}`] || {};
-    // Determina color estrella según estado: verde (perfecte), amarillo (completat), gris (otro)
     function colorStar(mod) {
       if (logrosTema[mod] === 'perfecte') return 'green';
       if (logrosTema[mod] === 'completat') return 'yellow';

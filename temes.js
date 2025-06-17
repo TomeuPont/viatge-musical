@@ -9,13 +9,15 @@ async function mostrarLogros(uid) {
   // Por cada tema
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
-    const logrosTema = logros[tema] || {};
+    const logrosTema = logros[`tema${tema}`] || {};
     // Modalidades: teoria, terminologia, audicions
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
       // Estado: gris (default), amarillo, verde
-      const estado = logrosTema[modalidad] || 'gris';
+      let estado = 'gris';
+      if (logrosTema[modalidad] === 'perfecte') estado = 'verde';
+      else if (logrosTema[modalidad] === 'completat') estado = 'amarillo';
       estrella.classList.remove('gris','amarillo','verde');
       estrella.classList.add(estado);
     });

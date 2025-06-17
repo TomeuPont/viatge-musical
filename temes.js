@@ -5,8 +5,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Mostrar estrellas de logros según Firestore
 async function mostrarLogros(uid) {
+  // Obtenemos los logros reales del usuario desde Firestore
   const logros = await getLogros(uid);
-  // Por cada tema
+  // Por cada tema en la pantalla
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
     const logrosTema = logros[`tema${tema}`] || {};

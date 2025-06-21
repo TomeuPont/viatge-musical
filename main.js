@@ -63,7 +63,7 @@ async function getLogros(uid) {
   }
 }
 
-// --- CORREGIDA ---
+// ... resto igual ...
 async function setLogro(uid, tema, modalidad, estado) {
   try {
     const docRef = db.collection("logros").doc(uid);

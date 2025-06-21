@@ -4,7 +4,8 @@ const firebaseConfig = {
   apiKey: "AIzaSyBIgrJxLanB-UM7-mPm-2deAny60yf1Rtk",
   authDomain: "viatge-musical.firebaseapp.com",
   projectId: "viatge-musical",
-  storageBucket: "viatge-musical.firebasestorage.app",
+  //storageBucket: "viatge-musical.firebasestorage.app",
+  storageBucket: "viatge-musical.appspot.com",
   messagingSenderId: "275074430816",
   appId: "1:275074430816:web:7a305c8c3ab5a423885005"
 };

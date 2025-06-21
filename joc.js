@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (user && temasEnPartida.length && modalitatActual) {
               temasEnPartida.forEach(temaObj => {
                 // Guardar bajo clave temaX (por id, para compatibilidad con otras vistas)
-                setLogro(user.uid, `tema${temaObj.id}`, modalitatActual, estat);
+                setLogro(user.uid, temaObj.id, modalitatActual, estat);                
               });
             }
           });

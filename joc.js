@@ -288,7 +288,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (user && temasEnPartida.length && modalitatActual) {
               temasEnPartida.forEach(temaObj => {
                 // Guardar bajo clave temaX (por id, para compatibilidad con otras vistas)
-                setLogro(user.uid, temaObj.id, modalitatActual, estat);                
+
+                const MODALITAT_MAP = {
+                "Treballar contingut teòric": "teoria",
+                "Treballar terminologia": "terminologia",
+                "Treballar audicions": "audicions"
+                };
+                const modalitatFinal = MODALITAT_MAP[modalitatActual] || modalitatActual;
+                setLogro(user.uid, temaObj.id, modalitatFinal, estat);
+               
               });
             }
           });

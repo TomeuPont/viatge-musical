@@ -3,19 +3,14 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
-// Mostrar estrellas de logros según Firestore
 async function mostrarLogros(uid) {
   const logros = await getLogros(uid);
-  // Por cada tema
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
-    // Corrige la clave:
     const logrosTema = logros[`tema${tema}`] || {};
-    // Modalidades: teoria, terminologia, audicions
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
-      // Traducción de valor:
       let estado;
       if (logrosTema[modalidad] === 'perfecte') estado = 'verde';
       else if (logrosTema[modalidad] === 'completat') estado = 'amarillo';

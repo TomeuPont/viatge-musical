@@ -19,16 +19,14 @@ const nomsTemes = [
 ];
 
 // Muestra los temas seleccionados y las estrellas de logros desde Firestore
+
 async function mostrarTemesSeleccionats() {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
     if (!Array.isArray(temes)) temes = [];
-  } catch(e) {
-    temes = [];
-  }
+  } catch(e) { temes = []; }
 
-  // Espera a que el usuario esté autenticado
   let user = null;
   if (typeof isUserAuthenticated === "function") {
     user = await isUserAuthenticated(false);
@@ -36,6 +34,7 @@ async function mostrarTemesSeleccionats() {
   let logros = {};
   if (user && typeof getLogros === "function") {
     logros = await getLogros(user.uid);
+    console.log("🔥 Logros recuperados:", logros); // <-- AQUI EL LOG IMPORTANTE
   }
   const ul = document.getElementById("temesSeleccionats");
   if (!ul) return;
@@ -43,6 +42,7 @@ async function mostrarTemesSeleccionats() {
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1] || "(tema desconegut)";
     const logrosTema = logros[`tema${idx}`] || {};
+    console.log(`Tema ${idx}:`, logrosTema); // <-- LOG POR TEMA
     function colorStar(mod) {
       if (logrosTema[mod] === 'perfecte') return 'green';
       if (logrosTema[mod] === 'completat') return 'yellow';
@@ -58,6 +58,7 @@ async function mostrarTemesSeleccionats() {
     </li>`;
   }).join('');
 }
+
 window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
 
 // Mostrar usuario y botón sortir (si tienes función global, úsala)

@@ -11,6 +11,7 @@ async function mostrarLogros(uid) {
   // Por cada tema
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
+    // ¡¡¡AQUÍ ESTÁ EL CAMBIO CLAVE!!!
     const logrosTema = logros[`tema${tema}`] || {};
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);

@@ -50,6 +50,56 @@ button:hover {
   transform: scale(1.06);
   color: #fff;
 }
+
+/* BLOQUE ESTRELLAS DE LOGRO */
+.logros {
+  display: inline-flex;
+  gap: 0.35em;
+  margin-left: 0.7em;
+  vertical-align: middle;
+}
+.estrella {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  background: #eee;
+  box-shadow: 0 1px 2px #0002;
+  border: 1.7px solid #e0e0e0;
+  margin-right: 0.1em;
+  transition: background 0.2s, border 0.2s;
+  position: relative;
+}
+.estrella.teoria::before,
+.estrella.terminologia::before,
+.estrella.audicions::before {
+  content: "★";
+  position: absolute;
+  color: inherit;
+  font-size: 1.13em;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -55%);
+  pointer-events: none;
+}
+
+/* Colores de estado (asegúrate de que los nombres coinciden con las clases JS) */
+.estrella.gris {
+  background: #f2f2f2;
+  border-color: #ddd;
+  color: #c0c0c0;
+}
+.estrella.amarillo {
+  background: #feeb8a;
+  border-color: #eac926;
+  color: #eac926;
+}
+.estrella.verde {
+  background: #bdfcb1;
+  border-color: #48c23d;
+  color: #48c23d;
+}
+
 /* Bloque usuario arriba derecha (solo uno es suficiente) */
 #jugadorInfo {
   position: fixed;

@@ -3,17 +3,11 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
-// Mostrar estrellas de logros según Firestore (corregido para mapear bien los estados)
+// Mostrar estrellas de logros según Firestore
 async function mostrarLogros(uid) {
   const logros = await getLogros(uid);
-  console.log('logros Firestore (temes):',
-  JSON.stringify(logros,null,2));  
-  
   // Mapeo de valores Firestore a las clases CSS de color
-  const estadoMap = {
-    perfecte: 'verde',
-    completat: 'amarillo'
-  };
+  const estadoMap = { perfecte: 'verde', completat: 'amarillo' };
   // Por cada tema
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');

@@ -61,3 +61,60 @@
   .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
   .estrelles-leyenda .estrella { font-size: 1.1em; }
 }
+
+/* Aumenta el ancho del panel lateral y mejora su aspecto */
+.side-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 310px; /* antes por defecto suele ser unos 220-250px, ahora más ancho */
+  background: #232346;
+  color: #ffe066;
+  padding: 2.1em 1.2em 1.8em 1.2em;
+  box-shadow: 2px 0 12px #0004;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.side-panel h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+  font-size: 1.18em;
+  color: #ffd600;
+}
+.side-panel .estrelles-leyenda {
+  margin-bottom: 1em;
+  margin-top: 0.2em;
+  font-size: 1em;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+#temesSeleccionats {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.98em;
+}
+
+/* Ajusta el contenido principal para que no se solape con el panel lateral */
+.main-content {
+  margin-left: 330px; /* ligeramente más que el panel para dejar aire */
+  padding: 2em 0 2em 0;
+}
+
+@media (max-width: 800px) {
+  .side-panel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    flex-direction: column;
+    padding: 1.2em 0.6em 0.7em 0.6em;
+    margin-bottom: 0.7em;
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 0.5em 0 1.2em 0;
+  }
+}

@@ -145,3 +145,6 @@ h2 {
     padding: 0.33em 1em;
   }
 }
+
+.estrella.verde { color: #38c172 !important; }
+.estrella.amarillo { color: #ffd600 !important; }

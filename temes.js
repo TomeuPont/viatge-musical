@@ -3,14 +3,19 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
+// Mostrar estrellas de logros según Firestore
 async function mostrarLogros(uid) {
   const logros = await getLogros(uid);
+  // Por cada tema
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
+    // CORRECTO: ahora accedemos a logros[`tema${tema}`]
     const logrosTema = logros[`tema${tema}`] || {};
+    // Modalidades: teoria, terminologia, audicions
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
+      // Estado: gris (default), amarillo, verde
       const estado = logrosTema[modalidad] || 'gris';
       estrella.classList.remove('gris','amarillo','verde');
       estrella.classList.add(estado);
@@ -67,3 +72,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Extra: si vuelves desde la partida SIN recargar (SPA), puedes exponer mostrarLogros global
+window.mostrarLogros = mostrarLogros;

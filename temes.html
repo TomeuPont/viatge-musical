@@ -43,12 +43,39 @@
         padding: 0.33em 1em;
       }
     }
+    /* Leyenda de estrellas */
+    .estrelles-leyenda {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+      margin-bottom: 1em;
+      margin-top: 0.5em;
+      font-size: 1.01em;
+      color: #ffe066;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .estrelles-leyenda .estrella {
+      margin-right: 0.4em;
+      font-size: 1.2em;
+      vertical-align: middle;
+    }
+    @media (max-width: 600px) {
+      .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
+      .estrelles-leyenda .estrella { font-size: 1.1em; }
+    }
   </style>
 </head>
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
   <div class="container center">
     <h2>Selecciona els apartats</h2>
+    <!-- Leyenda de estrellas -->
+    <div class="estrelles-leyenda" aria-label="Llegenda de les estrelles">
+      <span><span class="estrella teoria gris" aria-hidden="true"></span> Teoria</span>
+      <span><span class="estrella terminologia gris" aria-hidden="true"></span> Terminologia</span>
+      <span><span class="estrella audicions gris" aria-hidden="true"></span> Audicions</span>
+    </div>
     <form id="temesForm">
       <div class="temes-grid">
         <label class="tema-option" data-tema="1">
@@ -172,18 +199,10 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="main.js"></script>
   <script src="temes.js"></script>
-
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       if (typeof initUserInfo === "function") initUserInfo();
     });
-    // AÑADE ESTE BLOQUE DESPUÉS
-    window.addEventListener('DOMContentLoaded', async () => {
-      if (typeof isUserAuthenticated === "function" && typeof mostrarLogros === "function") {
-        const user = await isUserAuthenticated(false);
-        if (user) mostrarLogros(user.uid);
-      }
-    });
-  </script>  
+  </script>
 </body>
 </html>

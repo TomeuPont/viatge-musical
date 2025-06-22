@@ -172,10 +172,18 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="main.js"></script>
   <script src="temes.js"></script>
+
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       if (typeof initUserInfo === "function") initUserInfo();
     });
-  </script>
+    // AÑADE ESTE BLOQUE DESPUÉS
+    window.addEventListener('DOMContentLoaded', async () => {
+      if (typeof isUserAuthenticated === "function" && typeof mostrarLogros === "function") {
+        const user = await isUserAuthenticated(false);
+        if (user) mostrarLogros(user.uid);
+      }
+    });
+  </script>  
 </body>
 </html>

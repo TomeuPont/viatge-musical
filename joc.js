@@ -107,6 +107,7 @@ function guardarLogroFirestore(uid, temaId, modalidad, estado) {
     comprobarTemaCompletadoFirestore(uid, temaId);
   });
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
     document.getElementById("qcontainer").innerHTML = `
@@ -301,10 +302,22 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         const actual = preguntesPlanas[index];
         let estadoModalidad = (errors === 0) ? "perfecte" : "completat";
-        // Guardar en Firestore y comprobar si hay que mostrar enhorabuena
+        // MAPEO para garantizar modalidad estándar
+        const modalidadMap = {
+          'teoria': 'teoria',
+          'Teoria': 'teoria',
+          'Treballar contingut teòric': 'teoria',
+          'terminologia': 'terminologia',
+          'Terminologia': 'terminologia',
+          'Treballar terminologia': 'terminologia',
+          'audicions': 'audicions',
+          'Audicions': 'audicions',
+          'Treballar audicions': 'audicions'
+        };
         isUserAuthenticated().then(user => {
           if (user && user.uid) {
-            guardarLogroFirestore(user.uid, actual.temaId, actual.modalitat, estadoModalidad);
+            let modalidadGuardar = modalidadMap[actual.modalitat] || actual.modalitat;
+            guardarLogroFirestore(user.uid, actual.temaId, modalidadGuardar, estadoModalidad);
           }
         });
 

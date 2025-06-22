@@ -149,3 +149,24 @@ button:hover {
     padding: 0.33em 1em;
   }
 }
+
+.estrelles-leyenda {
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+  margin-bottom: 1em;
+  margin-top: 0.5em;
+  font-size: 1.01em;
+  color: #ffe066;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.estrelles-leyenda .estrella {
+  margin-right: 0.4em;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+@media (max-width: 600px) {
+  .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
+  .estrelles-leyenda .estrella { font-size: 1.1em; }
+}

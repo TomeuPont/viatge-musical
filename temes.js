@@ -1,35 +1,64 @@
-// Muestra el usuario y el botón "Sortir" arriba a la derecha de forma modular
-window.addEventListener('DOMContentLoaded', () => {
-  if (typeof initUserInfo === "function") initUserInfo();
-});
-
-// Este archivo debe cargarse después de Firebase y de que exista el DOM con las estrellas
+// === DEBUG: muestra en consola los pasos y datos usados ===
 
 // Pinta las estrellas según los logros en Firestore
 async function mostrarLogros(uid) {
-  const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
-  const logros = logrosDoc.exists ? logrosDoc.data() : {};
+  console.log("== [DEBUG] mostrarLogros iniciado con UID:", uid);
+
+  // 1. Cargar los logros del usuario desde Firestore
+  let logrosDoc;
+  try {
+    logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
+  } catch (e) {
+    console.error("[DEBUG] Error obteniendo logros:", e);
+    return;
+  }
+
+  if (!logrosDoc.exists) {
+    console.warn("[DEBUG] No hay documento de logros para este usuario.");
+    return;
+  }
+
+  const logros = logrosDoc.data();
+  console.log("[DEBUG] Logros recibidos de Firestore:", logros);
+
+  // 2. Relación estado <-> clase CSS
   const estadoMap = { perfecte: 'verde', completat: 'amarillo' };
 
+  // 3. Recorrer todos los temas en la página
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
     const logrosTema = logros[`tema${tema}`] || {};
+    console.log(`[DEBUG] Tema: tema${tema}`, logrosTema);
+
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
-      if (!estrella) return;
+      if (!estrella) {
+        console.warn(`[DEBUG] No se encuentra estrella .estrella.${modalidad} en tema${tema}`);
+        return;
+      }
       const valor = logrosTema[modalidad];
+      console.log(`[DEBUG]   Modalitat: ${modalidad}, valor:`, valor);
       const estado = estadoMap[valor] || 'gris';
       estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
       estrella.classList.add(estado);
+      console.log(`[DEBUG]   Añadida clase: ${estado} a .estrella.${modalidad} de tema${tema}`);
     });
   });
 }
 
+// Llama a mostrarLogros cuando el usuario esté autenticado y la página cargada
 window.addEventListener('DOMContentLoaded', () => {
   firebase.auth().onAuthStateChanged(user => {
-    if (user) mostrarLogros(user.uid);
+    if (user) {
+      console.log("[DEBUG] Usuario autenticado:", user.uid);
+      mostrarLogros(user.uid);
+    } else {
+      console.warn("[DEBUG] Usuario no autenticado.");
+    }
   });
 });
+
+// --- RESTO DE LÓGICA PARA CONTINUAR Y MÚSICA DE FONDO, ETC. ---
 
 // Guardar el tiempo de la música antes de cambiar de página y continuar flujo
 function continuar() {
@@ -64,19 +93,5 @@ window.addEventListener("DOMContentLoaded", () => {
     musica.play().catch(()=>{});
   } else {
     musica.pause();
-  }
-});
-
-// Proteger acceso y cargar logros
-window.addEventListener("DOMContentLoaded", () => {
-  if (typeof isUserAuthenticated === "function") {
-    isUserAuthenticated().then(user => {
-      if (user) {
-        // Cargar logros y pintar estrellas
-        mostrarLogros(user.uid);
-      } else {
-        window.location.href = "login.html";
-      }
-    });
   }
 });

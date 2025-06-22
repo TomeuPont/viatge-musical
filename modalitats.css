@@ -1,85 +1,13 @@
-/* Panel lateral y leyenda */
-.leyenda-nueva {
-  background: linear-gradient(120deg, #232443 80%, #2a184c 100%);
-  border-radius: 16px;
-  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
-  padding: 1.7em 1em 1.3em 1.1em;
-  color: #fff;
-  font-size: 1.06em;
-  min-width: 210px;
+.leyenda-modalitats {
+  margin-left: -2vw !important;
+  margin-top: 2em !important;
+  margin-bottom: 0 !important;
+  min-width: 220px;
   max-width: 295px;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
   align-self: flex-start;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border: none;
 }
-.leyenda-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.7em;
-  margin-bottom: 1.05em;
-  margin-left: 0.1em;
-  width: 100%;
-  justify-content: flex-start;
-}
-.leyenda-row .estrella {
-  font-size: 1.23em;
-  margin-right: 0.05em;
-  vertical-align: middle;
-  position: relative;
-  display: inline-flex;
-  align-items: flex-end;
-  font-family: inherit;
-}
-.numero-estrella {
-  position: absolute;
-  top: -1.15em;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.77em;
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  background: none;
-  border: none;
-  box-shadow: none;
-  z-index: 2;
-  pointer-events: none;
-  line-height: 1;
-}
-.llista-llegenda {
-  margin: 0.2em 0 0 0.2em;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-}
-.llista-llegenda li {
-  margin: 0.09em 0 0.09em 0;
-  padding-left: 0.1em;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-size: 1.01em;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-.llista-llegenda .estrella {
-  margin-right: 0.39em;
-  font-size: 1.25em;
-  vertical-align: middle;
-}
-.estrella.verde { color: #38c172 !important; }
-.estrella.amarillo { color: #ffd600 !important; }
-.estrella.gris { color: #aaa !important; }
-.estrella.teoria {}
-.estrella.terminologia {}
-.estrella.audicions {}
 
+/* Lista de temas seleccionados */
 #temesSeleccionats {
   list-style: none;
   padding: 0;
@@ -114,21 +42,77 @@
   position: relative;
 }
 
+/* Modalitats grid y título centrado */
+.modalitats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8em 1.2em;
+  width: 100%;
+}
+.modalitats-titol {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 0 0 0.8em 0;
+  font-size: 1.25em;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Checkbox igual que en temes */
+.modalitat-checkbox {
+  display: flex;
+  align-items: center;
+  background: none;
+  color: #fff;
+  padding: 0.4em 0.45em 0.4em 0.1em;
+  border-radius: 8px;
+  font-size: 1.09em;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background 0.18s;
+  cursor: pointer;
+  width: 100%;
+  min-height: 2.1em;
+  position: relative;
+  margin-bottom: 0.2em;
+}
+.modalitat-checkbox input[type="checkbox"] {
+  margin-right: 1em;
+  accent-color: #ff4081;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+  border: 2px solid #ff4081;
+  border-radius: 6px;
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: border 0.14s, box-shadow 0.14s;
+  position: relative;
+}
+.modalitat-checkbox input[type="checkbox"]:checked {
+  background: #ff4081;
+  border-color: #ff4081;
+}
+.modalitat-checkbox input[type="checkbox"]:checked:after {
+  content: "";
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  margin: 0.15em auto;
+  background: #fff;
+  border-radius: 2px;
+}
 @media (max-width: 900px) {
-  .leyenda-nueva {
-    margin: 0 auto 0.8em auto;
+  .leyenda-modalitats {
+    margin: 0 auto 0.8em auto !important;
     align-self: center;
     min-width: 0;
     max-width: 99vw;
     min-height: 150px;
   }
-}
-
-/* Ajusta el contenido principal para que no se solape con el panel lateral */
-.main-content {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 2em 0 2em 0;
 }
 .layout-flex {
   display: flex;
@@ -151,8 +135,9 @@
     gap: 1em;
     min-height: unset;
   }
-  .main-content {
-    margin-left: 0;
-    padding: 0.5em 0 1.2em 0;
-  }
+}
+.main-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 2em 0 2em 0;
 }

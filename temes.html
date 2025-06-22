@@ -43,157 +43,202 @@
         padding: 0.33em 1em;
       }
     }
-    /* Leyenda de estrellas */
-    .estrelles-leyenda {
-      display: flex;
-      gap: 1.5em;
-      align-items: center;
-      margin-bottom: 1em;
-      margin-top: 0.5em;
-      font-size: 1.01em;
-      color: #ffe066;
-      font-weight: 500;
-      letter-spacing: 0.01em;
+    /* Llegenda lateral */
+    .legenda-estrelles {
+      background: #f5f5fa;
+      border-radius: 10px;
+      padding: 1.2em 1em;
+      margin-bottom: 2em;
+      font-size: 1.04em;
+      box-shadow: 0 2px 8px #0001;
+      max-width: 320px;
+      margin-top: 2em;
+      margin-left: 0;
     }
-    .estrelles-leyenda .estrella {
-      margin-right: 0.4em;
-      font-size: 1.2em;
+    .legenda-estrelles h3 {
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      font-size: 1.15em;
+      color: #222244;
+    }
+    .legenda-estrelles .estrella {
+      font-size: 1.25em;
+      margin-right: 0.23em;
       vertical-align: middle;
     }
-    @media (max-width: 600px) {
-      .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
-      .estrelles-leyenda .estrella { font-size: 1.1em; }
+    .legenda-estrelles .verde { color: #38c172; }
+    .legenda-estrelles .amarillo { color: #ffd600; }
+    .legenda-estrelles .gris { color: #888; }
+    .llista-llegenda {
+      margin: 0.7em 0 0 0.4em;
+      padding: 0;
+      list-style: none;
+    }
+    .llista-llegenda li {
+      margin: 0.15em 0 0.18em 0;
+    }
+    .layout-flex {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2.5em;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .layout-flex {
+        flex-direction: column;
+        gap: 1.2em;
+        align-items: stretch;
+      }
+      .legenda-estrelles {
+        max-width: 100%;
+        margin: 0 0 1em 0;
+      }
     }
   </style>
 </head>
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
-  <div class="container center">
-    <h2>Selecciona els apartats</h2>
-    <!-- Leyenda de estrellas -->
-    <div class="estrelles-leyenda" aria-label="Llegenda de les estrelles">
-      <span><span class="estrella teoria gris" aria-hidden="true"></span> Teoria</span>
-      <span><span class="estrella terminologia gris" aria-hidden="true"></span> Terminologia</span>
-      <span><span class="estrella audicions gris" aria-hidden="true"></span> Audicions</span>
+  <div class="layout-flex">
+    <!-- Llegenda lateral esquerra -->
+    <div class="legenda-estrelles">
+      <h3>Llegenda d'estrelles</h3>
+      <div>
+        <span class="estrella teoria verde">★</span>
+        <span class="estrella terminologia amarillo">★</span>
+        <span class="estrella audicions gris">★</span>
+        <span style="margin-left:1em; font-size:0.97em; color:#333;">
+          <strong>Ordre:</strong> Teoria, Terminologia, Audicions
+        </span>
+      </div>
+      <ul class="llista-llegenda">
+        <li><span class="estrella verde">★</span> <b>Verd</b>: Realitzat perfecte, totes les respostes correctes.</li>
+        <li><span class="estrella amarillo">★</span> <b>Groc</b>: Realitzat amb errors.</li>
+        <li><span class="estrella gris">★</span> <b>Gris</b>: No s’ha treballat encara.</li>
+      </ul>
     </div>
-    <form id="temesForm">
-      <div class="temes-grid">
-        <label class="tema-option" data-tema="1">
-          <input type="checkbox" value="1">
-          Música de l’antiguitat
-          <span class="logros">
-
-            <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-            
-          </span>
-        </label>
-        <label class="tema-option" data-tema="2">
-          <input type="checkbox" value="2">
-          Música medieval
-          <span class="logros">
-            <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="3">
-          <input type="checkbox" value="3">
-          Música del Renaixement
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="4">
-          <input type="checkbox" value="4">
-          Música del Barroc
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="5">
-          <input type="checkbox" value="5">
-          Música del classicisme
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="6">
-          <input type="checkbox" value="6">
-          Música del Romanticisme
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="7">
-          <input type="checkbox" value="7">
-          Música del segle XX i últimes tendències
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="8">
-          <input type="checkbox" value="8">
-          Músiques urbanes (jazz, rock, blues, rap, electrònica)
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="9">
-          <input type="checkbox" value="9">
-          Música de pel·lícules i musicals
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="10">
-          <input type="checkbox" value="10">
-          Músiques i danses tradicionals del món
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="11">
-          <input type="checkbox" value="11">
-          Músiques i danses tradicionals de les Illes Balears
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-        <label class="tema-option" data-tema="12">
-          <input type="checkbox" value="12">
-          Història de la dansa
-          <span class="logros">
-             <span class="estrella teoria gris" title="Teoria">★</span>
-            <span class="estrella terminologia gris" title="Terminologia">★</span>
-            <span class="estrella audicions gris" title="Audicions">★</span>
-          </span>
-        </label>
-      </div>
-      <div class="actions">
-        <button type="button" class="boto-rosa" onclick="continuar()">Continuar</button>
-      </div>
-    </form>
-    <div id="error" class="error" style="display:none;"></div>
+    <div class="container center">
+      <h2>Selecciona els apartats</h2>
+      <form id="temesForm">
+        <div class="temes-grid">
+          <label class="tema-option" data-tema="1">
+            <input type="checkbox" value="1">
+            Música de l’antiguitat
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="2">
+            <input type="checkbox" value="2">
+            Música medieval
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="3">
+            <input type="checkbox" value="3">
+            Música del Renaixement
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="4">
+            <input type="checkbox" value="4">
+            Música del Barroc
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="5">
+            <input type="checkbox" value="5">
+            Música del classicisme
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="6">
+            <input type="checkbox" value="6">
+            Música del Romanticisme
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="7">
+            <input type="checkbox" value="7">
+            Música del segle XX i últimes tendències
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="8">
+            <input type="checkbox" value="8">
+            Músiques urbanes (jazz, rock, blues, rap, electrònica)
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="9">
+            <input type="checkbox" value="9">
+            Música de pel·lícules i musicals
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="10">
+            <input type="checkbox" value="10">
+            Músiques i danses tradicionals del món
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="11">
+            <input type="checkbox" value="11">
+            Músiques i danses tradicionals de les Illes Balears
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+          <label class="tema-option" data-tema="12">
+            <input type="checkbox" value="12">
+            Història de la dansa
+            <span class="logros">
+              <span class="estrella teoria gris" title="Teoria">★</span>
+              <span class="estrella terminologia gris" title="Terminologia">★</span>
+              <span class="estrella audicions gris" title="Audicions">★</span>
+            </span>
+          </label>
+        </div>
+        <div class="actions">
+          <button type="button" class="boto-rosa" onclick="continuar()">Continuar</button>
+        </div>
+      </form>
+      <div id="error" class="error" style="display:none;"></div>
+    </div>
   </div>
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>

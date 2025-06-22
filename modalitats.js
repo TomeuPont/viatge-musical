@@ -18,75 +18,57 @@ const nomsTemes = [
   "Història de la dansa"
 ];
 
-// Muestra los temas seleccionados y las estrellas de logros desde Firestore
-async function mostrarTemesSeleccionats() {
+// Muestra los temas seleccionados y los logros reales guardados en Firestore
+async function mostrarTemesSeleccionatsAmbLogros(uid) {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
-    if (!Array.isArray(temes)) temes = [];
-  } catch(e) {
-    temes = [];
-  }
-
-  // Espera a que el usuario esté autenticado
-  let user = null;
-  if (typeof isUserAuthenticated === "function") {
-    user = await isUserAuthenticated(false);
-  }
+  } catch(e) {}
+  // Cargar logros reales del usuario
   let logros = {};
-  if (user && typeof getLogros === "function") {
-    logros = await getLogros(user.uid);
+  if (typeof getLogros === "function") {
+    logros = await getLogros(uid);
   }
+  const estadoMap = {
+    perfecte: 'green',
+    completat: 'yellow'
+  };
   const ul = document.getElementById("temesSeleccionats");
-  if (!ul) return;
-
   ul.innerHTML = temes.map(idx => {
-    const temaNom = nomsTemes[parseInt(idx,10)-1] || "(tema desconegut)";
-    // --- CORRECCIÓN: Buscar logros con la clave correcta (tema1, tema2, etc) ---
-    const logrosTema = logros[`tema${idx}`] || {};
-    function colorStar(mod) {
-      if (logrosTema[mod] === 'perfecte') return 'green';
-      if (logrosTema[mod] === 'completat') return 'yellow';
-      return '';
-    }
+    const temaNom = nomsTemes[parseInt(idx,10)-1];
+    const logrosTema = logros && logros[`tema${idx}`] ? logros[`tema${idx}`] : {};
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
       <span class="stars">
-        <span class="star ${colorStar('teoria')}"></span>
-        <span class="star ${colorStar('terminologia')}"></span>
-        <span class="star ${colorStar('audicions')}"></span>
+        <span class="star ${estadoMap[logrosTema.teoria] || ''}" title="Teoria">&#9733;</span>
+        <span class="star ${estadoMap[logrosTema.terminologia] || ''}" title="Terminologia">&#9733;</span>
+        <span class="star ${estadoMap[logrosTema.audicions] || ''}" title="Audicions">&#9733;</span>
       </span>
     </li>`;
   }).join('');
 }
-window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
 
-// Mostrar usuario y botón sortir (si tienes función global, úsala)
+// Lógica de autenticación y renderizado
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof isUserAuthenticated === "function") {
+    isUserAuthenticated().then(user => {
+      if (user) {
+        mostrarTemesSeleccionatsAmbLogros(user.uid);
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+  }
+});
+
+// Muestra el email/usuario (si tienes función global, úsala)
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
 });
 
-// Autenticación y mostrar info de usuario/logros (igual que otras pantallas)
-isUserAuthenticated(async function(isAuth, user) {
-  const jugadorInfo = document.getElementById('jugadorInfo');
-  if (isAuth) {
-    jugadorInfo.style.display = 'flex';
-    let nomJugador = user.displayName ? user.displayName : user.email;
-    jugadorInfo.innerHTML = `👤 ${nomJugador}
-      <button id="logoutBtn" onclick="logout()">Sortir</button>`;
-    localStorage.setItem('jugador', nomJugador);
-  } else {
-    jugadorInfo.style.display = 'none';
-    localStorage.removeItem('jugador');
-    window.location.href = "login.html";
-  }
-});
-
 // Controla el envío del formulario de modalidades
 window.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('modalitatsForm');
-  if (!form) return;
-  form.addEventListener('submit', function(e) {
+  document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
     const errorDiv = document.getElementById('error');

@@ -27,18 +27,17 @@ function mostrarTemesSeleccionats() {
   const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
   const modalitats = ['teoria','terminologia','audicions'];
-  const numEstrella = [1,2,3];
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
     const estados = estrelles[idx] || {};
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
       <span class="estrelles-tema">
-        ${modalitats.map((mod, i) => {
+        ${modalitats.map(mod => {
           let color = 'gris';
           if (estados[mod]==='perfecta'||estados[mod]==='perfecte') color='verde';
           else if (estados[mod]==='fallos'||estados[mod]==='completat') color='amarillo';
-          return `<span class="estrella ${mod} ${color}"><span class="numero-estrella">${numEstrella[i]}</span>★</span>`;
+          return `<span class="estrella ${mod} ${color}">★</span>`;
         }).join('')}
       </span>
     </li>`;

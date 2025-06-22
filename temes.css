@@ -50,7 +50,6 @@ button:hover {
   transform: scale(1.06);
   color: #fff;
 }
-/* Bloque usuario arriba derecha (solo uno es suficiente) */
 #jugadorInfo {
   position: fixed;
   top: 1.2em;
@@ -78,7 +77,128 @@ button:hover {
 }
 .estrella.verde { color: #38c172 !important; }
 .estrella.amarillo { color: #ffd600 !important; }
-.estrella.gris { color: #888 !important; }
+.estrella.gris { color: #aaa !important; }
+
+.layout-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.5em;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+@media (max-width: 900px) {
+  .layout-flex {
+    flex-direction: column;
+    gap: 1.2em;
+    align-items: stretch;
+  }
+}
+
+/* Cuadro principal y cuadro leyenda (mismo fondo y estilo) */
+.container.center, .leyenda-nueva {
+  background: linear-gradient(120deg, #232443 70%, #2a184c 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
+  padding: 2em 2em 1.7em 2em;
+  color: #fff;
+  font-size: 1.08em;
+  min-width: 290px;
+  max-width: 385px;
+  min-height: 420px;
+  margin-top: 1.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: none;
+}
+
+.leyenda-nueva {
+  max-width: 340px;
+  min-height: 340px;
+  margin-bottom: 2em;
+  margin-left: 0;
+  margin-right: 0;
+  align-self: flex-start;
+  box-shadow: 0 6px 22px #0003, 0 2px 1.6px #38385a55;
+}
+
+.leyenda-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5em;
+  margin-bottom: 1.2em;
+  margin-left: 0.3em;
+  width: 100%;
+  justify-content: flex-start;
+}
+.leyenda-row .estrella {
+  font-size: 2.1em;
+  margin-right: 0.15em;
+  vertical-align: middle;
+  position: relative;
+  padding-left: 0.12em;
+  padding-right: 0.12em;
+  font-family: inherit;
+  display: inline-block;
+}
+.numero-estrella {
+  position: absolute;
+  top: -1.15em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.83em;
+  color: #fff;
+  background: #403080de;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  line-height: 1.3em;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  border: 2px solid #fff5;
+  box-shadow: 0 1px 4px #0002;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.llista-llegenda {
+  margin: 0.2em 0 0 0.4em;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+.llista-llegenda li {
+  margin: 0.09em 0 0.09em 0;
+  padding-left: 0.1em;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1.02em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.llista-llegenda .estrella {
+  margin-right: 0.42em;
+  font-size: 1.28em;
+  vertical-align: middle;
+}
+
+@media (max-width: 900px) {
+  .container.center, .leyenda-nueva {
+    max-width: 99vw;
+    min-width: 0;
+    margin: 0.6em auto;
+    padding: 1.1em 0.6em 1.1em 0.6em;
+  }
+  .leyenda-nueva { min-height: 150px; }
+  .leyenda-row { gap: 0.7em; }
+}
 @media (max-width: 600px) {
   .actions {
     flex-direction: column;
@@ -102,88 +222,3 @@ button:hover {
     padding: 0.33em 1em;
   }
 }
-
-.leyenda-nueva {
-  background: linear-gradient(120deg, #f5f5fa 65%, #f0e5ff 100%);
-  border-radius: 15px;
-  box-shadow: 0 4px 16px #0001, 0 1.5px 0.5px #c9c9e0;
-  padding: 1.6em 1.25em 1.2em 1.5em;
-  margin-bottom: 2em;
-  font-size: 1.08em;
-  max-width: 355px;
-  min-width: 270px;
-  min-height: 170px;
-  margin-top: 1.8em;
-  margin-left: -0.7em;
-  transition: box-shadow 0.18s;
-  border: 1.5px solid #e3dfff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.leyenda-nueva:hover { box-shadow: 0 8px 24px #b8b8e055, 0 2px 1.6px #c9c9e0; }
-.leyenda-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.7em;
-  margin-left: 0.1em;
-  gap: 0.38em;
-}
-.leyenda-row .estrella {
-  font-size: 1.23em;
-  margin-right: 0.18em;
-  vertical-align: middle;
-  position: relative;
-  padding-left: 0.8em;
-}
-.numero-estrella {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-51%);
-  font-size: 0.93em;
-  color: #403080;
-  font-weight: 700;
-  background: transparent;
-  width: 1em;
-  text-align: center;
-  pointer-events: none;
-}
-.llista-llegenda {
-  margin: 0.3em 0 0 0.4em;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-}
-.llista-llegenda li {
-  margin: 0.08em 0 0.08em 0;
-  padding-left: 0.1em;
-  display: flex;
-  align-items: center;
-  color: #35345a;
-  font-size: 0.98em;
-}
-.llista-llegenda .estrella {
-  margin-right: 0.32em;
-  font-size: 1.15em;
-  vertical-align: middle;
-}
-
-.layout-flex {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 2.5em;
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    @media (max-width: 900px) {
-      .layout-flex {
-        flex-direction: column;
-        gap: 1.2em;
-        align-items: stretch;
-      }
-    }

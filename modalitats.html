@@ -11,16 +11,16 @@
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
   <div class="layout-flex">
-    <aside class="leyenda-nueva" style="margin-right:2.3em; min-width:260px; align-self:flex-start;">
+    <aside class="leyenda-nueva leyenda-modalitats">
       <div class="leyenda-row" style="gap:0.7em;">
-        <span class="estrella teoria verde"><span class="numero-estrella">1</span>★</span>
-        <span class="estrella terminologia amarillo"><span class="numero-estrella">2</span>★</span>
-        <span class="estrella audicions gris"><span class="numero-estrella">3</span>★</span>
+        <span class="estrella teoria verde">★</span>
+        <span class="estrella terminologia amarillo">★</span>
+        <span class="estrella audicions gris">★</span>
       </div>
       <ul class="llista-llegenda">
-        <li><b>1 Teoria</b></li>
-        <li><b>2 Terminologia</b></li>
-        <li><b>3 Audicions</b></li>
+        <li><b>Teoria</b></li>
+        <li><b>Terminologia</b></li>
+        <li><b>Audicions</b></li>
       </ul>
       <ul class="llista-llegenda" style="margin-top:1.3em;">
         <li><span class="estrella verde">★</span> Realitzat perfecte</li>
@@ -33,9 +33,9 @@
     </aside>
     <div class="main-content">
       <div class="container center">
-        <h2>Selecciona les modalitats</h2>
         <form id="modalitatsForm">
-          <div class="modalitats-options">
+          <div class="modalitats-grid">
+            <h2 class="modalitats-titol">Selecciona les modalitats</h2>
             <label class="modalitat-checkbox">
               <input type="checkbox" name="modalitat" value="teoria"> Teoria
             </label>

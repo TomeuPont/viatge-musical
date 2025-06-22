@@ -1,10 +1,9 @@
-/* ACCIONES Y BOTONES */
 .actions {
   display: flex;
   justify-content: center;
   gap: 1.5em;
-  margin-top: 1.1em;     /* Ajustado para menos espacio arriba */
-  margin-bottom: 0.4em;   /* Ajustado para menos espacio abajo */
+  margin-top: 2em;
+  margin-bottom: 1em;
   flex-wrap: wrap;
 }
 .boto-rosa {
@@ -51,48 +50,7 @@ button:hover {
   transform: scale(1.06);
   color: #fff;
 }
-
-/* CONTENEDOR PRINCIPAL */
-.container {
-  margin-top: 1.5em !important;   /* Antes 4em, ahora menos */
-  padding-top: 1.5em;
-  padding-bottom: 1.3em;
-}
-
-/* TÍTULO Y LEYENDA */
-h2 {
-  margin-top: 0.2em;
-  margin-bottom: 0.7em;
-}
-
-/* Leyenda de estrellas */
-.estrelles-leyenda {
-  display: flex;
-  gap: 1.5em;
-  align-items: center;
-  margin-bottom: 0.6em;
-  margin-top: 0;
-  font-size: 1.01em;
-  color: #ffe066;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-.estrelles-leyenda .estrella {
-  margin-right: 0.4em;
-  font-size: 1.2em;
-  vertical-align: middle;
-}
-@media (max-width: 600px) {
-  .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
-  .estrelles-leyenda .estrella { font-size: 1.1em; }
-}
-
-/* GRID DE TEMAS */
-.temes-grid {
-  margin-bottom: 1.2em;
-}
-
-/* BLOQUE USUARIO ARRIBA DERECHA */
+/* Bloque usuario arriba derecha (solo uno es suficiente) */
 #jugadorInfo {
   position: fixed;
   top: 1.2em;
@@ -118,14 +76,13 @@ h2 {
   background: #ff79a7;
   transform: scale(1.07);
 }
-
-/* RESPONSIVE */
+.estrella.verde { color: #38c172 !important; }
+.estrella.amarillo { color: #ffd600 !important; }
+.estrella.gris { color: #888 !important; }
 @media (max-width: 600px) {
   .actions {
     flex-direction: column;
     gap: 0.7em;
-    margin-top: 0.6em;
-    margin-bottom: 0.2em;
   }
   .boto-rosa, button {
     padding: 0.8rem 1.2rem;
@@ -145,32 +102,3 @@ h2 {
     padding: 0.33em 1em;
   }
 }
-
-.legenda-estrelles {
-  background: #f5f5fa;
-  border-radius: 10px;
-  padding: 1.2em 1em;
-  margin-bottom: 2em;
-  font-size: 1.04em;
-  box-shadow: 0 2px 8px #0001;
-  max-width: 320px;
-}
-.legenda-estrelles .estrella {
-  font-size: 1.25em;
-  margin-right: 0.23em;
-  vertical-align: middle;
-}
-.legenda-estrelles .verde { color: #38c172; }
-.legenda-estrelles .amarillo { color: #ffd600; }
-.legenda-estrelles .gris { color: #888; }
-.llista-llegenda {
-  margin: 0.7em 0 0 0.4em;
-  padding: 0;
-  list-style: none;
-}
-.llista-llegenda li {
-  margin: 0.15em 0 0.18em 0;
-}
-.estrella.verde { color: #38c172 !important; }
-.estrella.amarillo { color: #ffd600 !important; }
-.estrella.gris { color: #888 !important; }

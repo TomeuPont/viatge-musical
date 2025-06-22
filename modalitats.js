@@ -32,9 +32,9 @@ function mostrarTemesSeleccionats() {
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
       <span class="stars">
-        <span class="star ${estados.teoria === 'perfecta' ? 'green' : estados.teoria === 'fallos' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.terminologia === 'perfecta' ? 'green' : estados.terminologia === 'fallos' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.audicions === 'perfecta' ? 'green' : estados.audicions === 'fallos' ? 'yellow' : ''}"></span>
+        <span class="star ${estados.teoria === 'perfecta' ? 'green' : estados.teoria === 'fallos' ? 'yellow' : ''}">★</span>
+        <span class="star ${estados.terminologia === 'perfecta' ? 'green' : estados.terminologia === 'fallos' ? 'yellow' : ''}">★</span>
+        <span class="star ${estados.audicions === 'perfecta' ? 'green' : estados.audicions === 'fallos' ? 'yellow' : ''}">★</span>
       </span>
     </li>`;
   }).join('');
@@ -76,8 +76,6 @@ window.addEventListener('DOMContentLoaded', function() {
     errorDiv.style.display = 'none';
     const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
     localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
-    // Aquí puedes llamar a guardarLogro cuando el usuario complete una modalidad, por ejemplo:
-    // guardarLogro(uid, tema, 'teoria', 'completat');
     window.location.href = 'joc.html';
   });
 });

@@ -4,25 +4,45 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Mostrar estrellas de logros según Firestore
+// Asegúrate de que este archivo se carga después de Firebase y el usuario está autenticado
 
+// Pinta las estrellas según los logros en Firestore
 async function mostrarLogros(uid) {
+  // 1. Cargar los logros del usuario desde Firestore
   const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
   const logros = logrosDoc.exists ? logrosDoc.data() : {};
+
+  // 2. Relación estado <-> clase CSS
   const estadoMap = { perfecte: 'verde', completat: 'amarillo' };
 
+  // 3. Recorrer todos los temas en la página
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
     const logrosTema = logros[`tema${tema}`] || {};
+
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
+      // valor será 'perfecte', 'completat' o undefined
       const valor = logrosTema[modalidad];
+      // clase CSS final
       const estado = estadoMap[valor] || 'gris';
+      // Quita cualquier clase de color previa
       estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
+      // Añade la nueva clase
       estrella.classList.add(estado);
     });
   });
 }
+
+// Llama a mostrarLogros cuando el usuario esté autenticado y la página cargada
+window.addEventListener('DOMContentLoaded', () => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      mostrarLogros(user.uid);
+    }
+  });
+});
 
 // Guardar el tiempo de la música antes de cambiar de página y continuar flujo
 function continuar() {

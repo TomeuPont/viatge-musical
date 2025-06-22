@@ -11,10 +11,7 @@ async function mostrarLogros(uid) {
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
-      let estado;
-      if (logrosTema[modalidad] === 'perfecte') estado = 'verde';
-      else if (logrosTema[modalidad] === 'completat') estado = 'amarillo';
-      else estado = 'gris';
+      const estado = logrosTema[modalidad] || 'gris';
       estrella.classList.remove('gris','amarillo','verde');
       estrella.classList.add(estado);
     });

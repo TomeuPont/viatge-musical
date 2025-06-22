@@ -1,74 +1,10 @@
-/* Estilos para la columna lateral de temas seleccionados y estrellas  */
-.side-panel ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tema-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.7em;
-  border-bottom: 1px solid #ffd60033;
-  padding: 0.5em 0 0.3em 0;
-  min-width: 0;
-}
-
-.tema-nom {
-  overflow: unset;
-  flex: 1 1 auto;
-  font-weight: 500;
-  min-width: 0;
-  word-break: break-word;
-}
-
-.stars {
-  display: flex;
-  gap: 0.1em;
-  font-size: 1.22em;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-.star {
-  color: #888; /* Vacía */
-  font-size: 1.13em;
-}
-.star.yellow {
-  color: #ffd600;
-}
-.star.green {
-  color: #38c172;
-}
-
-.estrelles-leyenda {
-  display: flex;
-  gap: 1.5em;
-  align-items: center;
-  margin-bottom: 1em;
-  margin-top: 0.5em;
-  font-size: 1.01em;
-  color: #ffe066;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-.estrelles-leyenda .estrella {
-  margin-right: 0.4em;
-  font-size: 1.2em;
-  vertical-align: middle;
-}
-@media (max-width: 600px) {
-  .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
-  .estrelles-leyenda .estrella { font-size: 1.1em; }
-}
-
-/* Aumenta el ancho del panel lateral y mejora su aspecto */
+/* Panel lateral y leyenda de estrellas */
 .side-panel {
   position: fixed;
   left: 0;
   top: 0;
   height: 100vh;
-  width: 310px; /* antes por defecto suele ser unos 220-250px, ahora más ancho */
+  width: 310px;
   background: #232346;
   color: #ffe066;
   padding: 2.1em 1.2em 1.8em 1.2em;
@@ -80,28 +16,75 @@
 .side-panel h3 {
   margin-top: 0.5em;
   margin-bottom: 0.7em;
-  font-size: 1.18em;
+  font-size: 1.13em;
   color: #ffd600;
 }
-.side-panel .estrelles-leyenda {
-  margin-bottom: 1em;
+
+/* Leyenda estrellas */
+.estrelles-leyenda {
+  display: flex;
+  gap: 1.1em;
+  align-items: center;
+  margin-bottom: 0.6em;
   margin-top: 0.2em;
-  font-size: 1em;
-  flex-wrap: wrap;
-  gap: 1em;
+  font-size: 1.01em;
+  color: #ffe066;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
-#temesSeleccionats {
+.estrelles-leyenda .estrella {
+  margin-right: 0.3em;
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+.mini-expl-leyenda {
+  display: flex;
+  gap: 1.1em;
+  margin-bottom: 1.2em;
+  margin-left: 0.2em;
+  font-size: 0.99em;
+  color: #ffe066;
+}
+.mini-expl-leyenda .estrella {
+  font-size: 1.08em;
+  margin-right: 0.23em;
+}
+.estrella.green { color: #38c172 !important; }
+.estrella.yellow { color: #ffd600 !important; }
+.estrella { color: #888; }
+
+ul#temesSeleccionats {
   list-style: none;
   padding: 0;
   margin: 0;
   font-size: 0.98em;
 }
-
-/* Ajusta el contenido principal para que no se solape con el panel lateral */
-.main-content {
-  margin-left: 330px; /* ligeramente más que el panel para dejar aire */
-  padding: 2em 0 2em 0;
+.tema-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7em;
+  border-bottom: 1px solid #ffd60033;
+  padding: 0.5em 0 0.3em 0;
+  min-width: 0;
 }
+.tema-nom {
+  overflow: unset;
+  flex: 1 1 auto;
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-word;
+}
+.stars {
+  display: flex;
+  gap: 0.1em;
+  font-size: 1.17em;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.star { color: #888; font-size: 1em; }
+.star.yellow { color: #ffd600; }
+.star.green { color: #38c172; }
 
 @media (max-width: 800px) {
   .side-panel {
@@ -117,4 +100,10 @@
     margin-left: 0;
     padding: 0.5em 0 1.2em 0;
   }
+}
+
+/* Ajusta el contenido principal para que no se solape con el panel lateral */
+.main-content {
+  margin-left: 330px;
+  padding: 2em 0 2em 0;
 }

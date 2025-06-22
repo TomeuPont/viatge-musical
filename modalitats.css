@@ -1,109 +1,158 @@
-/* Panel lateral y leyenda de estrellas */
-.side-panel {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 310px;
-  background: #232346;
-  color: #ffe066;
-  padding: 2.1em 1.2em 1.8em 1.2em;
-  box-shadow: 2px 0 12px #0004;
+/* Panel lateral y leyenda */
+.leyenda-nueva {
+  background: linear-gradient(120deg, #232443 80%, #2a184c 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
+  padding: 1.7em 1em 1.3em 1.1em;
+  color: #fff;
+  font-size: 1.06em;
+  min-width: 210px;
+  max-width: 295px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
-  z-index: 100;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: none;
 }
-.side-panel h3 {
-  margin-top: 0.5em;
-  margin-bottom: 0.7em;
-  font-size: 1.13em;
-  color: #ffd600;
-}
-
-/* Leyenda estrellas */
-.estrelles-leyenda {
+.leyenda-row {
   display: flex;
-  gap: 1.1em;
+  align-items: flex-end;
+  gap: 0.7em;
+  margin-bottom: 1.05em;
+  margin-left: 0.1em;
+  width: 100%;
+  justify-content: flex-start;
+}
+.leyenda-row .estrella {
+  font-size: 1.23em;
+  margin-right: 0.05em;
+  vertical-align: middle;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  font-family: inherit;
+}
+.numero-estrella {
+  position: absolute;
+  top: -1.15em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.77em;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: none;
+  border: none;
+  box-shadow: none;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 1;
+}
+.llista-llegenda {
+  margin: 0.2em 0 0 0.2em;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+.llista-llegenda li {
+  margin: 0.09em 0 0.09em 0;
+  padding-left: 0.1em;
+  display: flex;
   align-items: center;
-  margin-bottom: 0.6em;
-  margin-top: 0.2em;
+  color: #fff;
   font-size: 1.01em;
-  color: #ffe066;
   font-weight: 500;
   letter-spacing: 0.01em;
 }
-.estrelles-leyenda .estrella {
-  margin-right: 0.3em;
-  font-size: 1.1em;
+.llista-llegenda .estrella {
+  margin-right: 0.39em;
+  font-size: 1.25em;
   vertical-align: middle;
 }
-.mini-expl-leyenda {
-  display: flex;
-  gap: 1.1em;
-  margin-bottom: 1.2em;
-  margin-left: 0.2em;
-  font-size: 0.99em;
-  color: #ffe066;
-}
-.mini-expl-leyenda .estrella {
-  font-size: 1.08em;
-  margin-right: 0.23em;
-}
-.estrella.green { color: #38c172 !important; }
-.estrella.yellow { color: #ffd600 !important; }
-.estrella { color: #888; }
+.estrella.verde { color: #38c172 !important; }
+.estrella.amarillo { color: #ffd600 !important; }
+.estrella.gris { color: #aaa !important; }
+.estrella.teoria {}
+.estrella.terminologia {}
+.estrella.audicions {}
 
-ul#temesSeleccionats {
+#temesSeleccionats {
   list-style: none;
   padding: 0;
   margin: 0;
   font-size: 0.98em;
+  width: 100%;
 }
 .tema-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.7em;
+  gap: 0.8em;
   border-bottom: 1px solid #ffd60033;
   padding: 0.5em 0 0.3em 0;
   min-width: 0;
 }
 .tema-nom {
-  overflow: unset;
   flex: 1 1 auto;
   font-weight: 500;
   min-width: 0;
   word-break: break-word;
+  color: #fff;
+  font-size: 1em;
 }
-.stars {
+.estrelles-tema {
   display: flex;
-  gap: 0.1em;
-  font-size: 1.17em;
-  margin-top: 2px;
-  flex-shrink: 0;
+  gap: 0.21em;
+  margin-left: 0.7em;
 }
-.star { color: #888; font-size: 1em; }
-.star.yellow { color: #ffd600; }
-.star.green { color: #38c172; }
+.estrelles-tema .estrella {
+  font-size: 1.17em;
+  position: relative;
+}
 
-@media (max-width: 800px) {
-  .side-panel {
-    position: relative;
-    width: 100%;
-    height: auto;
-    box-shadow: none;
-    flex-direction: column;
-    padding: 1.2em 0.6em 0.7em 0.6em;
-    margin-bottom: 0.7em;
-  }
-  .main-content {
-    margin-left: 0;
-    padding: 0.5em 0 1.2em 0;
+@media (max-width: 900px) {
+  .leyenda-nueva {
+    margin: 0 auto 0.8em auto;
+    align-self: center;
+    min-width: 0;
+    max-width: 99vw;
+    min-height: 150px;
   }
 }
 
 /* Ajusta el contenido principal para que no se solape con el panel lateral */
 .main-content {
-  margin-left: 330px;
+  flex: 1 1 auto;
+  min-width: 0;
   padding: 2em 0 2em 0;
+}
+.layout-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2.2em;
+  width: 100%;
+  max-width: 1300px;
+  margin: 80px auto 0 auto;
+  min-height: 80vh;
+  padding: 0 2vw;
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  .layout-flex {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 65px;
+    gap: 1em;
+    min-height: unset;
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 0.5em 0 1.2em 0;
+  }
 }

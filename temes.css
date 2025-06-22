@@ -146,6 +146,31 @@ h2 {
   }
 }
 
+.legenda-estrelles {
+  background: #f5f5fa;
+  border-radius: 10px;
+  padding: 1.2em 1em;
+  margin-bottom: 2em;
+  font-size: 1.04em;
+  box-shadow: 0 2px 8px #0001;
+  max-width: 320px;
+}
+.legenda-estrelles .estrella {
+  font-size: 1.25em;
+  margin-right: 0.23em;
+  vertical-align: middle;
+}
+.legenda-estrelles .verde { color: #38c172; }
+.legenda-estrelles .amarillo { color: #ffd600; }
+.legenda-estrelles .gris { color: #888; }
+.llista-llegenda {
+  margin: 0.7em 0 0 0.4em;
+  padding: 0;
+  list-style: none;
+}
+.llista-llegenda li {
+  margin: 0.15em 0 0.18em 0;
+}
 .estrella.verde { color: #38c172 !important; }
 .estrella.amarillo { color: #ffd600 !important; }
 .estrella.gris { color: #888 !important; }

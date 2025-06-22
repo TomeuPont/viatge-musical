@@ -1,69 +1,10 @@
-console.log("[DEBUG] temes.js cargado");
-
+// =======================
+// Mostrar usuario y botón "Sortir" arriba a la derecha (como en las otras páginas)
+// =======================
 window.addEventListener('DOMContentLoaded', () => {
-  console.log("[DEBUG] DOMContentLoaded");
-  if (typeof firebase === "undefined") {
-    console.error("[DEBUG] Firebase NO está definido");
-    return;
-  }
   firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      console.log("[DEBUG] Usuario autenticado:", user.uid);
-      mostrarLogros(user.uid);
-    } else {
-      console.warn("[DEBUG] Usuario NO autenticado");
-    }
-  });
-});
-
-async function mostrarLogros(uid) {
-  console.log("== [DEBUG] mostrarLogros iniciado con UID:", uid);
-
-  // 1. Cargar los logros del usuario desde Firestore
-  let logrosDoc;
-  try {
-    logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
-  } catch (e) {
-    console.error("[DEBUG] Error obteniendo logros:", e);
-    return;
-  }
-
-  if (!logrosDoc.exists) {
-    console.warn("[DEBUG] No hay documento de logros para este usuario.");
-    return;
-  }
-
-  const logros = logrosDoc.data();
-  console.log("[DEBUG] Logros recibidos de Firestore:", logros);
-
-  // 2. Relación estado <-> clase CSS
-  const estadoMap = { perfecte: 'verde', completat: 'amarillo' };
-
-  // 3. Recorrer todos los temas en la página
-  document.querySelectorAll('.tema-option').forEach(label => {
-    const tema = label.getAttribute('data-tema');
-    ['teoria','terminologia','audicions'].forEach(modalidad => {
-      const estrella = label.querySelector(`.estrella.${modalidad}`);
-      if (!estrella) {
-        console.warn(`[DEBUG] No se encuentra estrella .estrella.${modalidad} en tema${tema}`);
-        return;
-      }
-      // Busca la clave plana: temaN.modalidad
-      const clave = `tema${tema}.${modalidad}`;
-      const valor = logros[clave];
-      console.log(`[DEBUG] Tema: tema${tema}, Modalitat: ${modalidad}, clave: ${clave}, valor:`, valor);
-      const estado = estadoMap[valor] || 'gris';
-      estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
-      estrella.classList.add(estado);
-      console.log(`[DEBUG]   Añadida clase: ${estado} a .estrella.${modalidad} de tema${tema}`);
-    });
-  });
-}
-
-if (typeof isUserAuthenticated === "function") {
-  isUserAuthenticated(async function(isAuth, user) {
     const jugadorInfo = document.getElementById('jugadorInfo');
-    if (isAuth) {
+    if (user) {
       jugadorInfo.style.display = 'flex';
       let nomJugador = user.displayName ? user.displayName : user.email;
       jugadorInfo.innerHTML = `👤 ${nomJugador}
@@ -74,5 +15,92 @@ if (typeof isUserAuthenticated === "function") {
       localStorage.removeItem('jugador');
       window.location.href = "login.html";
     }
+  });
+});
+
+// =======================
+// Mostrar estrellas de logros según Firestore (funcionalidad actual)
+// =======================
+async function mostrarLogros(uid) {
+  const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
+  const logros = logrosDoc.exists ? logrosDoc.data() : {};
+  document.querySelectorAll('.tema-option').forEach(label => {
+    const tema = label.getAttribute('data-tema');
+    ['teoria','terminologia','audicions'].forEach(modalidad => {
+      const estrella = label.querySelector(`.estrella.${modalidad}`);
+      if (!estrella) return;
+      const clave = `tema${tema}.${modalidad}`;
+      const estado = (() => {
+        const valor = logros[clave];
+        if (valor === "perfecte") return "verde";
+        if (valor === "completat") return "amarillo";
+        return "gris";
+      })();
+      estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
+      estrella.classList.add(estado);
+    });
+  });
+}
+
+// =======================
+// Proteger acceso y cargar logros al entrar
+// =======================
+window.addEventListener("DOMContentLoaded", () => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      mostrarLogros(user.uid);
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+});
+
+// =======================
+// Botón CONTINUAR funcional
+// =======================
+function continuar() {
+  // Guarda el tiempo de la música antes de cambiar de página
+  const musica = document.getElementById('musicaFondo');
+  if (musica && !musica.paused) {
+    localStorage.setItem('musicaFondoTime', musica.currentTime);
+  }
+  // Comprobar selección
+  const checkboxes = document.querySelectorAll('#temesForm input[type="checkbox"]:checked');
+  const errorDiv = document.getElementById('error');
+  if (checkboxes.length === 0) {
+    errorDiv.textContent = 'Per favor, selecciona almenys un apartat per continuar.';
+    errorDiv.style.display = 'block';
+    return;
+  }
+  errorDiv.style.display = 'none';
+  // Guarda los temas seleccionados (array de valores) en localStorage
+  const temesSeleccionats = Array.from(checkboxes).map(cb => cb.value);
+  localStorage.setItem('temesSeleccionats', JSON.stringify(temesSeleccionats));
+  window.location.href = 'modalitats.html';
+}
+
+// =======================
+// Música de fondo: recuperar posición y play/pause según ON/OFF
+// =======================
+window.addEventListener("DOMContentLoaded", () => {
+  const musica = document.getElementById('musicaFondo');
+  const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
+  if (!isNaN(tiempo)) {
+    musica.currentTime = tiempo;
+  }
+  if (localStorage.getItem('musicaFondoON') === 'si') {
+    musica.volume = 0.4;
+    musica.play().catch(()=>{});
+  } else {
+    musica.pause();
+  }
+});
+
+// =======================
+// Función logout (como en otras páginas)
+// =======================
+function logout() {
+  firebase.auth().signOut().then(() => {
+    window.location.href = "login.html";
   });
 }

@@ -6,41 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
   <link rel="stylesheet" href="modalitats.css">
-  <style>
-    /* Leyenda de estrellas */
-    .estrelles-leyenda {
-      display: flex;
-      gap: 1.5em;
-      align-items: center;
-      margin-bottom: 1em;
-      margin-top: 0.5em;
-      font-size: 1.01em;
-      color: #ffe066;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-    }
-    .estrelles-leyenda .estrella {
-      margin-right: 0.4em;
-      font-size: 1.2em;
-      vertical-align: middle;
-    }
-    @media (max-width: 600px) {
-      .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
-      .estrelles-leyenda .estrella { font-size: 1.1em; }
-    }
-  </style>
 </head>
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
-  <!-- Panel lateral para mostrar temas seleccionados y estrellas -->
+  <!-- Panel lateral para mostrar leyenda y temas seleccionados -->
   <div class="side-panel">
-    <h3>Apartats seleccionats</h3>
+    <h3>Referència</h3>
     <!-- Leyenda de estrellas -->
     <div class="estrelles-leyenda" aria-label="Llegenda de les estrelles">
-      <span><span class="estrella teoria gris" aria-hidden="true"></span> Teoria</span>
-      <span><span class="estrella terminologia gris" aria-hidden="true"></span> Terminologia</span>
-      <span><span class="estrella audicions gris" aria-hidden="true"></span> Audicions</span>
+      <span><span class="estrella teoria gris" aria-hidden="true">★</span> Teoria</span>
+      <span><span class="estrella terminologia gris" aria-hidden="true">★</span> Terminologia</span>
+      <span><span class="estrella audicions gris" aria-hidden="true">★</span> Audicions</span>
     </div>
+    <div class="mini-expl-leyenda">
+      <span><span class="estrella green">★</span> Perfecte</span>
+      <span><span class="estrella yellow">★</span> Amb errors</span>
+      <span><span class="estrella">★</span> No fet</span>
+    </div>
+    <h3>Apartats seleccionats</h3>
     <ul id="temesSeleccionats"></ul>
   </div>
   <div class="main-content">

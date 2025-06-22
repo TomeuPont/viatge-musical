@@ -24,14 +24,13 @@ async function mostrarLogros(uid) {
     });
   });
 }
-// Llama a mostrarLogros cuando el usuario esté autenticado y la página cargada
+
 window.addEventListener('DOMContentLoaded', () => {
   firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      mostrarLogros(user.uid);
-    }
+    if (user) mostrarLogros(user.uid);
   });
 });
+
 // Guardar el tiempo de la música antes de cambiar de página y continuar flujo
 function continuar() {
   const musica = document.getElementById('musicaFondo');

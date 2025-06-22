@@ -48,7 +48,7 @@ async function mostrarLogros(uid) {
         console.warn(`[DEBUG] No se encuentra estrella .estrella.${modalidad} en tema${tema}`);
         return;
       }
-      // OJO: ahora buscamos en logros["temaN.modalidad"]
+      // Busca la clave plana: temaN.modalidad
       const clave = `tema${tema}.${modalidad}`;
       const valor = logros[clave];
       console.log(`[DEBUG] Tema: tema${tema}, Modalitat: ${modalidad}, clave: ${clave}, valor:`, valor);

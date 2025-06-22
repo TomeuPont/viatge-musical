@@ -42,17 +42,16 @@ async function mostrarLogros(uid) {
   // 3. Recorrer todos los temas en la página
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
-    const logrosTema = logros[`tema${tema}`] || {};
-    console.log(`[DEBUG] Tema: tema${tema}`, logrosTema);
-
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) {
         console.warn(`[DEBUG] No se encuentra estrella .estrella.${modalidad} en tema${tema}`);
         return;
       }
-      const valor = logrosTema[modalidad];
-      console.log(`[DEBUG]   Modalitat: ${modalidad}, valor:`, valor);
+      // OJO: ahora buscamos en logros["temaN.modalidad"]
+      const clave = `tema${tema}.${modalidad}`;
+      const valor = logros[clave];
+      console.log(`[DEBUG] Tema: tema${tema}, Modalitat: ${modalidad}, clave: ${clave}, valor:`, valor);
       const estado = estadoMap[valor] || 'gris';
       estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
       estrella.classList.add(estado);

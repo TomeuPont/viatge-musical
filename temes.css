@@ -103,7 +103,6 @@ button:hover {
   }
 }
 
-/* Leyenda de estrellas: estilo profesional y alineado */
 .leyenda-nueva {
   background: linear-gradient(120deg, #f5f5fa 65%, #f0e5ff 100%);
   border-radius: 15px;
@@ -113,7 +112,7 @@ button:hover {
   font-size: 1.08em;
   max-width: 355px;
   min-width: 270px;
-  min-height: 210px;
+  min-height: 170px;
   margin-top: 1.8em;
   margin-left: -0.7em;
   transition: box-shadow 0.18s;
@@ -123,69 +122,48 @@ button:hover {
   justify-content: flex-start;
   align-items: flex-start;
 }
-
-.leyenda-nueva:hover {
-  box-shadow: 0 8px 24px #b8b8e055, 0 2px 1.6px #c9c9e0;
-}
-
-.leyenda-titulo {
-  display: flex;
-  align-items: center;
-  gap: 0.35em;
-  margin-bottom: 0.7em;
-}
-
-.leyenda-titulo h3 {
-  margin: 0;
-  font-size: 1.19em;
-  color: #402088;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
+.leyenda-nueva:hover { box-shadow: 0 8px 24px #b8b8e055, 0 2px 1.6px #c9c9e0; }
 .leyenda-row {
   display: flex;
   align-items: center;
   margin-bottom: 0.7em;
   margin-left: 0.1em;
-  gap: 0.32em;
+  gap: 0.38em;
 }
-
 .leyenda-row .estrella {
   font-size: 1.23em;
-  margin-right: 0.15em;
+  margin-right: 0.18em;
   vertical-align: middle;
-  filter: drop-shadow(0 0 2px #ffd600aa);
+  position: relative;
+  padding-left: 0.8em;
 }
-
-.leyenda-row .estrella.gris {
-  filter: none;
+.numero-estrella {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-51%);
+  font-size: 0.93em;
+  color: #403080;
+  font-weight: 700;
+  background: transparent;
+  width: 1em;
+  text-align: center;
+  pointer-events: none;
 }
-
-.leyenda-ordre {
-  margin-left: 0.7em;
-  font-size: 0.99em;
-  color: #595b6c;
-  font-weight: 500;
-  opacity: 0.9;
-}
-
 .llista-llegenda {
-  margin: 0.5em 0 0 0.4em;
+  margin: 0.3em 0 0 0.4em;
   padding: 0;
   list-style: none;
   width: 100%;
 }
-
 .llista-llegenda li {
-  margin: 0.16em 0 0.16em 0;
+  margin: 0.08em 0 0.08em 0;
   padding-left: 0.1em;
   display: flex;
   align-items: center;
   color: #35345a;
-  font-size: 0.99em;
+  font-size: 0.98em;
 }
-
 .llista-llegenda .estrella {
   margin-right: 0.32em;
   font-size: 1.15em;

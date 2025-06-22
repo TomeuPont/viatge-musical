@@ -81,6 +81,56 @@ function capitalitza(text) {
   return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
 }
 
+// --- NUEVO: Nombres de temas para pantalla de enhorabuena ---
+const nomsTemes = [
+  "Música de l’antiguitat",
+  "Música medieval",
+  "Música del Renaixement",
+  "Música del Barroc",
+  "Música del classicisme",
+  "Música del Romanticisme",
+  "Música del segle XX i últimes tendències",
+  "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
+  "Música de pel·lícules i musicals",
+  "Músiques i danses tradicionals del món",
+  "Músiques i danses tradicionals de les Illes Balears",
+  "Història de la dansa"
+];
+
+// --- NUEVO: Comprobar si el tema está completo (3 estrellas verdes) ---
+function comprobarTemaCompletado(temaId) {
+  try {
+    // Lee el objeto de logros (puede estar en localStorage o Firestore)
+    // Aquí trabajamos con localStorage para simplificar
+    const logros = JSON.parse(localStorage.getItem('logros') || '{}');
+    const temaLogro = logros[temaId];
+    if (
+      temaLogro &&
+      temaLogro.teoria === "perfecta" &&
+      temaLogro.terminologia === "perfecta" &&
+      temaLogro.audicions === "perfecta"
+    ) {
+      // Redirige a la pantalla de enhorabuena con el ID de tema
+      window.location.href = "enhorabona.html?tema=" + temaId;
+    }
+  } catch(e) {
+    // Si hay algún problema, no hacemos nada
+  }
+}
+
+// --- NUEVO: Guardar logros al terminar una modalidad ---
+function guardarLogro(temaId, modalidad, estado) {
+  let logros = {};
+  try {
+    logros = JSON.parse(localStorage.getItem('logros') || '{}');
+  } catch(e) {}
+  if (!logros[temaId]) logros[temaId] = {};
+  logros[temaId][modalidad] = estado;
+  localStorage.setItem('logros', JSON.stringify(logros));
+  // Comprobar si todas las modalidades están completas para ese tema
+  comprobarTemaCompletado(temaId);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
     document.getElementById("qcontainer").innerHTML = `
@@ -115,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
             temaObj.preguntes.forEach(p => {
               preguntesPlanas.push({
                 tema: temaObj.tema,
-                temaId: temaObj.id, // Importante para logros
+                temaId: temaObj.id,
                 modalitat: data.modalitat || modalitat,
                 titol: p.titol,
                 pregunta: p.pregunta,
@@ -128,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+
     if (!preguntesPlanas.length) {
       document.getElementById("qcontainer").innerHTML = `
         <div class="no-questions">
@@ -138,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       return;
     }
-
+    
     shuffleArray(preguntesPlanas);
     preguntesPlanas = preguntesPlanas.map(p => {
       const opcions = [...p.opcions];
@@ -185,9 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       const actual = preguntesPlanas[index];
-      const totalPreguntes = preguntesPlanas.length;
-      // Mostrar el contador de pregunta actual / total
-      document.getElementById("question-counter").textContent = `Pregunta ${index + 1} / ${totalPreguntes}`;
       document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
       document.getElementById("tema").textContent = actual.tema || '';
       document.getElementById("pregunta").innerHTML = "Pregunta: " + (actual.pregunta || '');
@@ -198,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("feedback").textContent = "";
       respostaMostrada = false;
 
-      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA ---
+      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA (corregido con robustez) ---
       const mod = (actual.modalitat || "").toLowerCase();
       if (mod.includes("audicio")) {
         silenciarMusicaFondo();
@@ -254,56 +302,21 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.style.display = "block";
     }
 
-    function comprovarResposta(seleccio) {
-      if (respostaMostrada) return;
-      respostaMostrada = true;
-      const correcta = preguntesPlanas[index].correcta;
-      const feedback = document.getElementById("feedback");
-      if (seleccio === correcta) {
-        feedback.textContent = "✅ Correcte!";
-        feedback.style.color = "#00ff88";
-        encerts++;
-      } else {
-        feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntesPlanas[index].opcions[correcta];
-        feedback.style.color = "#ff8888";
-        errors++;
-      }
-    }
-
+    // --- MODIFICADO: Al terminar todas las preguntas, guarda el logro y comprueba si debe mostrar enhorabuena ---
     function seguentPregunta() {
       if (index < preguntesPlanas.length - 1) {
         index++;
         carregarPregunta();
       } else {
-        // --- GUARDAR LOGRO EN FIRESTORE ---
-        try {
-          // Modalitat actual: todas las preguntas de la ronda son de la misma modalidad
-          const modalitatActual = preguntesPlanas.length > 0 ? preguntesPlanas[0].modalitat : null;
-          // Temes en partida (pueden ser varios si el usuario seleccionó más de uno)
-          const temasEnPartida = Array.from(new Set(preguntesPlanas.map(p => ({ id: p.temaId, nom: p.tema }))));
-          // Estado del logro
-          let estat = "completat";
-          if (errors === 0) estat = "perfecte";
-          isUserAuthenticated().then(user => {
-            if (user && temasEnPartida.length && modalitatActual) {
-              temasEnPartida.forEach(temaObj => {
-                // Guardar bajo clave temaX (por id, para compatibilidad con otras vistas)
+        // Determinar el tema y modalidad actual
+        const actual = preguntesPlanas[index];
+        // Si has acertado todas las preguntas de esta modalidad, es "perfecta"
+        // Si tienes algún fallo, puede ser "fallos" u otro estado según tu lógica
+        // Aquí: perfecta si todos correctos, fallos si al menos 1 error
+        let estadoModalidad = (errors === 0) ? "perfecta" : "fallos";
+        // Guarda el logro (esto también comprueba si hay que mostrar la enhorabuena)
+        guardarLogro(actual.temaId, actual.modalitat, estadoModalidad);
 
-                const MODALITAT_MAP = {
-                "Treballar contingut teòric": "teoria",
-                "Treballar terminologia": "terminologia",
-                "Treballar audicions": "audicions"
-                };
-                const modalitatFinal = MODALITAT_MAP[modalitatActual] || modalitatActual;
-                setLogro(user.uid, temaObj.id, modalitatFinal, estat);
-               
-              });
-            }
-          });
-        } catch (e) {
-          console.error("Error guardant logros:", e);
-        }
-        // Mostrar resumen final
         document.getElementById("qcontainer").innerHTML = `
           <h2>Has completat totes les preguntes! 🎉</h2>
           <p>✅ Correctes: ${encerts}</p>
@@ -326,21 +339,3 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   });
 });
-
-// Después de guardar el logro de la modalidad actual para el tema actual
-function comprobarTemaCompletado(uid, temaId) {
-  // Suponiendo que ya tienes una función getLogros(uid) que devuelve un objeto así:
-  // { "1": { teoria: "perfecta", terminologia: "perfecta", audicions: "perfecta" }, ... }
-  getLogros(uid).then(logros => {
-    const temaLogro = logros[temaId];
-    if (
-      temaLogro &&
-      temaLogro.teoria === "perfecta" &&
-      temaLogro.terminologia === "perfecta" &&
-      temaLogro.audicions === "perfecta"
-    ) {
-      // Redirige a la pantalla de enhorabuena
-      window.location.href = "enhorabona.html?tema=" + temaId;
-    }
-  });
-}

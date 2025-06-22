@@ -296,3 +296,21 @@ h2 {
   font-size: 1em;
   display: block;
 }
+
+.temes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.39em 1.08em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.temes-titol {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 0 0 0.8em 0;
+  font-size: 1.25em;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}

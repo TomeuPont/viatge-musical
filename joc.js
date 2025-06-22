@@ -96,20 +96,17 @@ async function comprobarTemaCompletadoFirestore(uid, temaId) {
 }
 
 // --- NUEVO: Guardar logros en Firestore ---
+
 function guardarLogroFirestore(uid, temaId, modalidad, estado) {
   const userLogrosRef = firebase.firestore().collection('logros').doc(uid);
-  const temaKey = `tema${temaId}`;
-  // Guardar el logro de la modalidad
+  const temaKey = `tema${temaId}.${modalidad}`; // dot notation
   userLogrosRef.set({
-    [temaKey]: {
-      [modalidad]: estado
-    }
+    [temaKey]: estado
   }, { merge: true }).then(() => {
-    // Comprobar si ya tiene las 3 estrellas verdes
+    // Comprobar si ya tiene las 3 estrelles verdes
     comprobarTemaCompletadoFirestore(uid, temaId);
   });
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
     document.getElementById("qcontainer").innerHTML = `

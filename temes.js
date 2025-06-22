@@ -6,17 +6,13 @@ window.addEventListener('DOMContentLoaded', () => {
 // Mostrar estrellas de logros según Firestore
 async function mostrarLogros(uid) {
   const logros = await getLogros(uid);
-  // Mapeo de valores Firestore a las clases CSS de color
   const estadoMap = { perfecte: 'verde', completat: 'amarillo' };
-  // Por cada tema
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
-    // ¡¡¡AQUÍ ESTÁ EL CAMBIO CLAVE!!!
     const logrosTema = logros[`tema${tema}`] || {};
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
-      // Mapeamos el valor Firestore a la clase CSS
       const estado = estadoMap[logrosTema[modalidad]] || 'gris';
       estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
       estrella.classList.add(estado);
@@ -74,5 +70,4 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Extra: si vuelves desde la partida SIN recargar (SPA), puedes exponer mostrarLogros global
 window.mostrarLogros = mostrarLogros;

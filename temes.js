@@ -6,21 +6,21 @@ window.addEventListener('DOMContentLoaded', () => {
 // Mostrar estrellas de logros según Firestore
 async function mostrarLogros(uid) {
   const logros = await getLogros(uid);
-  console.log('logros:', logros);
   const estadoMap = { perfecte: 'verde', completat: 'amarillo' };
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
     const logrosTema = logros[`tema${tema}`] || {};
     ['teoria','terminologia','audicions'].forEach(modalidad => {
-      console.log(`tema: tema${tema}`, logrosTema, modalidad, logrosTema[modalidad]);
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
-      const estado = estadoMap[logrosTema[modalidad]] || 'gris';
+      const valor = logrosTema[modalidad];
+      const estado = estadoMap[valor] || 'gris';
       estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
       estrella.classList.add(estado);
     });
   });
 }
+
 // Guardar el tiempo de la música antes de cambiar de página y continuar flujo
 function continuar() {
   const musica = document.getElementById('musicaFondo');
@@ -70,5 +70,3 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-window.mostrarLogros = mostrarLogros;

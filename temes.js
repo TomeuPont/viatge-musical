@@ -6,10 +6,8 @@ window.addEventListener('DOMContentLoaded', () => {
 // Mostrar estrellas de logros según Firestore (corregido para mapear bien los estados)
 async function mostrarLogros(uid) {
   const logros = await getLogros(uid);
-  JSON.stringify(logros,null,2));
-  console.log('logros Firestore (temes):', logros);
-  // ...
- 
+  console.log('logros Firestore (temes):',
+  JSON.stringify(logros,null,2));  
   
   // Mapeo de valores Firestore a las clases CSS de color
   const estadoMap = {

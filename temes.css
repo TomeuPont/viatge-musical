@@ -1,3 +1,201 @@
+body {
+  background: #181a2a;
+  margin: 0;
+  min-height: 100vh;
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+#jugadorInfo {
+  position: fixed;
+  top: 1.2em;
+  right: 2em;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  z-index: 150;
+  font-size: 1em;
+}
+#jugadorInfo button {
+  padding: 0.4em 1.1em;
+  font-size: 1.01em;
+  background: #ff4081;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  margin-left: 0.2em;
+  box-shadow: 0 2px 8px #0002;
+  transition: background 0.2s, transform 0.18s;
+}
+#jugadorInfo button:hover {
+  background: #ff79a7;
+  transform: scale(1.07);
+}
+
+.layout-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 3.5em;
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto 0 auto;
+  min-height: 80vh;
+  padding: 0 2vw;
+}
+
+/* Leyenda */
+.leyenda-nueva {
+  background: linear-gradient(120deg, #232443 80%, #2a184c 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
+  padding: 2em 1.2em 1.5em 1.7em;
+  color: #fff;
+  font-size: 1.06em;
+  min-width: 210px;
+  max-width: 270px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: none;
+}
+
+.leyenda-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.15em;
+  margin-bottom: 1.05em;
+  margin-left: 0.1em;
+  width: 100%;
+  justify-content: flex-start;
+}
+.leyenda-row .estrella {
+  font-size: 1.3em;
+  margin-right: 0.05em;
+  vertical-align: middle;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  font-family: inherit;
+}
+.numero-estrella {
+  position: absolute;
+  top: -1.15em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.77em;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: none;
+  border: none;
+  box-shadow: none;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.llista-llegenda {
+  margin: 0.2em 0 0 0.2em;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+.llista-llegenda li {
+  margin: 0.09em 0 0.09em 0;
+  padding-left: 0.1em;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1.01em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.llista-llegenda .estrella {
+  margin-right: 0.39em;
+  font-size: 1.25em;
+  vertical-align: middle;
+}
+
+.estrella.verde { color: #38c172 !important; }
+.estrella.amarillo { color: #ffd600 !important; }
+.estrella.gris { color: #aaa !important; }
+
+/* Cuadro de temas */
+.container.center {
+  background: linear-gradient(120deg, #232443 80%, #2a184c 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
+  padding: 2em 2.5em 2em 2.5em;
+  color: #fff;
+  font-size: 1.08em;
+  min-width: 330px;
+  max-width: 545px;
+  min-height: 440px;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 1.2em;
+  font-size: 1.35em;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.temes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.84em;
+  width: 100%;
+}
+
+.tema-option {
+  display: flex;
+  align-items: center;
+  background: none;
+  color: #fff;
+  padding: 0.47em 0.45em 0.47em 0.1em;
+  border-radius: 8px;
+  font-size: 1.05em;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background 0.18s;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  min-height: 2.1em;
+}
+.tema-option input[type="checkbox"] {
+  margin-right: 1em;
+  accent-color: #ff4081;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+}
+.tema-option .logros {
+  margin-left: auto;
+  display: flex;
+  gap: 0.2em;
+}
+.tema-option .estrella {
+  font-size: 1.3em;
+  line-height: 1;
+  font-family: inherit;
+}
+
 .actions {
   display: flex;
   justify-content: center;
@@ -5,6 +203,7 @@
   margin-top: 2em;
   margin-bottom: 1em;
   flex-wrap: wrap;
+  width: 100%;
 }
 .boto-rosa {
   padding: 1rem 2.5rem;
@@ -28,197 +227,63 @@
   transform: scale(1.06);
   color: #fff;
 }
-button {
-  padding: 1rem 2.5rem;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 12px;
-  background-color: #ff4081;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s;
-  box-shadow: 0 4px 18px 0 #0005;
-  letter-spacing: 0.5px;
-  outline: none;
-  margin: 0.5em 0;
-  text-decoration: none;
-  display: inline-block;
-}
-button:hover {
-  background-color: #ff79a7;
-  transform: scale(1.06);
-  color: #fff;
-}
-#jugadorInfo {
-  position: fixed;
-  top: 1.2em;
-  right: 2em;
-  display: flex;
-  align-items: center;
-  gap: 0.7em;
-  z-index: 150;
-}
-#jugadorInfo button {
-  padding: 0.4em 1.1em;
-  font-size: 1.01em;
-  background: #ff4081;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  margin-left: 0.2em;
-  box-shadow: 0 2px 8px #0002;
-  transition: background 0.2s, transform 0.18s;
-}
-#jugadorInfo button:hover {
-  background: #ff79a7;
-  transform: scale(1.07);
-}
-.estrella.verde { color: #38c172 !important; }
-.estrella.amarillo { color: #ffd600 !important; }
-.estrella.gris { color: #aaa !important; }
 
-.layout-flex {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 2.5em;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  min-height: 80vh;
+.error {
+  color: #ffbaba;
+  background: #3f1a1a;
+  padding: 0.5em 1em;
+  border-radius: 7px;
+  margin-top: 1.2em;
+  font-size: 1em;
+  display: block;
 }
-@media (max-width: 900px) {
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .layout-flex {
+    max-width: 98vw;
+    gap: 2em;
+    padding: 0 1vw;
+  }
+  .container.center, .leyenda-nueva {
+    max-width: 100vw;
+  }
+}
+@media (max-width: 800px) {
   .layout-flex {
     flex-direction: column;
+    align-items: center;
+    margin-top: 65px;
     gap: 1.2em;
-    align-items: stretch;
+    min-height: unset;
   }
-}
-
-/* Cuadro principal y cuadro leyenda (mismo fondo y estilo) */
-.container.center, .leyenda-nueva {
-  background: linear-gradient(120deg, #232443 70%, #2a184c 100%);
-  border-radius: 18px;
-  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
-  padding: 2em 2em 1.7em 2em;
-  color: #fff;
-  font-size: 1.08em;
-  min-width: 290px;
-  max-width: 385px;
-  min-height: 420px;
-  margin-top: 1.2em;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border: none;
-}
-
-.leyenda-nueva {
-  max-width: 340px;
-  min-height: 340px;
-  margin-bottom: 2em;
-  margin-left: 0;
-  margin-right: 0;
-  align-self: flex-start;
-  box-shadow: 0 6px 22px #0003, 0 2px 1.6px #38385a55;
-}
-
-.leyenda-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.5em;
-  margin-bottom: 1.2em;
-  margin-left: 0.3em;
-  width: 100%;
-  justify-content: flex-start;
-}
-.leyenda-row .estrella {
-  font-size: 2.1em;
-  margin-right: 0.15em;
-  vertical-align: middle;
-  position: relative;
-  padding-left: 0.12em;
-  padding-right: 0.12em;
-  font-family: inherit;
-  display: inline-block;
-}
-.numero-estrella {
-  position: absolute;
-  top: -1.15em;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.83em;
-  color: #fff;
-  background: #403080de;
-  border-radius: 50%;
-  width: 1.25em;
-  height: 1.25em;
-  line-height: 1.3em;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  border: 2px solid #fff5;
-  box-shadow: 0 1px 4px #0002;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.llista-llegenda {
-  margin: 0.2em 0 0 0.4em;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-}
-.llista-llegenda li {
-  margin: 0.09em 0 0.09em 0;
-  padding-left: 0.1em;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-size: 1.02em;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-.llista-llegenda .estrella {
-  margin-right: 0.42em;
-  font-size: 1.28em;
-  vertical-align: middle;
-}
-
-@media (max-width: 900px) {
-  .container.center, .leyenda-nueva {
-    max-width: 99vw;
+  .leyenda-nueva {
+    margin: 0 auto;
+    align-self: center;
+    width: 90vw;
     min-width: 0;
-    margin: 0.6em auto;
-    padding: 1.1em 0.6em 1.1em 0.6em;
+    max-width: 95vw;
+    min-height: 150px;
   }
-  .leyenda-nueva { min-height: 150px; }
-  .leyenda-row { gap: 0.7em; }
+  .container.center {
+    margin: 0 auto;
+    width: 95vw;
+    min-width: 0;
+    max-width: 97vw;
+    min-height: 320px;
+    padding: 1.3em 0.5em 1.3em 0.5em;
+  }
 }
 @media (max-width: 600px) {
-  .actions {
-    flex-direction: column;
-    gap: 0.7em;
+  .container.center, .leyenda-nueva {
+    padding: 1.1em 0.7em 1.1em 0.7em;
   }
-  .boto-rosa, button {
-    padding: 0.8rem 1.2rem;
-    font-size: 1rem;
-    width: 100%;
-    min-width: 0;
-  }
-  #jugadorInfo {
-    font-size: 0.99em;
-    top: 0.9em;
-    right: 1em;
-    padding: 0.4em 0.8em;
-    max-width: 96vw;
-  }
-  #jugadorInfo button {
+  .tema-option {
     font-size: 0.98em;
-    padding: 0.33em 1em;
+    flex-wrap: wrap;
+    min-height: 1.6em;
+  }
+  .leyenda-row .estrella, .tema-option .estrella {
+    font-size: 1.1em;
   }
 }

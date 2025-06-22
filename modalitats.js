@@ -18,52 +18,48 @@ const nomsTemes = [
   "Història de la dansa"
 ];
 
-// Muestra los temas seleccionados y los logros reales guardados en Firestore
-async function mostrarTemesSeleccionatsAmbLogros(uid) {
+// Muestra los temas seleccionados y las estrellas/logros si están guardados
+function mostrarTemesSeleccionats() {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
-  // Cargar logros reales del usuario
-  let logros = {};
-  if (typeof getLogros === "function") {
-    logros = await getLogros(uid);
-  }
-  const estadoMap = {
-    perfecte: 'green',
-    completat: 'yellow'
-  };
+  const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
-    const logrosTema = logros && logros[`tema${idx}`] ? logros[`tema${idx}`] : {};
+    const estados = estrelles[idx] || {};
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
       <span class="stars">
-        <span class="star ${estadoMap[logrosTema.teoria] || ''}" title="Teoria">&#9733;</span>
-        <span class="star ${estadoMap[logrosTema.terminologia] || ''}" title="Terminologia">&#9733;</span>
-        <span class="star ${estadoMap[logrosTema.audicions] || ''}" title="Audicions">&#9733;</span>
+        <span class="star ${estados.teoria === 'perfecta' ? 'green' : estados.teoria === 'fallos' ? 'yellow' : ''}"></span>
+        <span class="star ${estados.terminologia === 'perfecta' ? 'green' : estados.terminologia === 'fallos' ? 'yellow' : ''}"></span>
+        <span class="star ${estados.audicions === 'perfecta' ? 'green' : estados.audicions === 'fallos' ? 'yellow' : ''}"></span>
       </span>
     </li>`;
   }).join('');
 }
-
-// Lógica de autenticación y renderizado
-window.addEventListener('DOMContentLoaded', () => {
-  if (typeof isUserAuthenticated === "function") {
-    isUserAuthenticated().then(user => {
-      if (user) {
-        mostrarTemesSeleccionatsAmbLogros(user.uid);
-      } else {
-        window.location.href = "login.html";
-      }
-    });
-  }
-});
+window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
 
 // Muestra el email/usuario (si tienes función global, úsala)
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
+});
+
+// Autenticación y mostrar info de usuario/logros (igual que otras pantallas)
+isUserAuthenticated(async function(isAuth, user) {
+  const jugadorInfo = document.getElementById('jugadorInfo');
+  if (isAuth) {
+    jugadorInfo.style.display = 'flex';
+    let nomJugador = user.displayName ? user.displayName : user.email;
+    jugadorInfo.innerHTML = `👤 ${nomJugador}
+      <button id="logoutBtn" onclick="logout()">Sortir</button>`;
+    localStorage.setItem('jugador', nomJugador);
+  } else {
+    jugadorInfo.style.display = 'none';
+    localStorage.removeItem('jugador');
+    window.location.href = "login.html";
+  }
 });
 
 // Controla el envío del formulario de modalidades
@@ -80,6 +76,8 @@ window.addEventListener('DOMContentLoaded', function() {
     errorDiv.style.display = 'none';
     const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
     localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
+    // Aquí puedes llamar a guardarLogro cuando el usuario complete una modalidad, por ejemplo:
+    // guardarLogro(uid, tema, 'teoria', 'completat');
     window.location.href = 'joc.html';
   });
 });

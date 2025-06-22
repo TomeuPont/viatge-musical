@@ -326,3 +326,21 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   });
 });
+
+// Después de guardar el logro de la modalidad actual para el tema actual
+function comprobarTemaCompletado(uid, temaId) {
+  // Suponiendo que ya tienes una función getLogros(uid) que devuelve un objeto así:
+  // { "1": { teoria: "perfecta", terminologia: "perfecta", audicions: "perfecta" }, ... }
+  getLogros(uid).then(logros => {
+    const temaLogro = logros[temaId];
+    if (
+      temaLogro &&
+      temaLogro.teoria === "perfecta" &&
+      temaLogro.terminologia === "perfecta" &&
+      temaLogro.audicions === "perfecta"
+    ) {
+      // Redirige a la pantalla de enhorabuena
+      window.location.href = "enhorabona.html?tema=" + temaId;
+    }
+  });
+}

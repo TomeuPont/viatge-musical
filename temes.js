@@ -59,3 +59,20 @@ async function mostrarLogros(uid) {
     });
   });
 }
+
+if (typeof isUserAuthenticated === "function") {
+  isUserAuthenticated(async function(isAuth, user) {
+    const jugadorInfo = document.getElementById('jugadorInfo');
+    if (isAuth) {
+      jugadorInfo.style.display = 'flex';
+      let nomJugador = user.displayName ? user.displayName : user.email;
+      jugadorInfo.innerHTML = `👤 ${nomJugador}
+        <button id="logoutBtn" onclick="logout()">Sortir</button>`;
+      localStorage.setItem('jugador', nomJugador);
+    } else {
+      jugadorInfo.style.display = 'none';
+      localStorage.removeItem('jugador');
+      window.location.href = "login.html";
+    }
+  });
+}

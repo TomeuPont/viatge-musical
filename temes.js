@@ -3,8 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
-// Mostrar estrellas de logros según Firestore
-// Asegúrate de que este archivo se carga después de Firebase y el usuario está autenticado
+// Este archivo debe cargarse después de Firebase y de que exista el DOM con las estrellas
 
 // Pinta las estrellas según los logros en Firestore
 async function mostrarLogros(uid) {
@@ -43,7 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 // Guardar el tiempo de la música antes de cambiar de página y continuar flujo
 function continuar() {
   const musica = document.getElementById('musicaFondo');

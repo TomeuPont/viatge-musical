@@ -5,174 +5,15 @@
   <title>Modalitats - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
+  <link rel="stylesheet" href="modalitats.css">
   <style>
-    .stars {
-      display: flex;
-      gap: 0.1em;
-      font-size: 1.2em;
-      margin-top: 2px;
-    }
-    .star { color: #888; }
-    .star.yellow { color: #ffd600; }
-    .star.green { color: #38c172; }
-
-    .modalitats-options {
-      display: flex;
-      flex-direction: row;
-      gap: 2em;
-      margin-bottom: 2em;
-      margin-top: 2em;
-      align-items: flex-start;
-      justify-content: center;
-      width: 100%;
-    }
-    .modalitat-checkbox {
-      display: flex;
-      align-items: center;
-      padding: 0.7em 1.3em;
-      background: #222244;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.1em;
-      min-width: 160px;
-      box-shadow: 0 2px 8px #0002;
-      transition: background 0.16s;
-      border: 2px solid transparent;
-      gap: 0.8em;
-    }
-    .modalitat-checkbox:hover,
-    .modalitat-checkbox:focus-within {
-      background: #2a2a5a;
-      border-color: #ffd600;
-    }
-    .modalitat-checkbox input[type="checkbox"] {
-      appearance: none;
-      width: 1.3em;
-      height: 1.3em;
-      border: 2px solid #ffd600;
-      border-radius: 5px;
-      background: #fff;
-      margin-right: 1em;
-      position: relative;
-      cursor: pointer;
-      transition: border-color 0.2s;
-      outline: none;
-    }
-    .modalitat-checkbox input[type="checkbox"]:checked {
-      background: #ffd600;
-      border-color: #ffd600;
-    }
-    .modalitat-checkbox input[type="checkbox"]:checked:after {
-      content: '';
-      position: absolute;
-      left: 0.36em;
-      top: 0.15em;
-      width: 0.4em;
-      height: 0.8em;
-      border-right: 2.5px solid #222244;
-      border-bottom: 2.5px solid #222244;
-      transform: rotate(45deg);
-      display: block;
-    }
-    /* Responsive: Columna en mòbil */
-    @media (max-width: 600px) {
-      .modalitats-options {
-        flex-direction: column;
-        gap: 1.1em;
-        align-items: stretch;
-      }
-      .modalitat-checkbox {
-        min-width: 220px;
-      }
-    }
-    /* Botón rosa estilo global */
-    .boto-rosa, button, .actions button, .back-btn {
-      padding: 1rem 2.5rem;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 12px;
-      background-color: #ff4081;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
-      box-shadow: 0 4px 18px 0 #0005;
-      letter-spacing: 0.5px;
-      outline: none;
-      margin: 0.5em 0;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .boto-rosa:hover, button:hover, .actions button:hover, .back-btn:hover {
-      background-color: #ff79a7;
-      transform: scale(1.06);
-      color: #fff;
-    }
-    .actions-duo {
-      display: flex;
-      justify-content: center;
-      gap: 1.5em;
-      margin-bottom: 1em;
-      margin-top: 1.5em;
-      flex-wrap: wrap;
-    }
-    .actions-duo .boto-rosa {
-      min-width: 180px;
-      text-align: center;
-      margin: 0;
-    }
-    @media (max-width: 600px) {
-      .actions-duo {
-        flex-direction: column;
-        gap: 0.7em;
-      }
-      .actions-duo .boto-rosa {
-        width: 100%;
-        min-width: 0;
-      }
-    }
-    /* Estilos para jugadorInfo arriba a la derecha */
-    #jugadorInfo {
-      position: fixed;
-      top: 1.2em;
-      right: 2em;
-      display: flex;
-      align-items: center;
-      gap: 0.7em;
-      z-index: 150;
-    }
-    #jugadorInfo button {
-      padding: 0.4em 1.1em;
-      font-size: 1.01em;
-      background: #ff4081;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: 600;
-      border: none;
-      margin-left: 0.2em;
-      box-shadow: 0 2px 8px #0002;
-      transition: background 0.2s, transform 0.18s;
-    }
-    #jugadorInfo button:hover {
-      background: #ff79a7;
-      transform: scale(1.07);
-    }
-    @media (max-width: 600px) {
-      #jugadorInfo {
-        font-size: 0.93em;
-        top: 0.9em;
-        right: 1em;
-      }
-      #jugadorInfo button {
-        font-size: 0.98em;
-        padding: 0.33em 1em;
-      }
-    }
+    /* Puedes mantener aquí los estilos rápidos necesarios para el layout, pero 
+       las estrellas y el panel lateral ya están en modalitats.css */
   </style>
 </head>
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
-  <!-- Panel lateral para mostrar temas seleccionados y estrellas -->
+  <!-- Panel lateral para mostrar temas seleccionats y logros reales -->
   <div class="side-panel">
     <h3>Apartats seleccionats</h3>
     <ul id="temesSeleccionats"></ul>
@@ -181,7 +22,6 @@
     <div class="container center">
       <h2>Selecciona les modalitats</h2>
       <form id="modalitatsForm">
-
         <div class="modalitats-options">
           <label class="modalitat-checkbox">
             <input type="checkbox" name="modalitat" value="teoria"> Teoria

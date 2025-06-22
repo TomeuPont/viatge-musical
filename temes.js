@@ -3,23 +3,24 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof initUserInfo === "function") initUserInfo();
 });
 
-// Mostrar estrellas de logros según Firestore
+// Mostrar estrellas de logros según Firestore (corregido para mapear bien los estados)
 async function mostrarLogros(uid) {
   const logros = await getLogros(uid);
+  // Mapeo de valores Firestore a las clases CSS de color
+  const estadoMap = {
+    perfecte: 'verde',
+    completat: 'amarillo'
+  };
   // Por cada tema
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
-    const logrosTema = logros[`tema${tema}`] || {}; // <--- FIX: usa tema1, tema2...
-    // Modalidades: teoria, terminologia, audicions
+    const logrosTema = logros[`tema${tema}`] || {};
     ['teoria','terminologia','audicions'].forEach(modalidad => {
       const estrella = label.querySelector(`.estrella.${modalidad}`);
       if (!estrella) return;
-      // Estado: gris (default), amarillo, verde
-      // Mapea Firestore perfecto/completat a clases verde/amarillo
-      let estado = 'gris';
-      if (logrosTema[modalidad] === 'perfecte') estado = 'verde';
-      else if (logrosTema[modalidad] === 'completat') estado = 'amarillo';
-      estrella.classList.remove('gris','amarillo','verde');
+      // Mapeamos el valor Firestore a la clase CSS
+      const estado = estadoMap[logrosTema[modalidad]] || 'gris';
+      estrella.classList.remove('gris','amarillo','verde','perfecte','completat');
       estrella.classList.add(estado);
     });
   });
@@ -74,3 +75,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Extra: si vuelves desde la partida SIN recargar (SPA), puedes exponer mostrarLogros global
+window.mostrarLogros = mostrarLogros;

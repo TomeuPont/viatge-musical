@@ -5,52 +5,57 @@
   <title>Modalitats - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
+  <link rel="stylesheet" href="temes.css">
   <link rel="stylesheet" href="modalitats.css">
 </head>
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
-  <!-- Panel lateral para mostrar leyenda y temas seleccionados -->
-  <div class="side-panel">
-    <h3>Referència</h3>
-    <!-- Leyenda de estrellas -->
-    <div class="estrelles-leyenda" aria-label="Llegenda de les estrelles">
-      <span><span class="estrella teoria gris" aria-hidden="true">★</span> Teoria</span>
-      <span><span class="estrella terminologia gris" aria-hidden="true">★</span> Terminologia</span>
-      <span><span class="estrella audicions gris" aria-hidden="true">★</span> Audicions</span>
-    </div>
-    <div class="mini-expl-leyenda">
-      <span><span class="estrella green">★</span> Perfecte</span>
-      <span><span class="estrella yellow">★</span> Amb errors</span>
-      <span><span class="estrella">★</span> No fet</span>
-    </div>
-    <h3>Apartats seleccionats</h3>
-    <ul id="temesSeleccionats"></ul>
-  </div>
-  <div class="main-content">
-    <div class="container center">
-      <h2>Selecciona les modalitats</h2>
-      <form id="modalitatsForm">
-        <div class="modalitats-options">
-          <label class="modalitat-checkbox">
-            <input type="checkbox" name="modalitat" value="teoria"> Teoria
-          </label>
-          <label class="modalitat-checkbox">
-            <input type="checkbox" name="modalitat" value="terminologia"> Terminologia
-          </label>
-          <label class="modalitat-checkbox">
-            <input type="checkbox" name="modalitat" value="audicions"> Audicions
-          </label>
-        </div>
-        <div class="actions actions-duo">
-          <a href="temes.html" class="boto-rosa back-btn">← Tornar als apartats</a>
-          <button type="submit" class="boto-rosa">Començar</button>
-        </div>
-        <div id="error" class="error" style="display:none;"></div>
-      </form>
+  <div class="layout-flex">
+    <aside class="leyenda-nueva" style="margin-right:2.3em; min-width:260px; align-self:flex-start;">
+      <div class="leyenda-row" style="gap:0.7em;">
+        <span class="estrella teoria verde"><span class="numero-estrella">1</span>★</span>
+        <span class="estrella terminologia amarillo"><span class="numero-estrella">2</span>★</span>
+        <span class="estrella audicions gris"><span class="numero-estrella">3</span>★</span>
+      </div>
+      <ul class="llista-llegenda">
+        <li><b>1 Teoria</b></li>
+        <li><b>2 Terminologia</b></li>
+        <li><b>3 Audicions</b></li>
+      </ul>
+      <ul class="llista-llegenda" style="margin-top:1.3em;">
+        <li><span class="estrella verde">★</span> Realitzat perfecte</li>
+        <li><span class="estrella amarillo">★</span> Realitzat amb errors</li>
+        <li><span class="estrella gris">★</span> No s’ha treballat encara</li>
+      </ul>
+      <hr style="opacity:0.25;margin:1.2em 0 0.7em 0;">
+      <h3 style="font-size:1.07em;color:#403080;margin-bottom:0.6em;margin-top:0.2em;">Apartats seleccionats</h3>
+      <ul id="temesSeleccionats"></ul>
+    </aside>
+    <div class="main-content">
+      <div class="container center">
+        <h2>Selecciona les modalitats</h2>
+        <form id="modalitatsForm">
+          <div class="modalitats-options">
+            <label class="modalitat-checkbox">
+              <input type="checkbox" name="modalitat" value="teoria"> Teoria
+            </label>
+            <label class="modalitat-checkbox">
+              <input type="checkbox" name="modalitat" value="terminologia"> Terminologia
+            </label>
+            <label class="modalitat-checkbox">
+              <input type="checkbox" name="modalitat" value="audicions"> Audicions
+            </label>
+          </div>
+          <div class="actions actions-duo">
+            <a href="temes.html" class="boto-rosa back-btn">← Tornar als apartats</a>
+            <button type="submit" class="boto-rosa">Començar</button>
+          </div>
+          <div id="error" class="error" style="display:none;"></div>
+        </form>
+      </div>
     </div>
   </div>
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
-  <!-- Scripts Firebase y tus JS -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>

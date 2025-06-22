@@ -1,6 +1,21 @@
-// === DEBUG: muestra en consola los pasos y datos usados ===
+console.log("[DEBUG] temes.js cargado");
 
-// Pinta las estrellas según los logros en Firestore
+window.addEventListener('DOMContentLoaded', () => {
+  console.log("[DEBUG] DOMContentLoaded");
+  if (typeof firebase === "undefined") {
+    console.error("[DEBUG] Firebase NO está definido");
+    return;
+  }
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      console.log("[DEBUG] Usuario autenticado:", user.uid);
+      mostrarLogros(user.uid);
+    } else {
+      console.warn("[DEBUG] Usuario NO autenticado");
+    }
+  });
+});
+
 async function mostrarLogros(uid) {
   console.log("== [DEBUG] mostrarLogros iniciado con UID:", uid);
 
@@ -45,53 +60,3 @@ async function mostrarLogros(uid) {
     });
   });
 }
-
-// Llama a mostrarLogros cuando el usuario esté autenticado y la página cargada
-window.addEventListener('DOMContentLoaded', () => {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      console.log("[DEBUG] Usuario autenticado:", user.uid);
-      mostrarLogros(user.uid);
-    } else {
-      console.warn("[DEBUG] Usuario no autenticado.");
-    }
-  });
-});
-
-// --- RESTO DE LÓGICA PARA CONTINUAR Y MÚSICA DE FONDO, ETC. ---
-
-// Guardar el tiempo de la música antes de cambiar de página y continuar flujo
-function continuar() {
-  const musica = document.getElementById('musicaFondo');
-  if (musica && !musica.paused) {
-    localStorage.setItem('musicaFondoTime', musica.currentTime);
-  }
-  // Continuar: comprobar selección
-  const checkboxes = document.querySelectorAll('#temesForm input[type="checkbox"]:checked');
-  const errorDiv = document.getElementById('error');
-  if (checkboxes.length === 0) {
-    errorDiv.textContent = 'Per favor, selecciona almenys un apartat per continuar.';
-    errorDiv.style.display = 'block';
-    return;
-  }
-  errorDiv.style.display = 'none';
-  // Guarda los temas seleccionados (como array de valores) en localStorage
-  const temesSeleccionats = Array.from(checkboxes).map(cb => cb.value);
-  localStorage.setItem('temesSeleccionats', JSON.stringify(temesSeleccionats));
-  window.location.href = 'modalitats.html';
-}
-
-// Música de fondo: recuperar posición y play/pause según ON/OFF
-window.addEventListener("DOMContentLoaded", () => {
-  const musica = document.getElementById('musicaFondo');
-  const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
-  if (!isNaN(tiempo)) {
-    musica.currentTime = tiempo;
-  }
-  if (localStorage.getItem('musicaFondoON') === 'si') {
-    musica.volume = 0.4;
-    musica.play().catch(()=>{});
-  } else {
-    musica.pause();
-  }
-});

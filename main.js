@@ -83,6 +83,21 @@ async function setLogro(uid, tema, modalidad, estado) {
   }
 }
 
+async function guardarLogro(uid, tema, modalidad, estado) {
+  if (!['teoria', 'terminologia', 'audicions'].includes(modalidad)) {
+    throw new Error('Modalitat no vàlida');
+  }
+  // Referència al document de logros de l'usuari
+  const db = firebase.firestore();
+  const ref = db.collection('logros').doc(uid);
+
+  // Prepara l'objecte amb la clau estàndard
+  const updateObj = {};
+  updateObj[`tema${tema}.${modalidad}`] = estado;
+
+  await ref.set(updateObj, { merge: true });
+}
+
 // Guarda varios logros de golpe para un tema
 async function setLogros(uid, tema, logrosTema) {
   try {

@@ -38,12 +38,13 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 2.2em;
+  gap: 2em;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1350px;
   margin: 80px auto 0 auto;
   min-height: 80vh;
   padding: 0 2vw;
+  box-sizing: border-box;
 }
 
 .leyenda-nueva {
@@ -69,15 +70,15 @@ body {
 .leyenda-row {
   display: flex;
   align-items: flex-end;
-  gap: 1.05em;
+  gap: 0.6em;
   margin-bottom: 1.05em;
   margin-left: 0.1em;
   width: 100%;
   justify-content: flex-start;
 }
 .leyenda-row .estrella {
-  font-size: 1.3em;
-  margin-right: 0.05em;
+  font-size: 1.08em;
+  margin-right: 0.02em;
   vertical-align: middle;
   position: relative;
   display: inline-flex;
@@ -89,7 +90,7 @@ body {
   top: -1.15em;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.77em;
+  font-size: 0.66em;
   color: #fff;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -113,13 +114,13 @@ body {
   display: flex;
   align-items: center;
   color: #fff;
-  font-size: 1.01em;
+  font-size: 0.98em;
   font-weight: 500;
   letter-spacing: 0.01em;
 }
 .llista-llegenda .estrella {
-  margin-right: 0.39em;
-  font-size: 1.25em;
+  margin-right: 0.32em;
+  font-size: 1.08em;
   vertical-align: middle;
 }
 
@@ -132,17 +133,19 @@ body {
   background: linear-gradient(120deg, #232443 80%, #2a184c 100%);
   border-radius: 16px;
   box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
-  padding: 2em 2.5em 2em 2.5em;
+  padding: 2em 2.1em 2em 2.1em;
   color: #fff;
   font-size: 1.08em;
-  min-width: 350px;
-  max-width: 720px;
+  min-width: 370px;
+  max-width: 1000px;
+  width: 100%;
   min-height: 440px;
   margin-top: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   border: none;
+  box-sizing: border-box;
 }
 
 h2 {
@@ -156,20 +159,64 @@ h2 {
 
 .temes-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8em 2em;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.39em 1.08em;
   width: 100%;
+  box-sizing: border-box;
 }
-@media (min-width: 750px) {
+
+@media (max-width: 1200px) {
   .temes-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.8em 2em;
+  }
+  .container.center {
+    max-width: 98vw;
+  }
+  .layout-flex {
+    max-width: 98vw;
+    gap: 1.2em;
+    padding: 0 1vw;
   }
 }
-@media (min-width: 1100px) {
+@media (max-width: 900px) {
   .temes-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.84em 2.1em;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .container.center {
+    min-width: 0;
+    width: 96vw;
+    padding: 1.1em 0.6em 1.1em 0.6em;
+  }
+  .leyenda-nueva {
+    margin: 0 auto 0.6em auto;
+    align-self: center;
+    min-width: 0;
+    max-width: 99vw;
+    min-height: 150px;
+  }
+  .layout-flex {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 65px;
+    gap: 1em;
+    min-height: unset;
+  }
+}
+@media (max-width: 600px) {
+  .container.center, .leyenda-nueva {
+    padding: 1.1em 0.7em 1.1em 0.7em;
+  }
+  .temes-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8em 0.5em;
+  }
+  .tema-option {
+    font-size: 0.97em;
+    min-height: 1.6em;
+    flex-wrap: wrap;
+  }
+  .leyenda-row .estrella, .tema-option .estrella {
+    font-size: 1em;
   }
 }
 
@@ -178,32 +225,32 @@ h2 {
   align-items: center;
   background: none;
   color: #fff;
-  padding: 0.47em 0.45em 0.47em 0.1em;
+  padding: 0.35em 0.20em 0.35em 0.1em;
   border-radius: 8px;
-  font-size: 1.04em;
+  font-size: 0.98em;
   font-weight: 500;
   box-sizing: border-box;
   transition: background 0.18s;
   cursor: pointer;
   width: 100%;
-  min-height: 2.1em;
+  min-height: 1.8em;
   position: relative;
   flex-wrap: nowrap;
 }
 .tema-option input[type="checkbox"] {
-  margin-right: 1em;
+  margin-right: 0.8em;
   accent-color: #ff4081;
-  width: 1.1em;
-  height: 1.1em;
+  width: 1em;
+  height: 1em;
   vertical-align: middle;
 }
 .tema-option .logros {
   margin-left: auto;
   display: flex;
-  gap: 0.19em;
+  gap: 0.09em;
 }
 .tema-option .estrella {
-  font-size: 1.3em;
+  font-size: 1.08em;
   line-height: 1;
   font-family: inherit;
 }
@@ -248,58 +295,4 @@ h2 {
   margin-top: 1.2em;
   font-size: 1em;
   display: block;
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-  .layout-flex {
-    max-width: 98vw;
-    gap: 1.2em;
-    padding: 0 1vw;
-  }
-  .container.center, .leyenda-nueva {
-    max-width: 100vw;
-  }
-}
-@media (max-width: 800px) {
-  .layout-flex {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 65px;
-    gap: 1em;
-    min-height: unset;
-  }
-  .leyenda-nueva {
-    margin: 0 auto 0.6em auto;
-    align-self: center;
-    width: 95vw;
-    min-width: 0;
-    max-width: 99vw;
-    min-height: 150px;
-  }
-  .container.center {
-    margin: 0 auto;
-    width: 98vw;
-    min-width: 0;
-    max-width: 99vw;
-    min-height: 320px;
-    padding: 1.3em 0.5em 1.3em 0.5em;
-  }
-}
-@media (max-width: 600px) {
-  .container.center, .leyenda-nueva {
-    padding: 1.1em 0.7em 1.1em 0.7em;
-  }
-  .temes-grid {
-    grid-template-columns: 1fr;
-    gap: 0.8em 0.5em;
-  }
-  .tema-option {
-    font-size: 0.98em;
-    min-height: 1.6em;
-    flex-wrap: wrap;
-  }
-  .leyenda-row .estrella, .tema-option .estrella {
-    font-size: 1.1em;
-  }
 }

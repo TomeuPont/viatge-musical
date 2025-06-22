@@ -2,10 +2,9 @@ window.addEventListener('DOMContentLoaded', () => {
   initUserInfo();
 });
 
-// - -- Música de fondo: guardar y restaurar tiempo ---
+// Música de fondo
 window.addEventListener("DOMContentLoaded", () => {
   const musica = document.getElementById('musicaFondo');
-  // Restaurar posición
   const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
   if (!isNaN(tiempo) && tiempo > 0) {
     musica.currentTime = tiempo;
@@ -16,7 +15,6 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     musica.pause();
   }
-  // Guardar el tiempo cuando sales o recargas
   window.addEventListener('beforeunload', () => {
     if (musica && !musica.paused) {
       localStorage.setItem('musicaFondoTime', musica.currentTime);
@@ -24,7 +22,6 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// --- Funciones para silenciar y restaurar la música de fondo según modalidad ---
 function silenciarMusicaFondo() {
   const musica = document.getElementById('musicaFondo');
   if (musica) musica.volume = 0;
@@ -81,54 +78,36 @@ function capitalitza(text) {
   return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
 }
 
-// --- NUEVO: Nombres de temas para pantalla de enhorabuena ---
-const nomsTemes = [
-  "Música de l’antiguitat",
-  "Música medieval",
-  "Música del Renaixement",
-  "Música del Barroc",
-  "Música del classicisme",
-  "Música del Romanticisme",
-  "Música del segle XX i últimes tendències",
-  "Músiques urbanes (jazz, rock, blues, rap, electrònica)",
-  "Música de pel·lícules i musicals",
-  "Músiques i danses tradicionals del món",
-  "Músiques i danses tradicionals de les Illes Balears",
-  "Història de la dansa"
-];
-
-// --- NUEVO: Comprobar si el tema está completo (3 estrellas verdes) ---
-function comprobarTemaCompletado(temaId) {
-  try {
-    // Lee el objeto de logros (puede estar en localStorage o Firestore)
-    // Aquí trabajamos con localStorage para simplificar
-    const logros = JSON.parse(localStorage.getItem('logros') || '{}');
-    const temaLogro = logros[temaId];
-    if (
-      temaLogro &&
-      temaLogro.teoria === "perfecta" &&
-      temaLogro.terminologia === "perfecta" &&
-      temaLogro.audicions === "perfecta"
-    ) {
-      // Redirige a la pantalla de enhorabuena con el ID de tema
-      window.location.href = "enhorabona.html?tema=" + temaId;
-    }
-  } catch(e) {
-    // Si hay algún problema, no hacemos nada
+// --- NUEVO: Comprobar si el tema está completo (3 estrellas verdes en Firestore) ---
+async function comprobarTemaCompletadoFirestore(uid, temaId) {
+  const userLogrosRef = firebase.firestore().collection('logros').doc(uid);
+  const doc = await userLogrosRef.get();
+  if (!doc.exists) return;
+  const logros = doc.data() || {};
+  const temaKey = `tema${temaId}`;
+  const temaLogro = logros[temaKey] || {};
+  if (
+    temaLogro.teoria === "perfecte" &&
+    temaLogro.terminologia === "perfecte" &&
+    temaLogro.audicions === "perfecte"
+  ) {
+    window.location.href = "enhorabona.html?tema=" + temaId;
   }
 }
 
-// --- NUEVO: Guardar logros al terminar una modalidad ---
-function guardarLogro(temaId, modalidad, estado) {
-  let logros = {};
-  try {
-    logros = JSON.parse(localStorage.getItem('logros') || '{}');
-  } catch(e) {}
-  if (!logros[temaId]) logros[temaId] = {};
-  logros[temaId][modalidad] = estado;
-  localStorage.setItem('logros', JSON.stringify(logros));
-  // Comprobar si todas las modalidades están completas para ese tema
-  comprobarTemaCompletado(temaId);
+// --- NUEVO: Guardar logros en Firestore ---
+function guardarLogroFirestore(uid, temaId, modalidad, estado) {
+  const userLogrosRef = firebase.firestore().collection('logros').doc(uid);
+  const temaKey = `tema${temaId}`;
+  // Guardar el logro de la modalidad
+  userLogrosRef.set({
+    [temaKey]: {
+      [modalidad]: estado
+    }
+  }, { merge: true }).then(() => {
+    // Comprobar si ya tiene las 3 estrellas verdes
+    comprobarTemaCompletadoFirestore(uid, temaId);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -177,7 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
     });
-
 
     if (!preguntesPlanas.length) {
       document.getElementById("qcontainer").innerHTML = `
@@ -246,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("feedback").textContent = "";
       respostaMostrada = false;
 
-      // --- SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA (corregido con robustez) ---
+      // SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA
       const mod = (actual.modalitat || "").toLowerCase();
       if (mod.includes("audicio")) {
         silenciarMusicaFondo();
@@ -302,20 +280,36 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.style.display = "block";
     }
 
-    // --- MODIFICADO: Al terminar todas las preguntas, guarda el logro y comprueba si debe mostrar enhorabuena ---
+    function comprovarResposta(seleccio) {
+      if (respostaMostrada) return;
+      respostaMostrada = true;
+      const correcta = preguntesPlanas[index].correcta;
+      const feedback = document.getElementById("feedback");
+      if (seleccio === correcta) {
+        feedback.textContent = "✅ Correcte!";
+        feedback.style.color = "#00ff88";
+        encerts++;
+      } else {
+        feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntesPlanas[index].opcions[correcta];
+        feedback.style.color = "#ff8888";
+        errors++;
+      }
+    }
+
+    // --- MODIFICADO: Al terminar todas las preguntas, guardar el logro en Firestore y comprobar enhorabuena ---
     function seguentPregunta() {
       if (index < preguntesPlanas.length - 1) {
         index++;
         carregarPregunta();
       } else {
-        // Determinar el tema y modalidad actual
         const actual = preguntesPlanas[index];
-        // Si has acertado todas las preguntas de esta modalidad, es "perfecta"
-        // Si tienes algún fallo, puede ser "fallos" u otro estado según tu lógica
-        // Aquí: perfecta si todos correctos, fallos si al menos 1 error
-        let estadoModalidad = (errors === 0) ? "perfecta" : "fallos";
-        // Guarda el logro (esto también comprueba si hay que mostrar la enhorabuena)
-        guardarLogro(actual.temaId, actual.modalitat, estadoModalidad);
+        let estadoModalidad = (errors === 0) ? "perfecte" : "completat";
+        // Guardar en Firestore y comprobar si hay que mostrar enhorabuena
+        isUserAuthenticated().then(user => {
+          if (user && user.uid) {
+            guardarLogroFirestore(user.uid, actual.temaId, actual.modalitat, estadoModalidad);
+          }
+        });
 
         document.getElementById("qcontainer").innerHTML = `
           <h2>Has completat totes les preguntes! 🎉</h2>
@@ -323,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>❌ Incorrectes: ${errors}</p>
           <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
         `;
-        restaurarMusicaFondo(); // Por si terminamos en teoria o terminologia
+        restaurarMusicaFondo();
       }
     }
 

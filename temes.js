@@ -4,9 +4,12 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Mostrar estrellas de logros según Firestore
+
 async function mostrarLogros(uid) {
-  const logros = await getLogros(uid);
+  const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
+  const logros = logrosDoc.exists ? logrosDoc.data() : {};
   const estadoMap = { perfecte: 'verde', completat: 'amarillo' };
+
   document.querySelectorAll('.tema-option').forEach(label => {
     const tema = label.getAttribute('data-tema');
     const logrosTema = logros[`tema${tema}`] || {};

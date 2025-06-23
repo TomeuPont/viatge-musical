@@ -42,6 +42,19 @@ async function mostrarLogros(uid) {
   });
 }
 
+// Recoge todos los logros y guárdalos en localStorage
+let objetoLogros = {};
+document.querySelectorAll('.tema-option').forEach(label => {
+  const tema = label.getAttribute('data-tema');
+  objetoLogros[tema] = {};
+  ['teoria','terminologia','audicions'].forEach(mod => {
+    const estrella = label.querySelector(`.estrella.${mod}`);
+    if (estrella.classList.contains('verde')) objetoLogros[tema][mod] = 'perfecta';
+    else if (estrella.classList.contains('amarillo')) objetoLogros[tema][mod] = 'fallos';
+    else objetoLogros[tema][mod] = '';
+  });
+});
+localStorage.setItem('estrelles', JSON.stringify(objetoLogros));
 // =======================
 // Proteger acceso y cargar logros al entrar
 // =======================

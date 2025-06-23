@@ -21,6 +21,8 @@ window.addEventListener('DOMContentLoaded', () => {
 // =======================
 // Mostrar estrellas de logros según Firestore (funcionalidad actual)
 // =======================
+
+
 async function mostrarLogros(uid) {
   const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
   const logros = logrosDoc.exists ? logrosDoc.data() : {};
@@ -40,21 +42,22 @@ async function mostrarLogros(uid) {
       estrella.classList.add(estado);
     });
   });
+
+  // Guardar los logros pintados por tema en localStorage para modalitats.js
+  let objetoLogros = {};
+  document.querySelectorAll('.tema-option').forEach(label => {
+    const tema = label.getAttribute('data-tema');
+    objetoLogros[tema] = {};
+    ['teoria','terminologia','audicions'].forEach(modalidad => {
+      const estrella = label.querySelector(`.estrella.${modalidad}`);
+      if (estrella.classList.contains('verde')) objetoLogros[tema][modalidad] = 'verde';
+      else if (estrella.classList.contains('amarillo')) objetoLogros[tema][modalidad] = 'amarillo';
+      else objetoLogros[tema][modalidad] = 'gris';
+    });
+  });
+  localStorage.setItem('estrelles', JSON.stringify(objetoLogros));
 }
 
-// Recoge todos los logros y guárdalos en localStorage
-let objetoLogros = {};
-document.querySelectorAll('.tema-option').forEach(label => {
-  const tema = label.getAttribute('data-tema');
-  objetoLogros[tema] = {};
-  ['teoria','terminologia','audicions'].forEach(mod => {
-    const estrella = label.querySelector(`.estrella.${mod}`);
-    if (estrella.classList.contains('verde')) objetoLogros[tema][mod] = 'perfecta';
-    else if (estrella.classList.contains('amarillo')) objetoLogros[tema][mod] = 'fallos';
-    else objetoLogros[tema][mod] = '';
-  });
-});
-localStorage.setItem('estrelles', JSON.stringify(objetoLogros));
 // =======================
 // Proteger acceso y cargar logros al entrar
 // =======================

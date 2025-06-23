@@ -24,6 +24,7 @@ function mostrarTemesSeleccionats() {
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
+  // Lee los logros desde localStorage, que debe haberse guardado desde temes.js
   const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
   const modalitats = ['teoria','terminologia','audicions'];
@@ -44,6 +45,8 @@ function mostrarTemesSeleccionats() {
   }).join('');
 }
 window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
+
+// El resto de tu modalitats.js igual
 
 // Muestra el email/usuario (si tienes función global, úsala)
 window.addEventListener('DOMContentLoaded', () => {

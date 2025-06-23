@@ -24,7 +24,6 @@ function mostrarTemesSeleccionats() {
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
-  // El objeto correcto de logros es el que guarda temes.js en localStorage con las clases de colores.
   const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
   const modalitats = ['teoria','terminologia','audicions'];
@@ -36,8 +35,8 @@ function mostrarTemesSeleccionats() {
       <span class="estrelles-tema">
         ${modalitats.map(mod => {
           let color = 'gris';
-          if (estados[mod] === "verde" || estados[mod] === "perfecta" || estados[mod] === "perfecte") color = 'verde';
-          else if (estados[mod] === "amarillo" || estados[mod] === "fallos" || estados[mod] === "completat") color = 'amarillo';
+          if (estados[mod] === "verde") color = 'verde';
+          else if (estados[mod] === "amarillo") color = 'amarillo';
           return `<span class="estrella ${mod} ${color}">★</span>`;
         }).join('')}
       </span>
@@ -71,7 +70,7 @@ isUserAuthenticated(async function(isAuth, user) {
 window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
+    const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked, .modalitats-grid input[type="checkbox"]:checked');
     const errorDiv = document.getElementById('error');
     if (checkboxes.length === 0) {
       errorDiv.textContent = 'Per favor, selecciona almenys una modalitat per continuar.';

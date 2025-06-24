@@ -5,36 +5,49 @@
   <title>Modalitats - Un viatge musical i dansat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="estils.css">
-  <link rel="stylesheet" href="temes.css">
   <link rel="stylesheet" href="modalitats.css">
+  <style>
+    /* Leyenda de estrellas */
+    .estrelles-leyenda {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+      margin-bottom: 1em;
+      margin-top: 0.5em;
+      font-size: 1.01em;
+      color: #ffe066;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .estrelles-leyenda .estrella {
+      margin-right: 0.4em;
+      font-size: 1.2em;
+      vertical-align: middle;
+    }
+    @media (max-width: 600px) {
+      .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
+      .estrelles-leyenda .estrella { font-size: 1.1em; }
+    }
+  </style>
 </head>
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
-  <div class="layout-flex">
-    <aside class="leyenda-nueva leyenda-modalitats">
-      <div class="leyenda-row">
-        <span class="estrella teoria gris"><span class="numero-estrella">1</span>★</span>
-        <span class="estrella terminologia gris"><span class="numero-estrella">2</span>★</span>
-        <span class="estrella audicions gris"><span class="numero-estrella">3</span>★</span>
-      </div>
-      <ul class="llista-llegenda">
-        <li><b>1 Teoria</b></li>
-        <li><b>2 Terminologia</b></li>
-        <li><b>3 Audicions</b></li>
-      </ul>
-      <ul class="llista-llegenda" style="margin-top:1.3em;">
-        <li><span class="estrella verde">★</span> Realitzat perfecte</li>
-        <li><span class="estrella amarillo">★</span> Realitzat amb errors</li>
-        <li><span class="estrella gris">★</span> No s’ha treballat encara</li>
-      </ul>
-      <hr style="opacity:0.25;margin:1.2em 0 0.7em 0;">
-      <h3 style="font-size:1.07em;color:#403080;margin-bottom:0.6em;margin-top:0.2em;">Apartats seleccionats</h3>
-      <ul id="temesSeleccionats"></ul>
-    </aside>
+  <!-- Panel lateral para mostrar temas seleccionados y estrellas -->
+  <div class="side-panel">
+    <h3>Apartats seleccionats</h3>
+    <!-- Leyenda de estrellas -->
+    <div class="estrelles-leyenda" aria-label="Llegenda de les estrelles">
+      <span><span class="estrella teoria gris" aria-hidden="true"></span> Teoria</span>
+      <span><span class="estrella terminologia gris" aria-hidden="true"></span> Terminologia</span>
+      <span><span class="estrella audicions gris" aria-hidden="true"></span> Audicions</span>
+    </div>
+    <ul id="temesSeleccionats"></ul>
+  </div>
+  <div class="main-content">
     <div class="container center">
+      <h2>Selecciona les modalitats</h2>
       <form id="modalitatsForm">
-        <div class="modalitats-grid">
-          <h2 class="modalitats-titol">Selecciona les modalitats</h2>
+        <div class="modalitats-options">
           <label class="modalitat-checkbox">
             <input type="checkbox" name="modalitat" value="teoria"> Teoria
           </label>
@@ -54,6 +67,7 @@
     </div>
   </div>
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+  <!-- Scripts Firebase y tus JS -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>

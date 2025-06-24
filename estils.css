@@ -1,11 +1,12 @@
+
+
 body {
-  background: linear-gradient(to bottom right, #1a1a40, #4b0082);
+  background: linear-gradient(120deg, #3b3266 0%, #232346 100%);
   min-height: 100vh;
   margin: 0;
   color: white;
   font-family: 'Segoe UI', sans-serif;
 }
-
 
 .center {
   display: flex;

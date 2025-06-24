@@ -157,8 +157,37 @@
     min-height: unset;
   }
 }
+
+
+
+.side-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 310px;
+  background: #232346;
+  color: #ffe066;
+  padding: 0.6em 1.2em 1.8em 1.2em; /* <--- este es el cambio clave */
+  box-shadow: 2px 0 12px #0004;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.side-panel h3 {
+  margin-top: 0.3em;
+  margin-bottom: 0.7em;
+  font-size: 1.18em;
+  color: #ffd600;
+}
+.side-panel .estrelles-leyenda {
+  margin-bottom: 1em;
+  margin-top: 0.1em;
+  font-size: 1em;
+  flex-wrap: wrap;
+  gap: 1em;
+}
 .main-content {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 2em 0 2em 0;
+  margin-left: 330px;
+  padding: 0 0 2em 0; /* quita padding-top */
 }

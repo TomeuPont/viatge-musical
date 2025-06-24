@@ -11,8 +11,8 @@
 <body>
   <div id="jugadorInfo" style="display:none;"></div>
   <div class="layout-flex">
-    <aside class="leyenda-nueva leyenda-modalitats">
-      <div class="leyenda-row" style="gap:0.7em;">
+    <div class="leyenda-nueva">
+      <div class="leyenda-row">
         <span class="estrella teoria gris"><span class="numero-estrella">1</span>★</span>
         <span class="estrella terminologia gris"><span class="numero-estrella">2</span>★</span>
         <span class="estrella audicions gris"><span class="numero-estrella">3</span>★</span>
@@ -30,29 +30,27 @@
       <hr style="opacity:0.25;margin:1.2em 0 0.7em 0;">
       <h3 style="font-size:1.07em;color:#403080;margin-bottom:0.6em;margin-top:0.2em;">Apartats seleccionats</h3>
       <ul id="temesSeleccionats"></ul>
-    </aside>
-    <div class="main-content">
-      <div class="container center">
-        <form id="modalitatsForm">
-          <div class="modalitats-grid">
-            <h2 class="modalitats-titol">Selecciona les modalitats</h2>
-            <label class="modalitat-checkbox">
-              <input type="checkbox" name="modalitat" value="teoria"> Teoria
-            </label>
-            <label class="modalitat-checkbox">
-              <input type="checkbox" name="modalitat" value="terminologia"> Terminologia
-            </label>
-            <label class="modalitat-checkbox">
-              <input type="checkbox" name="modalitat" value="audicions"> Audicions
-            </label>
-          </div>
-          <div class="actions actions-duo">
-            <a href="temes.html" class="boto-rosa back-btn">← Tornar als apartats</a>
-            <button type="submit" class="boto-rosa">Començar</button>
-          </div>
-          <div id="error" class="error" style="display:none;"></div>
-        </form>
-      </div>
+    </div>
+    <div class="container center">
+      <form id="modalitatsForm">
+        <div class="modalitats-grid">
+          <h2 class="modalitats-titol">Selecciona les modalitats</h2>
+          <label class="modalitat-checkbox">
+            <input type="checkbox" name="modalitat" value="teoria"> Teoria
+          </label>
+          <label class="modalitat-checkbox">
+            <input type="checkbox" name="modalitat" value="terminologia"> Terminologia
+          </label>
+          <label class="modalitat-checkbox">
+            <input type="checkbox" name="modalitat" value="audicions"> Audicions
+          </label>
+        </div>
+        <div class="actions actions-duo">
+          <a href="temes.html" class="boto-rosa back-btn">← Tornar als apartats</a>
+          <button type="submit" class="boto-rosa">Començar</button>
+        </div>
+        <div id="error" class="error" style="display:none;"></div>
+      </form>
     </div>
   </div>
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>

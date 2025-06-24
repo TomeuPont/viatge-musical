@@ -1,120 +1,164 @@
-/* Estilos para la columna lateral de temas seleccionados y estrellas  */
-.side-panel ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.leyenda-modalitats {
+  margin-left: -2vw !important;
+  margin-top: 2em !important;
+  margin-bottom: 0 !important;
+  min-width: 220px;
+  max-width: 295px;
+  align-self: flex-start;
 }
 
-.tema-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.7em;
-  border-bottom: 1px solid #ffd60033;
-  padding: 0.5em 0 0.3em 0;
-  min-width: 0;
+.leyenda-row .estrella {
+  font-size: 1.23em;
+  margin-right: 0.05em;
+  vertical-align: middle;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  font-family: inherit;
 }
-
-.tema-nom {
-  overflow: unset;
-  flex: 1 1 auto;
-  font-weight: 500;
-  min-width: 0;
-  word-break: break-word;
-}
-
-.stars {
-  display: flex;
-  gap: 0.1em;
-  font-size: 1.22em;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-.star {
-  color: #888; /* Vacía */
-  font-size: 1.13em;
-}
-.star.yellow {
-  color: #ffd600;
-}
-.star.green {
-  color: #38c172;
-}
-
-.estrelles-leyenda {
-  display: flex;
-  gap: 1.5em;
-  align-items: center;
-  margin-bottom: 1em;
-  margin-top: 0.5em;
-  font-size: 1.01em;
-  color: #ffe066;
-  font-weight: 500;
+.numero-estrella {
+  position: absolute;
+  top: -1.15em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.77em;
+  color: #fff;
+  font-weight: 600;
   letter-spacing: 0.01em;
+  background: none;
+  border: none;
+  box-shadow: none;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 1;
 }
-.estrelles-leyenda .estrella {
-  margin-right: 0.4em;
-  font-size: 1.2em;
+
+.llista-llegenda .estrella {
+  margin-right: 0.39em;
+  font-size: 1.25em;
   vertical-align: middle;
 }
-@media (max-width: 600px) {
-  .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
-  .estrelles-leyenda .estrella { font-size: 1.1em; }
-}
+.estrella.verde { color: #38c172 !important; }
+.estrella.amarillo { color: #ffd600 !important; }
+.estrella.gris { color: #aaa !important; }
+.estrella.teoria {}
+.estrella.terminologia {}
+.estrella.audicions {}
 
-/* Aumenta el ancho del panel lateral y mejora su aspecto */
-.side-panel {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 310px; /* antes por defecto suele ser unos 220-250px, ahora más ancho */
-  background: #232346;
-  color: #ffe066;
-  padding: 2.1em 1.2em 1.8em 1.2em;
-  box-shadow: 2px 0 12px #0004;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-}
-.side-panel h3 {
-  margin-top: 0.5em;
-  margin-bottom: 0.7em;
-  font-size: 1.18em;
-  color: #ffd600;
-}
-.side-panel .estrelles-leyenda {
-  margin-bottom: 1em;
-  margin-top: 0.2em;
-  font-size: 1em;
-  flex-wrap: wrap;
-  gap: 1em;
-}
 #temesSeleccionats {
   list-style: none;
   padding: 0;
   margin: 0;
   font-size: 0.98em;
+  width: 100%;
+}
+.tema-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8em;
+  border-bottom: 1px solid #ffd60033;
+  padding: 0.5em 0 0.3em 0;
+  min-width: 0;
+}
+.tema-nom {
+  flex: 1 1 auto;
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-word;
+  color: #fff;
+  font-size: 1em;
+}
+.estrelles-tema {
+  display: flex;
+  gap: 0.21em;
+  margin-left: 0.7em;
+}
+.estrelles-tema .estrella {
+  font-size: 1.17em;
+  position: relative;
 }
 
-/* Ajusta el contenido principal para que no se solape con el panel lateral */
-.main-content {
-  margin-left: 330px; /* ligeramente más que el panel para dejar aire */
-  padding: 2em 0 2em 0;
+.modalitats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8em 1.2em;
+  width: 100%;
+}
+.modalitats-titol {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 0 0 0.8em 0;
+  font-size: 1.25em;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
-@media (max-width: 800px) {
-  .side-panel {
-    position: relative;
-    width: 100%;
-    height: auto;
-    box-shadow: none;
+/* Checkbox igual que en temes */
+.modalitat-checkbox {
+  display: flex;
+  align-items: center;
+  background: none;
+  color: #fff;
+  padding: 0.4em 0.45em 0.4em 0.1em;
+  border-radius: 8px;
+  font-size: 1.09em;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background 0.18s;
+  cursor: pointer;
+  width: 100%;
+  min-height: 2.1em;
+  position: relative;
+  margin-bottom: 0.2em;
+}
+.modalitat-checkbox input[type="checkbox"] {
+  accent-color: #ff4081;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+  border-radius: 6px;
+  background: #fff;
+  border: 1.7px solid #ff4081;
+  box-shadow: 0 1px 2px #0001;
+  transition: border 0.14s, box-shadow 0.14s;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .leyenda-modalitats {
+    margin: 0 auto 0.8em auto !important;
+    align-self: center;
+    min-width: 0;
+    max-width: 99vw;
+    min-height: 150px;
+  }
+}
+.layout-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2.2em;
+  width: 100%;
+  max-width: 1300px;
+  margin: 80px auto 0 auto;
+  min-height: 80vh;
+  padding: 0 2vw;
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  .layout-flex {
     flex-direction: column;
-    padding: 1.2em 0.6em 0.7em 0.6em;
-    margin-bottom: 0.7em;
+    align-items: center;
+    margin-top: 65px;
+    gap: 1em;
+    min-height: unset;
   }
-  .main-content {
-    margin-left: 0;
-    padding: 0.5em 0 1.2em 0;
-  }
+}
+.main-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 2em 0 2em 0;
 }

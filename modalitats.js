@@ -24,17 +24,22 @@ function mostrarTemesSeleccionats() {
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
+  // El objeto correcto de logros es el que guarda temes.js en localStorage con las clases de colores.
   const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
+  const modalitats = ['teoria','terminologia','audicions'];
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
     const estados = estrelles[idx] || {};
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
-      <span class="stars">
-        <span class="star ${estados.teoria === 'perfecta' ? 'green' : estados.teoria === 'fallos' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.terminologia === 'perfecta' ? 'green' : estados.terminologia === 'fallos' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.audicions === 'perfecta' ? 'green' : estados.audicions === 'fallos' ? 'yellow' : ''}"></span>
+      <span class="estrelles-tema">
+        ${modalitats.map(mod => {
+          let color = 'gris';
+          if (estados[mod] === "verde" || estados[mod] === "perfecta" || estados[mod] === "perfecte") color = 'verde';
+          else if (estados[mod] === "amarillo" || estados[mod] === "fallos" || estados[mod] === "completat") color = 'amarillo';
+          return `<span class="estrella ${mod} ${color}">★</span>`;
+        }).join('')}
       </span>
     </li>`;
   }).join('');
@@ -76,8 +81,6 @@ window.addEventListener('DOMContentLoaded', function() {
     errorDiv.style.display = 'none';
     const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
     localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
-    // Aquí puedes llamar a guardarLogro cuando el usuario complete una modalidad, por ejemplo:
-    // guardarLogro(uid, tema, 'teoria', 'completat');
     window.location.href = 'joc.html';
   });
 });

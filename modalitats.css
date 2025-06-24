@@ -1,159 +1,120 @@
-.leyenda-modalitats {
-  margin-left: -0.7em !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  min-width: 270px;
-  max-width: 355px;
-  align-self: flex-start;
+/* Estilos para la columna lateral de temas seleccionados y estrellas  */
+.side-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.leyenda-row .estrella {
-  font-size: 1.23em;
-  margin-right: 0.18em;
-  vertical-align: middle;
-  position: relative;
-  padding-left: 0.8em;
-}
-.numero-estrella {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-51%);
-  font-size: 0.93em;
-  color: #403080;
-  font-weight: 700;
-  background: transparent;
-  width: 1em;
-  text-align: center;
-  pointer-events: none;
-}
-.llista-llegenda .estrella {
-  margin-right: 0.32em;
-  font-size: 1.15em;
-  vertical-align: middle;
-}
-.estrella.verde { color: #38c172 !important; }
-.estrella.amarillo { color: #ffd600 !important; }
-.estrella.gris { color: #888 !important; }
-.estrella.teoria {}
-.estrella.terminologia {}
-.estrella.audicions {}
 
+.tema-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7em;
+  border-bottom: 1px solid #ffd60033;
+  padding: 0.5em 0 0.3em 0;
+  min-width: 0;
+}
+
+.tema-nom {
+  overflow: unset;
+  flex: 1 1 auto;
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.stars {
+  display: flex;
+  gap: 0.1em;
+  font-size: 1.22em;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.star {
+  color: #888; /* Vacía */
+  font-size: 1.13em;
+}
+.star.yellow {
+  color: #ffd600;
+}
+.star.green {
+  color: #38c172;
+}
+
+.estrelles-leyenda {
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+  margin-bottom: 1em;
+  margin-top: 0.5em;
+  font-size: 1.01em;
+  color: #ffe066;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.estrelles-leyenda .estrella {
+  margin-right: 0.4em;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+@media (max-width: 600px) {
+  .estrelles-leyenda { gap: 0.7em; font-size: 0.97em; }
+  .estrelles-leyenda .estrella { font-size: 1.1em; }
+}
+
+/* Aumenta el ancho del panel lateral y mejora su aspecto */
+.side-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 310px; /* antes por defecto suele ser unos 220-250px, ahora más ancho */
+  background: #232346;
+  color: #ffe066;
+  padding: 2.1em 1.2em 1.8em 1.2em;
+  box-shadow: 2px 0 12px #0004;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.side-panel h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+  font-size: 1.18em;
+  color: #ffd600;
+}
+.side-panel .estrelles-leyenda {
+  margin-bottom: 1em;
+  margin-top: 0.2em;
+  font-size: 1em;
+  flex-wrap: wrap;
+  gap: 1em;
+}
 #temesSeleccionats {
   list-style: none;
   padding: 0;
   margin: 0;
   font-size: 0.98em;
-  width: 100%;
-}
-.tema-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.8em;
-  border-bottom: 1px solid #ffd60033;
-  padding: 0.5em 0 0.3em 0;
-  min-width: 0;
-}
-.tema-nom {
-  flex: 1 1 auto;
-  font-weight: 500;
-  min-width: 0;
-  word-break: break-word;
-  color: #403080;
-  font-size: 1em;
-}
-.estrelles-tema {
-  display: flex;
-  gap: 0.21em;
-  margin-left: 0.7em;
-}
-.estrelles-tema .estrella {
-  font-size: 1.17em;
-  position: relative;
 }
 
-.modalitats-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.8em 1.2em;
-  width: 100%;
+/* Ajusta el contenido principal para que no se solape con el panel lateral */
+.main-content {
+  margin-left: 330px; /* ligeramente más que el panel para dejar aire */
+  padding: 2em 0 2em 0;
 }
-.modalitats-titol {
-  grid-column: 1 / -1;
-  text-align: center;
-  margin: 0 0 0.8em 0;
-  font-size: 1.25em;
-  color: #403080;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-.modalitat-checkbox {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  color: #403080;
-  padding: 0.7em 1em;
-  border-radius: 13px;
-  font-size: 1.13em;
-  font-weight: 600;
-  margin-bottom: 0.7em;
-  box-shadow: 0 2px 10px #0001;
-  border: 2px solid transparent;
-  transition: border 0.18s, box-shadow 0.18s, background 0.18s;
-  cursor: pointer;
-}
-.modalitat-checkbox input[type="checkbox"] {
-  margin-right: 1em;
-  accent-color: #ff4081;
-  width: 1.25em;
-  height: 1.25em;
-  border-radius: 7px;
-  border: 2px solid #ff4081;
-  background: #fff;
-  transition: border 0.14s, box-shadow 0.14s;
-}
-.modalitat-checkbox input[type="checkbox"]:checked {
-  background: #ff4081;
-  border-color: #ff4081;
-}
-.modalitat-checkbox:hover,
-.modalitat-checkbox input[type="checkbox"]:focus-visible {
-  border: 2px solid #ff4081;
-  background: #ffe6f0;
-  box-shadow: 0 2px 8px #ff40813a;
-}
-.modalitat-checkbox input[type="checkbox"]:checked:after {
-  display: none;
-}
-@media (max-width: 900px) {
-  .leyenda-modalitats {
-    margin: 0 auto 1.2em auto !important;
-    min-width: 0;
-    max-width: 99vw;
-    min-height: 150px;
-  }
-}
-.layout-flex {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 2.5em;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-@media (max-width: 900px) {
-  .layout-flex {
+
+@media (max-width: 800px) {
+  .side-panel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
     flex-direction: column;
-    align-items: stretch;
-    gap: 1.2em;
-    min-height: unset;
+    padding: 1.2em 0.6em 0.7em 0.6em;
+    margin-bottom: 0.7em;
   }
-}
-.container.center {
-  width: 100%;
-  max-width: 640px;
-  margin: 0 auto;
-  min-width: 0;
+  .main-content {
+    margin-left: 0;
+    padding: 0.5em 0 1.2em 0;
+  }
 }

@@ -68,19 +68,24 @@ isUserAuthenticated(async function(isAuth, user) {
 });
 
 // Controla el envío del formulario de modalidades
+
+window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
-  const errorDiv = document.getElementById('error');
-  if (checkboxes.length === 0) {
-    errorDiv.textContent = 'Per favor, selecciona almenys una modalitat per continuar.';
-    errorDiv.style.display = 'block';
-    return;
-  }
-  errorDiv.style.display = 'none';
-  const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
-  localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
-  window.location.href = 'joc.html';
+    e.preventDefault();
+    const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
+    const errorDiv = document.getElementById('error');
+    if (checkboxes.length === 0) {
+      errorDiv.textContent = 'Per favor, selecciona almenys una modalitat per continuar.';
+      errorDiv.style.display = 'block';
+      return;
+    }
+    errorDiv.style.display = 'none';
+    const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
+    localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
+    // Aquí puedes llamar a guardarLogro cuando el usuario complete una modalidad, por ejemplo:
+    // guardarLogro(uid, tema, 'teoria', 'completat');
+    window.location.href = 'joc.html';
+  });
 });
 
 // Música de fondo: recuperar posición y play/pause según ON/OFF

@@ -82,7 +82,6 @@ isUserAuthenticated(async function(isAuth, user) {
   localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
   window.location.href = 'joc.html';
 });
-});
 
 // Música de fondo: recuperar posición y play/pause según ON/OFF
 window.addEventListener("DOMContentLoaded", () => {

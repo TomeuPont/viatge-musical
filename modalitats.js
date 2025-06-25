@@ -51,6 +51,16 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
 });
 
+async function sincronitzarLogrosFirestore(uid) {
+  // Lee los logros del usuario en Firestore
+  const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
+  const logros = logrosDoc.exists ? logrosDoc.data() : {};
+  // Guarda los logros en localStorage, igual que hace temes.js
+  localStorage.setItem('estrelles', JSON.stringify(logros));
+  // Actualiza la visualización de estrellas
+  if (typeof mostrarTemesSeleccionats === "function") mostrarTemesSeleccionats();
+}
+
 // Autenticación y mostrar info de usuario/logros (igual que otras pantallas)
 isUserAuthenticated(async function(isAuth, user) {
   const jugadorInfo = document.getElementById('jugadorInfo');
@@ -60,6 +70,8 @@ isUserAuthenticated(async function(isAuth, user) {
     jugadorInfo.innerHTML = `👤 ${nomJugador}
       <button id="logoutBtn" onclick="logout()">Sortir</button>`;
     localStorage.setItem('jugador', nomJugador);
+    // Sincroniza logros de Firestore y actualiza las estrellas
+    await sincronitzarLogrosFirestore(user.uid);
   } else {
     jugadorInfo.style.display = 'none';
     localStorage.removeItem('jugador');

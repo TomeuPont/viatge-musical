@@ -143,3 +143,21 @@
   align-items: flex-start;
   border: none;
 }
+
+.tema-option {
+  display: flex;
+  align-items: center;
+  background: none;
+  color: #fff;
+  padding: 0.35em 0.20em 0.35em 0.1em;
+  border-radius: 8px;
+  font-size: 0.98em;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background 0.18s;
+  cursor: pointer;
+  width: 100%;
+  min-height: 1.8em;
+  position: relative;
+  flex-wrap: nowrap;
+}

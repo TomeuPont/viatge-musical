@@ -55,34 +55,37 @@ function mostrarTemesSeleccionats() {
 }
 
 // =======================
-// Mostrar usuario y botón "Sortir" arriba a la derecha
-// Y sincronizar logros ANTES de pintar la columna lateral
+// Autenticación, usuario y sincronización de logros
 // =======================
-isUserAuthenticated(async function(isAuth, user) {
-  const jugadorInfo = document.getElementById('jugadorInfo');
-  if (isAuth) {
-    jugadorInfo.style.display = 'flex';
-    let nomJugador = user.displayName ? user.displayName : user.email;
-    jugadorInfo.innerHTML = `👤 ${nomJugador}
-      <button id="logoutBtn" onclick="logout()">Sortir</button>`;
-    localStorage.setItem('jugador', nomJugador);
-    // Sincroniza logros y luego pinta la columna lateral
-    await sincronitzarLogrosFirestore(user.uid);
-    mostrarTemesSeleccionats();
-  } else {
-    jugadorInfo.style.display = 'none';
-    localStorage.removeItem('jugador');
-    window.location.href = "login.html";
-  }
+window.addEventListener('DOMContentLoaded', function() {
+  // Así tienes el DOM listo
+  isUserAuthenticated(async function(isAuth, user) {
+    const jugadorInfo = document.getElementById('jugadorInfo');
+    if (isAuth) {
+      jugadorInfo.style.display = 'flex';
+      let nomJugador = user.displayName ? user.displayName : user.email;
+      jugadorInfo.innerHTML = `👤 ${nomJugador}
+        <button id="logoutBtn" onclick="logout()">Sortir</button>`;
+      localStorage.setItem('jugador', nomJugador);
+      // Sincroniza logros y sólo entonces pinta la columna lateral
+      await sincronitzarLogrosFirestore(user.uid);
+      mostrarTemesSeleccionats();
+    } else {
+      jugadorInfo.style.display = 'none';
+      localStorage.removeItem('jugador');
+      window.location.href = "login.html";
+    }
+  });
 });
 
 // =======================
 // Controla el envío del formulario de modalidades
 // =======================
 window.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
+  const form = document.getElementById('modalitatsForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
-    // Selector robusto para los checkboxes, por si cambia el contenedor
     const checkboxes = document.querySelectorAll('input[name="modalitat"]:checked');
     const errorDiv = document.getElementById('error');
     if (checkboxes.length === 0) {

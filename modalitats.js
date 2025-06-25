@@ -18,48 +18,45 @@ const nomsTemes = [
   "Història de la dansa"
 ];
 
+// Sincroniza logros (estrelles) desde Firestore a localStorage
+async function sincronitzarLogrosFirestore(uid) {
+  try {
+    const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
+    const logros = logrosDoc.exists ? logrosDoc.data() : {};
+    localStorage.setItem('estrelles', JSON.stringify(logros));
+    mostrarTemesSeleccionats(); // Refresca la vista tras actualizar logros
+  } catch (err) {
+    // Si falla, al menos muestra los que había en localStorage
+    mostrarTemesSeleccionats();
+  }
+}
+
 // Muestra los temas seleccionados y las estrellas/logros si están guardados
 function mostrarTemesSeleccionats() {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) {}
-  // El objeto correcto de logros es el que guarda temes.js en localStorage con las clases de colores.
   const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
-  const modalitats = ['teoria','terminologia','audicions'];
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
     const estados = estrelles[idx] || {};
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
-      <span class="estrelles-tema">
-        ${modalitats.map(mod => {
-          let color = 'gris';
-          if (estados[mod] === "verde" || estados[mod] === "perfecta" || estados[mod] === "perfecte") color = 'verde';
-          else if (estados[mod] === "amarillo" || estados[mod] === "fallos" || estados[mod] === "completat") color = 'amarillo';
-          return `<span class="estrella ${mod} ${color}">★</span>`;
-        }).join('')}
+      <span class="stars">
+        <span class="star ${estados.teoria === 'perfecta' || estados.teoria === 'perfecte' ? 'green' : estados.teoria === 'fallos' || estados.teoria === 'completat' ? 'yellow' : ''}"></span>
+        <span class="star ${estados.terminologia === 'perfecta' || estados.terminologia === 'perfecte' ? 'green' : estados.terminologia === 'fallos' || estados.terminologia === 'completat' ? 'yellow' : ''}"></span>
+        <span class="star ${estados.audicions === 'perfecta' || estados.audicions === 'perfecte' ? 'green' : estados.audicions === 'fallos' || estados.audicions === 'completat' ? 'yellow' : ''}"></span>
       </span>
     </li>`;
   }).join('');
 }
-window.addEventListener('DOMContentLoaded', mostrarTemesSeleccionats);
 
 // Muestra el email/usuario (si tienes función global, úsala)
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
 });
-
-async function sincronitzarLogrosFirestore(uid) {
-  // Lee los logros del usuario en Firestore
-  const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
-  const logros = logrosDoc.exists ? logrosDoc.data() : {};
-  // Guarda los logros en localStorage, igual que hace temes.js
-  localStorage.setItem('estrelles', JSON.stringify(logros));
-  // Actualiza la visualización de estrellas
-  if (typeof mostrarTemesSeleccionats === "function") mostrarTemesSeleccionats();
-}
 
 // Autenticación y mostrar info de usuario/logros (igual que otras pantallas)
 isUserAuthenticated(async function(isAuth, user) {
@@ -70,7 +67,7 @@ isUserAuthenticated(async function(isAuth, user) {
     jugadorInfo.innerHTML = `👤 ${nomJugador}
       <button id="logoutBtn" onclick="logout()">Sortir</button>`;
     localStorage.setItem('jugador', nomJugador);
-    // Sincroniza logros de Firestore y actualiza las estrellas
+    // ¡Sincroniza logros después de autenticar!
     await sincronitzarLogrosFirestore(user.uid);
   } else {
     jugadorInfo.style.display = 'none';
@@ -80,11 +77,10 @@ isUserAuthenticated(async function(isAuth, user) {
 });
 
 // Controla el envío del formulario de modalidades
-
 window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    // Selector robusto para los checkboxes de modalidades
+    // Usa un selector robusto para los checkboxes (por si cambia la clase del contenedor)
     const checkboxes = document.querySelectorAll('input[name="modalitat"]:checked');
     const errorDiv = document.getElementById('error');
     if (checkboxes.length === 0) {

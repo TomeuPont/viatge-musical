@@ -72,7 +72,8 @@ isUserAuthenticated(async function(isAuth, user) {
 window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const checkboxes = document.querySelectorAll('.modalitats-options input[type="checkbox"]:checked');
+    // Selector robusto para los checkboxes de modalidades
+    const checkboxes = document.querySelectorAll('input[name="modalitat"]:checked');
     const errorDiv = document.getElementById('error');
     if (checkboxes.length === 0) {
       errorDiv.textContent = 'Per favor, selecciona almenys una modalitat per continuar.';
@@ -82,8 +83,6 @@ window.addEventListener('DOMContentLoaded', function() {
     errorDiv.style.display = 'none';
     const modalitatsSeleccionades = Array.from(checkboxes).map(cb => cb.value);
     localStorage.setItem('modalitatsSeleccionades', JSON.stringify(modalitatsSeleccionades));
-    // Aquí puedes llamar a guardarLogro cuando el usuario complete una modalidad, por ejemplo:
-    // guardarLogro(uid, tema, 'teoria', 'completat');
     window.location.href = 'joc.html';
   });
 });

@@ -1,8 +1,6 @@
-window.addEventListener('DOMContentLoaded', () => {
-  if (typeof initUserInfo === "function") initUserInfo();
-});
-
+// =======================
 // Nombres de los temas para mostrar
+// =======================
 const nomsTemes = [
   "Música de l’antiguitat",
   "Música medieval",
@@ -18,47 +16,48 @@ const nomsTemes = [
   "Història de la dansa"
 ];
 
+// =======================
 // Sincroniza logros (estrelles) desde Firestore a localStorage
+// =======================
 async function sincronitzarLogrosFirestore(uid) {
   try {
     const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
     const logros = logrosDoc.exists ? logrosDoc.data() : {};
     localStorage.setItem('estrelles', JSON.stringify(logros));
-    mostrarTemesSeleccionats(); // Refresca la vista tras actualizar logros
   } catch (err) {
-    // Si falla, al menos muestra los que había en localStorage
-    mostrarTemesSeleccionats();
+    // Si hay error, sigue mostrando lo que haya en localStorage sin bloquear nada
   }
 }
 
-// Muestra los temas seleccionados y las estrellas/logros si están guardados
+// =======================
+// Mostrar temas seleccionados y estrellas/logros
+// =======================
 function mostrarTemesSeleccionats() {
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
-  } catch(e) {}
+  } catch(e) { temes = []; }
   const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
   const ul = document.getElementById("temesSeleccionats");
+  if (!ul) return;
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
     const estados = estrelles[idx] || {};
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
       <span class="stars">
-        <span class="star ${estados.teoria === 'perfecta' || estados.teoria === 'perfecte' ? 'green' : estados.teoria === 'fallos' || estados.teoria === 'completat' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.terminologia === 'perfecta' || estados.terminologia === 'perfecte' ? 'green' : estados.terminologia === 'fallos' || estados.terminologia === 'completat' ? 'yellow' : ''}"></span>
-        <span class="star ${estados.audicions === 'perfecta' || estados.audicions === 'perfecte' ? 'green' : estados.audicions === 'fallos' || estados.audicions === 'completat' ? 'yellow' : ''}"></span>
+        <span class="star ${(estados.teoria === 'perfecta' || estados.teoria === 'perfecte') ? 'green' : (estados.teoria === 'fallos' || estados.teoria === 'completat') ? 'yellow' : ''}"></span>
+        <span class="star ${(estados.terminologia === 'perfecta' || estados.terminologia === 'perfecte') ? 'green' : (estados.terminologia === 'fallos' || estados.terminologia === 'completat') ? 'yellow' : ''}"></span>
+        <span class="star ${(estados.audicions === 'perfecta' || estados.audicions === 'perfecte') ? 'green' : (estados.audicions === 'fallos' || estados.audicions === 'completat') ? 'yellow' : ''}"></span>
       </span>
     </li>`;
   }).join('');
 }
 
-// Muestra el email/usuario (si tienes función global, úsala)
-window.addEventListener('DOMContentLoaded', () => {
-  if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
-});
-
-// Autenticación y mostrar info de usuario/logros (igual que otras pantallas)
+// =======================
+// Mostrar usuario y botón "Sortir" arriba a la derecha
+// Y sincronizar logros ANTES de pintar la columna lateral
+// =======================
 isUserAuthenticated(async function(isAuth, user) {
   const jugadorInfo = document.getElementById('jugadorInfo');
   if (isAuth) {
@@ -67,8 +66,9 @@ isUserAuthenticated(async function(isAuth, user) {
     jugadorInfo.innerHTML = `👤 ${nomJugador}
       <button id="logoutBtn" onclick="logout()">Sortir</button>`;
     localStorage.setItem('jugador', nomJugador);
-    // ¡Sincroniza logros después de autenticar!
+    // Sincroniza logros y luego pinta la columna lateral
     await sincronitzarLogrosFirestore(user.uid);
+    mostrarTemesSeleccionats();
   } else {
     jugadorInfo.style.display = 'none';
     localStorage.removeItem('jugador');
@@ -76,11 +76,13 @@ isUserAuthenticated(async function(isAuth, user) {
   }
 });
 
+// =======================
 // Controla el envío del formulario de modalidades
+// =======================
 window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modalitatsForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    // Usa un selector robusto para los checkboxes (por si cambia la clase del contenedor)
+    // Selector robusto para los checkboxes, por si cambia el contenedor
     const checkboxes = document.querySelectorAll('input[name="modalitat"]:checked');
     const errorDiv = document.getElementById('error');
     if (checkboxes.length === 0) {
@@ -95,7 +97,9 @@ window.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// =======================
 // Música de fondo: recuperar posición y play/pause según ON/OFF
+// =======================
 window.addEventListener("DOMContentLoaded", () => {
   const musica = document.getElementById('musicaFondo');
   if (!musica) return;
@@ -109,4 +113,11 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     musica.pause();
   }
+});
+
+// =======================
+// (Opcional) Mostrar email/usuario si tienes función global reutilizable
+// =======================
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
 });

@@ -1,4 +1,25 @@
 // =======================
+// Mostrar usuario y botón "Sortir" arriba a la derecha (como en las otras páginas)
+// =======================
+window.addEventListener('DOMContentLoaded', () => {
+  firebase.auth().onAuthStateChanged(user => {
+    const jugadorInfo = document.getElementById('jugadorInfo');
+    if (user) {
+      jugadorInfo.style.display = 'flex';
+      let nomJugador = user.displayName ? user.displayName : user.email;
+      jugadorInfo.innerHTML = `👤 ${nomJugador}
+        <button id="logoutBtn" onclick="logout()">Sortir</button>`;
+      localStorage.setItem('jugador', nomJugador);
+      mostrarLogrosLateral(user.uid); // Pinta la columna lateral tras logros
+    } else {
+      jugadorInfo.style.display = 'none';
+      localStorage.removeItem('jugador');
+      window.location.href = "login.html";
+    }
+  });
+});
+
+// =======================
 // Nombres de los temas para mostrar
 // =======================
 const nomsTemes = [
@@ -17,66 +38,43 @@ const nomsTemes = [
 ];
 
 // =======================
-// Sincroniza logros (estrelles) desde Firestore a localStorage
+// Mostrar temas seleccionados y sus estrellas según Firestore
 // =======================
-async function sincronitzarLogrosFirestore(uid) {
-  try {
-    const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
-    const logros = logrosDoc.exists ? logrosDoc.data() : {};
-    localStorage.setItem('estrelles', JSON.stringify(logros));
-  } catch (err) {
-    // Si hay error, sigue mostrando lo que haya en localStorage sin bloquear nada
-  }
-}
-
-// =======================
-// Mostrar temas seleccionados y estrellas/logros
-// =======================
-function mostrarTemesSeleccionats() {
+async function mostrarLogrosLateral(uid) {
+  // Leer temas seleccionados del localStorage
   let temes = [];
   try {
     temes = JSON.parse(localStorage.getItem('temesSeleccionats') || "[]");
   } catch(e) { temes = []; }
-  const estrelles = JSON.parse(localStorage.getItem('estrelles') || '{}');
+  // Leer logros de Firestore
+  const logrosDoc = await firebase.firestore().collection('logros').doc(uid).get();
+  const logros = logrosDoc.exists ? logrosDoc.data() : {};
   const ul = document.getElementById("temesSeleccionats");
   if (!ul) return;
   ul.innerHTML = temes.map(idx => {
     const temaNom = nomsTemes[parseInt(idx,10)-1];
-    const estados = estrelles[idx] || {};
+    // Claves como en temes.js: tema1.teoria, tema1.terminologia...
+    const estados = {
+      teoria: logros[`tema${idx}.teoria`] || "",
+      terminologia: logros[`tema${idx}.terminologia`] || "",
+      audicions: logros[`tema${idx}.audicions`] || ""
+    };
+    // Igual que en temes.js: perfect* -> verde, completat -> amarillo, else gris
+    function color(estado) {
+      if (estado === "perfecte") return "green";
+      if (estado === "completat") return "yellow";
+      return "";
+    }
     return `<li class="tema-row">
       <span class="tema-nom">${temaNom}</span>
       <span class="stars">
-        <span class="star ${(estados.teoria === 'perfecta' || estados.teoria === 'perfecte') ? 'green' : (estados.teoria === 'fallos' || estados.teoria === 'completat') ? 'yellow' : ''}"></span>
-        <span class="star ${(estados.terminologia === 'perfecta' || estados.terminologia === 'perfecte') ? 'green' : (estados.terminologia === 'fallos' || estados.terminologia === 'completat') ? 'yellow' : ''}"></span>
-        <span class="star ${(estados.audicions === 'perfecta' || estados.audicions === 'perfecte') ? 'green' : (estados.audicions === 'fallos' || estados.audicions === 'completat') ? 'yellow' : ''}"></span>
+        <span class="star teoria ${color(estados.teoria)}">&#9733;</span>
+        <span class="star terminologia ${color(estados.terminologia)}">&#9733;</span>
+        <span class="star audicions ${color(estados.audicions)}">&#9733;</span>
       </span>
     </li>`;
   }).join('');
 }
-
-// =======================
-// Autenticación, usuario y sincronización de logros
-// =======================
-window.addEventListener('DOMContentLoaded', function() {
-  // Así tienes el DOM listo
-  isUserAuthenticated(async function(isAuth, user) {
-    const jugadorInfo = document.getElementById('jugadorInfo');
-    if (isAuth) {
-      jugadorInfo.style.display = 'flex';
-      let nomJugador = user.displayName ? user.displayName : user.email;
-      jugadorInfo.innerHTML = `👤 ${nomJugador}
-        <button id="logoutBtn" onclick="logout()">Sortir</button>`;
-      localStorage.setItem('jugador', nomJugador);
-      // Sincroniza logros y sólo entonces pinta la columna lateral
-      await sincronitzarLogrosFirestore(user.uid);
-      mostrarTemesSeleccionats();
-    } else {
-      jugadorInfo.style.display = 'none';
-      localStorage.removeItem('jugador');
-      window.location.href = "login.html";
-    }
-  });
-});
 
 // =======================
 // Controla el envío del formulario de modalidades
@@ -119,8 +117,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // =======================
-// (Opcional) Mostrar email/usuario si tienes función global reutilizable
+// Función logout (como en otras páginas)
 // =======================
-window.addEventListener('DOMContentLoaded', () => {
-  if (typeof mostrarInfoUsuario === "function") mostrarInfoUsuario();
-});
+function logout() {
+  firebase.auth().signOut().then(() => {
+    window.location.href = "login.html";
+  });
+}

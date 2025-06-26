@@ -172,7 +172,10 @@
   flex-wrap: nowrap;
 }
 
-.side-panel h3,
 .side-panel .tema-nom {
+  color: #ffd600 !important;
+}
+
+.side-panel h3 {
   color: #ffd600 !important;
 }

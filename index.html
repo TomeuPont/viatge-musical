@@ -1,15 +1,3 @@
-<!-- Meta para modo app en iOS/iPadOS -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Viatge Musical">
-<link rel="apple-touch-icon" href="icon-192x192.png"> <!-- Cambia el nombre por el de tu icono -->
-
-<!-- Manifest PWA -->
-<link rel="manifest" href="/manifest.json">
-
-<!-- (Opcional, mejora experiencia) -->
-<meta name="theme-color" content="#ffd600">
-
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -119,27 +107,118 @@
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
   <div class="autora">Candelaria Pont Miró</div>
 
-<script>
-    document.getElementById('comencarBtn').addEventListener('click', function() {
+  <!-- MODAL DE PRIVACITAT -->
+  <div id="privacidadModal" style="display:none;
+    position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(30,30,60,0.82); 
+    display:flex; align-items:center; justify-content:center;">
+    <div id="privacidadContent" style="background:#fff; color:#222; border-radius:14px; padding:2rem 2.3rem; max-width:430px; width:90vw; box-shadow:0 4px 32px #0005; position:relative; text-align:left;">
+      <button id="cerrarPrivacidad" style="position:absolute; top:0.8em; right:1em; background:transparent; border:none; font-size:1.5em; color:#777; cursor:pointer;">×</button>
+      <div id="avisoPrivacidad">
+        <h2 style="margin-top:0;">Avís de privacitat</h2>
+        <p>
+          Per poder continuar amb el registre i accedir a la plataforma digital, és necessari que llegeixis i acceptis la nostra política de privacitat.
+        </p>
+        <p>
+          En utilitzar aquest servei, acceptes el tractament de les teves dades personals d’acord amb la nostra 
+          <a href="#" id="enlacePolitica">Política de privacitat</a>.
+        </p>
+        <label style="display:flex; align-items:center; gap:0.6em; margin:1.2em 0 1.8em 0;">
+          <input type="checkbox" id="aceptoPrivacidad"> 
+          <span>✅ Accepto la política de privacitat</span>
+        </label>
+        <button id="continuarBtn" style="padding:0.7em 1.8em; font-size:1.07em; border-radius:8px; background:#ff4081; color:#fff; border:none; font-weight:600; cursor:pointer;" disabled>Continuar</button>
+      </div>
+      <div id="politicaPrivacidad" style="display:none;">
+        <h2>Política de privacitat</h2>
+        <p>
+          Aquesta plataforma recull únicament l’adreça de correu electrònic que proporciones en el moment del registre. Utilitzem aquesta dada exclusivament per gestionar l’accés a la plataforma i, si escau, per comunicar-te informació rellevant sobre el seu funcionament.
+        </p>
+        <p>
+          No compartirem el teu correu electrònic amb tercers ni l’utilitzarem amb finalitats comercials.
+        </p>
+        <p>
+          En qualsevol moment pots sol·licitar l’eliminació de la teva informació escrivint-nos a <a href="mailto:flautistacande@gmail.com">flautistacande@gmail.com</a>.
+        </p>
+        <button id="volverAviso" style="margin-top:1.2em; padding:0.5em 1.5em; border-radius:8px; background:#ff4081; color:#fff; border:none; font-weight:600; cursor:pointer;">Tornar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // MODAL PRIVACIDAD
+    const privacidadModal = document.getElementById('privacidadModal');
+    const avisoPrivacidad = document.getElementById('avisoPrivacidad');
+    const politicaPrivacidad = document.getElementById('politicaPrivacidad');
+    const comencarBtn = document.getElementById('comencarBtn');
+    const aceptarCheck = document.getElementById('aceptoPrivacidad');
+    const continuarBtn = document.getElementById('continuarBtn');
+    const cerrarBtn = document.getElementById('cerrarPrivacidad');
+    const enlacePolitica = document.getElementById('enlacePolitica');
+    const volverAviso = document.getElementById('volverAviso');
+
+    comencarBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      privacidadModal.style.display = 'flex';
+      avisoPrivacidad.style.display = 'block';
+      politicaPrivacidad.style.display = 'none';
+      aceptarCheck.checked = false;
+      continuarBtn.disabled = true;
+    });
+
+    // Cerrar modal
+    cerrarBtn.addEventListener('click', function() {
+      privacidadModal.style.display = 'none';
+    });
+
+    // Mostrar política
+    enlacePolitica.addEventListener('click', function(e) {
+      e.preventDefault();
+      avisoPrivacidad.style.display = 'none';
+      politicaPrivacidad.style.display = 'block';
+    });
+
+    // Volver al aviso
+    volverAviso.addEventListener('click', function() {
+      politicaPrivacidad.style.display = 'none';
+      avisoPrivacidad.style.display = 'block';
+    });
+
+    // Control checkbox para habilitar botón continuar
+    aceptarCheck.addEventListener('change', function() {
+      continuarBtn.disabled = !aceptarCheck.checked;
+    });
+
+    // Al aceptar y continuar, sigue la lógica de música + retardo + navegación
+    continuarBtn.addEventListener('click', function() {
+      privacidadModal.style.display = 'none';
+
+      // Mensaje visual de espera
+      comencarBtn.style.display = 'none';
+      const esperaMsg = document.createElement('div');
+      esperaMsg.id = 'esperaMsg';
+      esperaMsg.style.marginTop = "2rem";
+      esperaMsg.style.fontSize = "1.2rem";
+      esperaMsg.style.color = "white";
+      esperaMsg.style.textAlign = "center";
+      esperaMsg.innerText = "La música ha començat. Espera uns segons...";
+      document.body.appendChild(esperaMsg);
+
       const musica = document.getElementById('musicaFondo');
-      localStorage.removeItem('musicaFondoTime');
       musica.volume = 0.4;
       musica.play().then(() => {
         localStorage.setItem('musicaFondoON', 'si');
-        // Añadimos un pequeño retardo antes de navegar (600ms)
+        localStorage.setItem('musicaFondoTime', musica.currentTime);
         setTimeout(() => {
           window.location.href = 'login.html';
-        }, 600);
+        }, 10000); // 10 segons de retard
       }).catch(() => {
         localStorage.setItem('musicaFondoON', 'si');
-        // Incluso si falla, aplicamos el mismo retardo
+        localStorage.setItem('musicaFondoTime', musica.currentTime);
         setTimeout(() => {
           window.location.href = 'login.html';
-        }, 600);
+        }, 10000);
       });
     });
-</script>
-  
-  
+  </script>
 </body>
 </html>

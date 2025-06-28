@@ -202,14 +202,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let errors = 0;
     let respostaMostrada = false;
 
-    function normalitzarModalitat(mod) {
+  function normalitzarModalitat(mod) {
   mod = (mod || "").trim().toLowerCase();
-  if (mod.includes("teoria")) return "teoria";
+  if (mod.includes("teoria") || mod.includes("teòric")) return "teoria";
   if (mod.includes("terminologia")) return "terminologia";
   if (mod.includes("audicio")) return "audicions";
   return mod;
 }
-
 function carregarPregunta() {
   if (!preguntesPlanas[index]) {
     document.getElementById("qcontainer").innerHTML = `

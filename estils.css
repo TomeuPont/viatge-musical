@@ -419,3 +419,18 @@ body {
     padding: 0.33em 1em;
   }
 }
+
+.joc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6em;
+}
+
+#question-counter {
+  font-size: 1.1em;
+  color: #ffd600;
+  font-weight: bold;
+  text-align: right;
+  margin-bottom: 0;
+}

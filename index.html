@@ -268,7 +268,7 @@
       esperaMsg.style.fontSize = "1.2rem";
       esperaMsg.style.color = "white";
       esperaMsg.style.textAlign = "center";
-      esperaMsg.innerText = "La música ha començat. Espera uns segons...";
+      esperaMsg.innerText = "";
       document.body.appendChild(esperaMsg);
 
       const musica = document.getElementById('musicaFondo');
@@ -284,7 +284,7 @@
         localStorage.setItem('musicaFondoTime', musica.currentTime);
         setTimeout(() => {
           window.location.href = 'login.html';
-        }, 10000);
+        }, 1);
       });
     });
   </script>

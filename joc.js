@@ -297,44 +297,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- MODIFICADO: Al terminar todas las preguntas, guardar el logro en Firestore y comprobar enhorabuena ---
-    function seguentPregunta() {
-      if (index < preguntesPlanas.length - 1) {
-        index++;
-        carregarPregunta();
-      } else {
-        const actual = preguntesPlanas[index];
-        let estadoModalidad = (errors === 0) ? "perfecte" : "completat";
-        // MAPEO para garantizar modalidad estándar
-        const modalidadMap = {
-          'teoria': 'teoria',
-          'Teoria': 'teoria',
-          'Treballar contingut teòric': 'teoria',
-          'terminologia': 'terminologia',
-          'Terminologia': 'terminologia',
-          'Treballar terminologia': 'terminologia',
-          'audicions': 'audicions',
-          'Audicions': 'audicions',
-          'Treballar audicions': 'audicions'
-        };
-        isUserAuthenticated().then(user => {
-          if (user && user.uid) {
-            let modalidadGuardar = modalidadMap[actual.modalitat] || actual.modalitat;
-            guardarLogroFirestore(user.uid, actual.temaId, modalidadGuardar, estadoModalidad);
-          }
-        });
 
-        document.getElementById("qcontainer").innerHTML = `
-          <h2>Has completat totes les preguntes! 🎉</h2>
-          <p>✅ Correctes: ${encerts}</p>
-          <p>❌ Incorrectes: ${errors}</p>
-          <button class="next-button" id="reloadModalitats">Tornar a les modalitats</button>
-        `;
-      document.getElementById("reloadModalitats").onclick = function() {
-      window.location.replace('modalitats.html');
-      };   
-        restaurarMusicaFondo();
+    function seguentPregunta() {
+  if (index < preguntesPlanas.length - 1) {
+    index++;
+    carregarPregunta();
+  } else {
+    let estadoModalidad = (errors === 0) ? "perfecte" : "completat";
+    // MAPEO para garantizar modalidad estándar
+    const modalidadMap = {
+      'teoria': 'teoria',
+      'Teoria': 'teoria',
+      'Treballar contingut teòric': 'teoria',
+      'terminologia': 'terminologia',
+      'Terminologia': 'terminologia',
+      'Treballar terminologia': 'terminologia',
+      'audicions': 'audicions',
+      'Audicions': 'audicions',
+      'Treballar audicions': 'audicions'
+    };
+
+    // Recoge todos los temas únicos y su modalidad de la partida
+    const temasYModalidades = {};
+    preguntesPlanas.forEach(p => {
+      const modalidadGuardar = modalidadMap[p.modalitat] || p.modalitat;
+      temasYModalidades[`${p.temaId}_${modalidadGuardar}`] = {temaId: p.temaId, modalitat: modalidadGuardar};
+    });
+
+    isUserAuthenticated().then(user => {
+      if (user && user.uid) {
+        Object.values(temasYModalidades).forEach(({temaId, modalitat}) => {
+          guardarLogroFirestore(user.uid, temaId, modalitat, estadoModalidad);
+        });
       }
-    }
+    });
+
+    document.getElementById("qcontainer").innerHTML = `
+      <h2>Has completat totes les preguntes! 🎉</h2>
+      <p>✅ Correctes: ${encerts}</p>
+      <p>❌ Incorrectes: ${errors}</p>
+      <button class="next-button" id="reloadModalitats">Tornar a les modalitats</button>
+    `;
+    document.getElementById("reloadModalitats").onclick = function() {
+      window.location.replace('modalitats.html');
+    };
+    restaurarMusicaFondo();
+  }
+}    
+    
 
     document.getElementById("nextBtn").onclick = seguentPregunta;
 

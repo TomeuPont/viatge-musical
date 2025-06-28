@@ -121,6 +121,7 @@
   <script>
     document.getElementById('comencarBtn').addEventListener('click', function() {
       const musica = document.getElementById('musicaFondo');
+      localStorage.removeItem('musicaFondoTime');
       musica.volume = 0.4;
       musica.play().then(() => {
         localStorage.setItem('musicaFondoON', 'si');

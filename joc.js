@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h2>Has completat totes les preguntes! 🎉</h2>
           <p>✅ Correctes: ${encerts}</p>
           <p>❌ Incorrectes: ${errors}</p>
-          <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
+          <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a les modalitats</button>
         `;
         restaurarMusicaFondo();
       }

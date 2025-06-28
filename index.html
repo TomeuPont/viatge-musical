@@ -57,8 +57,8 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s;
-      box-shadow: 0 4px 18px 0 #0005;
       letter-spacing: 0.5px;
+      box-shadow: none; /* SIN sombra */
     }
 
     button:hover {
@@ -122,39 +122,38 @@
     }
     #cerrarPrivacidad {
       position: absolute;
-      top: 0.6em;
-      right: 0.8em;
-      width: 28px;
-      height: 28px;
-      background: #eee;
-      border: 1.5px solid #ccc;
-      border-radius: 6px;
-      font-size: 1.2em;
-      color: #777;
+      top: 0.7em;
+      right: 1.1em;
+      background: none;
+      border: none;
+      font-size: 1.6em;
+      color: #888;
       cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
-      transition: background 0.15s, border 0.15s;
-      z-index: 10;
+      border-radius: 50%;
+      transition: background 0.15s;
     }
-    #cerrarPrivacidad:hover {
-      background: #ff4081;
-      color: #fff;
-      border-color: #ff4081;
-    }
+    #cerrarPrivacidad:hover,
     #cerrarPrivacidad:focus {
-      outline: 2px solid #ff4081;
+      background: #eee;
+      color: #555;
+      outline: none;
     }
     #cerrarPrivacidad span {
       font-family: Arial, sans-serif;
-      font-size: 1.35em;
+      font-size: 1.3em;
       font-weight: bold;
       line-height: 1;
       display: block;
       margin-top: -2px;
-      margin-left: 1px;
+      margin-left: 0px;
+      color: #888;
     }
     #continuarBtn, #volverAviso {
       padding: 0.7em 1.8em;
@@ -165,6 +164,7 @@
       border: none;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: none; /* SIN sombra */
     }
     #continuarBtn:disabled {
       background: #ccc;
@@ -196,9 +196,9 @@
         padding: 1.2rem 0.6rem;
       }
       #cerrarPrivacidad {
-        width: 24px;
-        height: 24px;
-        font-size: 1em;
+        width: 28px;
+        height: 28px;
+        font-size: 1.2em;
       }
     }
   </style>
@@ -225,7 +225,7 @@
         </p>
         <label style="display:flex; align-items:center; gap:0.6em; margin:1.2em 0 1.8em 0;">
           <input type="checkbox" id="aceptoPrivacidad"> 
-          <span>Accepto la política de privacitat</span>
+          <span>✅ Accepto la política de privacitat</span>
         </label>
         <button id="continuarBtn" disabled>Continuar</button>
       </div>

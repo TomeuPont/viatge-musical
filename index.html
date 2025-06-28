@@ -31,7 +31,7 @@
       margin-top: 0;
       letter-spacing: 1px;
       line-height: 1.15;
-      color: #fff; /* TODO: ahora es blanco puro */
+      color: #fff;
       background: none !important;
       -webkit-background-clip: unset !important;
       -webkit-text-fill-color: unset !important;
@@ -81,6 +81,73 @@
       pointer-events: none;
     }
 
+    /* MODAL PRIVACITAT */
+    #privacidadModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(30,30,60,0.82);
+      align-items: center;
+      justify-content: center;
+    }
+    #privacidadContent {
+      background: #fff;
+      color: #222;
+      border-radius: 14px;
+      padding: 2rem 2.3rem;
+      max-width: 430px;
+      width: 90vw;
+      box-shadow: 0 4px 32px #0005;
+      position: relative;
+      text-align: left;
+      /* Elimina cualquier sombra de texto en el modal */
+      text-shadow: none !important;
+    }
+    #privacidadContent h2, #privacidadContent p, #privacidadContent label, #privacidadContent span, #privacidadContent a {
+      color: #222 !important;
+      text-shadow: none !important;
+    }
+    #privacidadContent a {
+      text-decoration: underline;
+      color: #2451b7 !important;
+    }
+    #privacidadContent a:hover {
+      color: #ff4081 !important;
+    }
+    #cerrarPrivacidad {
+      position: absolute;
+      top: 0.8em;
+      right: 1em;
+      background: transparent;
+      border: none;
+      font-size: 1.5em;
+      color: #777;
+      cursor: pointer;
+    }
+    #continuarBtn, #volverAviso {
+      padding: 0.7em 1.8em;
+      font-size: 1.07em;
+      border-radius: 8px;
+      background: #ff4081;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #continuarBtn:disabled {
+      background: #ccc;
+      color: #888;
+      cursor: not-allowed;
+    }
+    #volverAviso {
+      margin-top: 1.2em;
+      padding: 0.5em 1.5em;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 2.1rem;
@@ -97,6 +164,9 @@
         right: 3vw;
         bottom: 1vh;
       }
+      #privacidadContent {
+        padding: 1.2rem 0.6rem;
+      }
     }
   </style>
 </head>
@@ -108,11 +178,9 @@
   <div class="autora">Candelaria Pont Miró</div>
 
   <!-- MODAL DE PRIVACITAT -->
-  <div id="privacidadModal" style="display:none;
-    position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(30,30,60,0.82); 
-    display:flex; align-items:center; justify-content:center;">
-    <div id="privacidadContent" style="background:#fff; color:#222; border-radius:14px; padding:2rem 2.3rem; max-width:430px; width:90vw; box-shadow:0 4px 32px #0005; position:relative; text-align:left;">
-      <button id="cerrarPrivacidad" style="position:absolute; top:0.8em; right:1em; background:transparent; border:none; font-size:1.5em; color:#777; cursor:pointer;">×</button>
+  <div id="privacidadModal">
+    <div id="privacidadContent">
+      <button id="cerrarPrivacidad">×</button>
       <div id="avisoPrivacidad">
         <h2 style="margin-top:0;">Avís de privacitat</h2>
         <p>
@@ -126,7 +194,7 @@
           <input type="checkbox" id="aceptoPrivacidad"> 
           <span>✅ Accepto la política de privacitat</span>
         </label>
-        <button id="continuarBtn" style="padding:0.7em 1.8em; font-size:1.07em; border-radius:8px; background:#ff4081; color:#fff; border:none; font-weight:600; cursor:pointer;" disabled>Continuar</button>
+        <button id="continuarBtn" disabled>Continuar</button>
       </div>
       <div id="politicaPrivacidad" style="display:none;">
         <h2>Política de privacitat</h2>
@@ -139,7 +207,7 @@
         <p>
           En qualsevol moment pots sol·licitar l’eliminació de la teva informació escrivint-nos a <a href="mailto:flautistacande@gmail.com">flautistacande@gmail.com</a>.
         </p>
-        <button id="volverAviso" style="margin-top:1.2em; padding:0.5em 1.5em; border-radius:8px; background:#ff4081; color:#fff; border:none; font-weight:600; cursor:pointer;">Tornar</button>
+        <button id="volverAviso">Tornar</button>
       </div>
     </div>
   </div>

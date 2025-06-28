@@ -119,35 +119,27 @@
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
   <div class="autora">Candelaria Pont Miró</div>
 
-  <script>
-  document.getElementById('comencarBtn').addEventListener('click', function() {
-    const musica = document.getElementById('musicaFondo');
-    musica.volume = 0.4;
-    // Oculta el botón "Començar"
-    document.getElementById('comencarBtn').style.display = 'none';
-    // Muestra el mensaje de espera
-    const esperaMsg = document.createElement('div');
-    esperaMsg.id = 'esperaMsg';
-    esperaMsg.style.marginTop = "2rem";
-    esperaMsg.style.fontSize = "1.2rem";
-    esperaMsg.style.color = "white";
-    esperaMsg.style.textAlign = "center";
-    esperaMsg.innerText = "La música ha començat. Espera uns segons...";
-    document.body.appendChild(esperaMsg);
-
-    musica.play().then(() => {
-      localStorage.setItem('musicaFondoON', 'si');
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 10000); // 10 segundos de retardo
-    }).catch(() => {
-      localStorage.setItem('musicaFondoON', 'si');
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 10000);
+<script>
+    document.getElementById('comencarBtn').addEventListener('click', function() {
+      const musica = document.getElementById('musicaFondo');
+      localStorage.removeItem('musicaFondoTime');
+      musica.volume = 0.4;
+      musica.play().then(() => {
+        localStorage.setItem('musicaFondoON', 'si');
+        // Añadimos un pequeño retardo antes de navegar (600ms)
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 600);
+      }).catch(() => {
+        localStorage.setItem('musicaFondoON', 'si');
+        // Incluso si falla, aplicamos el mismo retardo
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 600);
+      });
     });
-  });
 </script>
+  
   
 </body>
 </html>

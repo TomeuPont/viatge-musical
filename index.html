@@ -118,6 +118,7 @@
   <button id="comencarBtn" type="button">Començar</button>
   <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
   <div class="autora">Candelaria Pont Miró</div>
+
   <script>
     document.getElementById('comencarBtn').addEventListener('click', function() {
       const musica = document.getElementById('musicaFondo');
@@ -125,12 +126,20 @@
       musica.volume = 0.4;
       musica.play().then(() => {
         localStorage.setItem('musicaFondoON', 'si');
-        window.location.href = 'login.html';
+        // Añadimos un pequeño retardo antes de navegar (600ms)
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 600);
       }).catch(() => {
         localStorage.setItem('musicaFondoON', 'si');
-        window.location.href = 'login.html';
+        // Incluso si falla, aplicamos el mismo retardo
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 600);
       });
     });
-  </script>
+</script>
+
+  
 </body>
 </html>

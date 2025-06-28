@@ -203,7 +203,7 @@ body {
 }
 
 .side-panel {
-  width: 240px;
+  width: 310px;
   min-height: 100vh;
   background: rgba(34,34,68,0.90);
   color: #ffd600;
@@ -231,21 +231,6 @@ body {
   flex: 1;
   padding: 2.5em 1.5em;
 }
-@media (max-width: 800px) {
-  body {
-    flex-direction: column;
-  }
-  .side-panel {
-    width: 100%;
-    border-radius: 0;
-    min-height: auto;
-    position: static;
-    padding: 1em 0.6em;
-  }
-  .main-content {
-    padding: 1em 0.5em;
-  }
-}
 
 .modalitats-options {
   display: flex;
@@ -257,12 +242,7 @@ body {
   justify-content: center;
 }
 
-@media (max-width: 700px) {
-  .modalitats-options {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
+
 .modalitat-checkbox {
   display: flex;
   align-items: center;
@@ -408,17 +388,6 @@ body {
   background: #ff79a7;
   transform: scale(1.07);
 }
-@media (max-width: 600px) {
-  #jugadorInfo {
-    font-size: 0.93em;
-    top: 0.9em;
-    right: 1em;
-  }
-  #jugadorInfo button {
-    font-size: 0.98em;
-    padding: 0.33em 1em;
-  }
-}
 
 .joc-row {
   display: flex;
@@ -434,3 +403,64 @@ body {
   text-align: right;
   margin-bottom: 0;
 }
+
+/* Responsive para tablets y móviles */
+@media (max-width: 1024px) {
+  .side-panel {
+    width: 100%;
+    min-width: 0;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  .stars {
+    font-size: 1em;
+  }
+  .tema-row {
+    gap: 0.3em;
+  }
+}
+
+@media (max-width: 800px) {
+  .side-panel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    flex-direction: column;
+    padding: 1.2em 0.6em 0.7em 0.6em;
+    margin-bottom: 0.7em;
+    min-width: 0;
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 0.5em 0 1.2em 0;
+  }
+  .stars {
+    font-size: 0.93em;
+  }
+  .tema-row {
+    gap: 0.2em;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+  }
+}
+
+@media (max-width: 600px) {
+  #jugadorInfo {
+    font-size: 0.93em;
+    top: 0.9em;
+    right: 1em;
+  }
+  #jugadorInfo button {
+    font-size: 0.98em;
+    padding: 0.33em 1em;
+  }
+}
+
+@media (max-width: 700px) {
+  .modalitats-options {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+

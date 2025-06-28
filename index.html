@@ -94,6 +94,9 @@
       align-items: center;
       justify-content: center;
     }
+    #privacidadModal.show {
+      display: flex;
+    }
     #privacidadContent {
       background: #fff;
       color: #222;
@@ -104,7 +107,6 @@
       box-shadow: 0 4px 32px #0005;
       position: relative;
       text-align: left;
-      /* Elimina cualquier sombra de texto en el modal */
       text-shadow: none !important;
     }
     #privacidadContent h2, #privacidadContent p, #privacidadContent label, #privacidadContent span, #privacidadContent a {
@@ -226,7 +228,7 @@
 
     comencarBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      privacidadModal.style.display = 'flex';
+      privacidadModal.classList.add('show');
       avisoPrivacidad.style.display = 'block';
       politicaPrivacidad.style.display = 'none';
       aceptarCheck.checked = false;
@@ -235,7 +237,7 @@
 
     // Cerrar modal
     cerrarBtn.addEventListener('click', function() {
-      privacidadModal.style.display = 'none';
+      privacidadModal.classList.remove('show');
     });
 
     // Mostrar política
@@ -258,7 +260,7 @@
 
     // Al aceptar y continuar, sigue la lógica de música + retardo + navegación
     continuarBtn.addEventListener('click', function() {
-      privacidadModal.style.display = 'none';
+      privacidadModal.classList.remove('show');
 
       // Mensaje visual de espera
       comencarBtn.style.display = 'none';
@@ -268,7 +270,7 @@
       esperaMsg.style.fontSize = "1.2rem";
       esperaMsg.style.color = "white";
       esperaMsg.style.textAlign = "center";
-      esperaMsg.innerText = "";
+      esperaMsg.innerText = "La música ha començat. Espera uns segons...";
       document.body.appendChild(esperaMsg);
 
       const musica = document.getElementById('musicaFondo');
@@ -284,7 +286,7 @@
         localStorage.setItem('musicaFondoTime', musica.currentTime);
         setTimeout(() => {
           window.location.href = 'login.html';
-        }, 1);
+        }, 10000);
       });
     });
   </script>

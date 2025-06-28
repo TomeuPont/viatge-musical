@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h2>Has completat totes les preguntes! 🎉</h2>
           <p>✅ Correctes: ${encerts}</p>
           <p>❌ Incorrectes: ${errors}</p>
-          <button class="next-button" id="reloadModalitats">Tornar a escollir modalitat</button>
+          <button class="next-button" id="reloadModalitats">Tornar a les modalitats</button>
         `;
       document.getElementById("reloadModalitats").onclick = function() {
       window.location.replace('modalitats.html');

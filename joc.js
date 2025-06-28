@@ -108,6 +108,7 @@ function guardarLogroFirestore(uid, temaId, modalidad, estado) {
   });
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
   if (!temesSeleccionats.length || !modalitatsSeleccionades.length) {
     document.getElementById("qcontainer").innerHTML = `
@@ -202,156 +203,154 @@ document.addEventListener("DOMContentLoaded", () => {
     let errors = 0;
     let respostaMostrada = false;
 
-  function normalitzarModalitat(mod) {
-  mod = (mod || "").trim().toLowerCase();
-  if (mod.includes("teoria") || mod.includes("teòric")) return "teoria";
-  if (mod.includes("terminologia")) return "terminologia";
-  if (mod.includes("audicio")) return "audicions";
-  return mod;
-}
-function carregarPregunta() {
-  if (!preguntesPlanas[index]) {
-    document.getElementById("qcontainer").innerHTML = `
-      <div class="no-questions">
-        <p>❗ No hi ha més preguntes.</p>
-      </div>
-    `;
-    return;
-  }
-  document.getElementById("question-counter").textContent = `${index + 1} / ${preguntesPlanas.length}`;
-  
-  const actual = preguntesPlanas[index];
-  document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
-  document.getElementById("tema").textContent = actual.tema || '';
-  document.getElementById("pregunta").innerHTML = "Pregunta: " + (actual.pregunta || '');
-  if (actual.audio) {
-    document.getElementById("pregunta").innerHTML += `<br/><audio controls src="${actual.audio}" style="margin-top:1em"></audio>`;
-  }
-  document.getElementById("opcions").innerHTML = "";
-  document.getElementById("feedback").textContent = "";
-  respostaMostrada = false;
+    // --- NUEVO: Registro por tema ---
+    let estadisticasPorTema = {}; // { temaId: { aciertos: X, errores: Y, total: Z } }
 
-  // Solución robusta para controlar la música de fondo según modalidad
-  const mod = normalitzarModalitat(actual.modalitat);
-  if (mod === "audicions") {
-    silenciarMusicaFondo();
-  } else if (mod === "teoria" || mod === "terminologia") {
-    restaurarMusicaFondo();
-  }
+    function carregarPregunta() {
+      if (!preguntesPlanas[index]) {
+        document.getElementById("qcontainer").innerHTML = `
+          <div class="no-questions">
+            <p>❗ No hi ha més preguntes.</p>
+          </div>
+        `;
+        return;
+      }
+      const actual = preguntesPlanas[index];
+      document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
+      document.getElementById("tema").textContent = actual.tema || '';
+      document.getElementById("pregunta").innerHTML = "Pregunta: " + (actual.pregunta || '');
+      if (actual.audio) {
+        document.getElementById("pregunta").innerHTML += `<br/><audio controls src="${actual.audio}" style="margin-top:1em"></audio>`;
+      }
+      document.getElementById("opcions").innerHTML = "";
+      document.getElementById("feedback").textContent = "";
+      respostaMostrada = false;
 
-  // Deshabilitar el botón "Següent pregunta" hasta responder
-  const nextBtn = document.getElementById("nextBtn");
-  nextBtn.disabled = true;
-  nextBtn.classList.add("disabled");
+      // SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA
+      const mod = (actual.modalitat || "").toLowerCase();
+      if (mod.includes("audicio")) {
+        silenciarMusicaFondo();
+      } else if (mod.includes("teoria") || mod.includes("terminologia")) {
+        restaurarMusicaFondo();
+      }
 
-  // Mensaje de error si intenta avanzar sin contestar
-  const missatgeError = document.createElement("div");
-  missatgeError.id = "missatge-error";
-  missatgeError.style.display = "none";
-  missatgeError.style.color = "#ff4081";
-  missatgeError.style.marginTop = "1em";
-  document.getElementById("qcontainer").appendChild(missatgeError);
+      // Deshabilitar el botón "Següent pregunta" hasta responder
+      const nextBtn = document.getElementById("nextBtn");
+      nextBtn.disabled = true;
+      nextBtn.classList.add("disabled");
 
-  function mostrarMissatgeError(missatge) {
-    missatgeError.textContent = missatge;
-    missatgeError.style.display = "block";
-  }
-  function amagarMissatgeError() {
-    missatgeError.textContent = "";
-    missatgeError.style.display = "none";
-  }
+      // Mensaje de error si intenta avanzar sin contestar
+      const missatgeError = document.createElement("div");
+      missatgeError.id = "missatge-error";
+      missatgeError.style.display = "none";
+      missatgeError.style.color = "#ff4081";
+      missatgeError.style.marginTop = "1em";
+      document.getElementById("qcontainer").appendChild(missatgeError);
 
-  // Opciones de respuesta
-  actual.opcions.forEach((opcio, i) => {
-    const boto = document.createElement("button");
-    boto.className = "option-button";
-    boto.textContent = opcio;
-    boto.onclick = () => {
-      amagarMissatgeError();
-      comprovarResposta(i);
-      // Habilita el botón "Següent pregunta" solo cuando se responde
-      nextBtn.disabled = false;
-      nextBtn.classList.remove("disabled");
-    };
-    document.getElementById("opcions").appendChild(boto);
-  });
+      function mostrarMissatgeError(missatge) {
+        missatgeError.textContent = missatge;
+        missatgeError.style.display = "block";
+      }
+      function amagarMissatgeError() {
+        missatgeError.textContent = "";
+        missatgeError.style.display = "none";
+      }
 
-  nextBtn.onclick = () => {
-    if (!respostaMostrada) {
-      mostrarMissatgeError("Has de seleccionar una opció abans de continuar.");
-      return;
+      // Opciones de respuesta
+      actual.opcions.forEach((opcio, i) => {
+        const boto = document.createElement("button");
+        boto.className = "option-button";
+        boto.textContent = opcio;
+        boto.onclick = () => {
+          amagarMissatgeError();
+          comprovarResposta(i);
+          // Habilita el botón "Següent pregunta" solo cuando se responde
+          nextBtn.disabled = false;
+          nextBtn.classList.remove("disabled");
+        };
+        document.getElementById("opcions").appendChild(boto);
+      });
+
+      nextBtn.onclick = () => {
+        if (!respostaMostrada) {
+          mostrarMissatgeError("Has de seleccionar una opció abans de continuar.");
+          return;
+        }
+        seguentPregunta();
+        amagarMissatgeError();
+      };
+      nextBtn.style.display = "block";
     }
-    seguentPregunta();
-    amagarMissatgeError();
-  };
-  nextBtn.style.display = "block";
-}
-    
+
     function comprovarResposta(seleccio) {
       if (respostaMostrada) return;
       respostaMostrada = true;
-      const correcta = preguntesPlanas[index].correcta;
+      const preguntaActual = preguntesPlanas[index];
+      const correcta = preguntaActual.correcta;
       const feedback = document.getElementById("feedback");
+
+      // --- NUEVO: Actualiza estadísticas por tema ---
+      const temaId = preguntaActual.temaId;
+      if (!estadisticasPorTema[temaId]) {
+        estadisticasPorTema[temaId] = { aciertos: 0, errores: 0, total: 0 };
+      }
+      estadisticasPorTema[temaId].total++;
+
       if (seleccio === correcta) {
         feedback.textContent = "✅ Correcte!";
         feedback.style.color = "#00ff88";
         encerts++;
+        estadisticasPorTema[temaId].aciertos++;
       } else {
         feedback.textContent = "❌ Incorrecte. La resposta correcta era: " + preguntesPlanas[index].opcions[correcta];
         feedback.style.color = "#ff8888";
         errors++;
+        estadisticasPorTema[temaId].errores++;
       }
     }
 
-    // --- MODIFICADO: Al terminar todas las preguntas, guardar el logro en Firestore y comprobar enhorabuena ---
-
+    // --- MODIFICADO: Al terminar todas las preguntas, guardar el logro en Firestore por tema ---
     function seguentPregunta() {
-  if (index < preguntesPlanas.length - 1) {
-    index++;
-    carregarPregunta();
-  } else {
-    let estadoModalidad = (errors === 0) ? "perfecte" : "completat";
-    // MAPEO para garantizar modalidad estándar
-    const modalidadMap = {
-      'teoria': 'teoria',
-      'Teoria': 'teoria',
-      'Treballar contingut teòric': 'teoria',
-      'terminologia': 'terminologia',
-      'Terminologia': 'terminologia',
-      'Treballar terminologia': 'terminologia',
-      'audicions': 'audicions',
-      'Audicions': 'audicions',
-      'Treballar audicions': 'audicions'
-    };
+      if (index < preguntesPlanas.length - 1) {
+        index++;
+        carregarPregunta();
+      } else {
+        // MAPEO para garantizar modalidad estándar
+        const modalidadMap = {
+          'teoria': 'teoria',
+          'Teoria': 'teoria',
+          'Treballar contingut teòric': 'teoria',
+          'terminologia': 'terminologia',
+          'Terminologia': 'terminologia',
+          'Treballar terminologia': 'terminologia',
+          'audicions': 'audicions',
+          'Audicions': 'audicions',
+          'Treballar audicions': 'audicions'
+        };
 
-    // Recoge todos los temas únicos y su modalidad de la partida
-    const temasYModalidades = {};
-    preguntesPlanas.forEach(p => {
-      const modalidadGuardar = modalidadMap[p.modalitat] || p.modalitat;
-      temasYModalidades[`${p.temaId}_${modalidadGuardar}`] = {temaId: p.temaId, modalitat: modalidadGuardar};
-    });
-
-    isUserAuthenticated().then(user => {
-      if (user && user.uid) {
-        Object.values(temasYModalidades).forEach(({temaId, modalitat}) => {
-          guardarLogroFirestore(user.uid, temaId, modalitat, estadoModalidad);
+        isUserAuthenticated().then(user => {
+          if (user && user.uid) {
+            // Guardar logro para CADA tema jugado
+            Object.keys(estadisticasPorTema).forEach(temaId => {
+              const stats = estadisticasPorTema[temaId];
+              let estadoModalidad = (stats.errores === 0) ? "perfecte" : "completat";
+              // Modalidad: la tomamos de la primera pregunta que coincida con el tema
+              const preguntaTema = preguntesPlanas.find(p => p.temaId == temaId);
+              let modalidadGuardar = modalidadMap[preguntaTema.modalitat] || preguntaTema.modalitat;
+              guardarLogroFirestore(user.uid, temaId, modalidadGuardar, estadoModalidad);
+            });
+          }
         });
-      }
-    });
 
-    document.getElementById("qcontainer").innerHTML = `
-      <h2>Has completat totes les preguntes! 🎉</h2>
-      <p>✅ Correctes: ${encerts}</p>
-      <p>❌ Incorrectes: ${errors}</p>
-      <button class="next-button" id="reloadModalitats">Tornar a les modalitats</button>
-    `;
-    document.getElementById("reloadModalitats").onclick = function() {
-      window.location.replace('modalitats.html');
-    };
-    restaurarMusicaFondo();
-  }
-}    
-    
+        document.getElementById("qcontainer").innerHTML = `
+          <h2>Has completat totes les preguntes! 🎉</h2>
+          <p>✅ Correctes: ${encerts}</p>
+          <p>❌ Incorrectes: ${errors}</p>
+          <button class="next-button" onclick="window.location.href='modalitats.html'">Tornar a escollir modalitat</button>
+        `;
+        restaurarMusicaFondo();
+      }
+    }
 
     document.getElementById("nextBtn").onclick = seguentPregunta;
 

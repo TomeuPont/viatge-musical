@@ -202,84 +202,92 @@ document.addEventListener("DOMContentLoaded", () => {
     let errors = 0;
     let respostaMostrada = false;
 
-    function carregarPregunta() {
-      if (!preguntesPlanas[index]) {
-        document.getElementById("qcontainer").innerHTML = `
-          <div class="no-questions">
-            <p>❗ No hi ha més preguntes.</p>
-          </div>
-        `;
-        return;
-      }
-      document.getElementById("question-counter").textContent = `${index + 1} / ${preguntesPlanas.length}`;
-      
-      const actual = preguntesPlanas[index];
-      document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
-      document.getElementById("tema").textContent = actual.tema || '';
-      document.getElementById("pregunta").innerHTML = "Pregunta: " + (actual.pregunta || '');
-      if (actual.audio) {
-        document.getElementById("pregunta").innerHTML += `<br/><audio controls src="${actual.audio}" style="margin-top:1em"></audio>`;
-      }
-      document.getElementById("opcions").innerHTML = "";
-      document.getElementById("feedback").textContent = "";
-      respostaMostrada = false;
+    function normalitzarModalitat(mod) {
+  mod = (mod || "").trim().toLowerCase();
+  if (mod.includes("teoria")) return "teoria";
+  if (mod.includes("terminologia")) return "terminologia";
+  if (mod.includes("audicio")) return "audicions";
+  return mod;
+}
 
-      // SILENCIAR O RESTAURAR LA MÚSICA SEGÚN EL TIPO DE PREGUNTA
-      const mod = (actual.modalitat || "").toLowerCase();
-      if (mod.includes("audicio")) {
-        silenciarMusicaFondo();
-      } else if (mod.includes("teoria") || mod.includes("terminologia")) {
-        restaurarMusicaFondo();
-      }
+function carregarPregunta() {
+  if (!preguntesPlanas[index]) {
+    document.getElementById("qcontainer").innerHTML = `
+      <div class="no-questions">
+        <p>❗ No hi ha més preguntes.</p>
+      </div>
+    `;
+    return;
+  }
+  document.getElementById("question-counter").textContent = `${index + 1} / ${preguntesPlanas.length}`;
+  
+  const actual = preguntesPlanas[index];
+  document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
+  document.getElementById("tema").textContent = actual.tema || '';
+  document.getElementById("pregunta").innerHTML = "Pregunta: " + (actual.pregunta || '');
+  if (actual.audio) {
+    document.getElementById("pregunta").innerHTML += `<br/><audio controls src="${actual.audio}" style="margin-top:1em"></audio>`;
+  }
+  document.getElementById("opcions").innerHTML = "";
+  document.getElementById("feedback").textContent = "";
+  respostaMostrada = false;
 
-      // Deshabilitar el botón "Següent pregunta" hasta responder
-      const nextBtn = document.getElementById("nextBtn");
-      nextBtn.disabled = true;
-      nextBtn.classList.add("disabled");
+  // Solución robusta para controlar la música de fondo según modalidad
+  const mod = normalitzarModalitat(actual.modalitat);
+  if (mod === "audicions") {
+    silenciarMusicaFondo();
+  } else if (mod === "teoria" || mod === "terminologia") {
+    restaurarMusicaFondo();
+  }
 
-      // Mensaje de error si intenta avanzar sin contestar
-      const missatgeError = document.createElement("div");
-      missatgeError.id = "missatge-error";
-      missatgeError.style.display = "none";
-      missatgeError.style.color = "#ff4081";
-      missatgeError.style.marginTop = "1em";
-      document.getElementById("qcontainer").appendChild(missatgeError);
+  // Deshabilitar el botón "Següent pregunta" hasta responder
+  const nextBtn = document.getElementById("nextBtn");
+  nextBtn.disabled = true;
+  nextBtn.classList.add("disabled");
 
-      function mostrarMissatgeError(missatge) {
-        missatgeError.textContent = missatge;
-        missatgeError.style.display = "block";
-      }
-      function amagarMissatgeError() {
-        missatgeError.textContent = "";
-        missatgeError.style.display = "none";
-      }
+  // Mensaje de error si intenta avanzar sin contestar
+  const missatgeError = document.createElement("div");
+  missatgeError.id = "missatge-error";
+  missatgeError.style.display = "none";
+  missatgeError.style.color = "#ff4081";
+  missatgeError.style.marginTop = "1em";
+  document.getElementById("qcontainer").appendChild(missatgeError);
 
-      // Opciones de respuesta
-      actual.opcions.forEach((opcio, i) => {
-        const boto = document.createElement("button");
-        boto.className = "option-button";
-        boto.textContent = opcio;
-        boto.onclick = () => {
-          amagarMissatgeError();
-          comprovarResposta(i);
-          // Habilita el botón "Següent pregunta" solo cuando se responde
-          nextBtn.disabled = false;
-          nextBtn.classList.remove("disabled");
-        };
-        document.getElementById("opcions").appendChild(boto);
-      });
+  function mostrarMissatgeError(missatge) {
+    missatgeError.textContent = missatge;
+    missatgeError.style.display = "block";
+  }
+  function amagarMissatgeError() {
+    missatgeError.textContent = "";
+    missatgeError.style.display = "none";
+  }
 
-      nextBtn.onclick = () => {
-        if (!respostaMostrada) {
-          mostrarMissatgeError("Has de seleccionar una opció abans de continuar.");
-          return;
-        }
-        seguentPregunta();
-        amagarMissatgeError();
-      };
-      nextBtn.style.display = "block";
+  // Opciones de respuesta
+  actual.opcions.forEach((opcio, i) => {
+    const boto = document.createElement("button");
+    boto.className = "option-button";
+    boto.textContent = opcio;
+    boto.onclick = () => {
+      amagarMissatgeError();
+      comprovarResposta(i);
+      // Habilita el botón "Següent pregunta" solo cuando se responde
+      nextBtn.disabled = false;
+      nextBtn.classList.remove("disabled");
+    };
+    document.getElementById("opcions").appendChild(boto);
+  });
+
+  nextBtn.onclick = () => {
+    if (!respostaMostrada) {
+      mostrarMissatgeError("Has de seleccionar una opció abans de continuar.");
+      return;
     }
-
+    seguentPregunta();
+    amagarMissatgeError();
+  };
+  nextBtn.style.display = "block";
+}
+    
     function comprovarResposta(seleccio) {
       if (respostaMostrada) return;
       respostaMostrada = true;

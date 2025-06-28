@@ -211,6 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         return;
       }
+      document.getElementById("question-counter").textContent = `${index + 1} / ${preguntesPlanas.length}`;
+      
       const actual = preguntesPlanas[index];
       document.getElementById("modalitat-badge").innerHTML = actual.modalitat ? `<span class="badge">${capitalitza(actual.modalitat)}</span>` : "";
       document.getElementById("tema").textContent = actual.tema || '';

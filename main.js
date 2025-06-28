@@ -129,9 +129,11 @@ function silenciarMusicaFondo() {
   if (musica) musica.volume = 0; // O musica.pause();
 }
 
+
 function restaurarMusicaFondo() {
   const musica = document.getElementById('musicaFondo');
   if (musica && localStorage.getItem('musicaFondoON') === 'si') {
     musica.volume = 0.4;
+    musica.play().catch(()=>{});
   }
 }

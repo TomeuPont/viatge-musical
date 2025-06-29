@@ -1,0 +1,184 @@
+
+.container.center {
+  background: linear-gradient(120deg, #232443 80%, #2a184c 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
+  padding: 2em 2.1em 2em 2.1em;
+  color: #fff;
+  font-size: 1.08em;
+  min-width: 370px;
+  max-width: 1000px;
+  width: 100%;
+  min-height: 440px;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+  box-sizing: border-box;
+}
+
+/* Modalitats grid y titol */
+
+.modalitats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1em;
+  margin-bottom: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 700px;
+}
+@media (max-width: 700px) {
+  .modalitats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.modalitats-titol {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 0 0 0.8em 0;
+  font-size: 1.25em;
+  color: #fff !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Checkbox igual que temes */
+.modalitat-checkbox {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #403080;
+  padding: 0.7em 1em;
+  border-radius: 13px;
+  font-size: 1.13em;
+  font-weight: 600;
+  margin-bottom: 0.7em;
+  box-shadow: 0 2px 10px #0001;
+  border: 2px solid transparent;
+  transition: border 0.18s, box-shadow 0.18s, background 0.18s;
+  cursor: pointer;
+}
+.modalitat-checkbox input[type="checkbox"] {
+  margin-right: 1em;
+  accent-color: #ff4081;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 7px;
+  border: 2px solid #ff4081;
+  background: #fff;
+  transition: border 0.14s, box-shadow 0.14s;
+}
+.modalitat-checkbox input[type="checkbox"]:checked {
+  background: #ff4081;
+  border-color: #ff4081;
+}
+.modalitat-checkbox:hover,
+.modalitat-checkbox input[type="checkbox"]:focus-visible {
+  border: 2px solid #ff4081;
+  background: #ffe6f0;
+  box-shadow: 0 2px 8px #ff40813a;
+}
+.modalitat-checkbox input[type="checkbox"]:checked:after {
+  display: none;
+}
+
+/* Temas seleccionados (leyenda lateral) */
+#temesSeleccionats {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.98em;
+  width: 100%;
+}
+.tema-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8em;
+  border-bottom: 1px solid #ffd60033;
+  padding: 0.5em 0 0.3em 0;
+  min-width: 0;
+}
+.tema-nom {
+  flex: 1 1 auto;
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-word;
+  color: #ffd600 !important;
+  font-size: 1em;
+}
+.estrelles-tema {
+  display: flex;
+  gap: 0.21em;
+  margin-left: 0.7em;
+}
+.estrelles-tema .estrella {
+  font-size: 1.17em;
+  position: relative;
+}
+
+.layout-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2em;
+  width: 100%;
+  max-width: 1350px;
+  margin: 80px auto 0 auto;
+  min-height: 80vh;
+  padding: 0 2vw;
+  box-sizing: border-box;
+}
+
+.leyenda-nueva {
+  background: linear-gradient(120deg, #232443 80%, #2a184c 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #0004, 0 1.5px 0.5px #2222;
+  padding: 1.7em 1em 1.3em 1.1em;
+  color: #fff;
+  font-size: 1.06em;
+  min-width: 170px;
+  max-width: 215px;
+  margin-left: -2vw;
+  margin-right: 0;
+  margin-top: 0;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: none;
+}
+
+.tema-option {
+  display: flex;
+  align-items: center;
+  background: none;
+  color: #fff;
+  padding: 0.35em 0.20em 0.35em 0.1em;
+  border-radius: 8px;
+  font-size: 0.98em;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background 0.18s;
+  cursor: pointer;
+  width: 100%;
+  min-height: 1.8em;
+  position: relative;
+  flex-wrap: nowrap;
+}
+
+.side-panel .tema-nom {
+  color: #ffd600 !important;
+}
+.side-panel h3,
+.leyenda-nueva h3 {
+  color: #ffd600 !important;
+}
+.side-panel h3 {
+  color: #ffd600 !important;
+}

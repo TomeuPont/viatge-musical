@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inicia sessió - Un viatge musical i dansat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="estils.css">
+  <style>
+    #jugadorInfo {
+      position: fixed;
+      top: 1.2em;
+      right: 2em;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      z-index: 150;
+    }
+    #jugadorInfo button {
+      padding: 0.4em 1.1em;
+      font-size: 1.01em;
+      background: #ff4081;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      margin-left: 0.2em;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.2s, transform 0.18s;
+    }
+    #jugadorInfo button:hover {
+      background: #ff79a7;
+      transform: scale(1.07);
+    }
+    .btn-row {
+      display: flex;
+      gap: 1.2em;
+      justify-content: center;
+      margin-top: 1.5em;
+      margin-bottom: 1em;
+      flex-wrap: wrap;
+    }
+    .boto-rosa, button {
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ff4081;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 18px 0 #0005;
+      letter-spacing: 0.5px;
+      outline: none;
+      margin: 0.5em 0;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .boto-rosa:hover, button:hover {
+      background-color: #ff79a7;
+      transform: scale(1.06);
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      #jugadorInfo {
+        font-size: 0.93em;
+        top: 0.9em;
+        right: 1em;
+      }
+      #jugadorInfo button {
+        font-size: 0.98em;
+        padding: 0.33em 1em;
+      }
+      .btn-row {
+        flex-direction: column;
+        gap: 0.7em;
+      }
+      .boto-rosa, button {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+        min-width: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="jugadorInfo" style="display:none;"></div>
+  <div class="container center">
+    <h2>Inicia sessió</h2>
+    <form id="loginForm" autocomplete="off">
+      <input type="email" id="email" placeholder="Correu electrònic" autocomplete="off" required/>
+      <input type="password" id="password" placeholder="Contrasenya" autocomplete="off" required/>
+      <div class="btn-row">
+        <button type="button" class="boto-rosa" onclick="login()">Entrar</button>
+        <button type="button" class="boto-rosa" onclick="register()">Registrar-se</button>
+      </div>
+      <div id="error" class="error" style="display:none;"></div>
+    </form>
+  </div>
+  <!-- Música de fondo (heredada de index.html si estaba activada) -->
+  <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const musica = document.getElementById('musicaFondo');
+    const tiempo = parseFloat(localStorage.getItem('musicaFondoTime') || "0");
+    if (!isNaN(tiempo) && tiempo > 0) {
+      musica.currentTime = tiempo;
+    }
+    if (localStorage.getItem('musicaFondoON') === 'si') {
+      musica.volume = 0.4;
+      musica.play().catch(()=>{});
+    } else {
+      musica.pause();
+    }
+  });
+</script>
+  
+  <!-- Scripts DEBEN ir en este orden -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="main.js"></script>
+  <script src="login.js"></script>
+  <script>
+    // Llamada modular para mostrar usuario si está logueado (con Google u otro método)
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof initUserInfo === "function") initUserInfo();
+    });
+  </script>
+</body>
+</html>

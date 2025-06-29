@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modalitats - Un viatge musical i dansat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="estils.css">
+  <link rel="stylesheet" href="temes.css">
+  <link rel="stylesheet" href="modalitats.css">
+</head>
+<body>
+  <div id="jugadorInfo" style="display:none;"></div>
+  <div class="layout-flex">
+    <div class="leyenda-nueva">
+      <div class="leyenda-row">
+        <span class="estrella teoria gris"><span class="numero-estrella">1</span>★</span>
+        <span class="estrella terminologia gris"><span class="numero-estrella">2</span>★</span>
+        <span class="estrella audicions gris"><span class="numero-estrella">3</span>★</span>
+      </div>
+      <ul class="llista-llegenda">
+        <li><b>1 Teoria</b></li>
+        <li><b>2 Terminologia</b></li>
+        <li><b>3 Audicions</b></li>
+      </ul>
+      <ul class="llista-llegenda" style="margin-top:1.3em;">
+        <li><span class="estrella verde">★</span> Realitzat perfecte</li>
+        <li><span class="estrella amarillo">★</span> Realitzat amb errors</li>
+        <li><span class="estrella gris">★</span> No s’ha treballat encara</li>
+      </ul>
+      <hr style="opacity:0.25;margin:1.2em 0 0.7em 0;">
+      <h3 style="font-size:1.07em;margin-bottom:0.6em;margin-top:0.2em;">Apartats seleccionats</h3>
+      <ul id="temesSeleccionats"></ul>
+    </div>
+    <div class="container center">
+      <form id="modalitatsForm">
+        <h2 class="modalitats-titol">Selecciona les modalitats</h2>   
+        <div class="modalitats-grid">
+          <label class="tema-option">
+            <input type="checkbox" name="modalitat" value="teoria"> Teoria
+          </label>
+          <label class="tema-option">
+            <input type="checkbox" name="modalitat" value="terminologia"> Terminologia
+          </label>
+          <label class="tema-option">
+            <input type="checkbox" name="modalitat" value="audicions"> Audicions
+          </label>
+        </div>
+        <div class="actions actions-duo">
+          <a href="temes.html" class="boto-rosa back-btn">Tornar als apartats</a>
+          <button type="submit" class="boto-rosa">Començar</button>
+        </div>
+        <div id="error" class="error" style="display:none;"></div>
+      </form>
+    </div>
+  </div>
+  <audio id="musicaFondo" src="audio/musica_fondo.mp3" loop></audio>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="main.js"></script>
+  <script src="modalitats.js"></script>
+</body>
+</html>

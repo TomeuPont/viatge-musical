@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joc Dinàmic</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #1a1a40, #4b0082);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .question-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .option-button {
+      padding: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #4b0082;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .option-button:hover {
+      background-color: #ff4081;
+    }
+    .feedback {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .next-button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .next-button:disabled {
+      background-color: #a97ab7;
+      cursor: not-allowed;
+    }
+    .next-button:hover:enabled {
+      background-color: #ff79a7;
+    }
+    .audio-player {
+      margin-bottom: 1.5rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="question-container" id="contenidor">
+    <h2 id="tema"></h2>
+    <p id="pregunta"></p>
+    <div id="audioDiv"></div>
+    <div class="options" id="opcions"></div>
+    <div id="feedback" class="feedback"></div>
+    <button class="next-button" id="nextBtn" onclick="seguentPregunta()" disabled>Següent pregunta</button>
+  </div>
+
+  <script>
+    // Lletres per a les opcions
+    const lletres = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const temesSeleccionats = urlParams.get("temes")?.split(",").map(Number) || [];
+    let preguntes = [];
+    let index = 0;
+    let encerts = 0;
+    let errors = 0;
+    let respostaMostrada = false;
+
+    const modalitats = urlParams.get("modalitats")?.split(",") || [];
+    if (modalitats.includes("audicions")) {
+      document.title = "Joc – Audicions";
+    } else if (modalitats.includes("terminologia")) {
+      document.title = "Joc – Terminologia";
+    } else if (modalitats.includes("teoria")) {
+      document.title = "Joc – Contingut teòric";
+    }
+
+    let arxiusJSON = [];
+    if (modalitats.includes("audicions")) {
+      arxiusJSON.push("preguntes_audicions.json");
+    }
+    if (modalitats.includes("terminologia")) {
+      arxiusJSON.push("preguntes_terminologia.json");
+    }
+    if (modalitats.includes("teoria")) {
+      arxiusJSON.push("preguntes_teoria.json");
+    }
+
+    Promise.all(arxiusJSON.map(arxiu => fetch(arxiu).then(res => res.json())))
+      .then(llistes => {
+        // Obtenim la llista de temes (array de temes)
+        const combinades = llistes.flatMap(json => Array.isArray(json.preguntes) ? json.preguntes : []);
+        // Filtra només els temes seleccionats per id
+        const filtrades = combinades
+          .filter(t => temesSeleccionats.includes(t.id))
+          .flatMap(t =>
+            t.preguntes.map(p => {
+              // Crea una còpia de les opcions i les barreja
+              const opcionsBarrejades = barrejarArray([...p.opcions]);
+              // Troba la posició de la resposta correcta dins les opcions originals (no barrejades)
+              const indexCorrecteOriginal = lletres.indexOf(p.resposta_correcta);
+              // Troba el text de la resposta correcta segons el JSON original
+              const textCorrecte = p.opcions[indexCorrecteOriginal];
+              // Busca l'índex d'aquest text dins l'array barrejada
+              const indexCorrecteBarrejat = opcionsBarrejades.indexOf(textCorrecte);
+
+              return {
+                tema: t.tema,
+                enunciat: p.pregunta,
+                opcions: opcionsBarrejades,
+                correcta: indexCorrecteBarrejat,
+                titol: p.titol || "",
+                audio: p.audio || null
+              };
+            })
+          );
+        barrejarArray(filtrades); // barreja l'ordre de les preguntes
+        preguntes = filtrades;
+        carregarPregunta();
+      })
+      .catch(error => {
+        console.error("Error carregant les preguntes:", error);
+        document.getElementById("contenidor").innerHTML = "<p style='color:red;'>Error carregant les preguntes. Comprova que els arxius JSON i els temes seleccionats són correctes.</p>";
+      });
+
+    // Funció per barrejar un array (Fisher-Yates)
+    function barrejarArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function carregarPregunta() {
+      if (index >= preguntes.length) {
+        document.getElementById("contenidor").innerHTML =
+          `<h2>Joc completat!</h2>
+          <p>Encerts: ${encerts}</p>
+          <p>Errors: ${errors}</p>
+          <button onclick="window.location.href='index.html'">Tornar a l'inici</button>`;
+        return;
+      }
+      respostaMostrada = false;
+      const actual = preguntes[index];
+      document.getElementById("tema").textContent = actual.titol ? actual.tema + " – " + actual.titol : actual.tema;
+      document.getElementById("pregunta").textContent = "Pregunta: " + actual.enunciat;
+
+      // Mostra l'audio si existeix
+      const audioDiv = document.getElementById("audioDiv");
+      audioDiv.innerHTML = "";
+      if (actual.audio) {
+        const audio = document.createElement("audio");
+        audio.className = "audio-player";
+        audio.setAttribute("controls", "");
+        audio.src = actual.audio;
+        audioDiv.appendChild(audio);
+      }
+
+      const opcionsDiv = document.getElementById("opcions");
+      opcionsDiv.innerHTML = "";
+      actual.opcions.forEach((opcio, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = `${lletres[i]}) ${opcio}`;
+        btn.className = "option-button";
+        btn.onclick = () => comprovarResposta(i, actual.correcta);
+        opcionsDiv.appendChild(btn);
+      });
+      document.getElementById("feedback").textContent = "";
+      // Desactivem el botó de següent
+      document.getElementById("nextBtn").disabled = true;
+    }
+
+    function comprovarResposta(indexResposta, indexCorrecta) {
+      if (respostaMostrada) return;
+      respostaMostrada = true;
+      const feedback = document.getElementById("feedback");
+      if (indexResposta === indexCorrecta) {
+        feedback.textContent = "✅ Correcte!";
+        feedback.style.color = "#00ff88";
+        encerts++;
+      } else {
+        feedback.textContent = "❌ Incorrecte.";
+        feedback.style.color = "#ff8888";
+        errors++;
+      }
+      // Activem el botó de següent quan ja s'ha respost
+      document.getElementById("nextBtn").disabled = false;
+    }
+
+    function seguentPregunta() {
+      index++;
+      carregarPregunta();
+    }
+  </script>
+</body>
+</html>

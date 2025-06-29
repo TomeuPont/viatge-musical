@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "musical": "viatge-musical",
+    "default": "viatge-musical"
+  },
+  "targets": {},
+  "etags": {}
+}
